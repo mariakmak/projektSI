@@ -24,6 +24,8 @@ services:
             MYSQL_USER: symfony
             MYSQL_PASSWORD: symfony
 
+
+
     php:
         build: .docker/php
         container_name: symfony_php
@@ -31,6 +33,8 @@ services:
           - ./app:/home/wwwroot/app
         environment:
           - maildev_host=symfony_maildev
+        env_file:
+          - ./app/.env
         depends_on:
           - maildev
           - mysql
@@ -40,3 +44,4 @@ services:
         container_name: symfony_maildev
         ports:
           - "8001:80"
+

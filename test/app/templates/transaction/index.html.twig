@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'title.transaction_list'|trans }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ 'title.transaction_list'|trans }}</h1>
+    {% if transaction is defined and transaction|length %}
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>{{ 'label.id'|trans }}</th>
+                <th>{{ 'label.category'|trans }}</th>
+                <th>{{ 'label.description'|trans }}</th>
+                <th>{{ 'label.created_at'|trans }}</th>
+                <th>{{ 'label.wallet'|trans }}</th>
+                <th>{{ 'label.sum'|trans }}</th>
+                <th>{{ 'label.currency'|trans }}</th>
+                <th>{{ 'label.value'|trans }}</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for task in transaction %}
+                <tr>
+                    <td>{{ task.id }}</td>
+                    <td>{{ task.category.name }}</td>
+                    <td>{{ task.description }}</td>
+                    <td>{{ task.createdAt|date('Y/m/d') }}</td>
+                    <td>{{ task.wallet.name }}</td>
+                    <td>{{ task.sum }}</td>
+                    <td>{{ task.currency.name }}</td>
+                    <td>{{ task.value }}</td>
+
+                    <td>
+                        <a href="{{ url('transaction_show', {id: task.id}) }}" title="{{ 'action.view'|trans }}">
+                            {{ 'action.view'|trans }}
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>
+            {{ 'message.empty_list'|trans }}
+        </p>
+    {% endif %}
+{% endblock %}

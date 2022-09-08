@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}
+    {{ 'title.categories_list'|trans }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ 'title.categories_list'|trans }}</h1>
+
+    <div class="navigation text-center">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+
+    {% if categories is defined and categories|length %}
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>{{ knp_pagination_sortable(pagination, 'label.id'|trans, 'category.id' )}}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.created_at'|trans,'category.createdAt' )}}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.updated_at'|trans'category.updatedAt' )}}</th>
+                <th>{{ knp_pagination_sortable(pagination,'label.name'|trans, 'category.name')}}</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for cat in categories %}
+                <tr>
+                    <td>{{ cat.id }}</td>
+                    <td>{{ cat.createdAt|date('Y/m/d') }}</td>
+                    <td>{{ cat.updatedAt|date('Y/m/d') }}</td>
+                    <td>{{ cat.name }}</td>
+                    <td>
+                        <a href="{{ url('category_show', {id: cat.id}) }}" title="{{ 'action.view'|trans }}">
+                            {{ 'action.view'|trans }}
+                        </a>
+                    </td>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
+    {% else %}
+        <p>
+            {{ 'message.empty_list'|trans }}
+        </p>
+    {% endif %}
+{% endblock %}

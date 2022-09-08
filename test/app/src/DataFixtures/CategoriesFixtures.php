@@ -6,47 +6,26 @@
 
 namespace App\DataFixtures;
 
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Persistence\ObjectManager;
+
+
 use App\Entity\Categories;
 use DateTimeImmutable;
-use Faker\Factory;
-use Faker\Generator;
 
 
 /**
  * Class CategoriesFixtures.
  */
-class CategoriesFixtures extends Fixture
+class CategoriesFixtures extends AppFixtures
 {
 
 
     /**
-     * Faker.
-     *
-     * @var Generator
-     */
-    protected Generator $faker;
-
-    /**
-     * Persistence object manager.
-     *
-     * @var ObjectManager
-     */
-    protected ObjectManager $manager;
-
-    /**
-     * Load.
-     *
-     * @param ObjectManager $manager Persistence object manager
+     * Load data.
      */
 
-    public function load(ObjectManager $manager): void
+    public function loadData(): void
     {
-
-        $this->faker = Factory::create();
-
-        for ($i = 0; $i < 10; ++$i) {
+        $this->createMany(20, 'categories', function (int $i) {
             $category = new Categories();
             $category->setName($this->faker->sentence);
             $category->setCreatedAt(
@@ -55,11 +34,10 @@ class CategoriesFixtures extends Fixture
             $category->setUpdatedAt(
                 DateTimeImmutable::createFromMutable($this->faker->dateTimeBetween('-100 days', '-1 days'))
             );
-            $manager->persist($category);
-        }
-        // $product = new Product();
-        // $manager->persist($product);
 
-        $manager->flush();
+            return $category;
+        });
+
+        $this->manager->flush();
     }
 }

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'name.transaction_details'|trans({'%id%': transaction.id|default('')}) }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ 'name.transaction_details'|trans({'%id%': transaction.id|default('')}) }}</h1>
+    {% if transaction is defined and transaction|length %}
+        <dl class="dl-horizontal">
+            <dt>{{ 'label.id'|trans }}</dt>
+            <dd>{{ transaction.id }}</dd>
+            <dt>{{ 'label.category'|trans }}</dt>
+            <dd>{{ transaction.category.name }}</dd>
+            <dt>{{ 'label.description'|trans }}</dt>
+            <dd>{{ transaction.description }}</dd>
+            <dt>{{ 'label.created_at'|trans }}</dt>
+            <dd>{{ transaction.createdAt|date('Y/m/d') }}</dd>
+            <dt>{{ 'label.wallet'|trans }}</dt>
+            <dd>{{ transaction.wallet.name }}</dd>
+            <dt>{{ 'label.sum'|trans }}</dt>
+            <dd>{{ transaction.sum }}</dd>
+            <dt>{{ 'label.currency'|trans }}</dt>
+            <dd>{{ transaction.currency.name }}</dd>
+            <dt>{{ 'label.value'|trans }}</dt>
+            <dd>{{ transaction.value }}</dd>
+        </dl>
+        <p>
+            <a href="{{ url('transaction_index') }}" title="{{ 'action.back_to_list'|trans }}">
+                {{ 'action.back_to_list'|trans }}
+            </a>
+        </p>
+    {% else %}
+        <p>
+            {{ 'message.record_not_found'|trans }}
+        </p>
+    {% endif %}
+{% endblock %}

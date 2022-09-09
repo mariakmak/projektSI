@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Categories;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -26,13 +27,14 @@ class CategoriesRepository extends ServiceEntityRepository
      *
      * @constant int
      */
-    public const PAGINATOR_ITEMS_PER_PAGE = 3;
+    public const PAGINATOR_ITEMS_PER_PAGE = 5;
+
+
     /**
      * Constructor.
      *
      * @param ManagerRegistry $registry Manager registry
      */
-
 
     public function __construct(ManagerRegistry $registry)
     {
@@ -49,7 +51,7 @@ class CategoriesRepository extends ServiceEntityRepository
     public function queryAll(): QueryBuilder
     {
         return $this->getOrCreateQueryBuilder()
-            ->orderBy('Categories.updatedAt', 'DESC');
+            ->orderBy('categories.updatedAt', 'DESC');
     }
 
     /**
@@ -61,7 +63,7 @@ class CategoriesRepository extends ServiceEntityRepository
      */
     private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
     {
-        return $queryBuilder ?? $this->createQueryBuilder('Categories');
+        return $queryBuilder ?? $this->createQueryBuilder('categories');
     }
 
 

@@ -6,23 +6,27 @@
 
 {% block body %}
     <h1>{{ 'title.transaction_list'|trans }}</h1>
-    {% if transaction is defined and transaction|length %}
+    {% if pagination is defined and pagination.items|length %}
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>{{ 'label.id'|trans }}</th>
-                <th>{{ 'label.category'|trans }}</th>
-                <th>{{ 'label.description'|trans }}</th>
-                <th>{{ 'label.created_at'|trans }}</th>
-                <th>{{ 'label.wallet'|trans }}</th>
-                <th>{{ 'label.sum'|trans }}</th>
-                <th>{{ 'label.currency'|trans }}</th>
-                <th>{{ 'label.value'|trans }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.id'|trans, 'transaction.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.category'|trans, 'categories.name' ) }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.description'|trans, 'transaction.description') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.created_at'|trans, 'transaction.createdAt') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.wallet'|trans, 'wallet.name') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.sum'|trans, 'transaction.sum') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.currency'|trans, 'currency.name') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.value'|trans, 'transaction.value') }}</th>
 
             </tr>
             </thead>
             <tbody>
-            {% for task in transaction %}
+            {% for task in pagination.items %}
                 <tr>
                     <td>{{ task.id }}</td>
                     <td>{{ task.category.name }}</td>
@@ -42,6 +46,9 @@
             {% endfor %}
             </tbody>
         </table>
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
     {% else %}
         <p>
             {{ 'message.empty_list'|trans }}

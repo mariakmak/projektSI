@@ -6,25 +6,40 @@
 
 {% block body %}
     <h1>{{ 'title.wallet_list'|trans }}</h1>
-    {% if wallet is defined and wallet|length %}
+
+
+
+    {% if pagination is defined and pagination.items|length %}
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>{{ 'label.id'|trans }}</th>
-                <th>{{ 'label.name'|trans }}</th>
-                <th>{{ 'label.created_at'|trans }}</th>
-                <th>{{ 'label.updated_at'|trans }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.id'|trans, 'wallet.id')}}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.name'|trans, 'wallet.name') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.created_at'|trans, 'wallet.createdAt')}}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.updated_at'|trans, 'wallet.updatedAt')}}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.updated_at'|trans, 'transaction.id')}}</th>
 
 
             </tr>
             </thead>
             <tbody>
-            {% for task in wallet %}
+            {% for task in pagination %}
                 <tr>
-                    <td>{{ task.id }}</td>
+                    <td>{{  task.id }}</td>
                     <td>{{ task.name }}</td>
                     <td>{{ task.createdAt|date('Y/m/d') }}</td>
                     <td>{{ task.updatedAt|date('Y/m/d') }}</td>
+                    <td>{% for elem in task.transaction %}
+                    <a href="{{ url('transaction_show', {id: elem.id}) }}" title="{{ 'action.view'|trans }}">
+                        {{ elem.id }}
+                    </a>
+                    {% endfor %}
+                    </td>
+
 
 
                     <td>
@@ -36,6 +51,9 @@
             {% endfor %}
             </tbody>
         </table>
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
     {% else %}
         <p>
             {{ 'message.empty_list'|trans }}

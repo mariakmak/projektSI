@@ -10,6 +10,8 @@ use App\Repository\WalletRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class WalletController.
@@ -20,7 +22,10 @@ class WalletController extends AbstractController
     /**
      * Index action.
      *
-     * @param WalletRepository $walletRepository Wallet repository
+     *
+     * @param Request            $request        HTTP Request
+     * @param PaginatorInterface $paginator      Paginator
+     * @param WalletRepository $walletRepository wallet repository
      *
      * @return Response HTTP response
      */
@@ -28,13 +33,17 @@ class WalletController extends AbstractController
         name: 'wallet_index',
         methods: 'GET'
     )]
-    public function index(WalletRepository $walletRepository): Response
+    public function index(Request $request, PaginatorInterface $paginator, WalletRepository $walletRepository): Response
     {
-        $wallet = $walletRepository->findAll();
+        $pagination = $paginator->paginate(
+            $walletRepository->queryAll(),
+            $request->query->getInt('page', 1),
+            WalletRepository::PAGINATOR_ITEMS_PER_PAGE
+        );
 
         return $this->render(
             'wallet/index.html.twig',
-            ['wallet' => $wallet]
+            ['pagination' => $pagination]
         );
     }
 

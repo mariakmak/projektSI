@@ -7,8 +7,9 @@ namespace App\Controller;
 
 use App\Entity\Categories;
 use App\Repository\CategoriesRepository;
-use http\Env\Request;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -38,15 +39,14 @@ class CategoriesController extends AbstractController
         $pagination = $paginator->paginate(
             $categoriesRepository->queryAll(),
             $request->query->getInt('page', 1),
-            TaskRepository::PAGINATOR_ITEMS_PER_PAGE
+            CategoriesRepository::PAGINATOR_ITEMS_PER_PAGE
         );
 
 
-        $categories = $categoriesRepository->findAll();
 
         return $this->render(
             'category/index.html.twig',
-            ['categories' => $categories, 'pagination' => $pagination]
+            ['pagination' => $pagination]
         );
     }
 

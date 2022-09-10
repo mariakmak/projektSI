@@ -87,6 +87,20 @@ class CategoriesRepository extends ServiceEntityRepository
         }
     }
 
+
+
+    /**
+     * Save entity.
+     *
+     * @param Categories $categories Categories entity
+     */
+
+    public function save(Categories $categories): void
+    {
+        $this->_em->persist($categories);
+        $this->_em->flush();
+    }
+
 //    /**
 //     * @return Categories[] Returns an array of Categories objects
 //     */

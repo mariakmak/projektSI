@@ -101,6 +101,19 @@ class CategoriesRepository extends ServiceEntityRepository
         $this->_em->flush();
     }
 
+    /**
+     * Delete entity.
+     *
+     * @param Categories $categories Categories entity
+     */
+    public function delete(Categories $categories): void
+    {
+        $this->_em->remove($categories);
+        $this->_em->flush();
+    }
+
+
+
 //    /**
 //     * @return Categories[] Returns an array of Categories objects
 //     */

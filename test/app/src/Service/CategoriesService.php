@@ -63,6 +63,12 @@ class CategoriesService implements CategoriesServiceInterface
 
 
 
+    public function delete(Categories $category): void
+    {
+        $this->categoriesRepository->delete($category);
+    }
+
+
     /**
      * Get paginated list.
      *

@@ -39,10 +39,24 @@
                         </a>
                     </td>
 
+                    <td>
+                        <a href="{{ url('category_edit', {id: elem.id}) }}" title="{{ 'action.edit'|trans }}">
+                            {{ 'action.edit'|trans }}
+                        </a>
+                    </td>
+
+
+
                 </tr>
             {% endfor %}
             </tbody>
         </table>
+
+        <p>
+            <a href="{{ url('category_create') }}" title="{{ 'action.create'|trans }}">
+                {{ 'action.create'|trans }}
+            </a>
+        </p>
 
 
 

@@ -6,7 +6,9 @@
 namespace App\Controller;
 
 use App\Entity\Transaction;
+use App\Form\Type\TransactionType;
 use App\Repository\TransactionRepository;
+use App\Service\TransactionServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,25 +20,34 @@ use Symfony\Component\HttpFoundation\Request;
 #[Route('/transaction')]
 class TransactionController extends AbstractController
 {
+
+
+    /**
+     * Transaction service.
+     */
+    private TransactionServiceInterface $transactionService;
+
+    /**
+     * Constructor.
+     */
+    public function __construct(TransactionServiceInterface $transactionService)
+    {
+        $this->transactionService = $transactionService;
+    }
     /**
      * Index action.
      *
      * @param Request            $request        HTTP Request
-     * @param PaginatorInterface $paginator      Paginator
-     * @param TransactionRepository $transactionRepository transaction repository
-     *
      * @return Response HTTP response
      */
     #[Route(
         name: 'transaction_index',
         methods: 'GET'
     )]
-    public function index( Request $request, TransactionRepository $transactionRepository, PaginatorInterface $paginator): Response
+    public function index( Request $request): Response
     {
-        $pagination = $paginator->paginate(
-            $transactionRepository->queryAll(),
-            $request->query->getInt('page', 1),
-            TransactionRepository::PAGINATOR_ITEMS_PER_PAGE
+        $pagination = $this->transactionService->getPaginatedList(
+            $request->query->getInt('page', 1)
         );
 
         return $this->render(
@@ -65,4 +76,47 @@ class TransactionController extends AbstractController
             ['transaction' => $transaction]
         );
     }
+
+
+    /**
+     * Create action.
+     *
+     * @param Request $request HTTP request
+     *
+     * @return Response HTTP response
+     */
+    #[Route(
+        '/create',
+        name: 'category_create',
+        methods: 'GET|POST',
+    )]
+    public function create(Request $request): Response
+    {
+
+        /** @var User $user */
+        $user = $this->getUser();
+        $transaction = new Transaction();
+        $transaction->setAuthor($user);
+
+
+        $form = $this->createForm(TransactionType::class, $transaction);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->transactionService->save($transaction);
+
+            $this->addFlash(
+                'success',
+                $this->translator->trans('message.created_successfully')
+            );
+
+            return $this->redirectToRoute('transaction_index');
+        }
+
+        return $this->render(
+            'transaction/create.html.twig',
+            ['form' => $form->createView()]
+        );
+    }
+
 }

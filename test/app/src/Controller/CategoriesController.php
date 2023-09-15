@@ -40,7 +40,7 @@ class CategoriesController extends AbstractController
     /**
      * Constructor.
      *
-     * @param CategoriesServiceInterface $taskService Task service
+     * @param CategoriesServiceInterface $categoriesService Categories service
      * @param TranslatorInterface      $translator  Translator
      */
 
@@ -121,7 +121,12 @@ class CategoriesController extends AbstractController
     )]
     public function create(Request $request): Response
     {
+        /** @var User $user */
+        $user = $this->getUser();
         $categories = new Categories();
+        $categories->setAuthor($user);
+
+
         $form = $this->createForm(CategoriesType::class, $categories);
         $form->handleRequest($request);
 

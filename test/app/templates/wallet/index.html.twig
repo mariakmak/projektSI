@@ -50,6 +50,15 @@
             {% endfor %}
             </tbody>
         </table>
+
+        <p>
+            <a href="{{ url('wallet_create') }}" title="{{ 'action.create'|trans }}">
+                {{ 'action.create'|trans }}
+            </a>
+        </p>
+
+
+
         <div class="navigation text-center">
             {{ knp_pagination_render(pagination) }}
         </div>

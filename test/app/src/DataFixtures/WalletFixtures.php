@@ -7,6 +7,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Currency;
 use App\Entity\Transaction;
+use App\Entity\User;
 use App\Entity\Enum\TaskStatus;
 use App\Entity\Wallet;
 use DateTimeImmutable;
@@ -51,6 +52,9 @@ class WalletFixtures extends AppFixtures implements DependentFixtureInterface
                 $wallet->addCurrency($elem);
             }
 
+            $author = $this->getRandomReference('users');
+            $wallet->setAuthor($author);
+
 
             return $wallet;
         });
@@ -67,8 +71,14 @@ class WalletFixtures extends AppFixtures implements DependentFixtureInterface
      */
     public function getDependencies(): array
     {
-        return [CurrencyFixtures::class];
+        return [CurrencyFixtures::class, UserFixtures::class];
     }
+
+
+
+
+
+
 
 
 }

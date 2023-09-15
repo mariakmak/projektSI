@@ -11,12 +11,12 @@ use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
 /**
- * Class TaskService.
+ * Class CategoriesService.
  */
 class CategoriesService implements CategoriesServiceInterface
 {
     /**
-     * Task repository.
+     * Categories repository.
      */
     private CategoriesRepository $categoriesRepository;
 

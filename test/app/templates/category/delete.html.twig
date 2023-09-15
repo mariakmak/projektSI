@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'title.categorie_delete'|trans({'%id%': category.id|default('')}) }}
+    {{ 'title.categories_delete'|trans({'%id%': category.id|default('')}) }}
 {% endblock %}
 
 {% block body %}
     <h1>{{ 'title.categories_delete'|trans({'%id%': category.id|default('')}) }}</h1>
     {{ form_start(form) }}
     {{ form_widget(form) }}
-    <p> USUNIĘCIE KATEGORII SPOWODUJE USUNIECIE WSZYSTKICH POWIĄZANYCH ELEMENTOW!</p>
+    <p> Czy na pewno chcesz usunąć rekord? </p>
     <div class="form-group row float-sm-right">
         <input type="submit" value="{{ 'action.delete'|trans }}" class="btn btn-primary" />
     </div>

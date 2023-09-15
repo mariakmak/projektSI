@@ -94,7 +94,17 @@ class TransactionRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Save entity.
+     *
+     * @param Transaction $transaction Transaction entity
+     */
 
+    public function save(Transaction $categories): void
+    {
+        $this->_em->persist($transaction);
+        $this->_em->flush();
+    }
 
 
 

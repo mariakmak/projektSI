@@ -61,6 +61,10 @@ class Transaction
     #[ORM\JoinColumn(nullable: false)]
     private ?Wallet $wallet = null;
 
+    #[ORM\ManyToOne(targetEntity: Transaction::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $author = null;
+
 
     /**
      * Getter for Id.
@@ -166,6 +170,17 @@ class Transaction
     public function setWallet(?Wallet $wallet): void
     {
         $this->wallet = $wallet;
+
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): void
+    {
+        $this->author = $author;
 
     }
 }

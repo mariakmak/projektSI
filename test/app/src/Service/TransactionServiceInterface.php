@@ -5,7 +5,9 @@
 
 namespace App\Service;
 
+use App\Entity\Categories;
 use App\Entity\Transaction;
+use App\Entity\User;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 
 /**
@@ -20,14 +22,24 @@ interface TransactionServiceInterface
      *
      * @return PaginationInterface<string, mixed> Paginated list
      */
-    public function getPaginatedList(int $page): PaginationInterface;
+    public function getPaginatedList(int $page, User $author): PaginationInterface;
 
     /**
      * Save entity.
      *
-     * @param Transaction $transaction Categories entity
+     * @param Transaction $transaction Transaction entity
      */
     public function save(Transaction $transaction): void;
+
+
+
+    /**
+     * Delete entity.
+     *
+     * @param Transaction $transaction Transaction entity
+     */
+    public function delete(Transaction $transaction): void;
+
 
 
 

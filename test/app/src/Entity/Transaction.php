@@ -6,8 +6,10 @@
 namespace App\Entity;
 
 use App\Repository\TransactionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use DateTimeImmutable;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Transaction.
@@ -29,6 +31,7 @@ class Transaction
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\Type(ArrayCollection::class)]
     private ?Categories $category = null;
 
     /**
@@ -61,9 +64,14 @@ class Transaction
     #[ORM\JoinColumn(nullable: false)]
     private ?Wallet $wallet = null;
 
-    #[ORM\ManyToOne(targetEntity: Transaction::class)]
+    #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EXTRA_LAZY')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank]
+    #[Assert\Type(User::class)]
     private ?User $author = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
 
 
     /**
@@ -182,5 +190,17 @@ class Transaction
     {
         $this->author = $author;
 
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
     }
 }

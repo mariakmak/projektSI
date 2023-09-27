@@ -1,0 +1,41 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        {% if is_granted('ROLE_USER') and not is_granted('ROLE_ADMIN') %}
+        <h5 >{{ app.user.email }}</h5>
+        {% endif %}
+
+
+        {% if is_granted('ROLE_ADMIN') %}
+            <h5><a href="{{ url('user_edit', {id: app.user.id}) }}">{{ app.user.email }}</a></h5>
+        {% endif %}
+
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+            </ul>
+            <li class="nav-item d-flex">
+
+                {% if is_granted('ROLE_USER') %}
+                    <a class="nav-link active" href="{{ url('category_index') }}">{{ 'action.category'|trans }}</a>
+                    <a class="nav-link active" href="{{ url('transaction_index') }}">{{ 'action.transaction'|trans }}</a>
+                    <a class="nav-link active" href="{{ url('wallet_index') }}">{{ 'action.wallet'|trans }}</a>
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') %}
+                <a class="nav-link active" href="{{ url('user_index') }}">{{ 'action.user'|trans }}</a>
+                {% endif %}
+                <a class="nav-link active" href="{{ url('app_logout') }}">{{ 'action.logout'|trans }}</a>
+
+            </li>
+        </div>
+
+
+
+
+
+
+
+
+    </div>
+</nav>

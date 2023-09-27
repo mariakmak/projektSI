@@ -3,10 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\Categories;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
-
+use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @extends ServiceEntityRepository<Categories>
  *
@@ -65,6 +66,25 @@ class CategoriesRepository extends ServiceEntityRepository
     {
         return $queryBuilder ?? $this->createQueryBuilder('categories');
     }
+
+
+    /**
+* @return QueryBuilder Query builder
+*/
+    public function queryByAuthor(User $user): QueryBuilder
+    {
+        $queryBuilder = $this->queryAll();
+
+        $queryBuilder->andWhere('categories.author = :author')
+            ->setParameter('author', $user);
+
+        return $queryBuilder;
+    }
+
+
+
+
+
 
 
 

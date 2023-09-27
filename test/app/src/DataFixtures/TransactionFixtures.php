@@ -34,6 +34,7 @@ class TransactionFixtures extends AppFixtures implements DependentFixtureInterfa
             /** @var Categories $category */
             $category = $this->getRandomReference('categories');
             $transaction->setCategory($category);
+            $transaction->setName($this->faker->sentence);
 
             $transaction->setDescription($this->faker->sentence);
             $transaction->setCreatedAt(

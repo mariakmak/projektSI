@@ -10,6 +10,7 @@ use App\Repository\WalletRepository;
 
 use App\Service\WalletServiceInterface;
 use App\Form\Type\WalletType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -89,6 +90,7 @@ class WalletController extends AbstractController
         requirements: ['id' => '[1-9]\d*'],
         methods: 'GET',
     )]
+    #[IsGranted('VIEW', subject: 'wallet')]
     public function show(Wallet $wallet): Response
     {
         return $this->render(
@@ -149,6 +151,7 @@ class WalletController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}/edit', name: 'wallet_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
+    #[IsGranted('EDIT', subject: 'wallet')]
     public function edit(Request $request, Wallet $wallet): Response
     {
         $form = $this->createForm(
@@ -191,6 +194,7 @@ class WalletController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}/delete', name: 'wallet_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
+    #[IsGranted('DELETE', subject: 'wallet')]
     public function delete(Request $request, Wallet $wallet): Response
     {
         $form = $this->createForm(FormType::class, $wallet, [

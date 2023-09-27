@@ -6,9 +6,12 @@
 namespace App\Service;
 
 use App\Entity\Categories;
+use App\Entity\User;
 use App\Repository\CategoriesRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * Class CategoriesService.
@@ -39,11 +42,6 @@ class CategoriesService implements CategoriesServiceInterface
 
 
 
-    /**
-     * Save entity.
-     *
-     * @param Categories $categories Categories entity
-     */
 
 
     /**
@@ -76,13 +74,34 @@ class CategoriesService implements CategoriesServiceInterface
      *
      * @return PaginationInterface<string, mixed> Paginated list
      */
-    public function getPaginatedList(int $page): PaginationInterface
+    public function getPaginatedList(int $page, User $author): PaginationInterface
     {
         return $this->paginator->paginate(
-            $this->categoriesRepository->queryAll(),
+            $this->categoriesRepository->queryByAuthor($author),
             $page,
             CategoriesRepository::PAGINATOR_ITEMS_PER_PAGE
         );
     }
+
+
+    /**
+     * Find by id.
+     *
+     * @param int $id Category id
+     *
+     * @return Categories|null Categories entity
+     *
+     * @throws NonUniqueResultException
+     */
+    public function findOneById(int $id): ?CategoriesRepository
+    {
+        return $this->categoriesRepository->findOneById($id);
+    }
+
+
+
+
+
+
 }
 

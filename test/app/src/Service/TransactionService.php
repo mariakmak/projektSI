@@ -5,6 +5,8 @@
 
 namespace App\Service;
 
+use App\Entity\Categories;
+use App\Entity\User;
 use App\Repository\TransactionRepository;
 use App\Entity\Transaction;
 use App\Service\TransactionServiceInterface;
@@ -26,17 +28,54 @@ class TransactionService implements TransactionServiceInterface
      */
     private PaginatorInterface $paginator;
 
+
+
+    /**
+     * Category service.
+     */
+    private CategoriesServiceInterface $categoriesService;
+
+
+
+    /**
+     * Constructor.
+     *
+     * @param CategoriesServiceInterface $categoriesService Category service
+     * @param PaginatorInterface       $paginator       Paginator
+     * @param TransactionRepository       $transactionRepository  Transaction repository
+     */
+    public function __construct(
+        CategoriesServiceInterface $categoriesService,
+        PaginatorInterface $paginator,
+        TransactionRepository $transactionRepository
+    ) {
+        $this->categoriesService = $categoriesService;
+        $this->paginator = $paginator;
+        $this->transactionRepository = $transactionRepository;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
     /**
      * Constructor.
      *
      * @param TransactionRepository     $transactionRepository  Transaction repository
      * @param PaginatorInterface $paginator      Paginator
      */
-    public function __construct(TransactionRepository $transactionRepository, PaginatorInterface $paginator)
-    {
-        $this->transactionRepository = $transactionRepository;
-        $this->paginator = $paginator;
-    }
+    //public function __construct(TransactionRepository $transactionRepository, PaginatorInterface $paginator)
+    //{
+     //   $this->transactionRepository = $transactionRepository;
+     //   $this->paginator = $paginator;
+   // }
 
 
 
@@ -56,7 +95,10 @@ class TransactionService implements TransactionServiceInterface
     }
 
 
-
+    public function delete(Transaction $transaction): void
+    {
+        $this->transactionRepository->delete($transaction);
+    }
 
 
     /**
@@ -66,12 +108,50 @@ class TransactionService implements TransactionServiceInterface
      *
      * @return PaginationInterface<string, mixed> Paginated list
      */
-    public function getPaginatedList(int $page): PaginationInterface
+    public function getPaginatedList(int $page, User $author, array $filters = []): PaginationInterface
     {
+
+
+        $filters = $this->prepareFilters($filters);
+
         return $this->paginator->paginate(
-            $this->transactionRepository->queryAll(),
+            $this->transactionRepository->queryByAuthor($author, $filters),
             $page,
             TransactionRepository::PAGINATOR_ITEMS_PER_PAGE
         );
     }
+
+
+
+    /**
+     * Prepare filters for the categories list.
+     *
+     * @param array<string, int> $filters Raw filters from request
+     *
+     * @return array<string, object> Result array of filters
+     */
+    private function prepareFilters(array $filters): array
+    {
+        $resultFilters = [];
+        if (!empty($filters['categories_id'])) {
+            $categories = $this->categoriesService->findOneById($filters['categories_id']);
+            if (null !== $categories) {
+                $resultFilters['categories'] = $categories;
+            }
+        }
+
+        return $resultFilters;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 }

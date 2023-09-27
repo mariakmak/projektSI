@@ -6,7 +6,10 @@
 namespace App\Service;
 
 use App\Entity\Categories;
+use App\Entity\User;
+use App\Repository\CategoriesRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Interface CategoriesServiceInterface.
@@ -20,7 +23,7 @@ interface CategoriesServiceInterface
      *
      * @return PaginationInterface<string, mixed> Paginated list
      */
-    public function getPaginatedList(int $page): PaginationInterface;
+    public function getPaginatedList(int $page, User $author): PaginationInterface;
 
     /**
      * Save entity.
@@ -36,6 +39,8 @@ interface CategoriesServiceInterface
      */
     public function delete(Categories $category): void;
 
+
+    public function findOneById(int $id): ?CategoriesRepository;
 }
 
 

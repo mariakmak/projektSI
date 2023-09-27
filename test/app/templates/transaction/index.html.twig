@@ -22,6 +22,8 @@
                 <th>{{ knp_pagination_sortable(pagination, 'label.sum'|trans, 'transaction.sum') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.currency'|trans, 'currency.name') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.value'|trans, 'transaction.value') }}</th>
+                <th>{{ knp_pagination_sortable(pagination,'label.author'|trans, 'author.email')}}</th>
+                <th>{{ 'label.actions'|trans }}</th>
 
             </tr>
             </thead>
@@ -36,22 +38,56 @@
                     <td>{{ task.sum }}</td>
                     <td>{{ task.currency.name }}</td>
                     <td>{{ task.value }}</td>
-
+                    <td>{{ task.author.email }}</td>
                     <td>
-                        <a href="{{ url('transaction_show', {id: task.id}) }}" title="{{ 'action.view'|trans }}">
-                            {{ 'action.view'|trans }}
-                        </a>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ 'action.options'|trans }}
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item"  href="{{ url('transaction_show', {id: task.id}) }}" title="{{ 'action.view'|trans }}">
+                                        {{ 'action.view'|trans }}</a></li>
+                                <li class="dropdown-item"><a href="{{ url('transaction_delete', {id: task.id}) }}" title="{{ 'action.delete'|trans }}">
+                                        {{ 'action.delete'|trans }}</a></li>
+                            </ul>
+                        </div>
                     </td>
+
+
+
+
+
+
+                    <a href="{{ url('transaction_index', {'filters.categories_id' : task.category.id}) }}" title="{{ task.category.name }}">
+                        {{ task.category.name }}
+                    </a>
+
+
                 </tr>
             {% endfor %}
             </tbody>
         </table>
+
+
+        <p>
+            <a href="{{ url('transaction_create') }}" title="{{ 'action.create'|trans }}">
+                {{ 'action.create'|trans }}
+            </a>
+        </p>
+
+
         <div class="navigation text-center">
             {{ knp_pagination_render(pagination) }}
         </div>
     {% else %}
         <p>
             {{ 'message.empty_list'|trans }}
+        </p>
+
+        <p>
+            <a href="{{ url('transaction_create') }}" title="{{ 'action.create'|trans }}">
+                {{ 'action.create'|trans }}
+            </a>
         </p>
     {% endif %}
 {% endblock %}

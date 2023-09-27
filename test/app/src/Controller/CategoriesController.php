@@ -6,19 +6,25 @@
 namespace App\Controller;
 
 use App\Entity\Categories;
+use App\Entity\User;
 use App\Form\Type\CategoriesType;
 use App\Repository\CategoriesRepository;
 use App\Service\CategoriesServiceInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Class CategoriesController.
+ *
+ *
+ *
  */
 #[Route('/categories')]
 class CategoriesController extends AbstractController
@@ -70,7 +76,8 @@ class CategoriesController extends AbstractController
     {
 
         $pagination = $this->categoriesService->getPaginatedList(
-            $request->query->getInt('page', 1)
+            $request->query->getInt('page', 1),
+            $this->getUser()
 
         );
 
@@ -95,6 +102,7 @@ class CategoriesController extends AbstractController
         requirements: ['id' => '[1-9]\d*'],
         methods: 'GET',
     )]
+    #[IsGranted('VIEW', subject: 'categories')]
     public function show(Categories $categories): Response
     {
 
@@ -119,8 +127,10 @@ class CategoriesController extends AbstractController
         name: 'category_create',
         methods: 'GET|POST',
     )]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function create(Request $request): Response
     {
+
         /** @var User $user */
         $user = $this->getUser();
         $categories = new Categories();
@@ -157,6 +167,7 @@ class CategoriesController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}/delete', name: 'category_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
+    #[IsGranted('DELETE', subject: 'categories')]
     public function delete(Request $request, Categories $category): Response
     {
         $form = $this->createForm(FormType::class, $category, [
@@ -194,6 +205,7 @@ class CategoriesController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}/edit', name: 'category_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
+    #[IsGranted('EDIT', subject: 'categories')]
     public function edit(Request $request, Categories $category): Response
     {
         $form = $this->createForm(

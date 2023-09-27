@@ -23,13 +23,15 @@
                 <th>{{ knp_pagination_sortable(pagination, 'label.updated_at'|trans, 'wallet.updatedAt')}}</th>
                 {# <th> {{ knp_pagination_sortable(pagination, 'label.currency'|trans, 'currency.name')}}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.transaction'|trans, 'transaction.id')}}</th> #}
+                <th>{{ knp_pagination_sortable(pagination,'label.author'|trans, 'author.email')}}</th>
+                <th>{{ 'label.actions'|trans }}</th>
 
 
 
             </tr>
             </thead>
             <tbody>
-            {% for task in pagination %}
+            {% for task in pagination.items %}
                 <tr>
                     <td>{{  task.id }}</td>
                     <td>{{ task.name }}</td>
@@ -37,15 +39,24 @@
                     <td>{{ task.updatedAt|date('Y/m/d') }}</td>
                    {#  <td>{{ task.currency.name }}</td>
                     <td>{{ task.transaction.id }}</td> #}
-
-
-
-
+                    <td>{{ task.author.email }}</td>
                     <td>
-                        <a href="{{ url('wallet_show', {id: task.id}) }}" title="{{ 'action.view'|trans }}">
-                            {{ 'action.view'|trans }}
-                        </a>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ 'action.options'|trans }}
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ url('wallet_show', {id: task.id}) }}" title="{{ 'action.view'|trans }}">
+                                        {{ 'action.view'|trans }}</a></li>
+                                <li><a class="dropdown-item" href="{{ url('wallet_edit', {id: task.id}) }}" title="{{ 'action.edit'|trans }}">
+                                        {{ 'action.edit'|trans }}</a></li>
+                                <li><a class="dropdown-item" href="{{ url('wallet_delete', {id: task.id}) }}" title="{{ 'action.delete'|trans }}">
+                                        {{ 'action.delete'|trans }}</a></li>
+                            </ul>
+                        </div>
                     </td>
+
+
                 </tr>
             {% endfor %}
             </tbody>
@@ -65,6 +76,12 @@
     {% else %}
         <p>
             {{ 'message.empty_list'|trans }}
+        </p>
+
+        <p>
+            <a href="{{ url('wallet_create') }}" title="{{ 'action.create'|trans }}">
+                {{ 'action.create'|trans }}
+            </a>
         </p>
     {% endif %}
 {% endblock %}

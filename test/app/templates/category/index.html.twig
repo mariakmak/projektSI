@@ -23,6 +23,8 @@
                 <th>{{ knp_pagination_sortable(pagination, 'label.created_at'|trans,'category.createdAt' )}}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.updated_at'|trans, 'category.updatedAt' )}}</th>
                 <th>{{ knp_pagination_sortable(pagination,'label.name'|trans, 'category.name')}}</th>
+                <th>{{ knp_pagination_sortable(pagination,'label.author'|trans, 'author.email')}}</th>
+                <th>{{ 'label.actions'|trans }}</th>
 
             </tr>
             </thead>
@@ -33,22 +35,21 @@
                     <td>{{ elem.createdAt|date('Y/m/d') }}</td>
                     <td>{{ elem.updatedAt|date('Y/m/d') }}</td>
                     <td>{{ elem.name }}</td>
+                    <td>{{ elem.author.email }}</td>
                     <td>
-                        <a href="{{ url('category_show', {id: elem.id}) }}" title="{{ 'action.view'|trans }}">
-                            {{ 'action.view'|trans }}
-                        </a>
-                    </td>
-
-                    <td>
-                        <a href="{{ url('category_edit', {id: elem.id}) }}" title="{{ 'action.edit'|trans }}">
-                            {{ 'action.edit'|trans }}
-                        </a>
-                    </td>
-
-                    <td>
-                        <a href="{{ url('category_delete', {id: elem.id}) }}" title="{{ 'action.delete'|trans }}">
-                            {{ 'action.delete'|trans }}
-                        </a>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ 'action.options'|trans }}
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ url('category_show', {id: elem.id}) }}" title="{{ 'action.view'|trans }}">
+                                        {{ 'action.view'|trans }}</a></li>
+                                <li><a class="dropdown-item" href="{{ url('category_edit', {id: elem.id}) }}" title="{{ 'action.edit'|trans }}">
+                                        {{ 'action.edit'|trans }}</a></li>
+                                <li><a class="dropdown-item" href="{{ url('category_delete', {id: elem.id}) }}" title="{{ 'action.delete'|trans }}">
+                                        {{ 'action.delete'|trans }}</a></li>
+                            </ul>
+                        </div>
                     </td>
 
 
@@ -73,5 +74,12 @@
         <p>
             {{ 'message.empty_list'|trans }}
         </p>
+
+        <p>
+            <a href="{{ url('category_create') }}" title="{{ 'action.create'|trans }}">
+                {{ 'action.create'|trans }}
+            </a>
+        </p>
+
     {% endif %}
 {% endblock %}

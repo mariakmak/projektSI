@@ -1,24 +1,24 @@
 <?php
 /**
- * Transaction type.
+ * Admin type.
  */
 
 namespace App\Form\Type;
 
-use App\Entity\Transaction;
-use App\Entity\Categories;
-use App\Entity\Currency;
-use App\Entity\Wallet;
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class TransactionType.
+ * Class UserType.
  */
-class TransactionType extends AbstractType
+class AdminType extends AbstractType
 {
     /**
      * Builds the form.
@@ -33,70 +33,44 @@ class TransactionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-
         $builder->add(
-            'category',
-            EntityType::class,
+            'email',
+            EmailType::class,
             [
-                'class' => Categories::class,
-                'choice_label' => function ($category): string {
-                    return $category->getName();
-                },
-                'label' => 'label.category',
-                'placeholder' => 'label.none',
+                'label' => 'label.email',
                 'required' => false,
-                'expanded' => true,
-                'multiple' => true,
+                'attr' => ['max_length' => 180],
             ]
         );
 
         $builder->add(
-            'name',
-            TextType::class,
+            'password',
+            RepeatedType::class,
             [
-                'label' => 'label.name',
+                'type' => PasswordType::class,
+                'required' => false,
+                'first_options' => ['label' => 'Nowe hasło'],
+                'second_options' => ['label' => 'Potwierdź nowe hasło'],
+            ]
+        );
+        $builder->add(
+            'roles',
+            ChoiceType::class,
+            [
+                'attr' => ['class' => 'form-control'],
+                'choices' => [
+                    'ROLE_ADMIN' => [
+                        'Yes' => 'ROLE_ADMIN',
+                    ],
+                    'ROLE_USER' => [
+                        'Yes' => 'ROLE_USER',
+                    ],
+                ],
+                'multiple' => true,
                 'required' => true,
-                'attr' => ['max_length' => 64],
-            ]);
-
-
-        $builder->add(
-            'wallet',
-            EntityType::class,
-            [
-                'class' => Wallet::class,
-                'choice_label' => function ($wallet): string {
-                    return $wallet->getName();
-                },
-                'label' => 'label.wallet',
-                'placeholder' => 'label.none',
-                'required' => false,
-                'expanded' => true,
-                'multiple' => true,
             ]
         );
     }
-
-
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->transactions = new ArrayCollection();
-    }
-
-    /**
-
-
-
-
-
-
-
-
-
 
     /**
      * Configures the options for this type.
@@ -105,7 +79,7 @@ class TransactionType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults(['data_class' => Transaction::class]);
+        $resolver->setDefaults(['data_class' => User::class]);
     }
 
     /**
@@ -118,6 +92,6 @@ class TransactionType extends AbstractType
      */
     public function getBlockPrefix(): string
     {
-        return 'transaction';
+        return 'user';
     }
 }

@@ -2,10 +2,13 @@
 
 namespace App\Repository;
 
+use App\Entity\Categories;
 use App\Entity\Transaction;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @extends ServiceEntityRepository<Transaction>
@@ -37,9 +40,9 @@ class TransactionRepository extends ServiceEntityRepository
      *
      * @return \Doctrine\ORM\QueryBuilder Query builder
      */
-    public function queryAll(): QueryBuilder
+    public function queryAll(array $filters): QueryBuilder
     {
-        return $this->getOrCreateQueryBuilder()
+        $queryBuilder = $this->getOrCreateQueryBuilder()
             ->select(
                 'partial transaction.{id, description, createdAt, sum, value}',
                 'partial categories.{id, name}',
@@ -50,7 +53,14 @@ class TransactionRepository extends ServiceEntityRepository
             ->join('transaction.currency', 'currency')
             ->join('transaction.wallet', 'wallet')
             ->orderBy('transaction.createdAt', 'DESC');
+
+        return $this->applyFiltersToList($queryBuilder, $filters);
     }
+
+
+
+
+
 
     /**
      * Get or create new query builder.
@@ -100,11 +110,59 @@ class TransactionRepository extends ServiceEntityRepository
      * @param Transaction $transaction Transaction entity
      */
 
-    public function save(Transaction $categories): void
+    public function save(Transaction $transaction): void
     {
         $this->_em->persist($transaction);
         $this->_em->flush();
     }
+
+
+    /**
+     * Delete entity.
+     *
+     * @param Transaction $transaction Transaction entity
+     */
+    public function delete(Transaction $transaction): void
+    {
+        $this->_em->remove($transaction);
+        $this->_em->flush();
+    }
+
+    /**
+     * @return QueryBuilder Query builder
+     */
+    public function queryByAuthor(UserInterface $user, array $filters = []): QueryBuilder
+    {
+        $queryBuilder = $this->queryAll($filters);
+
+        $queryBuilder->andWhere('transaction.author = :author')
+            ->setParameter('author', $user);
+
+        return $queryBuilder;
+    }
+
+
+
+    /**
+     * Apply filters to paginated list.
+     *
+     * @param QueryBuilder          $queryBuilder Query builder
+     * @param array<string, object> $filters      Filters array
+     *
+     * @return QueryBuilder Query builder
+     */
+    private function applyFiltersToList(QueryBuilder $queryBuilder, array $filters = []): QueryBuilder
+    {
+        if (isset($filters['categories']) && $filters['categories'] instanceof Categories) {
+            $queryBuilder->andWhere('categories = :categories')
+                ->setParameter('categories', $filters['categories']);
+        }
+
+
+        return $queryBuilder;
+    }
+
+
 
 
 

@@ -67,8 +67,8 @@ class WalletController extends AbstractController
     public function index(Request $request): Response
     {
         $pagination = $this->walletService->getPaginatedList(
-            $request->query->getInt('page', 1)
-
+            $request->query->getInt('page', 1),
+            $this->getUser()
         );
 
         return $this->render(

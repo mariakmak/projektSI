@@ -5,6 +5,10 @@
 
 namespace App\Service;
 
+use App\Entity\Transaction;
+use App\Entity\User;
+use App\Repository\TransactionRepository;
+use App\Repository\UserRepository;
 use App\Repository\WalletRepository;
 use App\Entity\Wallet;
 use App\Service\WalletServiceInterface;
@@ -54,8 +58,14 @@ class WalletService implements WalletServiceInterface
         $this->walletRepository->save($wallet);
     }
 
-    public function delete(Wallet $wallet): void
+    public function delete(Wallet $wallet, TransactionRepository $transaction): void
     {
+
+
+        $a = $this->$transaction->querybyWallet();
+        foreach ($a as $b){
+            $transaction->delete($a);
+        }
         $this->walletRepository->delete($wallet);
     }
 
@@ -67,10 +77,10 @@ class WalletService implements WalletServiceInterface
      *
      * @return PaginationInterface<string, mixed> Paginated list
      */
-    public function getPaginatedList(int $page): PaginationInterface
+    public function getPaginatedList(int $page, User $author): PaginationInterface
     {
         return $this->paginator->paginate(
-            $this->walletRepository->queryAll(),
+            $this->walletRepository->queryByAuthor($author),
             $page,
             WalletRepository::PAGINATOR_ITEMS_PER_PAGE
         );

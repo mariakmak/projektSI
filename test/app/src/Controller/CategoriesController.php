@@ -170,6 +170,9 @@ class CategoriesController extends AbstractController
     #[IsGranted('DELETE', subject: 'categories')]
     public function delete(Request $request, Categories $category): Response
     {
+
+
+
         $form = $this->createForm(FormType::class, $category, [
             'method' => 'DELETE',
             'action' => $this->generateUrl('category_delete', ['id' => $category->getId()]),

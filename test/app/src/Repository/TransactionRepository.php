@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Categories;
 use App\Entity\Transaction;
 use App\Entity\User;
+use App\Entity\Wallet;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
@@ -140,6 +141,21 @@ class TransactionRepository extends ServiceEntityRepository
 
         return $queryBuilder;
     }
+
+
+
+    public function queryByWallet(Wallet $wallet): QueryBuilder
+    {
+        $queryBuilder = $this->queryAll();
+
+        $queryBuilder->andWhere('transaction.wallet = :wallet')
+            ->setParameter('wallet', $wallet);
+
+        return $queryBuilder;
+    }
+
+
+
 
 
 

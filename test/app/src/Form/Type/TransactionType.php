@@ -9,11 +9,21 @@ use App\Entity\Transaction;
 use App\Entity\Categories;
 use App\Entity\Currency;
 use App\Entity\Wallet;
+use App\Entity\User;
+use App\Repository\CategoriesRepository;
+use App\Repository\WalletRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use App\Repository\TransactionRepository;
+use App\Config\TextAlign;
+use Symfony\Component\Security\Core\Security;
+
 
 /**
  * Class TransactionType.
@@ -31,6 +41,16 @@ class TransactionType extends AbstractType
      *
      * @see FormTypeExtensionInterface::buildForm()
      */
+
+    private $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
+
+
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
 
@@ -40,13 +60,16 @@ class TransactionType extends AbstractType
             [
                 'class' => Categories::class,
                 'choice_label' => function ($category): string {
-                    return $category->getName();
+                    return $category ->getName() ;
                 },
                 'label' => 'label.category',
                 'placeholder' => 'label.none',
                 'required' => false,
                 'expanded' => true,
-                'multiple' => true,
+                'multiple' => false,
+                'query_builder' => function (CategoriesRepository $tg) {
+                    return $tg->queryByAuthor($this->security->getUser());
+                },
             ]
         );
 
@@ -58,6 +81,63 @@ class TransactionType extends AbstractType
                 'required' => true,
                 'attr' => ['max_length' => 64],
             ]);
+
+
+
+        $builder->add(
+            'description',
+            TextType::class,
+            [
+                'label' => 'label.description',
+                'required' => false,
+                'attr' => ['max_length' =>250],
+            ]);
+
+
+
+
+
+        $builder->add(
+            'sum',
+            NumberType::class,
+            [
+                'label' => 'label.sum',
+                'required' => true,
+
+            ]);
+
+        $builder->add(
+            'value',
+            CheckboxType::class,[
+            'label' => 'label.income',
+            'required' => false
+
+            ]);
+
+
+
+
+
+        $builder->add(
+            'currency',
+            EntityType::class,
+            [
+                'class' => Currency::class,
+                'choice_label' => function ($currency): string {
+                    return $currency->getName();
+                },
+                'label' => 'label.currency',
+                'placeholder' => 'label.none',
+                'required' => true,
+                'expanded' => true,
+                'multiple' => false,
+            ]
+        );
+            //CurrencyType::class,
+           // [
+              //  'label' => 'label.currency',
+
+            //]);
 
 
         $builder->add(
@@ -72,22 +152,17 @@ class TransactionType extends AbstractType
                 'placeholder' => 'label.none',
                 'required' => false,
                 'expanded' => true,
-                'multiple' => true,
+                'multiple' => false,
+                'query_builder' => function (WalletRepository $tg) {
+                    return $tg->queryByAuthor($this->security->getUser());
+                },
             ]
         );
     }
 
 
 
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->transactions = new ArrayCollection();
-    }
 
-    /**
 
 
 

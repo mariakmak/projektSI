@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\User;
 use App\Entity\Wallet;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -105,6 +106,21 @@ class WalletRepository extends ServiceEntityRepository
         $this->_em->remove($wallet);
         $this->_em->flush();
     }
+
+
+    /**
+     * @return QueryBuilder Query builder
+     */
+    public function queryByAuthor(User $user): QueryBuilder
+    {
+        $queryBuilder = $this->queryAll();
+
+        $queryBuilder->andWhere('wallet.author = :author')
+            ->setParameter('author', $user);
+
+        return $queryBuilder;
+    }
+
 
 
 //    /**

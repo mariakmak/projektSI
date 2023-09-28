@@ -5,7 +5,11 @@
 
 namespace App\Service;
 
+use App\Entity\Transaction;
+use App\Entity\User;
 use App\Entity\Wallet;
+use App\Repository\TransactionRepository;
+use App\Repository\UserRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 
 /**
@@ -20,7 +24,7 @@ interface WalletServiceInterface
      *
      * @return PaginationInterface<string, mixed> Paginated list
      */
-    public function getPaginatedList(int $page): PaginationInterface;
+    public function getPaginatedList(int $page,User $author): PaginationInterface;
 
 
 
@@ -37,7 +41,7 @@ interface WalletServiceInterface
      *
      * @param Wallet $wallet Wallet entity
      */
-    public function delete(Wallet $wallet): void;
+    public function delete(Wallet $wallet, TransactionRepository $transaction): void;
 
 
 

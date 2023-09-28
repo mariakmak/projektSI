@@ -31,7 +31,6 @@ class Transaction
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    #[Assert\Type(ArrayCollection::class)]
     private ?Categories $category = null;
 
     /**

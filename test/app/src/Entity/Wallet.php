@@ -66,6 +66,9 @@ class Wallet
     #[Assert\Type(User::class)]
     private ?User $author = null;
 
+    #[ORM\Column]
+    private ?int $Sum = null;
+
     public function __construct()
     {
         $this->currency = new ArrayCollection();
@@ -204,6 +207,17 @@ class Wallet
     public function setAuthor(?User $author): void
     {
         $this->author = $author;
+
+    }
+
+    public function getSum(): ?int
+    {
+        return $this->Sum;
+    }
+
+    public function setSum(int $Sum): void
+    {
+        $this->Sum = $Sum;
 
     }
 }

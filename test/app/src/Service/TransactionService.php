@@ -89,7 +89,7 @@ class TransactionService implements TransactionServiceInterface
         if ($transaction->getId() == null) {
             $transaction->setCreatedAt(new \DateTimeImmutable());
         }
-        $transaction->setUpdatedAt(new \DateTimeImmutable());
+
 
         $this->transactionRepository->save($transaction);
     }

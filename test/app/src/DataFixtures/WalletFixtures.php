@@ -54,6 +54,7 @@ class WalletFixtures extends AppFixtures implements DependentFixtureInterface
 
             $author = $this->getRandomReference('users');
             $wallet->setAuthor($author);
+            $wallet->setSum($this->faker->biasedNumberBetween($min = 1, $max = 1000));
 
 
             return $wallet;

@@ -5,11 +5,19 @@
 
 namespace App\Form\Type;
 
+use App\Entity\Currency;
+use App\Entity\Transaction;
 use App\Entity\Wallet;
+use App\Repository\CurrencyRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+
 
 /**
  * Class WalletType.
@@ -37,6 +45,39 @@ class WalletType extends AbstractType
                 'required' => true,
                 'attr' => ['max_length' => 255],
             ]);
+
+
+        $builder->add(
+            'currency',
+            EntityType::class,
+            [
+                'class' => Currency::class,
+                'choice_label' => function ($currency): string {
+                    return $currency ->getName() ;
+                },
+                'label' => 'label.currency',
+                'placeholder' => 'label.none',
+                'required' => true,
+                'expanded' => true,
+                'multiple' => true,
+
+            ]
+        );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
     /**

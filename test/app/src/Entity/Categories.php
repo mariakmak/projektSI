@@ -7,7 +7,9 @@
 namespace App\Entity;
 
 use App\Repository\CategoriesRepository;
+use App\Repository\TransactionRepository;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
@@ -53,11 +55,23 @@ class Categories
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
+
+
+
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EXTRA_LAZY')]
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\NotBlank]
     #[Assert\Type(User::class)]
     private ?User $author = null;
+
+
+
+
+
+
+
+
+
 
 
     /**
@@ -159,4 +173,12 @@ class Categories
 
 
     }
+
+
+
+
+
+
+
+
 }

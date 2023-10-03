@@ -1,20 +1,20 @@
 <?php
 /**
- * Categories service interface.
+ * Category service interface.
  */
 
 namespace App\Service;
 
-use App\Entity\Categories;
+use App\Entity\Category;
 use App\Entity\User;
-use App\Repository\CategoriesRepository;
+use App\Repository\CategoryRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * Interface CategoriesServiceInterface.
+ * Interface CategoryServiceInterface.
  */
-interface CategoriesServiceInterface
+interface CategoryServiceInterface
 {
     /**
      * Get paginated list.
@@ -28,19 +28,19 @@ interface CategoriesServiceInterface
     /**
      * Save entity.
      *
-     * @param Categories $categories Categories entity
+     * @param Category $category Category entity
      */
-    public function save(Categories $categories): void;
+    public function save(Category $category): void;
 
     /**
      * Delete entity.
      *
-     * @param Categories $category Categories entity
+     * @param Category $category Category entity
      */
-    public function delete(Categories $category): void;
+    public function delete(Category $category): void;
 
 
-    public function findOneById(int $id): ?CategoriesRepository;
+    public function findOneById(int $id): ?CategoryRepository;
 }
 
 

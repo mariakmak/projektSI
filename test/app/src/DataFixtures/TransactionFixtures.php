@@ -9,7 +9,7 @@ use App\Entity\Currency;
 use App\Entity\Transaction;
 use App\Entity\Enum\TaskStatus;
 use App\Entity\User;
-use App\Entity\Categories;
+use App\Entity\Category;
 use App\Entity\Wallet;
 use DateTimeImmutable;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -28,10 +28,10 @@ class TransactionFixtures extends AppFixtures implements DependentFixtureInterfa
             return;
         }
 
-        $this->createMany(25, 'transactions', function (int $i) {
+        $this->createMany(100, 'transactions', function (int $i) {
             $transaction = new Transaction();
 
-            /** @var Categories $category */
+            /** @var Category $category */
             $category = $this->getRandomReference('categories');
             $transaction->setCategory($category);
             $transaction->setName($this->faker->sentence);
@@ -72,6 +72,6 @@ class TransactionFixtures extends AppFixtures implements DependentFixtureInterfa
      */
     public function getDependencies(): array
     {
-        return [CategoriesFixtures::class, CurrencyFixtures::class, WalletFixtures::class, UserFixtures::class  ];
+        return [CategoryFixtures::class, CurrencyFixtures::class, WalletFixtures::class, UserFixtures::class  ];
     }
 }

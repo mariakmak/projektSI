@@ -1,11 +1,11 @@
 <?php
 /**
- * Categories type.
+ * Category type.
  */
 
 namespace App\Form\Type;
 
-use App\Entity\Categories;
+use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,7 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * Class CategoryType.
  */
-class CategoriesType extends AbstractType
+class CategoryType extends AbstractType
 {
     /**
      * Builds the form.
@@ -46,7 +46,7 @@ class CategoriesType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults(['data_class' => Categories::class]);
+        $resolver->setDefaults(['data_class' => Category::class]);
     }
 
     /**
@@ -59,6 +59,6 @@ class CategoriesType extends AbstractType
      */
     public function getBlockPrefix(): string
     {
-        return 'categories';
+        return 'category';
     }
 }

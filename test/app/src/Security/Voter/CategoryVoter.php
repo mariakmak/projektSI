@@ -5,14 +5,14 @@ namespace App\Security\Voter;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
-use App\Entity\Categories;
+use App\Entity\Category;
 use App\Entity\User;
 use Symfony\Component\Security\Core\Security;
 
 
 
 
-class CategoriesVoter extends Voter
+class CategoryVoter extends Voter
 {
 
 
@@ -62,7 +62,7 @@ class CategoriesVoter extends Voter
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
         return in_array($attribute, [self::DELETE, self::EDIT, self::VIEW])
-            && $subject instanceof \App\Entity\Categories;
+            && $subject instanceof \App\Entity\Category;
     }
 
     protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
@@ -94,35 +94,35 @@ class CategoriesVoter extends Voter
      *
      * @return bool Result
      */
-    private function canEdit(Categories $categories, User $user): bool
+    private function canEdit(Category $category, User $user): bool
     {
-        return $categories->getAuthor() === $user;
+        return $category->getAuthor() === $user;
     }
 
     /**
      * Checks if user can view category.
      *
-     * @param Categories $categories categories entity
+     * @param Category $category categories entity
      * @param User $user User
      *
      * @return bool Result
      */
-    private function canView(Categories $categories, User $user): bool
+    private function canView(Category $category, User $user): bool
     {
-        return $categories->getAuthor() === $user;
+        return $category->getAuthor() === $user;
     }
 
     /**
      * Checks if user can delete category.
      *
-     * @param Categories $categories categories entity
+     * @param Category $category category entity
      * @param User $user User
      *
      * @return bool Result
      */
-    private function canDelete(Categories $categories, User $user): bool
+    private function canDelete(Category $category, User $user): bool
     {
-        return $categories->getAuthor() === $user;
+        return $category->getAuthor() === $user;
     }
 
 

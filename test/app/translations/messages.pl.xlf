@@ -1,170 +1,168 @@
 <?xml version="1.0"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-  <file source-language="en" datatype="plaintext" original="file.ext">
+  <file source-language="pl" datatype="plaintext" original="file.ext">
     <body>
 
       <trans-unit id="name.category_details">
         <source>name.category_details</source>
-        <target>Category details #%id%</target>
+        <target>Informacje szczegółowe-kategoria: #%id%</target>
       </trans-unit>
       <trans-unit id="name.transaction_details">
          <source>name.transaction_details</source>
-         <target>Transaction details #%id%</target>
+         <target>Informacje szczegółowe-transakcja: #%id%</target>
       </trans-unit>
       <trans-unit id="name.wallet_details">
          <source>name.wallet_details</source>
-         <target>Wallet details #%id%</target>
+         <target>Informacje szczegółowe-portfel: #%id%</target>
       </trans-unit>
          <trans-unit id="action.logout">
          <source>action.logout</source>
-         <target>Log out </target>
+         <target>Wyloguj się </target>
       </trans-unit>
          <trans-unit id="title.sign_in">
          <source>title.sign_in</source>
-         <target>Sign in! </target>
+         <target>Zaloguj się! </target>
       </trans-unit>
          <trans-unit id="label.password">
          <source>label.password</source>
-         <target>Password </target>
+         <target>Hasło </target>
       </trans-unit>
          <trans-unit id="action.category">
          <source>action.category</source>
-         <target>Categories </target>
+         <target>Kategorie </target>
       </trans-unit>
          <trans-unit id="action.transaction">
          <source>action.transaction</source>
-         <target>Transactions </target>
+         <target>Transakcje </target>
       </trans-unit>
          <trans-unit id="action.wallet">
          <source>action.wallet</source>
-         <target>Wallets </target>
+         <target>Portfele </target>
       </trans-unit>
          <trans-unit id="title.category_list">
          <source>title.category_list</source>
-         <target>Categories </target>
+         <target>Kategorie </target>
       </trans-unit>
          <trans-unit id="label.actions">
          <source>label.actions</source>
-         <target>Operations </target>
+         <target>operacje </target>
       </trans-unit>
          <trans-unit id="label.id">
          <source>label.id</source>
-         <target>number </target>
+         <target>numer </target>
       </trans-unit>
          <trans-unit id="label.created_at">
          <source>label.created_at</source>
-         <target>created at</target>
+         <target>data utworzenia</target>
       </trans-unit>
          <trans-unit id="label.updated_at">
          <source>label.updated_at</source>
-         <target>updated at</target>
+         <target>ostatnio edytowane</target>
       </trans-unit>
          <trans-unit id="label.name">
          <source>label.name</source>
-         <target>name </target>
+         <target>nazwa </target>
       </trans-unit>
          <trans-unit id="label.author">
          <source>label.author</source>
-         <target>author </target>
+         <target>autor </target>
       </trans-unit>
          <trans-unit id="action.create">
          <source>action.create</source>
-         <target>create new</target>
+         <target>utwórz </target>
       </trans-unit>
          <trans-unit id="action.view">
          <source>action.view</source>
-         <target>see details</target>
+         <target>podgląd</target>
       </trans-unit>
          <trans-unit id="action.edit">
          <source>action.edit</source>
-         <target>edit </target>
+         <target>edytuj </target>
       </trans-unit>
          <trans-unit id="action.delete">
          <source>action.delete</source>
-         <target>delete </target>
+         <target>usuń </target>
       </trans-unit>
          <trans-unit id="action.back_to_list">
          <source>action.back_to_list</source>
-         <target>back to list </target>
+         <target>powrót do listy </target>
       </trans-unit>
                <trans-unit id="label.category">
                <source>label.category</source>
-               <target>Category </target>
+               <target>Categoria </target>
             </trans-unit>
                <trans-unit id="label.description">
                <source>label.description</source>
-               <target>description </target>
+               <target>opis </target>
             </trans-unit>
                <trans-unit id="label.wallet">
                <source>label.wallet</source>
-               <target>wallet</target>
+               <target>portfel</target>
             </trans-unit>
                <trans-unit id="label.sum">
                <source>label.sum</source>
-               <target>sum</target>
+               <target>kwota</target>
             </trans-unit>
                <trans-unit id="label.currency">
                <source>label.currency</source>
-               <target>currency </target>
+               <target>waluta </target>
             </trans-unit>
                <trans-unit id="label.value">
                <source>label.value</source>
-               <target>value </target>
+               <target>wartość </target>
             </trans-unit>
                <trans-unit id="action.options">
                <source>action.options</source>
-               <target>operations </target>
+               <target>operacje </target>
             </trans-unit>
                <trans-unit id="title.transaction_list">
                <source>title.transaction_list</source>
-               <target>Transactions </target>
+               <target>Transakcje </target>
             </trans-unit>
                <trans-unit id="title.wallet_list">
                <source>title.wallet_list</source>
-               <target>Wallets </target>
+               <target>Portfele </target>
             </trans-unit>
                <trans-unit id="currency.options">
                <source>currency.options</source>
-               <target>currencies </target>
+               <target>waluty </target>
             </trans-unit>
                <trans-unit id="transaction.options">
                <source>transaction.options</source>
-               <target>transactions </target>
+               <target>transakcje </target>
             </trans-unit>
                <trans-unit id="label.transaction">
                <source>label.transaction</source>
-               <target>transactions </target>
+               <target>transakcje </target>
             </trans-unit>
                <trans-unit id="action.save">
                <source>action.save</source>
-               <target>save </target>
+               <target>zapisz </target>
             </trans-unit>
                <trans-unit id="title.category_create">
                <source>title.category_create</source>
-               <target>Create category </target>
+               <target>Utwórz kategorie </target>
             </trans-unit>
                <trans-unit id="title.transaction_create">
                <source>title.transaction_create</source>
-               <target>Create transaction </target>
+               <target>Utwórz transakcje </target>
             </trans-unit>
                <trans-unit id="title.wallet_create">
                <source>title.wallet_create</source>
-               <target>Create wallet </target>
+               <target>Utworz portfel </target>
             </trans-unit>
                <trans-unit id="title.transaction_delete">
                <source>title.transaction_delete</source>
-               <target> Delete transaction </target>
+               <target> Usuń transakcje </target>
             </trans-unit>
                <trans-unit id="title.category_delete">
                <source>title.category_delete</source>
-               <target>Delete category </target>
+               <target>Usuń kategorię </target>
             </trans-unit>
                <trans-unit id="title.wallet_delete">
                <source>title.wallet_delete</source>
-               <target>Delete wallet </target>
+               <target>Usuń portfel </target>
             </trans-unit>
-
-
 
 
 

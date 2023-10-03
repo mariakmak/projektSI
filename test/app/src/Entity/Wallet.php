@@ -42,6 +42,8 @@ class Wallet
     private Collection $currency;
 
     #[ORM\OneToMany(mappedBy: 'wallet', targetEntity: Transaction::class)]
+    #[Assert\NotBlank]
+    #[Assert\IsNull]
     private Collection $transaction;
 
     /**

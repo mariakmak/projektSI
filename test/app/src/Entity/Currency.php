@@ -27,6 +27,7 @@ class Currency
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank]
     private ?string $name = null;
 
     /**

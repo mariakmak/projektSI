@@ -31,7 +31,8 @@ class Transaction
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Categories $category = null;
+    #[Assert\NotBlank]
+    private ?Category $category = null;
 
     /**
      * Description.
@@ -47,20 +48,25 @@ class Transaction
      * @var DateTimeImmutable|null
      */
     #[ORM\Column]
+    #[Assert\NotBlank]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank]
     private ?int $sum = null;
 
     #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
+    #[Assert\NotBlank]
     private ?Currency $currency = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank]
     private ?bool $value = null;
 
     #[ORM\ManyToOne(inversedBy: 'transaction')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank]
     private ?Wallet $wallet = null;
 
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EXTRA_LAZY')]
@@ -83,12 +89,12 @@ class Transaction
         return $this->id;
     }
 
-    public function getCategory(): ?Categories
+    public function getCategory(): ?Category
     {
         return $this->category;
     }
 
-    public function setCategory(?Categories $category): void
+    public function setCategory(?Category $category): void
     {
         $this->category = $category;
 ;

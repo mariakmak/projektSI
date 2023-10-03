@@ -65,6 +65,14 @@ class WalletType extends AbstractType
         );
 
 
+        $builder->add(
+            'sum',
+            NumberType::class,
+            [
+                'label' => 'label.sum',
+                'required' => false,
+
+            ]);
 
 
 

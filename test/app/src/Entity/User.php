@@ -46,6 +46,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var array<int, string>
      */
     #[ORM\Column(type: 'json')]
+    #[Assert\NotBlank]
     private array $roles = [];
 
     /**

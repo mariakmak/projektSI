@@ -1,15 +1,15 @@
 <?php
 /**
- * Categories controller.
+ * Category controller.
  */
 
 namespace App\Controller;
 
-use App\Entity\Categories;
+use App\Entity\Category;
 use App\Entity\User;
-use App\Form\Type\CategoriesType;
-use App\Repository\CategoriesRepository;
-use App\Service\CategoriesServiceInterface;
+use App\Form\Type\CategoryType;
+use App\Repository\CategoryRepository;
+use App\Service\CategoryServiceInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,19 +21,19 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * Class CategoriesController.
+ * Class CategoryController.
  *
  *
  *
  */
-#[Route('/categories')]
-class CategoriesController extends AbstractController
+#[Route('/category')]
+class CategoryController extends AbstractController
 {
 
     /**
-     * Categories service.
+     * Category service.
      */
-    private CategoriesServiceInterface $categoriesService;
+    private CategoryServiceInterface $categoriesService;
 
 
     /**
@@ -46,7 +46,7 @@ class CategoriesController extends AbstractController
     /**
      * Constructor.
      *
-     * @param CategoriesServiceInterface $categoriesService Categories service
+     * @param CategoryServiceInterface $categoryService Category service
      * @param TranslatorInterface      $translator  Translator
      */
 
@@ -55,9 +55,9 @@ class CategoriesController extends AbstractController
     /**
      * Constructor.
      */
-    public function __construct(CategoriesServiceInterface $taskService, TranslatorInterface $translator)
+    public function __construct(CategoryServiceInterface $taskService, TranslatorInterface $translator)
     {
-        $this->categoriesService = $taskService;
+        $this->categoryService = $taskService;
         $this->translator = $translator;
     }
 
@@ -75,7 +75,7 @@ class CategoriesController extends AbstractController
     public function index(Request $request): Response
     {
 
-        $pagination = $this->categoriesService->getPaginatedList(
+        $pagination = $this->categoryService->getPaginatedList(
             $request->query->getInt('page', 1),
             $this->getUser()
 
@@ -92,7 +92,7 @@ class CategoriesController extends AbstractController
     /**
      * Show action.
      *
-     * @param Categories $categories Categories entity
+     * @param Category $category Category entity
      *
      * @return Response HTTP response
      */
@@ -102,14 +102,14 @@ class CategoriesController extends AbstractController
         requirements: ['id' => '[1-9]\d*'],
         methods: 'GET',
     )]
-    #[IsGranted('VIEW', subject: 'categories')]
-    public function show(Categories $categories): Response
+    #[IsGranted('VIEW', subject: 'category')]
+    public function show(Category $category): Response
     {
 
 
         return $this->render(
             'category/show.html.twig',
-            ['category' => $categories]
+            ['category' => $category]
         );
 
     }
@@ -133,15 +133,15 @@ class CategoriesController extends AbstractController
 
         /** @var User $user */
         $user = $this->getUser();
-        $categories = new Categories();
-        $categories->setAuthor($user);
+        $category = new Category();
+        $category->setAuthor($user);
 
 
-        $form = $this->createForm(CategoriesType::class, $categories);
+        $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->categoriesService->save($categories);
+            $this->categoryService->save($category);
 
             $this->addFlash(
                 'success',
@@ -162,13 +162,13 @@ class CategoriesController extends AbstractController
      * Delete action.
      *
      * @param Request  $request  HTTP request
-     * @param Categories $category Category entity
+     * @param Category $category Category entity
      *
      * @return Response HTTP response
      */
     #[Route('/{id}/delete', name: 'category_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
-    #[IsGranted('DELETE', subject: 'categories')]
-    public function delete(Request $request, Categories $category): Response
+    #[IsGranted('DELETE', subject: 'category')]
+    public function delete(Request $request, Category $category): Response
     {
 
 
@@ -180,7 +180,7 @@ class CategoriesController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->categoriesService->delete($category);
+            $this->categoryService->delete($category);
 
           /*  $this->addFlash(
                 'success',
@@ -203,16 +203,16 @@ class CategoriesController extends AbstractController
      * Edit action.
      *
      * @param Request $request HTTP request
-     * @param Categories $category Categories entity
+     * @param Category $category Category entity
      *
      * @return Response HTTP response
      */
     #[Route('/{id}/edit', name: 'category_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
-    #[IsGranted('EDIT', subject: 'categories')]
-    public function edit(Request $request, Categories $category): Response
+    #[IsGranted('EDIT', subject: 'category')]
+    public function edit(Request $request, Category $category): Response
     {
         $form = $this->createForm(
-            CategoriesType::class,
+            CategoryType::class,
             $category,
             [
                 'method' => 'PUT',
@@ -222,7 +222,7 @@ class CategoriesController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->categoriesService->save($category);
+            $this->categoryService->save($category);
 
             $this->addFlash(
                 'success',

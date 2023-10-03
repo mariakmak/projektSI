@@ -27,7 +27,7 @@ class WalletFixtures extends AppFixtures implements DependentFixtureInterface
             return;
         }
 
-        $this->createMany(5, 'wallets', function (int $i) {
+        $this->createMany(40, 'wallets', function (int $i) {
             $wallet = new Wallet();
 
 

@@ -37,8 +37,8 @@
                 <tr>
                     <td>{{  task.id }}</td>
                     <td>{{ task.name }}</td>
-                    <td>{{ task.createdAt|date('Y/m/d') }}</td>
-                    <td>{{ task.updatedAt|date('Y/m/d') }}</td>
+                    <td>{{ task.createdAt|format_date('long')}}</td>
+                    <td>{{ task.updatedAt|format_date('long') }}</td>
                    {#  <td>{{ task.currency.name }}</td>
                     <td>{{ task.transaction.id }}</td> #}
                     <td>{{ task.author.email }}</td>

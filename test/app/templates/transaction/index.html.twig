@@ -33,7 +33,7 @@
                     <td>{{ task.id }}</td>
                     <td>{{ task.category.name }}</td>
                     <td>{{ task.description }}</td>
-                    <td>{{ task.createdAt|date('Y/m/d') }}</td>
+                    <td>{{ task.createdAt|format_date('long') }}</td>
                     <td>{{ task.wallet.name }}</td>
                     <td>{{ task.sum }}</td>
                     <td>{{ task.currency.name }}</td>
@@ -47,7 +47,7 @@
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item"  href="{{ url('transaction_show', {id: task.id}) }}" title="{{ 'action.view'|trans }}">
                                         {{ 'action.view'|trans }}</a></li>
-                                <li class="dropdown-item"><a href="{{ url('transaction_delete', {id: task.id}) }}" title="{{ 'action.delete'|trans }}">
+                                <li ><a class="dropdown-item" href="{{ url('transaction_delete', {id: task.id}) }}" title="{{ 'action.delete'|trans }}">
                                         {{ 'action.delete'|trans }}</a></li>
                             </ul>
                         </div>
@@ -58,7 +58,7 @@
 
 
 
-                    <a href="{{ url('transaction_index', {'filters.categories_id' : task.category.id}) }}" title="{{ task.category.name }}">
+                    <a href="{{ url('transaction_index', {'filters.category_id' : task.category.id}) }}" title="{{ task.category.name }}">
                         {{ task.category.name }}
                     </a>
 

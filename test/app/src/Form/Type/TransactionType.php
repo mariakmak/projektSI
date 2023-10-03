@@ -6,11 +6,11 @@
 namespace App\Form\Type;
 
 use App\Entity\Transaction;
-use App\Entity\Categories;
+use App\Entity\Category;
 use App\Entity\Currency;
 use App\Entity\Wallet;
 use App\Entity\User;
-use App\Repository\CategoriesRepository;
+use App\Repository\CategoryRepository;
 use App\Repository\WalletRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -58,7 +58,7 @@ class TransactionType extends AbstractType
             'category',
             EntityType::class,
             [
-                'class' => Categories::class,
+                'class' => Category::class,
                 'choice_label' => function ($category): string {
                     return $category ->getName() ;
                 },
@@ -67,7 +67,7 @@ class TransactionType extends AbstractType
                 'required' => false,
                 'expanded' => true,
                 'multiple' => false,
-                'query_builder' => function (CategoriesRepository $tg) {
+                'query_builder' => function (CategoryRepository $tg) {
                     return $tg->queryByAuthor($this->security->getUser());
                 },
             ]
@@ -150,7 +150,7 @@ class TransactionType extends AbstractType
                 },
                 'label' => 'label.wallet',
                 'placeholder' => 'label.none',
-                'required' => false,
+                'required' => true,
                 'expanded' => true,
                 'multiple' => false,
                 'query_builder' => function (WalletRepository $tg) {

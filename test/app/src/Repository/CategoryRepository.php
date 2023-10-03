@@ -2,22 +2,22 @@
 
 namespace App\Repository;
 
-use App\Entity\Categories;
+use App\Entity\Category;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\User\UserInterface;
 /**
- * @extends ServiceEntityRepository<Categories>
+ * @extends ServiceEntityRepository<Category>
  *
- * @method Categories|null find($id, $lockMode = null, $lockVersion = null)
- * @method Categories|null findOneBy(array $criteria, array $orderBy = null)
- * @method Categories[]    findAll()
- * @method Categories[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- * @extends ServiceEntityRepository<Categories>
+ * @method Category|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Category|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Category[]    findAll()
+ * @method Category[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @extends ServiceEntityRepository<Category>
  */
-class CategoriesRepository extends ServiceEntityRepository
+class CategoryRepository extends ServiceEntityRepository
 {
     /**
      * Items per page.
@@ -39,7 +39,7 @@ class CategoriesRepository extends ServiceEntityRepository
 
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Categories::class);
+        parent::__construct($registry, Category::class);
     }
 
 
@@ -52,7 +52,7 @@ class CategoriesRepository extends ServiceEntityRepository
     public function queryAll(): QueryBuilder
     {
         return $this->getOrCreateQueryBuilder()
-            ->orderBy('categories.updatedAt', 'DESC');
+            ->orderBy('category.updatedAt', 'DESC');
     }
 
     /**
@@ -64,7 +64,7 @@ class CategoriesRepository extends ServiceEntityRepository
      */
     private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
     {
-        return $queryBuilder ?? $this->createQueryBuilder('categories');
+        return $queryBuilder ?? $this->createQueryBuilder('category');
     }
 
 
@@ -75,7 +75,7 @@ class CategoriesRepository extends ServiceEntityRepository
     {
         $queryBuilder = $this->queryAll();
 
-        $queryBuilder->andWhere('categories.author = :author')
+        $queryBuilder->andWhere('category.author = :author')
             ->setParameter('author', $user);
 
         return $queryBuilder;
@@ -89,7 +89,7 @@ class CategoriesRepository extends ServiceEntityRepository
 
 
 
-    public function add(Categories $entity, bool $flush = false): void
+    public function add(Category $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -98,7 +98,7 @@ class CategoriesRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Categories $entity, bool $flush = false): void
+    public function remove(Category $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -112,30 +112,30 @@ class CategoriesRepository extends ServiceEntityRepository
     /**
      * Save entity.
      *
-     * @param Categories $categories Categories entity
+     * @param Category $category Category entity
      */
 
-    public function save(Categories $categories): void
+    public function save(Category $category): void
     {
-        $this->_em->persist($categories);
+        $this->_em->persist($category);
         $this->_em->flush();
     }
 
     /**
      * Delete entity.
      *
-     * @param Categories $categories Categories entity
+     * @param Category $category Category entity
      */
-    public function delete(Categories $categories): void
+    public function delete(Category $category): void
     {
-        $this->_em->remove($categories);
+        $this->_em->remove($category);
         $this->_em->flush();
     }
 
 
 
 //    /**
-//     * @return Categories[] Returns an array of Categories objects
+//     * @return Category[] Returns an array of Category objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -149,7 +149,7 @@ class CategoriesRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Categories
+//    public function findOneBySomeField($value): ?Category
 //    {
 //        return $this->createQueryBuilder('c')
 //            ->andWhere('c.exampleField = :val')

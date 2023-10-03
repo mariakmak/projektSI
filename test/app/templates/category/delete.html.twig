@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'title.categories_delete'|trans({'%id%': category.id|default('')}) }}
+    {{ 'title.category_delete'|trans({'%id%': category.id|default('')}) }}
 {% endblock %}
 
 {% block body %}
-    <h1>{{ 'title.categories_delete'|trans({'%id%': category.id|default('')}) }}</h1>
+    <h1>{{ 'title.category_delete'|trans({'%id%': category.id|default('')}) }}</h1>
     {{ form_start(form) }}
     {{ form_widget(form) }}
     <p> Czy na pewno chcesz usunąć rekord? </p>

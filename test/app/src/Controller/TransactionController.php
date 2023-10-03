@@ -158,7 +158,7 @@ class TransactionController extends AbstractController
 
             $data = $form ->getData(); //dane z formu
             $selectedentity = $data -> getwallet();
-            $wallet = $walletRepository -> find($selectedentity);
+            $wallet = $walletRepository -> find($selectedentity); //szuka portfela z formu
             $walletSum = $wallet->getSum(); //pobiera wartosc portfela
             $sum = $data->getSum(); //sum z form
             $value = $data -> isValue(); //value z form

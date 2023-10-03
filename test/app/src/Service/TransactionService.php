@@ -5,7 +5,7 @@
 
 namespace App\Service;
 
-use App\Entity\Categories;
+use App\Entity\Category;
 use App\Entity\User;
 use App\Repository\TransactionRepository;
 use App\Entity\Transaction;
@@ -33,23 +33,23 @@ class TransactionService implements TransactionServiceInterface
     /**
      * Category service.
      */
-    private CategoriesServiceInterface $categoriesService;
+    private CategoryServiceInterface $categoryService;
 
 
 
     /**
      * Constructor.
      *
-     * @param CategoriesServiceInterface $categoriesService Category service
+     * @param CategoryServiceInterface $categoryService Category service
      * @param PaginatorInterface       $paginator       Paginator
      * @param TransactionRepository       $transactionRepository  Transaction repository
      */
     public function __construct(
-        CategoriesServiceInterface $categoriesService,
+        CategoryServiceInterface $categoryService,
         PaginatorInterface $paginator,
         TransactionRepository $transactionRepository
     ) {
-        $this->categoriesService = $categoriesService;
+        $this->categoryService = $categoryService;
         $this->paginator = $paginator;
         $this->transactionRepository = $transactionRepository;
     }
@@ -82,13 +82,14 @@ class TransactionService implements TransactionServiceInterface
     /**
      * Save entity.
      *
-     * @param Transaction $transaction Categories entity
+     * @param Transaction $transaction Category entity
      */
     public function save(Transaction $transaction): void
     {
         if ($transaction->getId() == null) {
             $transaction->setCreatedAt(new \DateTimeImmutable());
         }
+
 
 
         $this->transactionRepository->save($transaction);
@@ -133,10 +134,10 @@ class TransactionService implements TransactionServiceInterface
     private function prepareFilters(array $filters): array
     {
         $resultFilters = [];
-        if (!empty($filters['categories_id'])) {
-            $categories = $this->categoriesService->findOneById($filters['categories_id']);
-            if (null !== $categories) {
-                $resultFilters['categories'] = $categories;
+        if (!empty($filters['category_id'])) {
+            $category = $this->categoryService->findOneById($filters['category_id']);
+            if (null !== $category) {
+                $resultFilters['categories'] = $category;
             }
         }
 

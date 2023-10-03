@@ -62,9 +62,9 @@ class WalletService implements WalletServiceInterface
     {
 
 
-        $a = $this->$transaction->querybyWallet();
+        $a = $transaction->querybyWallet($wallet);
         foreach ($a as $b){
-            $transaction->delete($a);
+            $transaction->delete($b);
         }
         $this->walletRepository->delete($wallet);
     }

@@ -1,23 +1,23 @@
 <?php
 
 /**
- * Categories fixtures.
+ * Category fixtures.
  */
 
 namespace App\DataFixtures;
 
 
 
-use App\Entity\Categories;
+use App\Entity\Category;
 use App\Entity\User;
 use DateTimeImmutable;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 
 /**
- * Class CategoriesFixtures.
+ * Class CategoryFixtures.
  */
-class CategoriesFixtures extends AppFixtures implements DependentFixtureInterface
+class CategoryFixtures extends AppFixtures implements DependentFixtureInterface
 {
 
 
@@ -27,8 +27,8 @@ class CategoriesFixtures extends AppFixtures implements DependentFixtureInterfac
 
     public function loadData(): void
     {
-        $this->createMany(20, 'categories', function (int $i) {
-            $category = new Categories();
+        $this->createMany(80, 'categories', function (int $i) {
+            $category = new Category();
             $category->setName($this->faker->sentence);
             $category->setCreatedAt(
                 DateTimeImmutable::createFromMutable($this->faker->dateTimeBetween('-100 days', '-1 days'))

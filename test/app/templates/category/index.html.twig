@@ -2,11 +2,11 @@
 
 
 {% block title %}
-    {{ 'title.categories_list'|trans }}
+    {{ 'title.category_list'|trans }}
 {% endblock %}
 
 {% block body %}
-    <h1>{{ 'title.categories_list'|trans }}</h1>
+    <h1>{{ 'title.category_list'|trans }}</h1>
 
 
     {% if pagination is defined and pagination.items|length %}
@@ -32,8 +32,8 @@
             {% for elem in pagination.items %}
                 <tr>
                     <td>{{ elem.id }}</td>
-                    <td>{{ elem.createdAt|date('Y/m/d') }}</td>
-                    <td>{{ elem.updatedAt|date('Y/m/d') }}</td>
+                    <td>{{ elem.createdAt|format_date('long') }}</td>
+                    <td>{{ elem.updatedAt|format_date('long') }}</td>
                     <td>{{ elem.name }}</td>
                     <td>{{ elem.author.email }}</td>
                     <td>

@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Categories;
+use App\Entity\Category;
 use App\Entity\Transaction;
 use App\Entity\User;
 use App\Entity\Wallet;
@@ -144,9 +144,9 @@ class TransactionRepository extends ServiceEntityRepository
 
 
 
-    public function queryByWallet(Wallet $wallet): QueryBuilder
+    public function queryByWallet(Wallet $wallet, array $filters = []): QueryBuilder
     {
-        $queryBuilder = $this->queryAll();
+        $queryBuilder = $this->queryAll($filters);
 
         $queryBuilder->andWhere('transaction.wallet = :wallet')
             ->setParameter('wallet', $wallet);
@@ -169,9 +169,9 @@ class TransactionRepository extends ServiceEntityRepository
      */
     private function applyFiltersToList(QueryBuilder $queryBuilder, array $filters = []): QueryBuilder
     {
-        if (isset($filters['categories']) && $filters['categories'] instanceof Categories) {
-            $queryBuilder->andWhere('categories = :categories')
-                ->setParameter('categories', $filters['categories']);
+        if (isset($filters['category']) && $filters['category'] instanceof Category) {
+            $queryBuilder->andWhere('category = :category')
+                ->setParameter('category', $filters['category']);
         }
 
 
@@ -179,7 +179,9 @@ class TransactionRepository extends ServiceEntityRepository
     }
 
 
+    public function addtowallet():void{
 
+    }
 
 
 //    /**

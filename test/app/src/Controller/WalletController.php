@@ -6,6 +6,7 @@
 namespace App\Controller;
 
 use App\Entity\Wallet;
+use App\Repository\TransactionRepository;
 use App\Repository\WalletRepository;
 
 use App\Service\WalletServiceInterface;
@@ -124,7 +125,17 @@ class WalletController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->walletService->save($wallet);
+
+            $data = $form ->getData(); //dane z formu
+            $sum = $data->getSum();
+
+            if($sum === null){
+                $wallet->setSum(0);
+                $this->walletService->save($wallet);
+            }
+
+            else{$this->walletService->save($wallet);}
+
 
             $this->addFlash(
                 'success',
@@ -165,7 +176,15 @@ class WalletController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->walletService->save($wallet);
+            $data = $form ->getData(); //dane z formu
+            $sum = $data->getSum();
+
+            if($sum === null){
+                $wallet->setSum(0);
+                $this->walletService->save($wallet);
+            }
+
+            else{$this->walletService->save($wallet);}
 
             $this->addFlash(
                 'success',
@@ -195,7 +214,7 @@ class WalletController extends AbstractController
      */
     #[Route('/{id}/delete', name: 'wallet_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
     #[IsGranted('DELETE', subject: 'wallet')]
-    public function delete(Request $request, Wallet $wallet): Response
+    public function delete(Request $request, Wallet $wallet, TransactionRepository $transaction): Response
     {
         $form = $this->createForm(FormType::class, $wallet, [
             'method' => 'DELETE',
@@ -204,7 +223,7 @@ class WalletController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->walletService->delete($wallet);
+            $this->walletService->delete($wallet, $transaction);
 
             $this->addFlash(
                 'success',

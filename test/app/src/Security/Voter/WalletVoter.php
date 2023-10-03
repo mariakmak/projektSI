@@ -6,7 +6,7 @@ use App\Entity\Wallet;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
-use App\Entity\Categories;
+use App\Entity\Category;
 use App\Entity\User;
 use Symfony\Component\Security\Core\Security;
 

@@ -6,7 +6,7 @@
 
 namespace App\Entity;
 
-use App\Repository\CategoriesRepository;
+use App\Repository\CategoryRepository;
 use App\Repository\TransactionRepository;
 use Doctrine\ORM\Mapping as ORM;
 use phpDocumentor\Reflection\Types\Collection;
@@ -18,9 +18,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 
 
-#[ORM\Entity(repositoryClass: CategoriesRepository::class)]
-#[ORM\Table(name: 'Categories')]
-class Categories
+#[ORM\Entity(repositoryClass: CategoryRepository::class)]
+#[ORM\Table(name: 'Category')]
+class Category
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -33,6 +33,7 @@ class Categories
      * @var string|null
      */
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
     private ?string $name = null;
 
     /**

@@ -184,6 +184,18 @@ class TransactionRepository extends ServiceEntityRepository
     }
 
 
+    public function queryByCategory(Category $category): int
+    {
+        $queryBuilder = $this->getOrCreateQueryBuilder();
+
+        return $queryBuilder->select($queryBuilder->expr()->countDistinct('transaction.id'))
+            ->where('transaction.category = :category')
+            ->setParameter(':category', $category)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+
 //    /**
 //     * @return Transaction[] Returns an array of Transaction objects
 //     */

@@ -19,10 +19,11 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
+
 use App\Repository\TransactionRepository;
 use App\Config\TextAlign;
 use Symfony\Component\Security\Core\Security;
+
 
 
 /**
@@ -64,7 +65,7 @@ class TransactionType extends AbstractType
                 },
                 'label' => 'label.category',
                 'placeholder' => 'label.none',
-                'required' => false,
+                'required' => true,
                 'expanded' => true,
                 'multiple' => false,
                 'query_builder' => function (CategoryRepository $tg) {
@@ -133,11 +134,7 @@ class TransactionType extends AbstractType
                 'multiple' => false,
             ]
         );
-            //CurrencyType::class,
-           // [
-              //  'label' => 'label.currency',
 
-            //]);
 
 
         $builder->add(

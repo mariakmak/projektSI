@@ -8,10 +8,13 @@ namespace App\Service;
 use App\Entity\Category;
 use App\Entity\User;
 use App\Repository\CategoryRepository;
+use App\Repository\TransactionRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Security;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 
 /**
  * Class CategoryService.
@@ -28,16 +31,24 @@ class CategoryService implements CategoryServiceInterface
      */
     private PaginatorInterface $paginator;
 
+
+
+    /**
+     * Transaction repository.
+     */
+    private TransactionRepository $transactionRepository;
+
     /**
      * Constructor.
      *
      * @param CategoryRepository  $categoryRepository CategoryRepository
      * @param PaginatorInterface $paginator      Paginator
      */
-    public function __construct(CategoryRepository $categoryRepository, PaginatorInterface $paginator)
+    public function __construct(CategoryRepository $categoryRepository, PaginatorInterface $paginator, TransactionRepository $transactionRepository)
     {
         $this->categoryRepository = $categoryRepository;
         $this->paginator = $paginator;
+        $this->transactionRepository = $transactionRepository;
     }
 
 
@@ -97,6 +108,23 @@ class CategoryService implements CategoryServiceInterface
     {
         return $this->categoryRepository->findOneById($id);
     }
+
+
+
+    public function canBeDeleted(Category $category): bool
+    {
+        try {
+            $result = $this->transactionRepository->queryByCategory($category);
+
+            return !($result > 0);
+
+        } catch (NoResultException|NonUniqueResultException) {
+            return false;
+
+        }
+    }
+
+
 
 
 

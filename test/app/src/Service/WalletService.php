@@ -26,6 +26,14 @@ class WalletService implements WalletServiceInterface
     private WalletRepository $walletRepository;
 
     /**
+     * transaction repository.
+     */
+    private TransactionRepository $transactionRepository;
+
+
+
+
+    /**
      * Paginator.
      */
     private PaginatorInterface $paginator;
@@ -36,8 +44,10 @@ class WalletService implements WalletServiceInterface
      * @param WalletRepository     $walletRepository  Wallet repository
      * @param PaginatorInterface $paginator      Paginator
      */
-    public function __construct(WalletRepository $walletRepository, PaginatorInterface $paginator)
+    public function __construct(WalletRepository $walletRepository, PaginatorInterface $paginator, TransactionRepository $transactionRepository)
     {
+
+        $this->transactionRepository = $transactionRepository;
         $this->walletRepository = $walletRepository;
         $this->paginator = $paginator;
     }
@@ -58,14 +68,9 @@ class WalletService implements WalletServiceInterface
         $this->walletRepository->save($wallet);
     }
 
-    public function delete(Wallet $wallet, TransactionRepository $transaction): void
+    public function delete(Wallet $wallet): void
     {
 
-
-        $a = $transaction->querybyWallet($wallet);
-        foreach ($a as $b){
-            $transaction->delete($b);
-        }
         $this->walletRepository->delete($wallet);
     }
 
@@ -85,4 +90,21 @@ class WalletService implements WalletServiceInterface
             WalletRepository::PAGINATOR_ITEMS_PER_PAGE
         );
     }
+
+
+
+    public function canBeDeleted(Wallet $wallet): void
+    {
+        $result = $this->transactionRepository->queryByWallet($wallet);
+        $query = $result->getQuery();
+        $transactions = $query->getResult();
+        foreach($transactions as $elem){
+
+            $this->transactionRepository->delete($elem);
+        }
+
+
+
+    }
+
 }

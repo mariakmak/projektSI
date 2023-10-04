@@ -223,7 +223,8 @@ class WalletController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->walletService->delete($wallet, $transaction);
+            $this->walletService->canBeDeleted($wallet);
+            $this->walletService->delete($wallet);
 
             $this->addFlash(
                 'success',

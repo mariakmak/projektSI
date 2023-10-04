@@ -55,9 +55,9 @@ class CategoryController extends AbstractController
     /**
      * Constructor.
      */
-    public function __construct(CategoryServiceInterface $taskService, TranslatorInterface $translator)
+    public function __construct(CategoryServiceInterface $categoryService, TranslatorInterface $translator)
     {
-        $this->categoryService = $taskService;
+        $this->categoryService = $categoryService;
         $this->translator = $translator;
     }
 
@@ -170,6 +170,18 @@ class CategoryController extends AbstractController
     #[IsGranted('DELETE', subject: 'category')]
     public function delete(Request $request, Category $category): Response
     {
+
+
+        if (!$this->categoryService->canBeDeleted($category)) {
+            $this->addFlash(
+                'warning',
+                $this->translator->trans('message.category_contains_transactions')
+            );
+
+            return $this->redirectToRoute('category_index');
+        }
+
+
 
 
 

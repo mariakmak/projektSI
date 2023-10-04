@@ -17,11 +17,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
+
 /**
  * Class TransactionController.
  */
@@ -154,7 +153,10 @@ class TransactionController extends AbstractController
         $form = $this->createForm(TransactionType::class, $transaction);
         $form->handleRequest($request);
 
+
+
         if ($form->isSubmitted() && $form->isValid()) {
+
 
             $data = $form ->getData(); //dane z formu
             $selectedentity = $data -> getwallet();
@@ -162,32 +164,6 @@ class TransactionController extends AbstractController
             $walletSum = $wallet->getSum(); //pobiera wartosc portfela
             $sum = $data->getSum(); //sum z form
             $value = $data -> isValue(); //value z form
-            if($value !== null ) {
-                if ($walletSum + $sum >= 0) {
-                    $wallet->setSum($walletSum + $sum);
-                    $walletRepository->save($wallet);
-                    $this->transactionService->save($transaction);
-                    $this->addFlash('success', 'message_created_successfully');
-                } else {
-                    $this->addFlash(
-                        'notice',
-                        'Value is to low'
-                    );
-                }
-            }
-            else {
-                if ($walletSum - $sum >= 0) {
-                    $wallet->setSum($walletSum + $sum);
-                    $walletRepository->save($wallet);
-                    $this->transactionService->save($transaction);
-                    $this->addFlash('success', 'message_created_successfully');
-                } else {
-                    $this->addFlash(
-                        'notice',
-                        'Value is to low'
-                    );
-                }
-            }
 
 
             $this->transactionService->save($transaction);

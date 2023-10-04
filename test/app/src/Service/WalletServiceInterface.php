@@ -41,7 +41,11 @@ interface WalletServiceInterface
      *
      * @param Wallet $wallet Wallet entity
      */
-    public function delete(Wallet $wallet, TransactionRepository $transaction): void;
+    public function delete(Wallet $wallet): void;
+
+
+
+    public function canBeDeleted(Wallet $wallet): void;
 
 
 

@@ -70,7 +70,7 @@ class WalletType extends AbstractType
             NumberType::class,
             [
                 'label' => 'label.sum',
-                'required' => false,
+                'required' => true,
 
             ]);
 

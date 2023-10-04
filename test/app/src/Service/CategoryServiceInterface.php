@@ -41,6 +41,10 @@ interface CategoryServiceInterface
 
 
     public function findOneById(int $id): ?CategoryRepository;
+
+
+    public function canBeDeleted(Category $category): bool;
+
 }
 
 

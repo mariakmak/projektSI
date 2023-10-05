@@ -31,7 +31,7 @@ class Transaction
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    #[Assert\NotBlank]
+    #[Assert\NotNull]
     private ?Category $category = null;
 
     /**
@@ -48,25 +48,23 @@ class Transaction
      * @var DateTimeImmutable|null
      */
     #[ORM\Column]
-    #[Assert\NotBlank]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank]
+    #[Assert\NotNull]
     private ?int $sum = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: true)]
-    #[Assert\NotBlank]
+    #[Assert\NotNull]
     private ?Currency $currency = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank]
-    private ?bool $value = null;
+    private ?bool $value=null;
 
     #[ORM\ManyToOne(inversedBy: 'transaction')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Assert\NotBlank]
+    #[Assert\NotNull]
     private ?Wallet $wallet = null;
 
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EXTRA_LAZY')]
@@ -76,6 +74,8 @@ class Transaction
     private ?User $author = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\NotNull]
     private ?string $name = null;
 
 
@@ -164,6 +164,8 @@ class Transaction
 
     }
 
+
+
     public function isValue(): ?bool
     {
         return $this->value;
@@ -174,6 +176,24 @@ class Transaction
         $this->value = $value;
 
     }
+
+
+
+
+//    public function isValue(): bool
+//    {
+//        return $this->value;
+//    }
+//
+//    public function setValue(bool $value): void
+//    {
+//        if($value==null){
+//            $this->value=true;
+//
+//        }
+//        $this->value = $value;
+//
+//    }
 
     public function getWallet(): ?Wallet
     {

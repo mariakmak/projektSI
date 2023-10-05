@@ -7,6 +7,7 @@ namespace App\Service;
 
 use App\Entity\Category;
 use App\Entity\User;
+use App\Entity\Wallet;
 use App\Repository\TransactionRepository;
 use App\Entity\Transaction;
 use App\Service\TransactionServiceInterface;
@@ -143,7 +144,6 @@ class TransactionService implements TransactionServiceInterface
 
         return $resultFilters;
     }
-
 
 
 

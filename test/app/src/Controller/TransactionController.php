@@ -13,6 +13,7 @@ use App\Repository\TransactionRepository;
 use App\Repository\UserRepository;
 use App\Repository\WalletRepository;
 use App\Service\TransactionServiceInterface;
+use App\Service\WalletService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,37 +39,39 @@ class TransactionController extends AbstractController
     /**
      * Wallet repository.
      */
-    private WalletRepository $walletRepository;
-
+    private WalletService $walletService;
 
 
     /**
      * Constructor.
      */
-    public function __construct(TransactionServiceInterface $transactionService, WalletRepository $walletRepository)
+    public function __construct(TransactionServiceInterface $transactionService, WalletService $walletService)
     {
         $this->transactionService = $transactionService;
-        $this->walletRepository = $walletRepository;
+        $this->walletService = $walletService;
     }
+
     /**
      * Index action.
      *
-     * @param Request            $request        HTTP Request
+     * @param Request $request HTTP Request
      * @return Response HTTP response
      */
     #[Route(
         name: 'transaction_index',
         methods: 'GET'
     )]
-
-    public function index( Request $request): Response
+    public function index(Request $request): Response
     {
         $filters = $this->getFilters($request);
 
-
+        $user = $this->getUser();
         $pagination = $this->transactionService->getPaginatedList(
-            $request->query->getInt('page', 1), $this->getUser()
-        );
+            $request->query->getInt('page', 1),
+            $user,
+            $filters);
+
+
 
         return $this->render(
             'transaction/index.html.twig',
@@ -88,22 +91,10 @@ class TransactionController extends AbstractController
     private function getFilters(Request $request): array
     {
         $filters = [];
-        $filters['categories_id'] = $request->query->getInt('filters_categories_id');
+        $filters['category_id'] = $request->query->getInt('filters_category_id');
 
         return $filters;
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     /**
@@ -141,7 +132,7 @@ class TransactionController extends AbstractController
         name: 'transaction_create',
         methods: 'GET|POST',
     )]
-    public function create(Request $request, WalletRepository $walletRepository): Response
+    public function create(Request $request): Response
     {
 
         /** @var User $user */
@@ -154,45 +145,49 @@ class TransactionController extends AbstractController
         $form->handleRequest($request);
 
 
-
+        //dd($request, $form);
         if ($form->isSubmitted() && $form->isValid()) {
 
+            // dd($request);
+            $data = $form->getData(); //dane z formu
+            $selectedentity = $data->getwallet();
 
-            $data = $form ->getData(); //dane z formu
-            $selectedentity = $data -> getwallet();
-            $wallet = $walletRepository -> find($selectedentity); //szuka portfela z formu
-            $walletSum = $wallet->getSum(); //pobiera wartosc portfela
             $sum = $data->getSum(); //sum z form
-            $value = $data -> isValue(); //value z form
+            $value = $data->isValue(); //value z form
 
+            $a = $this->walletService->CountWalletSum($selectedentity, $sum, $value);
+            if ($a = false) {
+                $this->addFlash(
+                    'notice',
+                    'Value is to low');
+            }
+                $this->transactionService->save($transaction);
 
-            $this->transactionService->save($transaction);
+//                $this->addFlash(
+//                    'success',
+//                    $this->translator->trans('message.created_successfully')
+//                );
 
-            //$this->addFlash(
-               // 'success',
-               // $this->translator->trans('message.created_successfully')
-           // );
+                return $this->redirectToRoute('transaction_index');
+            }
 
-            return $this->redirectToRoute('transaction_index');
+            return $this->render(
+                'transaction/create.html.twig',
+                ['form' => $form->createView()]
+            );
         }
 
-        return $this->render(
-            'transaction/create.html.twig',
-            ['form' => $form->createView()]
-        );
-    }
 
-
-
-    /**
-     * Delete action.
-     *
-     * @param Request  $request  HTTP request
-     * @param Transaction $transaction Transaction entity
-     *
-     * @return Response HTTP response
-     */
-    #[Route('/{id}/delete', name: 'transaction_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
+        /**
+         * Delete action.
+         *
+         * @param Request $request HTTP request
+         * @param Transaction $transaction Transaction entity
+         *
+         * @return Response HTTP response
+         */
+        #[
+        Route('/{id}/delete', name: 'transaction_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
     #[IsGranted('DELETE', subject: 'transaction')]
     public function delete(Request $request, Transaction $transaction): Response
     {
@@ -203,8 +198,7 @@ class TransactionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->transactionService->delete($transaction);
-
+            $this->walletService->delete($transaction);
 
 
             return $this->redirectToRoute('transaction_index');
@@ -218,15 +212,6 @@ class TransactionController extends AbstractController
             ]
         );
     }
-
-
-
-
-
-
-
-
-
 
 
 }

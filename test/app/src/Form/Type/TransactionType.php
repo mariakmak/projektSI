@@ -70,10 +70,10 @@ class TransactionType extends AbstractType
                 'multiple' => false,
                 'query_builder' => function (CategoryRepository $tg) {
                     return $tg->queryByAuthor($this->security->getUser());
-                },
-            ]
-        );
+                }
+                ],
 
+        );
         $builder->add(
             'name',
             TextType::class,

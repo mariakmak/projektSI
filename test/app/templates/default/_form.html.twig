@@ -15,6 +15,7 @@ parameters:
 {% block body %}
     <h1>{{ page_title }}</h1>
     {{ form_start(form) }}
+    {{ form_errors(form) }}
     {% if false == form.vars.valid %}
         {% include 'default/_single_alert_message.html.twig' with {
             type: 'danger',

@@ -107,4 +107,49 @@ class WalletService implements WalletServiceInterface
 
     }
 
+
+
+    public function CountWalletSum(Wallet $selectedentity, int $sum, bool $value): bool
+    {
+
+        $wallet = $this->walletRepository->find($selectedentity->getId()); //szuka portfela z formu
+        $walletSum = $wallet->getSum(); //pobiera wartosc portfela
+
+        if($value !== false ) {
+            if ($walletSum + $sum >= 0) {
+                $wallet->setSum($walletSum + $sum);
+                $this->walletRepository->save($wallet);
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+            else{
+                if ($walletSum - $sum >= 0) {
+                    $wallet->setSum($walletSum - $sum);
+                    $this->walletRepository->save($wallet);
+                    return true;
+                }
+                else {
+
+                    return false;
+                }
+            }
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

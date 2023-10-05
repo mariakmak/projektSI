@@ -123,6 +123,7 @@ class WalletController extends AbstractController
 
         $form = $this->createForm(WalletType::class, $wallet);
         $form->handleRequest($request);
+        //dd($request, $form);
 
         if ($form->isSubmitted() && $form->isValid()) {
 

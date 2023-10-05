@@ -163,8 +163,18 @@
                <source>title.wallet_delete</source>
                <target>Delete wallet </target>
             </trans-unit>
-
-
+               <trans-unit id="title.category_edit">
+               <source>title.category_edit</source>
+               <target>Edit category </target>
+            </trans-unit>
+               <trans-unit id="label.income">
+               <source>label.income</source>
+               <target>Income (check this option if the transaction is a payment to an account) </target>
+            </trans-unit>
+               <trans-unit id="message.created_successfully">
+               <source>message.created_successfully</source>
+               <target> Operation succeeded </target>
+            </trans-unit>
 
 
 

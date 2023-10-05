@@ -102,7 +102,7 @@ class UserController extends AbstractController
 
             $this->addFlash(
                 'success',
-                $this->translator->trans('message.success')
+                $this->translator->trans('message.created_successfully')
             );
 
             return $this->redirectToRoute('user_index');

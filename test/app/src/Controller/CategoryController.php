@@ -9,6 +9,7 @@ use App\Entity\Category;
 use App\Entity\User;
 use App\Form\Type\CategoryType;
 use App\Repository\CategoryRepository;
+use App\Service\CategoryService;
 use App\Service\CategoryServiceInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -55,7 +56,7 @@ class CategoryController extends AbstractController
     /**
      * Constructor.
      */
-    public function __construct(CategoryServiceInterface $categoryService, TranslatorInterface $translator)
+    public function __construct(CategoryService $categoryService, TranslatorInterface $translator)
     {
         $this->categoryService = $categoryService;
         $this->translator = $translator;

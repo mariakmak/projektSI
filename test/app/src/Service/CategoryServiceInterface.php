@@ -40,7 +40,7 @@ interface CategoryServiceInterface
     public function delete(Category $category): void;
 
 
-    public function findOneById(int $id): ?CategoryRepository;
+    public function findOneById(int $id): ?Category;
 
 
     public function canBeDeleted(Category $category): bool;

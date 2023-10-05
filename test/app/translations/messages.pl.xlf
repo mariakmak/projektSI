@@ -89,7 +89,7 @@
       </trans-unit>
                <trans-unit id="label.category">
                <source>label.category</source>
-               <target>Categoria </target>
+               <target>kategoria </target>
             </trans-unit>
                <trans-unit id="label.description">
                <source>label.description</source>
@@ -163,8 +163,18 @@
                <source>title.wallet_delete</source>
                <target>Usuń portfel </target>
             </trans-unit>
-
-
+               <trans-unit id="title.category_edit">
+               <source>title.category_edit</source>
+               <target>Edytuj kategorię </target>
+            </trans-unit>
+               <trans-unit id="label.income">
+               <source>label.income</source>
+               <target>Przychód (zaznacz tą opcję jeśli transakcja to wpłata na konto) </target>
+            </trans-unit>
+               <trans-unit id="message.created_successfully">
+               <source>message.created_successfully</source>
+               <target> Operacja przebiegła pomyślnie </target>
+            </trans-unit>
 
     </body>
   </file>

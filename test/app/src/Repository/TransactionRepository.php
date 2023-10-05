@@ -181,7 +181,20 @@ class TransactionRepository extends ServiceEntityRepository
 
     public function addtowallet():void{
 
-    }
+       // if($value !== null ) {
+        //    if ($walletSum + $sum >= 0) {
+         //       $wallet->setSum($walletSum + $sum);
+          //      $walletRepository->save($wallet);
+             //   $this->transactionService->save($transaction);
+          //      $this->addFlash('success', 'message_created_successfully');
+          //  } else {
+           //     if ($walletSum - $sum >= 0) {
+            //        $wallet->setSum($walletSum + $sum);
+
+            //    }
+         //   }
+
+        }
 
 
     public function queryByCategory(Category $category): int

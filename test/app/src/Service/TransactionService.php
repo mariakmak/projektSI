@@ -13,6 +13,9 @@ use App\Entity\Transaction;
 use App\Service\TransactionServiceInterface;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Collections\ArrayCollection;
+
 
 /**
  * Class WalletService.
@@ -60,26 +63,6 @@ class TransactionService implements TransactionServiceInterface
 
 
 
-
-
-
-
-
-
-    /**
-     * Constructor.
-     *
-     * @param TransactionRepository     $transactionRepository  Transaction repository
-     * @param PaginatorInterface $paginator      Paginator
-     */
-    //public function __construct(TransactionRepository $transactionRepository, PaginatorInterface $paginator)
-    //{
-     //   $this->transactionRepository = $transactionRepository;
-     //   $this->paginator = $paginator;
-   // }
-
-
-
     /**
      * Save entity.
      *
@@ -110,35 +93,78 @@ class TransactionService implements TransactionServiceInterface
      *
      * @return PaginationInterface<string, mixed> Paginated list
      */
-    public function getPaginatedList(int $page, User $author, array $filters = []): PaginationInterface
+
+    /* public function getPaginatedList(int $page, User $author, array $filters = []): PaginationInterface
+     {
+
+
+         $filters = $this->prepareFilters($filters);
+
+         return $this->paginator->paginate(
+             $this->transactionRepository->queryByAuthor($author, $filters),
+             $page,
+             TransactionRepository::PAGINATOR_ITEMS_PER_PAGE
+         );
+     }
+ */
+
+
+    public function getPaginatedList(int $page, User $author, array $filters = []): array
     {
-
-
         $filters = $this->prepareFilters($filters);
 
-        return $this->paginator->paginate(
-            $this->transactionRepository->queryByAuthor($author, $filters),
+        $queryBuilder = $this->transactionRepository->queryByAuthor($author, $filters);
+        $transactions = $this->paginator->paginate(
+            $queryBuilder,
             $page,
             TransactionRepository::PAGINATOR_ITEMS_PER_PAGE
         );
+
+        $transactionCollection = new ArrayCollection($transactions->getItems());
+
+        $balance = $this->transactionRepository->calculateTotalAmount($transactionCollection);
+
+        return ['transactions' => $transactions, 'balance' => $balance];
     }
 
 
 
-    /**
-     * Prepare filters for the categories list.
-     *
-     * @param array<string, int> $filters Raw filters from request
-     *
-     * @return array<string, object> Result array of filters
-     */
+
+     public function getByDate(int $page, User $user,\DateTimeInterface $startDate, \DateTimeInterface $endDate): array
+     {
+
+
+         $queryBuilder = $this->transactionRepository->findByDate($startDate, $endDate, $user);
+         $transactions = $this->paginator->paginate(
+             $queryBuilder,
+             $page,
+             TransactionRepository::PAGINATOR_ITEMS_PER_PAGE
+         );
+
+         $transactionCollection = new ArrayCollection($transactions->getItems());
+
+         $balance = $this->transactionRepository->calculateTotalAmount($transactionCollection);
+
+         return ['transactions' => $transactions, 'balance' => $balance];
+
+     }
+
+
+
+     /**
+      * Prepare filters for the categories list.
+      *
+      * @param array<string, int> $filters Raw filters from request
+      *
+      * @return array<string, object> Result array of filters
+      */
     private function prepareFilters(array $filters): array
     {
         $resultFilters = [];
         if (!empty($filters['category_id'])) {
             $category = $this->categoryService->findOneById($filters['category_id']);
             if (null !== $category) {
-                $resultFilters['categories'] = $category;
+                $resultFilters['category'] = $category;
             }
         }
 

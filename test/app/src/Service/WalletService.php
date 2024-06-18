@@ -68,6 +68,9 @@ class WalletService implements WalletServiceInterface
         $this->walletRepository->save($wallet);
     }
 
+
+
+
     public function delete(Wallet $wallet): void
     {
 
@@ -109,33 +112,16 @@ class WalletService implements WalletServiceInterface
 
 
 
-    public function CountWalletSum(Wallet $selectedentity, int $sum, bool $value): bool
+    public function CountWalletSum(Wallet $selectedentity, int $sum, bool $value): void
     {
 
         $wallet = $this->walletRepository->find($selectedentity->getId()); //szuka portfela z formu
         $walletSum = $wallet->getSum(); //pobiera wartosc portfela
 
-        if($value !== false ) {
-            if ($walletSum + $sum >= 0) {
-                $wallet->setSum($walletSum + $sum);
-                $this->walletRepository->save($wallet);
-                return true;
-            }
-            else {
-                return false;
-            }
-        }
-            else{
-                if ($walletSum - $sum >= 0) {
-                    $wallet->setSum($walletSum - $sum);
-                    $this->walletRepository->save($wallet);
-                    return true;
-                }
-                else {
+        $this->walletRepository->countWalletBalance( $sum, $value, $wallet, $walletSum);
 
-                    return false;
-                }
-            }
+
+
                 }
 
 

@@ -10,6 +10,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @extends ServiceEntityRepository<Transaction>
@@ -46,11 +47,11 @@ class TransactionRepository extends ServiceEntityRepository
         $queryBuilder = $this->getOrCreateQueryBuilder()
             ->select(
                 'partial transaction.{id, description, createdAt, sum, value}',
-                'partial categories.{id, name}',
+                'partial category.{id, name}',
                 'partial currency.{id, name}',
                 'partial wallet.{id, name}',
             )
-            ->join('transaction.category', 'categories')
+            ->join('transaction.category', 'category')
             ->join('transaction.currency', 'currency')
             ->join('transaction.wallet', 'wallet')
             ->orderBy('transaction.createdAt', 'DESC');
@@ -179,39 +180,57 @@ class TransactionRepository extends ServiceEntityRepository
     }
 
 
-    public function addtowallet():void{
 
-       // if($value !== null ) {
-        //    if ($walletSum + $sum >= 0) {
-         //       $wallet->setSum($walletSum + $sum);
-          //      $walletRepository->save($wallet);
-             //   $this->transactionService->save($transaction);
-          //      $this->addFlash('success', 'message_created_successfully');
-          //  } else {
-           //     if ($walletSum - $sum >= 0) {
-            //        $wallet->setSum($walletSum + $sum);
 
-            //    }
-         //   }
+            public function queryByCategory(Category $category): int
+            {
+                $queryBuilder = $this->getOrCreateQueryBuilder();
 
+                return $queryBuilder->select($queryBuilder->expr()->countDistinct('transaction.id'))
+                    ->where('transaction.category = :category')
+                    ->setParameter(':category', $category)
+                    ->getQuery()
+                    ->getSingleScalarResult();
+            }
+
+
+            // funkcja do pobierania transakcji po dacie
+            public function findByDate(\DateTimeInterface $startDate, \DateTimeInterface $endDate, User $user)
+            {
+                #var_dump($startDate);
+                #var_dump($endDate);
+                #var_dump($user);
+                $queryBuilder = $this->createQueryBuilder('t')
+                    ->andWhere('t.createdAt >= :startDate')
+                    ->andWhere('t.createdAt <= :endDate')
+                    ->andWhere('t.author = :user')
+                    ->setParameter('startDate', $startDate->format('Y-m-d'))
+                    ->setParameter('endDate', $endDate->format('Y-m-d '))
+                    ->setParameter('user', $user);
+                #var_dump($queryBuilder);
+
+                $query = $queryBuilder->getQuery();
+                #var_dump($query);
+                return $query->getResult();
+
+            }
+
+
+    public function calculateTotalAmount(Collection $transactions): float
+    {
+        $totalAmount = 0;
+
+        foreach ($transactions as $transaction) {
+            $totalAmount += $transaction->getValue() ? $transaction->getSum() : -$transaction->getSum();
         }
 
-
-    public function queryByCategory(Category $category): int
-    {
-        $queryBuilder = $this->getOrCreateQueryBuilder();
-
-        return $queryBuilder->select($queryBuilder->expr()->countDistinct('transaction.id'))
-            ->where('transaction.category = :category')
-            ->setParameter(':category', $category)
-            ->getQuery()
-            ->getSingleScalarResult();
+        return $totalAmount;
     }
 
 
-//    /**
-//     * @return Transaction[] Returns an array of Transaction objects
-//     */
+        //    /**
+        //     * @return Transaction[] Returns an array of Transaction objects
+        //     */
 //    public function findByExampleField($value): array
 //    {
 //        return $this->createQueryBuilder('t')

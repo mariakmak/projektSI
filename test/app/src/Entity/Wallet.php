@@ -11,6 +11,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use DateTimeImmutable;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Wallet.
@@ -42,8 +43,6 @@ class Wallet
     private Collection $currency;
 
     #[ORM\OneToMany(mappedBy: 'wallet', targetEntity: Transaction::class)]
-    #[Assert\NotBlank]
-    #[Assert\IsNull]
     private Collection $transaction;
 
     /**

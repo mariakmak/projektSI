@@ -5,8 +5,11 @@ namespace App\Repository;
 use App\Entity\User;
 use App\Entity\Wallet;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Mapping\Entity;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
 /**
  * @extends ServiceEntityRepository<Wallet>
  *
@@ -120,6 +123,32 @@ class WalletRepository extends ServiceEntityRepository
 
         return $queryBuilder;
     }
+
+    public function countWalletBalance(int $sum, bool $value, Wallet $wallet, int $walletSum): bool
+    {
+        if($value !== false ) {
+            if ($walletSum + $sum >= 0) {
+                $wallet->setSum($walletSum + $sum);
+                $this->save($wallet);
+                return true;
+            }
+else {
+    return false;
+}
+}
+else{
+    if ($walletSum - $sum >= 0) {
+        $wallet->setSum($walletSum - $sum);
+        $this->save($wallet);
+        return true;
+    }
+    else {
+
+        return false;
+    }
+}
+}
+
 
 
 

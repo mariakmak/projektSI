@@ -6,10 +6,32 @@
 
 {% block body %}
     <h1>{{ 'title.transaction_list'|trans }}</h1>
+
+
+
+
+    <form action="{{ path('transaction_index') }}" method="get">
+        {{ form_start(form, {'method': 'GET'}) }}
+        {{ form_row(form.start_date) }}
+        {{ form_row(form.end_date) }}
+        <button type="submit">{{ 'action.search'|trans }}</button>
+        {{ form_end(form) }}
+    </form>
+
+
+
+
+
+
+
+
     {% if pagination is defined and pagination.items|length %}
         <div class="navigation text-center">
             {{ knp_pagination_render(pagination) }}
         </div>
+
+
+        <p>{{ 'title.balance'|trans }}: {{ balance }}</p>
 
         <table class="table table-striped">
             <thead>
@@ -31,9 +53,13 @@
             {% for task in pagination.items %}
                 <tr>
                     <td>{{ task.id }}</td>
-                    <td>{{ task.category.name }}</td>
+                    <td>
+                        <a href="{{ url('transaction_index', {'filters.category_id' : task.category.id}) }}" title="{{ task.category.name }}">
+                        {{ task.category.name }}
+                        </a>
+                    </td>
                     <td>{{ task.description }}</td>
-                    <td>{{ task.createdAt|format_date('long') }}</td>
+                    <td>  {{ task.createdAt|format_date('long')}} </td>
                     <td>{{ task.wallet.name }}</td>
                     <td>{{ task.sum }}</td>
                     <td>{{ task.currency.name }}</td>
@@ -58,9 +84,7 @@
 
 
 
-                    <a href="{{ url('transaction_index', {'filters.category_id' : task.category.id}) }}" title="{{ task.category.name }}">
-                        {{ task.category.name }}
-                    </a>
+
 
 
                 </tr>

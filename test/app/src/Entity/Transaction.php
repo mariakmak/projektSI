@@ -59,7 +59,8 @@ class Transaction
     #[Assert\NotNull]
     private ?Currency $currency = null;
 
-    #[ORM\Column]
+
+    #[ORM\Column(type: 'boolean', options: ['default: 0'])]
     private ?bool $value=null;
 
     #[ORM\ManyToOne(inversedBy: 'transaction')]
@@ -140,6 +141,12 @@ class Transaction
     {
         $this->createdAt = $createdAt;
 
+    }
+
+
+    public function getValue(): ?bool
+    {
+        return $this->value;
     }
 
     public function getSum(): ?int

@@ -48,7 +48,7 @@ interface WalletServiceInterface
     public function canBeDeleted(Wallet $wallet): void;
 
 
-    public function CountWalletSum(Wallet $selectedentity, int $sum, bool $value): bool;
+    public function CountWalletSum(Wallet $selectedentity, int $sum, bool $value): void;
 
 
 

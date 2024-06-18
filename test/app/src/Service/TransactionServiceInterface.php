@@ -22,7 +22,24 @@ interface TransactionServiceInterface
      *
      * @return PaginationInterface<string, mixed> Paginated list
      */
-    public function getPaginatedList(int $page, User $author, array $filters = []): PaginationInterface;
+    public function getPaginatedList(int $page, User $author, array $filters = []): array;
+
+
+
+    /**
+     * Get paginated list by date.
+     *
+     * @param int $page Page number
+     *
+     * @return PaginationInterface<string, mixed> Paginated list
+     */
+
+    public function getByDate(int $page, User $user,\DateTimeInterface $startDate,\DateTimeInterface $endDate): array;
+
+
+
+
+
 
     /**
      * Save entity.

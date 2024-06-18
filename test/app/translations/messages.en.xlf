@@ -175,9 +175,34 @@
                <source>message.created_successfully</source>
                <target> Operation succeeded </target>
             </trans-unit>
-
-
-
+               <trans-unit id="sign_in">
+               <source>sign_in</source>
+               <target> Sign in </target>
+            </trans-unit>
+               <trans-unit id="title.transaction_day">
+               <source>title.transaction_day</source>
+               <target> Transactions on</target>
+            </trans-unit>
+               <trans-unit id="label.start_date">
+               <source>label.start_date</source>
+               <target> Start date</target>
+            </trans-unit>
+               <trans-unit id="label.end_date">
+               <source>label.end_date</source>
+               <target> End date</target>
+            </trans-unit>
+               <trans-unit id="title.balance">
+               <source>title.balance</source>
+               <target> Balance </target>
+            </trans-unit>
+               <trans-unit id="message.category_contains_transactions">
+               <source>message.category_contains_transactions</source>
+               <target> Can't be deleted. Category contains transactions. </target>
+            </trans-unit>
+               <trans-unit id="action.search">
+               <source>action.search</source>
+               <target> Search </target>
+            </trans-unit>
     </body>
   </file>
 </xliff>

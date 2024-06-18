@@ -175,7 +175,34 @@
                <source>message.created_successfully</source>
                <target> Operacja przebiegła pomyślnie </target>
             </trans-unit>
-
+               <trans-unit id="sign_in">
+               <source>sign_in</source>
+               <target> Zaloguj </target>
+            </trans-unit>
+               <trans-unit id="title.transaction_day">
+               <source>title.transaction_day</source>
+               <target> Transakcje z dnia </target>
+            </trans-unit>
+               <trans-unit id="label.start_date">
+               <source>label.start_date</source>
+               <target> Data początkowa</target>
+            </trans-unit>
+               <trans-unit id="label.end_date">
+               <source>label.end_date</source>
+               <target> Data końcowa</target>
+            </trans-unit>
+               <trans-unit id="title.balance">
+               <source>title.balance</source>
+               <target> Saldo </target>
+            </trans-unit>
+               <trans-unit id="message.category_contains_transactions">
+               <source>message.category_contains_transactions</source>
+               <target> Nie można usunąć. Kategoria zawiera transakcje. </target>
+            </trans-unit>
+               <trans-unit id="action.search">
+               <source>action.search</source>
+               <target> Szukaj </target>
+            </trans-unit>
     </body>
   </file>
 </xliff>

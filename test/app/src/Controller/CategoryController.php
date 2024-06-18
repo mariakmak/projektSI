@@ -73,6 +73,7 @@ class CategoryController extends AbstractController
         name: 'category_index',
         methods: 'GET'
     )]
+
     public function index(Request $request): Response
     {
 

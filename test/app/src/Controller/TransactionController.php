@@ -14,6 +14,7 @@ use App\Repository\UserRepository;
 use App\Repository\WalletRepository;
 use App\Service\TransactionServiceInterface;
 use App\Service\WalletService;
+use Form\Type\FilterType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,6 +22,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use DateTime;
 
 /**
  * Class TransactionController.
@@ -59,23 +61,71 @@ class TransactionController extends AbstractController
      */
     #[Route(
         name: 'transaction_index',
-        methods: 'GET'
+        methods: ['GET']
     )]
     public function index(Request $request): Response
     {
-        $filters = $this->getFilters($request);
-
         $user = $this->getUser();
-        $pagination = $this->transactionService->getPaginatedList(
-            $request->query->getInt('page', 1),
-            $user,
-            $filters);
+        $transactions = [];
+        $balance = null;
 
 
+        $formData = $request->query->get('filter', []);
+        $startDateString = $formData['start_date'] ?? null;
+        $endDateString = $formData['end_date'] ?? null;
+
+        #var_dump($startDateString, $endDateString);
+
+        if ($startDateString && $endDateString) {
+            #var_dump($startDateString);
+            #var_dump($endDateString);
+            $startDate = \DateTime::createFromFormat('Y-m-d', $formData['start_date']['year'] . '-' . $formData['start_date']['month'] . '-' . $formData['start_date']['day']);
+            $endDate = \DateTime::createFromFormat('Y-m-d', $formData['end_date']['year'] . '-' . $formData['end_date']['month'] . '-' . $formData['end_date']['day']);
+
+            #var_dump($startDate);
+            #var_dump($endDate);
+
+
+
+            if ($startDate === false || $endDate === false) {
+                // Obsługa błędnego formatu daty
+                $this->addFlash(
+                    'error',
+                    $this->translator->trans('message.data_error')
+                );
+            }
+
+            $paginationData = $this->transactionService->getByDate(
+                $request->query->getInt('page', 1),
+                $user,
+                $startDate,
+                $endDate
+            );
+
+            $transactions = $paginationData['transactions'];
+            $balance = $paginationData['balance'];
+        } else {
+            $filters = $this->getFilters($request);
+            $paginationData = $this->transactionService->getPaginatedList(
+                $request->query->getInt('page', 1),
+                $user,
+                $filters
+            );
+
+            $transactions = $paginationData['transactions'];
+            $balance = $paginationData['balance'];
+        }
+
+        $form = $this->createForm(FilterType::class);
+        $form->submit($formData);
 
         return $this->render(
             'transaction/index.html.twig',
-            ['pagination' => $pagination]
+            [
+                'pagination' => $transactions,
+                'balance' => $balance,
+                'form' => $form->createView()
+            ]
         );
     }
 
@@ -92,6 +142,7 @@ class TransactionController extends AbstractController
     {
         $filters = [];
         $filters['category_id'] = $request->query->getInt('filters_category_id');
+        $filters['created_at'] = $request->query->getInt('filters_created_at');
 
         return $filters;
     }
@@ -212,6 +263,41 @@ class TransactionController extends AbstractController
             ]
         );
     }
+
+
+
+
+    /**
+     * @Route("/{date}", name="transaction_by_date")
+     */
+  #  public function getByDate(Request $request,TransactionRepository $transactionRepository, string $date): Response
+  #  {
+      #  $user = $this->getUser();
+     #   $dateTime = new DateTime($date);
+
+#        $pagination = $this->transactionService->getByDate(
+#            $request->query->getInt('page', 1),
+ #           $user,
+ #           $dateTime
+  #      );
+
+
+
+  #      return $this->render('transaction/by_date.html.twig', [
+      #      'date' => $dateTime,
+  #          'pagination' => $pagination
+  #      ]);
+ #   }
+
+
+
+
+
+
+
+
+
+
 
 
 }

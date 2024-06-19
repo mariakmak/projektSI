@@ -38,6 +38,17 @@ class TransactionController extends AbstractController
     private TransactionServiceInterface $transactionService;
 
 
+
+    /**
+     * Translator.
+     *
+     * @var TranslatorInterface
+     */
+    private TranslatorInterface $translator;
+
+
+
+
     /**
      * Wallet repository.
      */
@@ -210,14 +221,15 @@ class TransactionController extends AbstractController
             if ($a = false) {
                 $this->addFlash(
                     'notice',
-                    'Value is to low');
+                    $this->translator->trans('message.value')
+                );
             }
                 $this->transactionService->save($transaction);
 
-//                $this->addFlash(
-//                    'success',
-//                    $this->translator->trans('message.created_successfully')
-//                );
+                $this->addFlash(
+                    'success',
+                    $this->translator->trans('message.created_successfully')
+                );
 
                 return $this->redirectToRoute('transaction_index');
             }

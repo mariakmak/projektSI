@@ -203,6 +203,14 @@
                <source>action.search</source>
                <target> Szukaj </target>
             </trans-unit>
+               <trans-unit id="message.data_error">
+               <source>message.data_error</source>
+               <target> Przesłane dane są niepoprawne </target>
+            </trans-unit>
+               <trans-unit id="message.value">
+               <source>message.value</source>
+               <target> Nie masz wystarczających środków, aby wykonać taką transakcję </target>
+            </trans-unit>
     </body>
   </file>
 </xliff>

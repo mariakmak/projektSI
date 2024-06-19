@@ -203,6 +203,14 @@
                <source>action.search</source>
                <target> Search </target>
             </trans-unit>
+               <trans-unit id="message.data_error">
+               <source>message.data_error</source>
+               <target> The data is incorrect </target>
+            </trans-unit>
+               <trans-unit id="message.value">
+               <source>message.value</source>
+               <target> You do not have sufficient funds to complete this transaction </target>
+            </trans-unit>
     </body>
   </file>
 </xliff>

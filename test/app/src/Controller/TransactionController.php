@@ -27,7 +27,7 @@ use DateTime;
 /**
  * Class TransactionController.
  */
-#[Route('/transaction')]
+#[\Symfony\Component\Routing\Attribute\Route('/transaction')]
 class TransactionController extends AbstractController
 {
 
@@ -58,10 +58,11 @@ class TransactionController extends AbstractController
     /**
      * Constructor.
      */
-    public function __construct(TransactionServiceInterface $transactionService, WalletService $walletService)
+    public function __construct(TransactionServiceInterface $transactionService, WalletService $walletService, TranslatorInterface $translator)
     {
         $this->transactionService = $transactionService;
         $this->walletService = $walletService;
+        $this->translator = $translator;
     }
 
     /**
@@ -70,53 +71,72 @@ class TransactionController extends AbstractController
      * @param Request $request HTTP Request
      * @return Response HTTP response
      */
-    #[Route(
+    #[\Symfony\Component\Routing\Attribute\Route(
         name: 'transaction_index',
         methods: ['GET']
     )]
     public function index(Request $request): Response
     {
+        #ob_start(); // Rozpocznij buforowanie wyjścia
+
         $user = $this->getUser();
         $transactions = [];
         $balance = null;
 
+        $form = $this->createForm(FilterType::class, null, [
+        'method' => 'GET',
+    ]);
 
-        $formData = $request->query->get('filter', []);
-        $startDateString = $formData['start_date'] ?? null;
-        $endDateString = $formData['end_date'] ?? null;
+        // Obsługa przesłania formularza
+        $form->handleRequest($request);
+        #var_dump('Form:', $form);
 
-        #var_dump($startDateString, $endDateString);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $formData = $form->getData();
+            #var_dump('Form Data:', $formData);
 
-        if ($startDateString && $endDateString) {
-            #var_dump($startDateString);
-            #var_dump($endDateString);
-            $startDate = \DateTime::createFromFormat('Y-m-d', $formData['start_date']['year'] . '-' . $formData['start_date']['month'] . '-' . $formData['start_date']['day']);
-            $endDate = \DateTime::createFromFormat('Y-m-d', $formData['end_date']['year'] . '-' . $formData['end_date']['month'] . '-' . $formData['end_date']['day']);
+            $startDateString = $formData['start_date'] ? $formData['start_date']->format('Y-m-d') : null;
+            $endDateString = $formData['end_date'] ? $formData['end_date']->format('Y-m-d') : null;
 
-            #var_dump($startDate);
-            #var_dump($endDate);
+            #var_dump('Start Date String:', $startDateString);
+            #var_dump('End Date String:', $endDateString);
 
+            if ($startDateString && $endDateString) {
+                #$startDate = \DateTime::createFromFormat('Y-m-d', $startDateString . ' 00:00:00');
+                #$endDate = \DateTime::createFromFormat('Y-m-d', $endDateString . ' 23:59:59');
+                $startDate = \DateTime::createFromFormat('Y-m-d', $startDateString);
+                $endDate = \DateTime::createFromFormat('Y-m-d', $endDateString);
 
+                #var_dump('Start Date:', $startDate);
+                #var_dump('End Date:', $endDate);
 
-            if ($startDate === false || $endDate === false) {
-                // Obsługa błędnego formatu daty
+                if ($startDate === false || $endDate === false) {
+                    $this->addFlash(
+                        'error',
+                        $this->translator->trans('message.data_error')
+                    );
+                } else {
+                    $paginationData = $this->transactionService->getByDate(
+                        $request->query->getInt('page', 1),
+                        $user,
+                        $startDate,
+                        $endDate
+                    );
+
+                    $transactions = $paginationData['transactions'];
+                    $balance = $paginationData['balance'];
+                    #var_dump('Filtered Transactions:', $transactions);
+                }
+            } else {
                 $this->addFlash(
                     'error',
-                    $this->translator->trans('message.data_error')
+                    $this->translator->trans('message.data_missing')
                 );
             }
-
-            $paginationData = $this->transactionService->getByDate(
-                $request->query->getInt('page', 1),
-                $user,
-                $startDate,
-                $endDate
-            );
-
-            $transactions = $paginationData['transactions'];
-            $balance = $paginationData['balance'];
         } else {
             $filters = $this->getFilters($request);
+            #var_dump('Filters:', $filters);
+
             $paginationData = $this->transactionService->getPaginatedList(
                 $request->query->getInt('page', 1),
                 $user,
@@ -125,10 +145,10 @@ class TransactionController extends AbstractController
 
             $transactions = $paginationData['transactions'];
             $balance = $paginationData['balance'];
+            #var_dump('All Transactions:', $transactions);
         }
 
-        $form = $this->createForm(FilterType::class);
-        $form->submit($formData);
+        #ob_end_flush(); // Zakończ buforowanie wyjścia i wyślij buforowaną treść
 
         return $this->render(
             'transaction/index.html.twig',
@@ -140,7 +160,6 @@ class TransactionController extends AbstractController
         );
     }
 
-
     /**
      * Get filters from request.
      *
@@ -151,11 +170,7 @@ class TransactionController extends AbstractController
      */
     private function getFilters(Request $request): array
     {
-        $filters = [];
-        $filters['category_id'] = $request->query->getInt('filters_category_id');
-        $filters['created_at'] = $request->query->getInt('filters_created_at');
-
-        return $filters;
+        return ['category_id' => $request->query->getInt('filters_category_id'), 'created_at' => $request->query->getInt('filters_created_at')];
     }
 
 
@@ -166,7 +181,7 @@ class TransactionController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route(
+    #[\Symfony\Component\Routing\Attribute\Route(
         '/{id}',
         name: 'transaction_show',
         requirements: ['id' => '[1-9]\d*'],
@@ -189,7 +204,7 @@ class TransactionController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route(
+    #[\Symfony\Component\Routing\Attribute\Route(
         '/create',
         name: 'transaction_create',
         methods: 'GET|POST',
@@ -250,7 +265,7 @@ class TransactionController extends AbstractController
          * @return Response HTTP response
          */
         #[
-        Route('/{id}/delete', name: 'transaction_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
+        \Symfony\Component\Routing\Attribute\Route('/{id}/delete', name: 'transaction_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
     #[IsGranted('DELETE', subject: 'transaction')]
     public function delete(Request $request, Transaction $transaction): Response
     {
@@ -261,7 +276,7 @@ class TransactionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->walletService->delete($transaction);
+            $this->transactionService->delete($transaction);
 
 
             return $this->redirectToRoute('transaction_index');

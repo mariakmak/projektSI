@@ -27,10 +27,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *
  *
  */
-#[Route('/category')]
+#[\Symfony\Component\Routing\Attribute\Route('/category')]
 class CategoryController extends AbstractController
 {
 
+    public $categoryService;
     /**
      * Category service.
      */
@@ -69,7 +70,7 @@ class CategoryController extends AbstractController
      * @param Request            $request        HTTP Request
      * @return Response HTTP response
      */
-    #[Route(
+    #[\Symfony\Component\Routing\Attribute\Route(
         name: 'category_index',
         methods: 'GET'
     )]
@@ -98,7 +99,7 @@ class CategoryController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route(
+    #[\Symfony\Component\Routing\Attribute\Route(
         '/{id}',
         name: 'category_show',
         requirements: ['id' => '[1-9]\d*'],
@@ -124,7 +125,7 @@ class CategoryController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route(
+    #[\Symfony\Component\Routing\Attribute\Route(
         '/create',
         name: 'category_create',
         methods: 'GET|POST',
@@ -168,7 +169,7 @@ class CategoryController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route('/{id}/delete', name: 'category_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
+    #[\Symfony\Component\Routing\Attribute\Route('/{id}/delete', name: 'category_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
     #[IsGranted('DELETE', subject: 'category')]
     public function delete(Request $request, Category $category): Response
     {
@@ -221,7 +222,7 @@ class CategoryController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route('/{id}/edit', name: 'category_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
+    #[\Symfony\Component\Routing\Attribute\Route('/{id}/edit', name: 'category_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
     #[IsGranted('EDIT', subject: 'category')]
     public function edit(Request $request, Category $category): Response
     {

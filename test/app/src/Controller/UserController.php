@@ -20,7 +20,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 /**
  * Class UserController.
  */
-#[Route('/user')]
+#[\Symfony\Component\Routing\Attribute\Route('/user')]
 #[IsGranted('ROLE_ADMIN')]
 class UserController extends AbstractController
 {
@@ -60,7 +60,7 @@ class UserController extends AbstractController
      *
      * @return Response Response
      */
-    #[Route(name: 'user_index', methods: 'GET')]
+    #[\Symfony\Component\Routing\Attribute\Route(name: 'user_index', methods: 'GET')]
     public function index(Request $request): Response
     {
         $pagination = $this->userService->getPaginatedList(
@@ -78,7 +78,7 @@ class UserController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route('/{id}/edit', name: 'user_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
+    #[\Symfony\Component\Routing\Attribute\Route('/{id}/edit', name: 'user_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
     #[IsGranted('ROLE_ADMIN')]
     public function edit(Request $request, User $user): Response
     {

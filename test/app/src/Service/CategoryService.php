@@ -116,7 +116,7 @@ class CategoryService implements CategoryServiceInterface
         try {
             $result = $this->transactionRepository->queryByCategory($category);
 
-            return !($result > 0);
+            return $result <= 0;
 
         } catch (NoResultException|NonUniqueResultException) {
             return false;

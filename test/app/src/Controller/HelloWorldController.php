@@ -16,7 +16,7 @@ class HelloWorldController
      * @return Response HTTP response
      */
 
-    #[Route(
+    #[\Symfony\Component\Routing\Attribute\Route(
         '/hello/{name}',
         name: 'hello_index',
         requirements: ['name' => '[a-zA-Z]+'],

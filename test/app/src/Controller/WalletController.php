@@ -23,7 +23,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 /**
  * Class WalletController.
  */
-#[Route('/wallet')]
+#[\Symfony\Component\Routing\Attribute\Route('/wallet')]
 class WalletController extends AbstractController
 {
     /**
@@ -61,7 +61,7 @@ class WalletController extends AbstractController
      * @param Request $request HTTP Request
      * @return Response HTTP response
      */
-    #[Route(
+    #[\Symfony\Component\Routing\Attribute\Route(
         name: 'wallet_index',
         methods: 'GET'
     )]
@@ -85,7 +85,7 @@ class WalletController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route(
+    #[\Symfony\Component\Routing\Attribute\Route(
         '/{id}',
         name: 'wallet_show',
         requirements: ['id' => '[1-9]\d*'],
@@ -108,7 +108,7 @@ class WalletController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route(
+    #[\Symfony\Component\Routing\Attribute\Route(
         '/create',
         name: 'wallet_create',
         methods: 'GET|POST',
@@ -162,7 +162,7 @@ class WalletController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route('/{id}/edit', name: 'wallet_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
+    #[\Symfony\Component\Routing\Attribute\Route('/{id}/edit', name: 'wallet_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
     #[IsGranted('EDIT', subject: 'wallet')]
     public function edit(Request $request, Wallet $wallet): Response
     {
@@ -213,7 +213,7 @@ class WalletController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route('/{id}/delete', name: 'wallet_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
+    #[\Symfony\Component\Routing\Attribute\Route('/{id}/delete', name: 'wallet_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
     #[IsGranted('DELETE', subject: 'wallet')]
     public function delete(Request $request, Wallet $wallet, TransactionRepository $transaction): Response
     {

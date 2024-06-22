@@ -148,11 +148,9 @@ class Wallet
 
     public function removeTransaction(Transaction $transaction): self
     {
-        if ($this->transaction->removeElement($transaction)) {
-            // set the owning side to null (unless already changed)
-            if ($transaction->getWallet() === $this) {
-                $transaction->setWallet(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->transaction->removeElement($transaction) && $transaction->getWallet() === $this) {
+            $transaction->setWallet(null);
         }
 
         return $this;

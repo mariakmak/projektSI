@@ -126,7 +126,7 @@ class WalletRepository extends ServiceEntityRepository
 
     public function countWalletBalance(int $sum, bool $value, Wallet $wallet, int $walletSum): bool
     {
-        if($value !== false ) {
+        if ($value) {
             if ($walletSum + $sum >= 0) {
                 $wallet->setSum($walletSum + $sum);
                 $this->save($wallet);
@@ -135,18 +135,14 @@ class WalletRepository extends ServiceEntityRepository
 else {
     return false;
 }
-}
-else{
-    if ($walletSum - $sum >= 0) {
-        $wallet->setSum($walletSum - $sum);
-        $this->save($wallet);
-        return true;
-    }
-    else {
+        } elseif ($walletSum - $sum >= 0) {
+            $wallet->setSum($walletSum - $sum);
+            $this->save($wallet);
+            return true;
+        } else {
 
-        return false;
-    }
-}
+            return false;
+        }
 }
 
 

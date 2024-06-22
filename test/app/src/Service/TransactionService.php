@@ -41,6 +41,8 @@ class TransactionService implements TransactionServiceInterface
 
 
 
+
+
     /**
      * Constructor.
      *
@@ -51,7 +53,8 @@ class TransactionService implements TransactionServiceInterface
     public function __construct(
         CategoryServiceInterface $categoryService,
         PaginatorInterface $paginator,
-        TransactionRepository $transactionRepository
+        TransactionRepository $transactionRepository,
+
     ) {
         $this->categoryService = $categoryService;
         $this->paginator = $paginator;
@@ -163,7 +166,7 @@ class TransactionService implements TransactionServiceInterface
         $resultFilters = [];
         if (!empty($filters['category_id'])) {
             $category = $this->categoryService->findOneById($filters['category_id']);
-            if (null !== $category) {
+            if ($category instanceof \App\Entity\Category) {
                 $resultFilters['category'] = $category;
             }
         }

@@ -55,7 +55,7 @@ class AdminType extends AbstractType
         $builder->add(
             'roles',
             ChoiceType::class,
-            [   'label' => 'label.roles',
+            ['label' => 'label.roles',
                 'attr' => ['class' => 'form-control'],
                 'choices' => [
                     'ROLE_ADMIN' => [

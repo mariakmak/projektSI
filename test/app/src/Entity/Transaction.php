@@ -263,6 +263,8 @@ class Transaction
      * Setter for name.
      *
      * @param string $name Name
+     *
+     * @return self This instance
      */
     public function setName(string $name): self
     {

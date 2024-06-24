@@ -21,7 +21,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Security;
 
-
 /**
  * Class TransactionType.
  */
@@ -154,7 +153,7 @@ class TransactionType extends AbstractType
                     return $repository->createQueryBuilder('c')
                         ->andWhere('c.author = :author')
                         ->setParameter('author', $this->security->getUser());
-                }
+                },
             ]
         );
     }

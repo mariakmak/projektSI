@@ -1,4 +1,4 @@
-{% include('base.html.twig') %}
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         {% if is_granted('ROLE_USER') and not is_granted('ROLE_ADMIN') %}
@@ -25,7 +25,9 @@
                 {% if is_granted('ROLE_ADMIN') %}
                 <a class="nav-link active" href="{{ url('user_index') }}">{{ 'action.user'|trans }}</a>
                 {% endif %}
+                {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
                 <a class="nav-link active" href="{{ url('app_logout') }}">{{ 'action.logout'|trans }}</a>
+                {% endif %}
 
             </li>
         </div>

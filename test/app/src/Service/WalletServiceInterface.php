@@ -48,11 +48,11 @@ interface WalletServiceInterface
     /**
      * Count wallet balance.
      *
-     * @param Wallet $selectedentity Wallet entity
-     * @param int    $sum            Sum to add or subtract
-     * @param bool   $value          Whether to add or subtract the sum
+     * @param Wallet $select Wallet entity
+     * @param int    $sum    Sum to add or subtract
+     * @param bool   $value  Whether to add or subtract the sum
      *
      * @return bool True if the wallet balance was updated successfully, false otherwise
      */
-    public function countWalletSum(Wallet $selectedentity, int $sum, bool $value): bool;
+    public function countWalletSum(Wallet $select, int $sum, bool $value): bool;
 }

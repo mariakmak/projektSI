@@ -55,7 +55,7 @@ class TransactionService implements TransactionServiceInterface
      */
     public function save(Transaction $transaction): void
     {
-        if (null == $transaction->getId()) {
+        if (null === $transaction->getId()) {
             $transaction->setCreatedAt(new \DateTimeImmutable());
         }
 
@@ -113,7 +113,12 @@ class TransactionService implements TransactionServiceInterface
             TransactionRepository::PAGINATOR_ITEMS_PER_PAGE
         );
 
-        $transactionCollection = new ArrayCollection($transactions->getItems());
+        $items = [];
+        foreach ($transactions->getItems() as $item) {
+            $items[] = $item;
+        }
+
+        $transactionCollection = new ArrayCollection($items);
 
         $balance = $this->transactionRepository->calculateTotalAmount($transactionCollection);
 
@@ -139,7 +144,12 @@ class TransactionService implements TransactionServiceInterface
             TransactionRepository::PAGINATOR_ITEMS_PER_PAGE
         );
 
-        $transactionCollection = new ArrayCollection($transactions->getItems());
+        $items = [];
+        foreach ($transactions->getItems() as $item) {
+            $items[] = $item;
+        }
+
+        $transactionCollection = new ArrayCollection($items);
 
         $balance = $this->transactionRepository->calculateTotalAmount($transactionCollection);
 

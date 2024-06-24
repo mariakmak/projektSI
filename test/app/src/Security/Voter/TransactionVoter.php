@@ -105,8 +105,8 @@ class TransactionVoter extends Voter
     /**
      * Checks if user can edit transaction.
      *
+     * @param Transaction $transaction Transaction entity
      * @param User        $user        User
-     * @param Transaction $transaction transaction entity
      *
      * @return bool Result
      */

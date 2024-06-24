@@ -107,14 +107,15 @@ class WalletService implements WalletServiceInterface
     /**
      * Count wallet sum based on provided parameters.
      *
-     * @param int  $sum   Sum to calculate
-     * @param bool $value Value to calculate
+     * @param Wallet $select Selected wallet entity
+     * @param int    $sum    Sum to calculate
+     * @param bool   $value  Value to calculate
      *
      * @return bool True if the wallet balance was updated successfully, false otherwise
      */
-    public function countWalletSum(Wallet $selectedentity, int $sum, bool $value): bool
+    public function countWalletSum(Wallet $select, int $sum, bool $value): bool
     {
-        $wallet = $this->walletRepository->find($selectedentity->getId()); // szuka portfela z formu
+        $wallet = $this->walletRepository->find($select->getId()); // szuka portfela z formu
         $walletSum = $wallet->getSum(); // pobiera wartosc portfela
 
         return $this->walletRepository->countWalletBalance($sum, $value, $wallet, $walletSum);

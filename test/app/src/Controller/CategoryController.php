@@ -33,7 +33,6 @@ class CategoryController extends AbstractController
      */
     private TranslatorInterface $translator;
 
-
     /**
      * Constructor.
      *
@@ -162,10 +161,10 @@ class CategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->categoryService->delete($category);
 
-              $this->addFlash(
-                  'success',
-                  $this->translator->trans('message.deleted_successfully')
-              );
+            $this->addFlash(
+                'success',
+                $this->translator->trans('message.deleted_successfully')
+            );
 
             return $this->redirectToRoute('category_index');
         }

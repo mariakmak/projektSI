@@ -63,18 +63,6 @@ class TransactionRepository extends ServiceEntityRepository
     }
 
     /**
-     * Get or create new query builder.
-     *
-     * @param QueryBuilder|null $queryBuilder Query builder
-     *
-     * @return QueryBuilder Query builder
-     */
-    private function getOrCreateQueryBuilder(?QueryBuilder $queryBuilder = null): QueryBuilder
-    {
-        return $queryBuilder ?? $this->createQueryBuilder('transaction');
-    }
-
-    /**
      * Constructor.
      *
      * @param ManagerRegistry $registry Manager registry
@@ -173,24 +161,6 @@ class TransactionRepository extends ServiceEntityRepository
     }
 
     /**
-     * Apply filters to paginated list.
-     *
-     * @param QueryBuilder          $queryBuilder Query builder
-     * @param array<string, object> $filters      Filters array
-     *
-     * @return QueryBuilder Query builder
-     */
-    private function applyFiltersToList(QueryBuilder $queryBuilder, array $filters = []): QueryBuilder
-    {
-        if (isset($filters['category']) && $filters['category'] instanceof Category) {
-            $queryBuilder->andWhere('category = :category')
-                ->setParameter('category', $filters['category']);
-        }
-
-        return $queryBuilder;
-    }
-
-    /**
      * Query transactions count by category.
      *
      * @param Category $category The category entity
@@ -209,8 +179,8 @@ class TransactionRepository extends ServiceEntityRepository
                 ->setParameter(':category', $category)
                 ->getQuery()
                 ->getSingleScalarResult();
-        } catch (NonUniqueResultException | NoResultException $e) {
-            throw new \RuntimeException('Error while querying by category: ' . $e->getMessage());
+        } catch (NonUniqueResultException|NoResultException $e) {
+            throw new \RuntimeException(sprintf('Error while querying by category: %s', $e->getMessage()));
         }
     }
 
@@ -261,6 +231,35 @@ class TransactionRepository extends ServiceEntityRepository
         return $totalAmount;
     }
 
+    /**
+     * Get or create new query builder.
+     *
+     * @param QueryBuilder|null $queryBuilder Query builder
+     *
+     * @return QueryBuilder Query builder
+     */
+    private function getOrCreateQueryBuilder(?QueryBuilder $queryBuilder = null): QueryBuilder
+    {
+        return $queryBuilder ?? $this->createQueryBuilder('transaction');
+    }
+
+    /**
+     * Apply filters to paginated list.
+     *
+     * @param QueryBuilder          $queryBuilder Query builder
+     * @param array<string, object> $filters      Filters array
+     *
+     * @return QueryBuilder Query builder
+     */
+    private function applyFiltersToList(QueryBuilder $queryBuilder, array $filters = []): QueryBuilder
+    {
+        if (isset($filters['category']) && $filters['category'] instanceof Category) {
+            $queryBuilder->andWhere('category = :category')
+                ->setParameter('category', $filters['category']);
+        }
+
+        return $queryBuilder;
+    }
     //    /**
     //     * @return Transaction[] Returns an array of Transaction objects
     //     */

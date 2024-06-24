@@ -33,16 +33,12 @@ class Category
 
     /**
      * Created at.
-     *
-     * @var \DateTimeImmutable|null
      */
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
     /**
      * Updated at.
-     *
-     * @var \DateTimeImmutable|null
      */
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
@@ -75,6 +71,8 @@ class Category
 
     /**
      * Setter for name.
+     *
+     * @param string $name the name to set
      */
     public function setName(string $name): void
     {

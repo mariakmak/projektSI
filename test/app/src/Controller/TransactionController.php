@@ -77,7 +77,6 @@ class TransactionController extends AbstractController
             'method' => 'GET',
         ]);
 
-
         $form->handleRequest($request);
         // var_dump('Form:', $form);
 
@@ -151,41 +150,6 @@ class TransactionController extends AbstractController
     }
 
     /**
-     * Get filters from request.
-     *
-     * @param Request $request HTTP request
-     *
-     * @return array<string, int> Array of filters
-     */
-    #[ArrayShape(['category_id' => "int", 'created_at' => "int"])]
-    private function getFilters(Request $request): array
-    {
-        return ['category_id' => $request->query->getInt('filters_category_id'), 'created_at' => $request->query->getInt('filters_created_at')];
-    }
-
-    /**
-     * Show action.
-     *
-     * @param Transaction $transaction Transaction entity
-     *
-     * @return Response HTTP response
-     */
-    #[\Symfony\Component\Routing\Attribute\Route(
-        '/{id}',
-        name: 'transaction_show',
-        requirements: ['id' => '[1-9]\d*'],
-        methods: 'GET',
-    )]
-    #[IsGranted('VIEW', subject: 'transaction')]
-    public function show(Transaction $transaction): Response
-    {
-        return $this->render(
-            'transaction/show.html.twig',
-            ['transaction' => $transaction]
-        );
-    }
-
-    /**
      * Create action.
      *
      * @param Request $request HTTP request
@@ -217,7 +181,7 @@ class TransactionController extends AbstractController
             $value = $data->isValue(); // value z form
 
             $a = $this->walletService->countWalletSum($selectedentity, $sum, $value);
-            if ($a === false) {
+            if (false === $a) {
                 $this->addFlash(
                     'notice',
                     $this->translator->trans('message.value')
@@ -274,6 +238,41 @@ class TransactionController extends AbstractController
                 'form' => $form->createView(),
                 'category' => $transaction,
             ]
+        );
+    }
+
+    /**
+     * Get filters from request.
+     *
+     * @param Request $request HTTP request
+     *
+     * @return array<string, int> Array of filters
+     */
+    #[ArrayShape(['category_id' => 'int', 'created_at' => 'int'])]
+    private function getFilters(Request $request): array
+    {
+        return ['category_id' => $request->query->getInt('filters_category_id'), 'created_at' => $request->query->getInt('filters_created_at')];
+    }
+
+    /**
+     * Show action.
+     *
+     * @param Transaction $transaction Transaction entity
+     *
+     * @return Response HTTP response
+     */
+    #[\Symfony\Component\Routing\Attribute\Route(
+        '/{id}',
+        name: 'transaction_show',
+        requirements: ['id' => '[1-9]\d*'],
+        methods: 'GET',
+    )]
+    #[IsGranted('VIEW', subject: 'transaction')]
+    public function show(Transaction $transaction): Response
+    {
+        return $this->render(
+            'transaction/show.html.twig',
+            ['transaction' => $transaction]
         );
     }
 }

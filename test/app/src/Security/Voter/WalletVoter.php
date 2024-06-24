@@ -55,6 +55,14 @@ class WalletVoter extends Voter
         $this->security = $security;
     }
 
+    /**
+     * Determines if the attribute and subject are supported by this voter.
+     *
+     * @param string $attribute An attribute
+     * @param mixed  $subject   The subject to secure, e.g. an object the user wants to access or any other PHP type
+     *
+     * @return bool Result
+     */
     protected function supports(string $attribute, mixed $subject): bool
     {
         // replace with your own logic
@@ -97,8 +105,8 @@ class WalletVoter extends Voter
     /**
      * Checks if user can edit wallet.
      *
-     * @param User   $user   User
      * @param Wallet $wallet wallet entity
+     * @param User   $user   User
      *
      * @return bool Result
      */

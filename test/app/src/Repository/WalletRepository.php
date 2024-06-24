@@ -92,18 +92,6 @@ class WalletRepository extends ServiceEntityRepository
     }
 
     /**
-     * Get or create new query builder.
-     *
-     * @param QueryBuilder|null $queryBuilder Query builder
-     *
-     * @return QueryBuilder Query builder
-     */
-    private function getOrCreateQueryBuilder(?QueryBuilder $queryBuilder = null): QueryBuilder
-    {
-        return $queryBuilder ?? $this->createQueryBuilder('wallet');
-    }
-
-    /**
      * Save entity.
      *
      * @param Wallet $wallet Wallet entity
@@ -169,6 +157,18 @@ class WalletRepository extends ServiceEntityRepository
         }
 
         return false;
+    }
+
+    /**
+     * Get or create new query builder.
+     *
+     * @param QueryBuilder|null $queryBuilder Query builder
+     *
+     * @return QueryBuilder Query builder
+     */
+    private function getOrCreateQueryBuilder(?QueryBuilder $queryBuilder = null): QueryBuilder
+    {
+        return $queryBuilder ?? $this->createQueryBuilder('wallet');
     }
 
     //    /**

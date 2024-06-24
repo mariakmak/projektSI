@@ -110,6 +110,8 @@ class Wallet
      * Add currency.
      *
      * @param Currency $currency Currency entity
+     *
+     * @return self This instance
      */
     public function addCurrency(Currency $currency): self
     {
@@ -124,6 +126,8 @@ class Wallet
      * Remove currency.
      *
      * @param Currency $currency Currency entity
+     *
+     * @return self This instance
      */
     public function removeCurrency(Currency $currency): self
     {
@@ -144,6 +148,8 @@ class Wallet
      * Add transaction.
      *
      * @param Transaction $transaction Transaction entity
+     *
+     * @return self This instance
      */
     public function addTransaction(Transaction $transaction): self
     {
@@ -159,6 +165,8 @@ class Wallet
      * Remove transaction.
      *
      * @param Transaction $transaction Transaction entity
+     *
+     * @return self This instance
      */
     public function removeTransaction(Transaction $transaction): self
     {

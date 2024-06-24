@@ -1,0 +1,2805 @@
+   1) src/Controller/CategoryController.php (class_attributes_separation, method_argument_space, align_multiline_comment, no_superfluous_phpdoc_tags, no_blank_lines_after_class_opening, line_ending, phpdoc_separation, statement_indentation, phpdoc_trim, no_unused_imports, no_extra_blank_lines, phpdoc_align, single_blank_line_at_eof)
+   2) src/Controller/HelloWorldController.php (method_argument_space, align_multiline_comment, line_ending, no_unused_imports, single_line_after_imports, no_blank_lines_after_phpdoc, no_extra_blank_lines, single_blank_line_at_eof)
+   3) src/Controller/SecurityController.php (no_unused_imports)
+   4) src/Controller/TransactionController.php (class_attributes_separation, method_argument_space, array_indentation, align_multiline_comment, phpdoc_to_comment, fully_qualified_strict_types, no_superfluous_phpdoc_tags, single_line_comment_spacing, global_namespace_import, trailing_comma_in_multiline, yoda_style, no_blank_lines_after_class_opening, line_ending, phpdoc_separation, statement_indentation, phpdoc_trim, no_unused_imports, no_extra_blank_lines, single_line_comment_style, phpdoc_align)
+   5) src/Controller/UserController.php (class_attributes_separation, method_argument_space, align_multiline_comment, line_ending, no_unused_imports, single_blank_line_at_eof)
+   6) src/Controller/WalletController.php (class_attributes_separation, single_space_around_construct, method_argument_space, align_multiline_comment, no_superfluous_phpdoc_tags, single_line_comment_spacing, object_operator_without_whitespace, yoda_style, control_structure_continuation_position, line_ending, space_after_semicolon, braces_position, phpdoc_separation, statement_indentation, phpdoc_trim, no_unused_imports, no_extra_blank_lines, phpdoc_align, single_blank_line_at_eof)
+   7) src/DataFixtures/AppFixtures.php (class_attributes_separation, no_superfluous_phpdoc_tags, global_namespace_import, phpdoc_trim, no_unused_imports, no_blank_lines_after_phpdoc, no_extra_blank_lines)
+   8) src/DataFixtures/CategoryFixtures.php (class_attributes_separation, global_namespace_import, no_trailing_comma_in_singleline, trim_array_spaces, no_unused_imports, single_line_after_imports, no_extra_blank_lines, single_blank_line_at_eof)
+   9) src/DataFixtures/CurrencyFixtures.php (class_attributes_separation, align_multiline_comment, line_ending, single_line_after_imports, no_extra_blank_lines, single_blank_line_at_eof)
+  10) src/DataFixtures/TransactionFixtures.php (method_argument_space, align_multiline_comment, global_namespace_import, trim_array_spaces, line_ending, no_unused_imports, no_extra_blank_lines, single_blank_line_at_eof)
+  11) src/DataFixtures/UserFixtures.php (method_argument_space, align_multiline_comment, line_ending, single_blank_line_at_eof)
+  12) src/DataFixtures/WalletFixtures.php (class_attributes_separation, method_argument_space, align_multiline_comment, global_namespace_import, line_ending, phpdoc_trim, no_unused_imports, no_extra_blank_lines, single_blank_line_at_eof)
+  13) src/Entity/Category.php (class_attributes_separation, no_superfluous_phpdoc_tags, phpdoc_trim, no_unused_imports, single_line_after_imports, no_blank_lines_after_phpdoc, no_extra_blank_lines)
+  14) src/Entity/Currency.php (single_space_around_construct, no_superfluous_phpdoc_tags, phpdoc_trim, no_blank_lines_after_phpdoc, no_extra_blank_lines)
+  15) src/Entity/Enum/UserRole.php (align_multiline_comment, line_ending)
+  16) src/Entity/Transaction.php (class_attributes_separation, no_empty_statement, single_space_around_construct, fully_qualified_strict_types, no_superfluous_phpdoc_tags, global_namespace_import, statement_indentation, phpdoc_trim, no_unused_imports, no_blank_lines_after_phpdoc, no_extra_blank_lines, binary_operator_spaces)
+  17) src/Entity/User.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+  18) src/Entity/Wallet.php (fully_qualified_strict_types, no_superfluous_phpdoc_tags, global_namespace_import, phpdoc_trim, no_unused_imports, no_blank_lines_after_phpdoc, no_extra_blank_lines)
+  19) src/Form/Type/AdminType.php (method_argument_space, align_multiline_comment, line_ending, no_unused_imports, single_blank_line_at_eof)
+  20) src/Form/Type/CategoryType.php (method_argument_space, align_multiline_comment, line_ending, single_blank_line_at_eof)
+  21) src/Form/Type/FilterType.php (line_ending, no_unused_imports, single_blank_line_at_eof)
+  22) src/Form/Type/TransactionType.php (class_attributes_separation, method_argument_space, array_indentation, align_multiline_comment, no_singleline_whitespace_before_semicolons, object_operator_without_whitespace, trailing_comma_in_multiline, line_ending, no_unused_imports, single_line_after_imports, no_blank_lines_after_phpdoc, no_extra_blank_lines, binary_operator_spaces, single_blank_line_at_eof)
+  23) src/Form/Type/WalletType.php (method_argument_space, align_multiline_comment, no_singleline_whitespace_before_semicolons, object_operator_without_whitespace, line_ending, no_unused_imports, single_line_after_imports, no_extra_blank_lines, single_blank_line_at_eof)
+  24) src/Repository/CategoryRepository.php (class_attributes_separation, align_multiline_comment, nullable_type_declaration_for_default_null_value, phpdoc_separation, statement_indentation, no_unused_imports, single_line_after_imports, no_extra_blank_lines)
+  25) src/Repository/CurrencyRepository.php (statement_indentation, no_extra_blank_lines)
+  26) src/Repository/TransactionRepository.php (class_attributes_separation, fully_qualified_strict_types, nullable_type_declaration_for_default_null_value, single_line_comment_spacing, no_blank_lines_after_class_opening, statement_indentation, no_extra_blank_lines, blank_line_before_statement, single_line_comment_style)
+  27) src/Repository/UserRepository.php (class_attributes_separation, nullable_type_declaration_for_default_null_value, no_blank_lines_after_class_opening, braces_position, statement_indentation, no_extra_blank_lines)
+  28) src/Repository/WalletRepository.php (class_attributes_separation, nullable_type_declaration_for_default_null_value, control_structure_continuation_position, statement_indentation, no_unused_imports, no_extra_blank_lines, blank_line_before_statement)
+  29) src/Security/LoginFormAuthenticator.php (global_namespace_import, no_unused_imports, single_blank_line_at_eof)
+  30) src/Security/Voter/CategoryVoter.php (class_attributes_separation, align_multiline_comment, fully_qualified_strict_types, no_superfluous_phpdoc_tags, no_blank_lines_after_class_opening, phpdoc_trim, single_line_after_imports, phpdoc_trim_consecutive_blank_line_separation, phpdoc_align)
+  31) src/Security/Voter/TransactionVoter.php (class_attributes_separation, align_multiline_comment, fully_qualified_strict_types, no_superfluous_phpdoc_tags, phpdoc_trim, phpdoc_trim_consecutive_blank_line_separation, phpdoc_align)
+  32) src/Security/Voter/WalletVoter.php (class_attributes_separation, align_multiline_comment, fully_qualified_strict_types, no_superfluous_phpdoc_tags, phpdoc_trim, no_unused_imports, single_line_after_imports, phpdoc_trim_consecutive_blank_line_separation, phpdoc_align)
+  33) src/Service/CategoryService.php (class_attributes_separation, method_argument_space, align_multiline_comment, yoda_style, line_ending, no_unused_imports, no_extra_blank_lines, phpdoc_align, single_blank_line_at_eof)
+  34) src/Service/CategoryServiceInterface.php (class_attributes_separation, align_multiline_comment, line_ending, no_unused_imports, no_extra_blank_lines, single_blank_line_at_eof)
+  35) src/Service/TransactionService.php (class_attributes_separation, method_argument_space, align_multiline_comment, phpdoc_indent, fully_qualified_strict_types, yoda_style, line_ending, statement_indentation, no_unused_imports, single_line_after_imports, no_extra_blank_lines, phpdoc_align, single_blank_line_at_eof)
+  36) src/Service/TransactionServiceInterface.php (class_attributes_separation, method_argument_space, align_multiline_comment, line_ending, no_unused_imports, single_blank_line_at_eof)
+  37) src/Service/UserService.php (class_attributes_separation, method_argument_space, align_multiline_comment, line_ending, phpdoc_align, single_blank_line_at_eof)
+  38) src/Service/UserServiceInterface.php (class_attributes_separation, align_multiline_comment, line_ending, single_blank_line_at_eof)
+  39) src/Service/WalletService.php (class_attributes_separation, single_space_around_construct, method_argument_space, align_multiline_comment, spaces_inside_parentheses, single_line_comment_spacing, yoda_style, line_ending, braces_position, statement_indentation, no_unused_imports, no_extra_blank_lines, phpdoc_align)
+  40) src/Service/WalletServiceInterface.php (class_attributes_separation, method_argument_space, align_multiline_comment, line_ending, no_unused_imports, single_blank_line_at_eof)
+
+Found 40 of 41 files that can be fixed in 2.386 seconds, 20.00 MB memory used
+
+FILE: /home/wwwroot/app/src/Controller/CategoryController.php
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FOUND 14 ERRORS AND 208 WARNINGS AFFECTING 211 LINES
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+   1 | WARNING | [ ] File has mixed line endings; this may cause incorrect results
+   1 | ERROR   | [x] End of line character is invalid; expected "\n" but found "\r\n"
+   4 | WARNING | [x] Please trim any trailing whitespace
+   5 | WARNING | [x] Please trim any trailing whitespace
+   6 | WARNING | [x] Please trim any trailing whitespace
+   7 | WARNING | [x] Please trim any trailing whitespace
+   8 | WARNING | [x] Please trim any trailing whitespace
+   9 | WARNING | [x] Please trim any trailing whitespace
+  10 | WARNING | [x] Please trim any trailing whitespace
+  11 | WARNING | [x] Please trim any trailing whitespace
+  12 | WARNING | [x] Please trim any trailing whitespace
+  13 | WARNING | [x] Please trim any trailing whitespace
+  14 | WARNING | [x] Please trim any trailing whitespace
+  15 | WARNING | [x] Please trim any trailing whitespace
+  16 | WARNING | [x] Please trim any trailing whitespace
+  17 | WARNING | [x] Please trim any trailing whitespace
+  18 | WARNING | [x] Please trim any trailing whitespace
+  19 | WARNING | [x] Please trim any trailing whitespace
+  20 | WARNING | [x] Please trim any trailing whitespace
+  21 | WARNING | [x] Please trim any trailing whitespace
+  22 | WARNING | [x] Please trim any trailing whitespace
+  23 | WARNING | [x] Please trim any trailing whitespace
+  29 | WARNING | [x] Please trim any trailing whitespace
+  30 | WARNING | [x] Please trim any trailing whitespace
+  31 | WARNING | [x] Please trim any trailing whitespace
+  32 | WARNING | [x] Please trim any trailing whitespace
+  33 | WARNING | [x] Please trim any trailing whitespace
+  36 | WARNING | [x] Please trim any trailing whitespace
+  37 | WARNING | [x] Please trim any trailing whitespace
+  38 | WARNING | [x] Please trim any trailing whitespace
+  39 | WARNING | [x] Please trim any trailing whitespace
+  44 | WARNING | [x] Please trim any trailing whitespace
+  45 | WARNING | [x] Please trim any trailing whitespace
+  46 | WARNING | [x] Please trim any trailing whitespace
+  52 | WARNING | [x] Please trim any trailing whitespace
+  53 | WARNING | [x] Please trim any trailing whitespace
+  54 | WARNING | [x] Please trim any trailing whitespace
+  55 | WARNING | [x] Please trim any trailing whitespace
+  56 | ERROR   | [ ] Doc comment for parameter "$categoryService" missing
+  56 | ERROR   | [ ] Doc comment for parameter "$translator" missing
+  58 | WARNING | [x] Please trim any trailing whitespace
+  59 | WARNING | [x] Please trim any trailing whitespace
+  60 | WARNING | [x] Please trim any trailing whitespace
+  61 | WARNING | [x] Please trim any trailing whitespace
+  62 | WARNING | [x] Please trim any trailing whitespace
+  63 | WARNING | [x] Please trim any trailing whitespace
+  64 | WARNING | [x] Please trim any trailing whitespace
+  65 | WARNING | [x] Please trim any trailing whitespace
+  69 | ERROR   | [x] Group annotations together so that annotations of the same type immediately follow each other, and annotations of a different type are separated by a single
+     |         |     blank line
+  69 | ERROR   | [x] Expected 1 spaces after parameter type; 12 found
+  69 | ERROR   | [x] Expected 1 spaces after parameter name; 8 found
+  71 | ERROR   | [x] There must be no blank lines after the function comment
+  71 | WARNING | [x] Please trim any trailing whitespace
+  72 | WARNING | [x] Please trim any trailing whitespace
+  73 | WARNING | [x] Please trim any trailing whitespace
+  74 | WARNING | [x] Please trim any trailing whitespace
+  75 | WARNING | [x] Please trim any trailing whitespace
+  76 | WARNING | [x] Please trim any trailing whitespace
+  77 | WARNING | [x] Please trim any trailing whitespace
+  78 | WARNING | [x] Please trim any trailing whitespace
+  79 | WARNING | [x] Please trim any trailing whitespace
+  80 | WARNING | [x] Please trim any trailing whitespace
+  81 | WARNING | [x] Please trim any trailing whitespace
+  82 | WARNING | [x] Please trim any trailing whitespace
+  83 | WARNING | [x] Please trim any trailing whitespace
+  83 | ERROR   | [x] Empty lines are not allowed in multi-line function calls
+  83 | ERROR   | [x] Empty lines are not allowed in multi-line function calls
+  84 | WARNING | [x] Please trim any trailing whitespace
+  85 | WARNING | [x] Please trim any trailing whitespace
+  86 | WARNING | [x] Please trim any trailing whitespace
+  87 | WARNING | [x] Please trim any trailing whitespace
+  88 | WARNING | [x] Please trim any trailing whitespace
+  89 | WARNING | [x] Please trim any trailing whitespace
+  90 | WARNING | [x] Please trim any trailing whitespace
+  91 | WARNING | [x] Please trim any trailing whitespace
+  92 | WARNING | [x] Please trim any trailing whitespace
+  93 | WARNING | [x] Please trim any trailing whitespace
+ 100 | WARNING | [x] Please trim any trailing whitespace
+ 101 | WARNING | [x] Please trim any trailing whitespace
+ 102 | WARNING | [x] Please trim any trailing whitespace
+ 103 | WARNING | [x] Please trim any trailing whitespace
+ 104 | WARNING | [x] Please trim any trailing whitespace
+ 105 | WARNING | [x] Please trim any trailing whitespace
+ 106 | WARNING | [x] Please trim any trailing whitespace
+ 107 | WARNING | [x] Please trim any trailing whitespace
+ 108 | WARNING | [x] Please trim any trailing whitespace
+ 109 | WARNING | [x] Please trim any trailing whitespace
+ 110 | WARNING | [x] Please trim any trailing whitespace
+ 111 | WARNING | [x] Please trim any trailing whitespace
+ 112 | WARNING | [x] Please trim any trailing whitespace
+ 113 | WARNING | [x] Please trim any trailing whitespace
+ 114 | WARNING | [x] Please trim any trailing whitespace
+ 115 | WARNING | [x] Please trim any trailing whitespace
+ 116 | WARNING | [x] Please trim any trailing whitespace
+ 117 | ERROR   | [x] Function closing brace must go on the next line following the body; found 1 blank lines before brace
+ 117 | WARNING | [x] Please trim any trailing whitespace
+ 118 | WARNING | [x] Please trim any trailing whitespace
+ 119 | WARNING | [x] Please trim any trailing whitespace
+ 126 | WARNING | [x] Please trim any trailing whitespace
+ 127 | WARNING | [x] Please trim any trailing whitespace
+ 128 | WARNING | [x] Please trim any trailing whitespace
+ 129 | WARNING | [x] Please trim any trailing whitespace
+ 130 | WARNING | [x] Please trim any trailing whitespace
+ 131 | WARNING | [x] Please trim any trailing whitespace
+ 132 | WARNING | [x] Please trim any trailing whitespace
+ 133 | WARNING | [x] Please trim any trailing whitespace
+ 134 | WARNING | [x] Please trim any trailing whitespace
+ 135 | WARNING | [x] Please trim any trailing whitespace
+ 136 | WARNING | [x] Please trim any trailing whitespace
+ 137 | WARNING | [x] Please trim any trailing whitespace
+ 138 | WARNING | [x] Please trim any trailing whitespace
+ 139 | WARNING | [x] Please trim any trailing whitespace
+ 140 | WARNING | [x] Please trim any trailing whitespace
+ 141 | WARNING | [x] Please trim any trailing whitespace
+ 142 | WARNING | [x] Please trim any trailing whitespace
+ 143 | WARNING | [x] Please trim any trailing whitespace
+ 144 | WARNING | [x] Please trim any trailing whitespace
+ 145 | WARNING | [x] Please trim any trailing whitespace
+ 146 | WARNING | [x] Please trim any trailing whitespace
+ 147 | WARNING | [x] Please trim any trailing whitespace
+ 148 | WARNING | [x] Please trim any trailing whitespace
+ 149 | WARNING | [x] Please trim any trailing whitespace
+ 150 | WARNING | [x] Please trim any trailing whitespace
+ 151 | WARNING | [x] Please trim any trailing whitespace
+ 152 | WARNING | [x] Please trim any trailing whitespace
+ 153 | WARNING | [x] Please trim any trailing whitespace
+ 154 | WARNING | [x] Please trim any trailing whitespace
+ 155 | WARNING | [x] Please trim any trailing whitespace
+ 156 | WARNING | [x] Please trim any trailing whitespace
+ 157 | WARNING | [x] Please trim any trailing whitespace
+ 158 | WARNING | [x] Please trim any trailing whitespace
+ 159 | WARNING | [x] Please trim any trailing whitespace
+ 160 | WARNING | [x] Please trim any trailing whitespace
+ 161 | WARNING | [x] Please trim any trailing whitespace
+ 162 | WARNING | [x] Please trim any trailing whitespace
+ 170 | WARNING | [x] Please trim any trailing whitespace
+ 171 | WARNING | [x] Please trim any trailing whitespace
+ 172 | WARNING | [x] Please trim any trailing whitespace
+ 173 | WARNING | [x] Please trim any trailing whitespace
+ 174 | WARNING | [x] Please trim any trailing whitespace
+ 175 | WARNING | [x] Please trim any trailing whitespace
+ 176 | WARNING | [x] Please trim any trailing whitespace
+ 177 | WARNING | [x] Please trim any trailing whitespace
+ 178 | WARNING | [x] Please trim any trailing whitespace
+ 179 | WARNING | [x] Please trim any trailing whitespace
+ 180 | WARNING | [x] Please trim any trailing whitespace
+ 181 | WARNING | [x] Please trim any trailing whitespace
+ 182 | WARNING | [x] Please trim any trailing whitespace
+ 183 | WARNING | [x] Please trim any trailing whitespace
+ 184 | WARNING | [x] Please trim any trailing whitespace
+ 185 | WARNING | [x] Please trim any trailing whitespace
+ 186 | WARNING | [x] Please trim any trailing whitespace
+ 187 | WARNING | [x] Please trim any trailing whitespace
+ 188 | WARNING | [x] Please trim any trailing whitespace
+ 189 | WARNING | [x] Please trim any trailing whitespace
+ 190 | WARNING | [x] Please trim any trailing whitespace
+ 191 | WARNING | [x] Please trim any trailing whitespace
+ 192 | WARNING | [x] Please trim any trailing whitespace
+ 193 | WARNING | [x] Please trim any trailing whitespace
+ 194 | WARNING | [x] Please trim any trailing whitespace
+ 195 | WARNING | [x] Please trim any trailing whitespace
+ 196 | WARNING | [x] Please trim any trailing whitespace
+ 197 | WARNING | [x] Please trim any trailing whitespace
+ 198 | WARNING | [x] Please trim any trailing whitespace
+ 202 | WARNING | [x] Please trim any trailing whitespace
+ 203 | WARNING | [x] Please trim any trailing whitespace
+ 204 | WARNING | [x] Please trim any trailing whitespace
+ 205 | WARNING | [x] Please trim any trailing whitespace
+ 206 | WARNING | [x] Please trim any trailing whitespace
+ 207 | WARNING | [x] Please trim any trailing whitespace
+ 208 | WARNING | [x] Please trim any trailing whitespace
+ 209 | WARNING | [x] Please trim any trailing whitespace
+ 210 | WARNING | [x] Please trim any trailing whitespace
+ 211 | WARNING | [x] Please trim any trailing whitespace
+ 212 | WARNING | [x] Please trim any trailing whitespace
+ 213 | WARNING | [x] Please trim any trailing whitespace
+ 214 | WARNING | [x] Please trim any trailing whitespace
+ 215 | WARNING | [x] Please trim any trailing whitespace
+ 219 | ERROR   | [x] Expected 2 spaces after parameter type; 1 found
+ 219 | ERROR   | [x] Expected 2 spaces after parameter name; 1 found
+ 223 | WARNING | [x] Please trim any trailing whitespace
+ 224 | WARNING | [x] Please trim any trailing whitespace
+ 225 | WARNING | [x] Please trim any trailing whitespace
+ 226 | WARNING | [x] Please trim any trailing whitespace
+ 227 | WARNING | [x] Please trim any trailing whitespace
+ 228 | WARNING | [x] Please trim any trailing whitespace
+ 229 | WARNING | [x] Please trim any trailing whitespace
+ 230 | WARNING | [x] Please trim any trailing whitespace
+ 231 | WARNING | [x] Please trim any trailing whitespace
+ 232 | WARNING | [x] Please trim any trailing whitespace
+ 233 | WARNING | [x] Please trim any trailing whitespace
+ 234 | WARNING | [x] Please trim any trailing whitespace
+ 235 | WARNING | [x] Please trim any trailing whitespace
+ 236 | WARNING | [x] Please trim any trailing whitespace
+ 237 | WARNING | [x] Please trim any trailing whitespace
+ 238 | WARNING | [x] Please trim any trailing whitespace
+ 239 | WARNING | [x] Please trim any trailing whitespace
+ 240 | WARNING | [x] Please trim any trailing whitespace
+ 241 | WARNING | [x] Please trim any trailing whitespace
+ 242 | WARNING | [x] Please trim any trailing whitespace
+ 243 | WARNING | [x] Please trim any trailing whitespace
+ 244 | WARNING | [x] Please trim any trailing whitespace
+ 245 | WARNING | [x] Please trim any trailing whitespace
+ 246 | WARNING | [x] Please trim any trailing whitespace
+ 247 | WARNING | [x] Please trim any trailing whitespace
+ 248 | WARNING | [x] Please trim any trailing whitespace
+ 249 | WARNING | [x] Please trim any trailing whitespace
+ 250 | WARNING | [x] Please trim any trailing whitespace
+ 251 | WARNING | [x] Please trim any trailing whitespace
+ 252 | WARNING | [x] Please trim any trailing whitespace
+ 253 | WARNING | [x] Please trim any trailing whitespace
+ 254 | WARNING | [x] Please trim any trailing whitespace
+ 255 | WARNING | [x] Please trim any trailing whitespace
+ 256 | WARNING | [x] Please trim any trailing whitespace
+ 257 | WARNING | [x] Please trim any trailing whitespace
+ 258 | WARNING | [x] Please trim any trailing whitespace
+ 259 | WARNING | [x] Please trim any trailing whitespace
+ 260 | WARNING | [x] Please trim any trailing whitespace
+ 261 | ERROR   | [x] Expected 1 blank line at end of file; 2 found
+ 261 | ERROR   | [x] The closing brace for the class must go on the next line after the body
+ 261 | WARNING | [x] Please trim any trailing whitespace
+ 262 | WARNING | [x] Please trim any trailing whitespace
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 219 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Controller/HelloWorldController.php
+----------------------------------------------------------------------------------------
+FOUND 6 ERRORS AND 26 WARNINGS AFFECTING 28 LINES
+----------------------------------------------------------------------------------------
+  1 | ERROR   | [x] End of line character is invalid; expected "\n" but found "\r\n"
+  2 | WARNING | [x] Please trim any trailing whitespace
+  3 | WARNING | [ ] The license block has to be present at the top
+    |         |                     of every PHP file, before the namespace
+  3 | WARNING | [x] Please trim any trailing whitespace
+  4 | WARNING | [x] Please trim any trailing whitespace
+  5 | WARNING | [x] Please trim any trailing whitespace
+  6 | WARNING | [x] Please trim any trailing whitespace
+  7 | ERROR   | [x] There must be one blank line after the last USE statement; 3 found;
+  7 | WARNING | [x] Please trim any trailing whitespace
+  8 | WARNING | [x] Please trim any trailing whitespace
+  9 | WARNING | [x] Please trim any trailing whitespace
+ 10 | WARNING | [x] Please trim any trailing whitespace
+ 11 | ERROR   | [ ] Missing doc comment for class HelloWorldController
+ 11 | WARNING | [x] Please trim any trailing whitespace
+ 12 | WARNING | [x] Please trim any trailing whitespace
+ 13 | ERROR   | [ ] Doc comment for parameter "$name" missing
+ 17 | ERROR   | [x] There must be no blank lines after the function comment
+ 17 | WARNING | [x] Please trim any trailing whitespace
+ 18 | WARNING | [x] Please trim any trailing whitespace
+ 19 | WARNING | [x] Please trim any trailing whitespace
+ 20 | WARNING | [x] Please trim any trailing whitespace
+ 21 | WARNING | [x] Please trim any trailing whitespace
+ 22 | WARNING | [x] Please trim any trailing whitespace
+ 23 | WARNING | [x] Please trim any trailing whitespace
+ 24 | WARNING | [x] Please trim any trailing whitespace
+ 25 | WARNING | [x] Please trim any trailing whitespace
+ 26 | WARNING | [x] Please trim any trailing whitespace
+ 27 | WARNING | [x] Please trim any trailing whitespace
+ 28 | WARNING | [x] Please trim any trailing whitespace
+ 29 | WARNING | [x] Please trim any trailing whitespace
+ 30 | WARNING | [x] Please trim any trailing whitespace
+ 31 | ERROR   | [x] Expected 1 newline at end of file; 0 found
+----------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 29 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+----------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Controller/SecurityController.php
+------------------------------------------------------------------------
+FOUND 3 ERRORS AND 1 WARNING AFFECTING 4 LINES
+------------------------------------------------------------------------
+  3 | WARNING | The license block has to be present at the top
+    |         |                 of every PHP file, before the namespace
+ 10 | ERROR   | Missing doc comment for class SecurityController
+ 13 | ERROR   | Missing doc comment for function login()
+ 28 | ERROR   | Missing doc comment for function logout()
+------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Controller/TransactionController.php
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FOUND 49 ERRORS AND 249 WARNINGS AFFECTING 280 LINES
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+   1 | ERROR   | [x] End of line character is invalid; expected "\n" but found "\r\n"
+   4 | WARNING | [x] Please trim any trailing whitespace
+   5 | WARNING | [x] Please trim any trailing whitespace
+   6 | WARNING | [x] Please trim any trailing whitespace
+   7 | WARNING | [x] Please trim any trailing whitespace
+   8 | WARNING | [x] Please trim any trailing whitespace
+   9 | WARNING | [x] Please trim any trailing whitespace
+  10 | WARNING | [x] Please trim any trailing whitespace
+  11 | WARNING | [x] Please trim any trailing whitespace
+  12 | WARNING | [x] Please trim any trailing whitespace
+  13 | WARNING | [x] Please trim any trailing whitespace
+  14 | WARNING | [x] Please trim any trailing whitespace
+  15 | WARNING | [x] Please trim any trailing whitespace
+  16 | WARNING | [x] Please trim any trailing whitespace
+  17 | WARNING | [x] Please trim any trailing whitespace
+  18 | WARNING | [x] Please trim any trailing whitespace
+  19 | WARNING | [x] Please trim any trailing whitespace
+  20 | WARNING | [x] Please trim any trailing whitespace
+  21 | WARNING | [x] Please trim any trailing whitespace
+  22 | WARNING | [x] Please trim any trailing whitespace
+  23 | WARNING | [x] Please trim any trailing whitespace
+  24 | WARNING | [x] Please trim any trailing whitespace
+  25 | WARNING | [x] Please trim any trailing whitespace
+  26 | WARNING | [x] Please trim any trailing whitespace
+  29 | WARNING | [x] Please trim any trailing whitespace
+  30 | WARNING | [x] Please trim any trailing whitespace
+  31 | WARNING | [x] Please trim any trailing whitespace
+  32 | WARNING | [x] Please trim any trailing whitespace
+  33 | WARNING | [x] Please trim any trailing whitespace
+  34 | WARNING | [x] Please trim any trailing whitespace
+  37 | WARNING | [x] Please trim any trailing whitespace
+  38 | WARNING | [x] Please trim any trailing whitespace
+  39 | WARNING | [x] Please trim any trailing whitespace
+  40 | WARNING | [x] Please trim any trailing whitespace
+  41 | WARNING | [x] Please trim any trailing whitespace
+  46 | WARNING | [x] Please trim any trailing whitespace
+  47 | WARNING | [x] Please trim any trailing whitespace
+  48 | WARNING | [x] Please trim any trailing whitespace
+  49 | WARNING | [x] Please trim any trailing whitespace
+  50 | WARNING | [x] Please trim any trailing whitespace
+  51 | WARNING | [x] Please trim any trailing whitespace
+  54 | WARNING | [x] Please trim any trailing whitespace
+  55 | WARNING | [x] Please trim any trailing whitespace
+  56 | WARNING | [x] Please trim any trailing whitespace
+  57 | WARNING | [x] Please trim any trailing whitespace
+  58 | ERROR   | [ ] Doc comment for parameter "$transactionService" missing
+  58 | ERROR   | [ ] Doc comment for parameter "$walletService" missing
+  58 | ERROR   | [ ] Doc comment for parameter "$translator" missing
+  60 | WARNING | [x] Please trim any trailing whitespace
+  61 | WARNING | [x] Please trim any trailing whitespace
+  62 | WARNING | [x] Please trim any trailing whitespace
+  63 | WARNING | [x] Please trim any trailing whitespace
+  64 | WARNING | [x] Please trim any trailing whitespace
+  65 | WARNING | [x] Please trim any trailing whitespace
+  66 | WARNING | [x] Please trim any trailing whitespace
+  67 | WARNING | [x] Please trim any trailing whitespace
+  71 | ERROR   | [x] Group annotations together so that annotations of the same type immediately follow each other, and annotations of a different type are separated by a single
+     |         |     blank line
+  73 | WARNING | [x] Please trim any trailing whitespace
+  74 | WARNING | [x] Please trim any trailing whitespace
+  75 | WARNING | [x] Please trim any trailing whitespace
+  76 | WARNING | [x] Please trim any trailing whitespace
+  77 | WARNING | [x] Please trim any trailing whitespace
+  78 | WARNING | [x] Please trim any trailing whitespace
+  79 | WARNING | [x] Please trim any trailing whitespace
+  80 | ERROR   | [x] Perl-style comments are not allowed. Use "// Comment." or "/* comment */" instead.
+  81 | WARNING | [x] Please trim any trailing whitespace
+  82 | WARNING | [x] Please trim any trailing whitespace
+  83 | WARNING | [x] Please trim any trailing whitespace
+  84 | WARNING | [x] Please trim any trailing whitespace
+  85 | WARNING | [x] Please trim any trailing whitespace
+  86 | WARNING | [x] Please trim any trailing whitespace
+  87 | ERROR   | [x] Multi-line function call not indented correctly; expected 12 spaces but found 8
+  87 | WARNING | [x] Please trim any trailing whitespace
+  88 | ERROR   | [x] Multi-line function call not indented correctly; expected 8 spaces but found 4
+  88 | ERROR   | [x] Line indented incorrectly; expected at least 8 spaces, found 4
+  88 | WARNING | [x] Please trim any trailing whitespace
+  89 | WARNING | [x] Please trim any trailing whitespace
+  91 | WARNING | [x] Please trim any trailing whitespace
+  92 | ERROR   | [x] Perl-style comments are not allowed. Use "// Comment." or "/* comment */" instead.
+  93 | WARNING | [x] Please trim any trailing whitespace
+  94 | WARNING | [x] Please trim any trailing whitespace
+  95 | WARNING | [x] Please trim any trailing whitespace
+  96 | ERROR   | [x] Perl-style comments are not allowed. Use "// Comment." or "/* comment */" instead.
+  97 | WARNING | [x] Please trim any trailing whitespace
+  98 | WARNING | [x] Please trim any trailing whitespace
+  99 | WARNING | [x] Please trim any trailing whitespace
+ 100 | WARNING | [x] Please trim any trailing whitespace
+ 101 | ERROR   | [x] Perl-style comments are not allowed. Use "// Comment." or "/* comment */" instead.
+ 102 | ERROR   | [x] Perl-style comments are not allowed. Use "// Comment." or "/* comment */" instead.
+ 103 | WARNING | [x] Please trim any trailing whitespace
+ 104 | WARNING | [x] Please trim any trailing whitespace
+ 105 | ERROR   | [x] Perl-style comments are not allowed. Use "// Comment." or "/* comment */" instead.
+ 106 | ERROR   | [x] Perl-style comments are not allowed. Use "// Comment." or "/* comment */" instead.
+ 107 | WARNING | [x] Please trim any trailing whitespace
+ 108 | WARNING | [x] Please trim any trailing whitespace
+ 109 | WARNING | [x] Please trim any trailing whitespace
+ 110 | ERROR   | [x] Perl-style comments are not allowed. Use "// Comment." or "/* comment */" instead.
+ 111 | ERROR   | [x] Perl-style comments are not allowed. Use "// Comment." or "/* comment */" instead.
+ 112 | WARNING | [x] Please trim any trailing whitespace
+ 113 | ERROR   | [ ] Use Yoda conditions when checking a variable against an expression to avoid an accidental assignment inside the condition statement.
+ 113 | ERROR   | [ ] Use Yoda conditions when checking a variable against an expression to avoid an accidental assignment inside the condition statement.
+ 113 | WARNING | [x] Please trim any trailing whitespace
+ 114 | WARNING | [x] Please trim any trailing whitespace
+ 115 | WARNING | [x] Please trim any trailing whitespace
+ 116 | WARNING | [x] Please trim any trailing whitespace
+ 117 | WARNING | [x] Please trim any trailing whitespace
+ 118 | WARNING | [x] Please trim any trailing whitespace
+ 119 | WARNING | [x] Please trim any trailing whitespace
+ 120 | WARNING | [x] Please trim any trailing whitespace
+ 121 | WARNING | [x] Please trim any trailing whitespace
+ 122 | WARNING | [x] Please trim any trailing whitespace
+ 123 | WARNING | [x] Please trim any trailing whitespace
+ 124 | WARNING | [x] Please trim any trailing whitespace
+ 125 | WARNING | [x] Please trim any trailing whitespace
+ 126 | WARNING | [x] Please trim any trailing whitespace
+ 127 | WARNING | [x] Please trim any trailing whitespace
+ 128 | ERROR   | [x] Perl-style comments are not allowed. Use "// Comment." or "/* comment */" instead.
+ 129 | WARNING | [x] Please trim any trailing whitespace
+ 130 | WARNING | [x] Please trim any trailing whitespace
+ 131 | WARNING | [x] Please trim any trailing whitespace
+ 132 | WARNING | [x] Please trim any trailing whitespace
+ 133 | WARNING | [x] Please trim any trailing whitespace
+ 134 | WARNING | [x] Please trim any trailing whitespace
+ 135 | WARNING | [x] Please trim any trailing whitespace
+ 136 | WARNING | [x] Please trim any trailing whitespace
+ 137 | WARNING | [x] Please trim any trailing whitespace
+ 138 | ERROR   | [x] Perl-style comments are not allowed. Use "// Comment." or "/* comment */" instead.
+ 139 | WARNING | [x] Please trim any trailing whitespace
+ 140 | WARNING | [x] Please trim any trailing whitespace
+ 141 | WARNING | [x] Please trim any trailing whitespace
+ 142 | WARNING | [x] Please trim any trailing whitespace
+ 143 | WARNING | [x] Please trim any trailing whitespace
+ 144 | WARNING | [x] Please trim any trailing whitespace
+ 145 | WARNING | [x] Please trim any trailing whitespace
+ 146 | WARNING | [x] Please trim any trailing whitespace
+ 147 | WARNING | [x] Please trim any trailing whitespace
+ 148 | ERROR   | [x] Perl-style comments are not allowed. Use "// Comment." or "/* comment */" instead.
+ 149 | WARNING | [x] Please trim any trailing whitespace
+ 150 | WARNING | [x] Please trim any trailing whitespace
+ 151 | ERROR   | [x] Perl-style comments are not allowed. Use "// Comment." or "/* comment */" instead.
+ 152 | WARNING | [x] Please trim any trailing whitespace
+ 153 | WARNING | [x] Please trim any trailing whitespace
+ 154 | WARNING | [x] Please trim any trailing whitespace
+ 155 | ERROR   | [x] Add a comma after each item in a multi-line array
+ 155 | WARNING | [x] Please trim any trailing whitespace
+ 156 | WARNING | [x] Please trim any trailing whitespace
+ 157 | WARNING | [x] Please trim any trailing whitespace
+ 158 | WARNING | [x] Please trim any trailing whitespace
+ 159 | WARNING | [x] Please trim any trailing whitespace
+ 160 | WARNING | [x] Please trim any trailing whitespace
+ 161 | WARNING | [x] Please trim any trailing whitespace
+ 162 | WARNING | [x] Please trim any trailing whitespace
+ 170 | WARNING | [x] Please trim any trailing whitespace
+ 171 | WARNING | [x] Please trim any trailing whitespace
+ 172 | WARNING | [x] Please trim any trailing whitespace
+ 173 | WARNING | [x] Please trim any trailing whitespace
+ 174 | WARNING | [x] Please trim any trailing whitespace
+ 175 | WARNING | [x] Please trim any trailing whitespace
+ 176 | WARNING | [x] Please trim any trailing whitespace
+ 183 | WARNING | [x] Please trim any trailing whitespace
+ 184 | WARNING | [x] Please trim any trailing whitespace
+ 185 | WARNING | [x] Please trim any trailing whitespace
+ 186 | WARNING | [x] Please trim any trailing whitespace
+ 187 | WARNING | [x] Please trim any trailing whitespace
+ 188 | WARNING | [x] Please trim any trailing whitespace
+ 189 | WARNING | [x] Please trim any trailing whitespace
+ 190 | WARNING | [x] Please trim any trailing whitespace
+ 191 | ERROR   | [ ] Declare public methods first,then protected ones and finally private ones
+ 191 | WARNING | [x] Please trim any trailing whitespace
+ 192 | WARNING | [x] Please trim any trailing whitespace
+ 193 | WARNING | [x] Please trim any trailing whitespace
+ 194 | WARNING | [x] Please trim any trailing whitespace
+ 195 | WARNING | [x] Please trim any trailing whitespace
+ 196 | WARNING | [x] Please trim any trailing whitespace
+ 197 | WARNING | [x] Please trim any trailing whitespace
+ 198 | WARNING | [x] Please trim any trailing whitespace
+ 199 | WARNING | [x] Please trim any trailing whitespace
+ 206 | WARNING | [x] Please trim any trailing whitespace
+ 207 | WARNING | [x] Please trim any trailing whitespace
+ 208 | WARNING | [x] Please trim any trailing whitespace
+ 209 | WARNING | [x] Please trim any trailing whitespace
+ 210 | WARNING | [x] Please trim any trailing whitespace
+ 211 | WARNING | [x] Please trim any trailing whitespace
+ 212 | WARNING | [x] Please trim any trailing whitespace
+ 213 | WARNING | [x] Please trim any trailing whitespace
+ 214 | WARNING | [x] Please trim any trailing whitespace
+ 215 | WARNING | [x] Please trim any trailing whitespace
+ 216 | WARNING | [x] Please trim any trailing whitespace
+ 217 | WARNING | [x] Please trim any trailing whitespace
+ 218 | WARNING | [x] Please trim any trailing whitespace
+ 219 | WARNING | [x] Please trim any trailing whitespace
+ 220 | WARNING | [x] Please trim any trailing whitespace
+ 221 | WARNING | [x] Please trim any trailing whitespace
+ 222 | WARNING | [x] Please trim any trailing whitespace
+ 223 | WARNING | [x] Please trim any trailing whitespace
+ 224 | WARNING | [x] Please trim any trailing whitespace
+ 226 | ERROR   | [x] Blank line found at start of control structure
+ 226 | WARNING | [x] Please trim any trailing whitespace
+ 227 | WARNING | [x] Please trim any trailing whitespace
+ 230 | WARNING | [x] Please trim any trailing whitespace
+ 231 | WARNING | [x] Please trim any trailing whitespace
+ 234 | WARNING | [x] Please trim any trailing whitespace
+ 235 | WARNING | [x] Please trim any trailing whitespace
+ 236 | WARNING | [x] Please trim any trailing whitespace
+ 237 | WARNING | [x] Please trim any trailing whitespace
+ 238 | WARNING | [x] Please trim any trailing whitespace
+ 239 | WARNING | [x] Please trim any trailing whitespace
+ 240 | WARNING | [x] Please trim any trailing whitespace
+ 241 | WARNING | [x] Please trim any trailing whitespace
+ 242 | WARNING | [x] Please trim any trailing whitespace
+ 243 | WARNING | [x] Please trim any trailing whitespace
+ 244 | WARNING | [x] Please trim any trailing whitespace
+ 245 | WARNING | [x] Please trim any trailing whitespace
+ 246 | WARNING | [x] Please trim any trailing whitespace
+ 247 | WARNING | [x] Please trim any trailing whitespace
+ 248 | WARNING | [x] Please trim any trailing whitespace
+ 249 | WARNING | [x] Please trim any trailing whitespace
+ 250 | ERROR   | [x] Line indented incorrectly; expected 8 spaces, found 12
+ 250 | ERROR   | [x] Closing brace indented incorrectly; expected 8 spaces, found 12
+ 250 | ERROR   | [x] Closing brace indented incorrectly; expected 8 spaces, found 12
+ 250 | WARNING | [x] Please trim any trailing whitespace
+ 251 | WARNING | [x] Please trim any trailing whitespace
+ 252 | WARNING | [x] Please trim any trailing whitespace
+ 253 | WARNING | [x] Please trim any trailing whitespace
+ 254 | WARNING | [x] Please trim any trailing whitespace
+ 255 | WARNING | [x] Please trim any trailing whitespace
+ 256 | ERROR   | [x] Line indented incorrectly; expected 4 spaces, found 8
+ 256 | ERROR   | [x] Closing brace indented incorrectly; expected 4 spaces, found 8
+ 256 | ERROR   | [x] Closing brace indented incorrectly; expected 4 spaces, found 8
+ 256 | WARNING | [x] Please trim any trailing whitespace
+ 257 | WARNING | [x] Please trim any trailing whitespace
+ 258 | WARNING | [x] Please trim any trailing whitespace
+ 262 | ERROR   | [x] Expected 5 spaces after parameter type; 1 found
+ 262 | ERROR   | [x] Expected 5 spaces after parameter name; 1 found
+ 266 | WARNING | [x] Please trim any trailing whitespace
+ 267 | WARNING | [x] Please trim any trailing whitespace
+ 268 | WARNING | [x] Please trim any trailing whitespace
+ 269 | WARNING | [x] Please trim any trailing whitespace
+ 270 | WARNING | [x] Please trim any trailing whitespace
+ 271 | WARNING | [x] Please trim any trailing whitespace
+ 272 | WARNING | [x] Please trim any trailing whitespace
+ 273 | WARNING | [x] Please trim any trailing whitespace
+ 274 | WARNING | [x] Please trim any trailing whitespace
+ 275 | WARNING | [x] Please trim any trailing whitespace
+ 276 | WARNING | [x] Please trim any trailing whitespace
+ 277 | WARNING | [x] Please trim any trailing whitespace
+ 278 | WARNING | [x] Please trim any trailing whitespace
+ 279 | WARNING | [x] Please trim any trailing whitespace
+ 280 | WARNING | [x] Please trim any trailing whitespace
+ 281 | WARNING | [x] Please trim any trailing whitespace
+ 282 | WARNING | [x] Please trim any trailing whitespace
+ 283 | WARNING | [x] Please trim any trailing whitespace
+ 284 | WARNING | [x] Please trim any trailing whitespace
+ 285 | WARNING | [x] Please trim any trailing whitespace
+ 286 | WARNING | [x] Please trim any trailing whitespace
+ 287 | WARNING | [x] Please trim any trailing whitespace
+ 288 | WARNING | [x] Please trim any trailing whitespace
+ 289 | WARNING | [x] Please trim any trailing whitespace
+ 290 | WARNING | [x] Please trim any trailing whitespace
+ 291 | WARNING | [x] Please trim any trailing whitespace
+ 292 | WARNING | [x] Please trim any trailing whitespace
+ 293 | WARNING | [x] Please trim any trailing whitespace
+ 294 | WARNING | [x] Please trim any trailing whitespace
+ 295 | WARNING | [x] Please trim any trailing whitespace
+ 296 | WARNING | [x] Please trim any trailing whitespace
+ 299 | WARNING | [x] Please trim any trailing whitespace
+ 300 | ERROR   | [x] Perl-style comments are not allowed. Use "// Comment." or "/* comment */" instead.
+ 301 | ERROR   | [x] Perl-style comments are not allowed. Use "// Comment." or "/* comment */" instead.
+ 302 | ERROR   | [x] Perl-style comments are not allowed. Use "// Comment." or "/* comment */" instead.
+ 303 | ERROR   | [x] Perl-style comments are not allowed. Use "// Comment." or "/* comment */" instead.
+ 304 | WARNING | [x] Please trim any trailing whitespace
+ 305 | ERROR   | [x] Perl-style comments are not allowed. Use "// Comment." or "/* comment */" instead.
+ 306 | ERROR   | [x] Perl-style comments are not allowed. Use "// Comment." or "/* comment */" instead.
+ 307 | ERROR   | [x] Perl-style comments are not allowed. Use "// Comment." or "/* comment */" instead.
+ 308 | ERROR   | [x] Perl-style comments are not allowed. Use "// Comment." or "/* comment */" instead.
+ 309 | ERROR   | [x] Perl-style comments are not allowed. Use "// Comment." or "/* comment */" instead.
+ 310 | WARNING | [x] Please trim any trailing whitespace
+ 311 | WARNING | [x] Please trim any trailing whitespace
+ 312 | WARNING | [x] Please trim any trailing whitespace
+ 313 | ERROR   | [x] Perl-style comments are not allowed. Use "// Comment." or "/* comment */" instead.
+ 314 | ERROR   | [x] Perl-style comments are not allowed. Use "// Comment." or "/* comment */" instead.
+ 315 | ERROR   | [x] Perl-style comments are not allowed. Use "// Comment." or "/* comment */" instead.
+ 316 | ERROR   | [x] Perl-style comments are not allowed. Use "// Comment." or "/* comment */" instead.
+ 317 | ERROR   | [x] Perl-style comments are not allowed. Use "// Comment." or "/* comment */" instead.
+ 318 | WARNING | [x] Please trim any trailing whitespace
+ 319 | WARNING | [x] Please trim any trailing whitespace
+ 320 | WARNING | [x] Please trim any trailing whitespace
+ 321 | WARNING | [x] Please trim any trailing whitespace
+ 322 | WARNING | [x] Please trim any trailing whitespace
+ 323 | WARNING | [x] Please trim any trailing whitespace
+ 324 | WARNING | [x] Please trim any trailing whitespace
+ 325 | WARNING | [x] Please trim any trailing whitespace
+ 326 | WARNING | [x] Please trim any trailing whitespace
+ 327 | WARNING | [x] Please trim any trailing whitespace
+ 328 | WARNING | [x] Please trim any trailing whitespace
+ 329 | WARNING | [x] Please trim any trailing whitespace
+ 330 | ERROR   | [x] The closing brace for the class must go on the next line after the body
+ 330 | WARNING | [x] Please trim any trailing whitespace
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 292 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Controller/UserController.php
+---------------------------------------------------------------------------------------------
+FOUND 3 ERRORS AND 90 WARNINGS AFFECTING 92 LINES
+---------------------------------------------------------------------------------------------
+   1 | ERROR   | [x] End of line character is invalid; expected "\n" but found "\r\n"
+   4 | WARNING | [x] Please trim any trailing whitespace
+   5 | WARNING | [x] Please trim any trailing whitespace
+   6 | WARNING | [x] Please trim any trailing whitespace
+   7 | WARNING | [x] Please trim any trailing whitespace
+   8 | WARNING | [x] Please trim any trailing whitespace
+   9 | WARNING | [x] Please trim any trailing whitespace
+  10 | WARNING | [x] Please trim any trailing whitespace
+  11 | WARNING | [x] Please trim any trailing whitespace
+  12 | WARNING | [x] Please trim any trailing whitespace
+  13 | WARNING | [x] Please trim any trailing whitespace
+  14 | WARNING | [x] Please trim any trailing whitespace
+  15 | WARNING | [x] Please trim any trailing whitespace
+  16 | WARNING | [x] Please trim any trailing whitespace
+  17 | WARNING | [x] Please trim any trailing whitespace
+  18 | WARNING | [x] Please trim any trailing whitespace
+  19 | WARNING | [x] Please trim any trailing whitespace
+  22 | WARNING | [x] Please trim any trailing whitespace
+  23 | WARNING | [x] Please trim any trailing whitespace
+  24 | WARNING | [x] Please trim any trailing whitespace
+  25 | WARNING | [x] Please trim any trailing whitespace
+  26 | WARNING | [x] Please trim any trailing whitespace
+  29 | WARNING | [x] Please trim any trailing whitespace
+  30 | WARNING | [x] Please trim any trailing whitespace
+  31 | WARNING | [x] Please trim any trailing whitespace
+  34 | WARNING | [x] Please trim any trailing whitespace
+  35 | WARNING | [x] Please trim any trailing whitespace
+  36 | WARNING | [x] Please trim any trailing whitespace
+  39 | WARNING | [x] Please trim any trailing whitespace
+  40 | WARNING | [x] Please trim any trailing whitespace
+  41 | WARNING | [x] Please trim any trailing whitespace
+  48 | WARNING | [x] Please trim any trailing whitespace
+  49 | WARNING | [x] Please trim any trailing whitespace
+  50 | WARNING | [x] Please trim any trailing whitespace
+  51 | WARNING | [x] Please trim any trailing whitespace
+  52 | WARNING | [x] Please trim any trailing whitespace
+  53 | WARNING | [x] Please trim any trailing whitespace
+  54 | WARNING | [x] Please trim any trailing whitespace
+  55 | WARNING | [x] Please trim any trailing whitespace
+  62 | WARNING | [x] Please trim any trailing whitespace
+  63 | WARNING | [x] Please trim any trailing whitespace
+  64 | WARNING | [x] Please trim any trailing whitespace
+  65 | WARNING | [x] Please trim any trailing whitespace
+  66 | WARNING | [x] Please trim any trailing whitespace
+  67 | WARNING | [x] Please trim any trailing whitespace
+  68 | WARNING | [x] Please trim any trailing whitespace
+  69 | WARNING | [x] Please trim any trailing whitespace
+  70 | WARNING | [x] Please trim any trailing whitespace
+  71 | WARNING | [x] Please trim any trailing whitespace
+  72 | WARNING | [x] Please trim any trailing whitespace
+  80 | WARNING | [x] Please trim any trailing whitespace
+  81 | WARNING | [x] Please trim any trailing whitespace
+  82 | WARNING | [x] Please trim any trailing whitespace
+  83 | WARNING | [x] Please trim any trailing whitespace
+  84 | WARNING | [x] Please trim any trailing whitespace
+  85 | WARNING | [x] Please trim any trailing whitespace
+  86 | WARNING | [x] Please trim any trailing whitespace
+  87 | WARNING | [x] Please trim any trailing whitespace
+  88 | WARNING | [x] Please trim any trailing whitespace
+  89 | WARNING | [x] Please trim any trailing whitespace
+  90 | WARNING | [x] Please trim any trailing whitespace
+  91 | WARNING | [x] Please trim any trailing whitespace
+  92 | WARNING | [x] Please trim any trailing whitespace
+  93 | WARNING | [x] Please trim any trailing whitespace
+  94 | WARNING | [x] Please trim any trailing whitespace
+  95 | WARNING | [x] Please trim any trailing whitespace
+  96 | WARNING | [x] Please trim any trailing whitespace
+  97 | WARNING | [x] Please trim any trailing whitespace
+  98 | WARNING | [x] Please trim any trailing whitespace
+  99 | WARNING | [x] Please trim any trailing whitespace
+ 100 | WARNING | [x] Please trim any trailing whitespace
+ 101 | WARNING | [x] Please trim any trailing whitespace
+ 102 | WARNING | [x] Please trim any trailing whitespace
+ 103 | WARNING | [x] Please trim any trailing whitespace
+ 104 | WARNING | [x] Please trim any trailing whitespace
+ 105 | WARNING | [x] Please trim any trailing whitespace
+ 106 | WARNING | [x] Please trim any trailing whitespace
+ 107 | WARNING | [x] Please trim any trailing whitespace
+ 108 | WARNING | [x] Please trim any trailing whitespace
+ 109 | WARNING | [x] Please trim any trailing whitespace
+ 110 | WARNING | [x] Please trim any trailing whitespace
+ 111 | WARNING | [x] Please trim any trailing whitespace
+ 112 | WARNING | [x] Please trim any trailing whitespace
+ 113 | WARNING | [x] Please trim any trailing whitespace
+ 114 | WARNING | [x] Please trim any trailing whitespace
+ 115 | WARNING | [x] Please trim any trailing whitespace
+ 116 | WARNING | [x] Please trim any trailing whitespace
+ 117 | WARNING | [x] Please trim any trailing whitespace
+ 118 | WARNING | [x] Please trim any trailing whitespace
+ 119 | WARNING | [x] Please trim any trailing whitespace
+ 120 | WARNING | [x] Please trim any trailing whitespace
+ 121 | ERROR   | [x] Expected 1 newline at end of file; 0 found
+ 121 | ERROR   | [x] The closing brace for the class must go on the next line after the body
+---------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 93 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+---------------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Controller/WalletController.php
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FOUND 28 ERRORS AND 193 WARNINGS AFFECTING 200 LINES
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+   1 | ERROR   | [x] End of line character is invalid; expected "\n" but found "\r\n"
+   4 | WARNING | [x] Please trim any trailing whitespace
+   5 | WARNING | [x] Please trim any trailing whitespace
+   6 | WARNING | [x] Please trim any trailing whitespace
+   7 | WARNING | [x] Please trim any trailing whitespace
+   8 | WARNING | [x] Please trim any trailing whitespace
+   9 | WARNING | [x] Please trim any trailing whitespace
+  10 | WARNING | [x] Please trim any trailing whitespace
+  11 | WARNING | [x] Please trim any trailing whitespace
+  12 | WARNING | [x] Please trim any trailing whitespace
+  13 | WARNING | [x] Please trim any trailing whitespace
+  14 | WARNING | [x] Please trim any trailing whitespace
+  15 | WARNING | [x] Please trim any trailing whitespace
+  16 | WARNING | [x] Please trim any trailing whitespace
+  17 | WARNING | [x] Please trim any trailing whitespace
+  18 | WARNING | [x] Please trim any trailing whitespace
+  19 | WARNING | [x] Please trim any trailing whitespace
+  20 | WARNING | [x] Please trim any trailing whitespace
+  21 | WARNING | [x] Please trim any trailing whitespace
+  22 | WARNING | [x] Please trim any trailing whitespace
+  25 | WARNING | [x] Please trim any trailing whitespace
+  26 | WARNING | [x] Please trim any trailing whitespace
+  27 | WARNING | [x] Please trim any trailing whitespace
+  28 | WARNING | [x] Please trim any trailing whitespace
+  31 | WARNING | [x] Please trim any trailing whitespace
+  32 | WARNING | [x] Please trim any trailing whitespace
+  33 | WARNING | [x] Please trim any trailing whitespace
+  36 | WARNING | [x] Please trim any trailing whitespace
+  37 | WARNING | [x] Please trim any trailing whitespace
+  42 | WARNING | [x] Please trim any trailing whitespace
+  43 | WARNING | [x] Please trim any trailing whitespace
+  44 | WARNING | [x] Please trim any trailing whitespace
+  45 | WARNING | [x] Please trim any trailing whitespace
+  50 | ERROR   | [x] Expected 4 spaces after parameter type; 1 found
+  50 | ERROR   | [x] Expected 4 spaces after parameter name; 1 found
+  51 | WARNING | [x] Please trim any trailing whitespace
+  52 | WARNING | [x] Please trim any trailing whitespace
+  53 | WARNING | [x] Please trim any trailing whitespace
+  54 | WARNING | [x] Please trim any trailing whitespace
+  55 | WARNING | [x] Please trim any trailing whitespace
+  56 | WARNING | [x] Please trim any trailing whitespace
+  57 | WARNING | [x] Please trim any trailing whitespace
+  61 | ERROR   | [x] Group annotations together so that annotations of the same type immediately follow each other, and annotations of a different type are separated by a single
+     |         |     blank line
+  63 | WARNING | [x] Please trim any trailing whitespace
+  64 | WARNING | [x] Please trim any trailing whitespace
+  65 | WARNING | [x] Please trim any trailing whitespace
+  66 | WARNING | [x] Please trim any trailing whitespace
+  67 | WARNING | [x] Please trim any trailing whitespace
+  68 | WARNING | [x] Please trim any trailing whitespace
+  69 | WARNING | [x] Please trim any trailing whitespace
+  70 | WARNING | [x] Please trim any trailing whitespace
+  71 | WARNING | [x] Please trim any trailing whitespace
+  72 | WARNING | [x] Please trim any trailing whitespace
+  73 | WARNING | [x] Please trim any trailing whitespace
+  74 | WARNING | [x] Please trim any trailing whitespace
+  75 | WARNING | [x] Please trim any trailing whitespace
+  76 | WARNING | [x] Please trim any trailing whitespace
+  77 | WARNING | [x] Please trim any trailing whitespace
+  78 | WARNING | [x] Please trim any trailing whitespace
+  79 | WARNING | [x] Please trim any trailing whitespace
+  80 | WARNING | [x] Please trim any trailing whitespace
+  87 | WARNING | [x] Please trim any trailing whitespace
+  88 | WARNING | [x] Please trim any trailing whitespace
+  89 | WARNING | [x] Please trim any trailing whitespace
+  90 | WARNING | [x] Please trim any trailing whitespace
+  91 | WARNING | [x] Please trim any trailing whitespace
+  92 | WARNING | [x] Please trim any trailing whitespace
+  93 | WARNING | [x] Please trim any trailing whitespace
+  94 | WARNING | [x] Please trim any trailing whitespace
+  95 | WARNING | [x] Please trim any trailing whitespace
+  96 | WARNING | [x] Please trim any trailing whitespace
+  97 | WARNING | [x] Please trim any trailing whitespace
+  98 | WARNING | [x] Please trim any trailing whitespace
+  99 | WARNING | [x] Please trim any trailing whitespace
+ 100 | WARNING | [x] Please trim any trailing whitespace
+ 101 | WARNING | [x] Please trim any trailing whitespace
+ 102 | WARNING | [x] Please trim any trailing whitespace
+ 103 | WARNING | [x] Please trim any trailing whitespace
+ 110 | WARNING | [x] Please trim any trailing whitespace
+ 111 | WARNING | [x] Please trim any trailing whitespace
+ 112 | WARNING | [x] Please trim any trailing whitespace
+ 113 | WARNING | [x] Please trim any trailing whitespace
+ 114 | WARNING | [x] Please trim any trailing whitespace
+ 115 | WARNING | [x] Please trim any trailing whitespace
+ 116 | WARNING | [x] Please trim any trailing whitespace
+ 117 | WARNING | [x] Please trim any trailing whitespace
+ 118 | WARNING | [x] Please trim any trailing whitespace
+ 119 | WARNING | [x] Please trim any trailing whitespace
+ 120 | WARNING | [x] Please trim any trailing whitespace
+ 121 | WARNING | [x] Please trim any trailing whitespace
+ 122 | WARNING | [x] Please trim any trailing whitespace
+ 123 | WARNING | [x] Please trim any trailing whitespace
+ 124 | WARNING | [x] Please trim any trailing whitespace
+ 125 | WARNING | [x] Please trim any trailing whitespace
+ 127 | WARNING | [x] Please trim any trailing whitespace
+ 128 | ERROR   | [x] Blank line found at start of control structure
+ 128 | WARNING | [x] Please trim any trailing whitespace
+ 129 | WARNING | [x] Please trim any trailing whitespace
+ 131 | WARNING | [x] Please trim any trailing whitespace
+ 132 | WARNING | [x] Please trim any trailing whitespace
+ 133 | ERROR   | [ ] Use Yoda conditions when checking a variable against an expression to avoid an accidental assignment inside the condition statement.
+ 133 | ERROR   | [x] Expected 1 space after IF keyword; 0 found
+ 133 | ERROR   | [x] Expected 1 space after closing parenthesis; found 0
+ 133 | WARNING | [x] Please trim any trailing whitespace
+ 134 | WARNING | [x] Please trim any trailing whitespace
+ 135 | WARNING | [x] Please trim any trailing whitespace
+ 136 | ERROR   | [x] Expected 1 space after closing brace; newline found
+ 136 | WARNING | [x] Please trim any trailing whitespace
+ 137 | WARNING | [x] Please trim any trailing whitespace
+ 138 | ERROR   | [x] Expected 1 space after ELSE keyword; 0 found
+ 138 | ERROR   | [x] Newline required after opening brace
+ 138 | ERROR   | [x] Closing brace must be on a line by itself
+ 138 | ERROR   | [x] Closing brace must be on a line by itself
+ 138 | WARNING | [x] Please trim any trailing whitespace
+ 139 | WARNING | [x] Please trim any trailing whitespace
+ 140 | WARNING | [x] Please trim any trailing whitespace
+ 141 | WARNING | [x] Please trim any trailing whitespace
+ 142 | WARNING | [x] Please trim any trailing whitespace
+ 143 | WARNING | [x] Please trim any trailing whitespace
+ 144 | WARNING | [x] Please trim any trailing whitespace
+ 145 | WARNING | [x] Please trim any trailing whitespace
+ 146 | WARNING | [x] Please trim any trailing whitespace
+ 147 | WARNING | [x] Please trim any trailing whitespace
+ 148 | WARNING | [x] Please trim any trailing whitespace
+ 149 | WARNING | [x] Please trim any trailing whitespace
+ 150 | WARNING | [x] Please trim any trailing whitespace
+ 151 | WARNING | [x] Please trim any trailing whitespace
+ 152 | WARNING | [x] Please trim any trailing whitespace
+ 153 | WARNING | [x] Please trim any trailing whitespace
+ 154 | ERROR   | [x] Function closing brace must go on the next line following the body; found 1 blank lines before brace
+ 154 | WARNING | [x] Please trim any trailing whitespace
+ 155 | WARNING | [x] Please trim any trailing whitespace
+ 156 | WARNING | [x] Please trim any trailing whitespace
+ 161 | ERROR   | [x] Expected 2 spaces after parameter type; 1 found
+ 161 | ERROR   | [x] Expected 2 spaces after parameter name; 1 found
+ 164 | WARNING | [x] Please trim any trailing whitespace
+ 165 | WARNING | [x] Please trim any trailing whitespace
+ 166 | WARNING | [x] Please trim any trailing whitespace
+ 167 | WARNING | [x] Please trim any trailing whitespace
+ 168 | WARNING | [x] Please trim any trailing whitespace
+ 169 | WARNING | [x] Please trim any trailing whitespace
+ 170 | WARNING | [x] Please trim any trailing whitespace
+ 171 | WARNING | [x] Please trim any trailing whitespace
+ 172 | WARNING | [x] Please trim any trailing whitespace
+ 173 | WARNING | [x] Please trim any trailing whitespace
+ 174 | WARNING | [x] Please trim any trailing whitespace
+ 175 | WARNING | [x] Please trim any trailing whitespace
+ 176 | WARNING | [x] Please trim any trailing whitespace
+ 177 | WARNING | [x] Please trim any trailing whitespace
+ 178 | WARNING | [x] Please trim any trailing whitespace
+ 179 | WARNING | [x] Please trim any trailing whitespace
+ 181 | WARNING | [x] Please trim any trailing whitespace
+ 182 | WARNING | [x] Please trim any trailing whitespace
+ 183 | ERROR   | [ ] Use Yoda conditions when checking a variable against an expression to avoid an accidental assignment inside the condition statement.
+ 183 | ERROR   | [x] Expected 1 space after IF keyword; 0 found
+ 183 | ERROR   | [x] Expected 1 space after closing parenthesis; found 0
+ 183 | WARNING | [x] Please trim any trailing whitespace
+ 184 | WARNING | [x] Please trim any trailing whitespace
+ 185 | WARNING | [x] Please trim any trailing whitespace
+ 186 | ERROR   | [x] Expected 1 space after closing brace; newline found
+ 186 | WARNING | [x] Please trim any trailing whitespace
+ 187 | WARNING | [x] Please trim any trailing whitespace
+ 188 | ERROR   | [x] Expected 1 space after ELSE keyword; 0 found
+ 188 | ERROR   | [x] Newline required after opening brace
+ 188 | ERROR   | [x] Closing brace must be on a line by itself
+ 188 | ERROR   | [x] Closing brace must be on a line by itself
+ 188 | WARNING | [x] Please trim any trailing whitespace
+ 189 | WARNING | [x] Please trim any trailing whitespace
+ 190 | WARNING | [x] Please trim any trailing whitespace
+ 191 | WARNING | [x] Please trim any trailing whitespace
+ 192 | WARNING | [x] Please trim any trailing whitespace
+ 193 | WARNING | [x] Please trim any trailing whitespace
+ 194 | WARNING | [x] Please trim any trailing whitespace
+ 195 | WARNING | [x] Please trim any trailing whitespace
+ 196 | WARNING | [x] Please trim any trailing whitespace
+ 197 | WARNING | [x] Please trim any trailing whitespace
+ 198 | WARNING | [x] Please trim any trailing whitespace
+ 199 | WARNING | [x] Please trim any trailing whitespace
+ 200 | WARNING | [x] Please trim any trailing whitespace
+ 201 | WARNING | [x] Please trim any trailing whitespace
+ 202 | WARNING | [x] Please trim any trailing whitespace
+ 203 | WARNING | [x] Please trim any trailing whitespace
+ 204 | WARNING | [x] Please trim any trailing whitespace
+ 205 | WARNING | [x] Please trim any trailing whitespace
+ 206 | WARNING | [x] Please trim any trailing whitespace
+ 207 | WARNING | [x] Please trim any trailing whitespace
+ 208 | ERROR   | [ ] Doc comment for parameter "$transaction" missing
+ 212 | ERROR   | [x] Expected 2 spaces after parameter type; 1 found
+ 212 | ERROR   | [x] Expected 2 spaces after parameter name; 1 found
+ 215 | WARNING | [x] Please trim any trailing whitespace
+ 216 | WARNING | [x] Please trim any trailing whitespace
+ 217 | WARNING | [x] Please trim any trailing whitespace
+ 218 | WARNING | [x] Please trim any trailing whitespace
+ 219 | WARNING | [x] Please trim any trailing whitespace
+ 220 | WARNING | [x] Please trim any trailing whitespace
+ 221 | WARNING | [x] Please trim any trailing whitespace
+ 222 | WARNING | [x] Please trim any trailing whitespace
+ 223 | WARNING | [x] Please trim any trailing whitespace
+ 224 | WARNING | [x] Please trim any trailing whitespace
+ 225 | WARNING | [x] Please trim any trailing whitespace
+ 226 | WARNING | [x] Please trim any trailing whitespace
+ 227 | WARNING | [x] Please trim any trailing whitespace
+ 228 | WARNING | [x] Please trim any trailing whitespace
+ 229 | WARNING | [x] Please trim any trailing whitespace
+ 230 | WARNING | [x] Please trim any trailing whitespace
+ 231 | WARNING | [x] Please trim any trailing whitespace
+ 232 | WARNING | [x] Please trim any trailing whitespace
+ 233 | WARNING | [x] Please trim any trailing whitespace
+ 234 | WARNING | [x] Please trim any trailing whitespace
+ 235 | WARNING | [x] Please trim any trailing whitespace
+ 236 | WARNING | [x] Please trim any trailing whitespace
+ 237 | WARNING | [x] Please trim any trailing whitespace
+ 238 | WARNING | [x] Please trim any trailing whitespace
+ 239 | WARNING | [x] Please trim any trailing whitespace
+ 240 | WARNING | [x] Please trim any trailing whitespace
+ 241 | WARNING | [x] Please trim any trailing whitespace
+ 242 | WARNING | [x] Please trim any trailing whitespace
+ 243 | WARNING | [x] Please trim any trailing whitespace
+ 244 | WARNING | [x] Please trim any trailing whitespace
+ 245 | WARNING | [x] Please trim any trailing whitespace
+ 246 | ERROR   | [x] Expected 1 newline at end of file; 0 found
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 218 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/DataFixtures/AppFixtures.php
+-------------------------------------------------------------------------------------------
+FOUND 4 ERRORS AFFECTING 4 LINES
+-------------------------------------------------------------------------------------------
+  19 | ERROR | [ ] Abstract class name is not prefixed with "Abstract"
+  53 | ERROR | [x] There must be no blank lines after the function comment
+  68 | ERROR | [x] There must be no blank lines after the function comment
+ 162 | ERROR | [x] The closing brace for the class must go on the next line after the body
+-------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 3 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+-------------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/DataFixtures/CategoryFixtures.php
+------------------------------------------------------------------------------------------
+FOUND 5 ERRORS AFFECTING 4 LINES
+------------------------------------------------------------------------------------------
+  7 | ERROR | [x] There must be one blank line after the namespace declaration
+ 14 | ERROR | [x] There must be one blank line after the last USE statement; 2 found;
+ 26 | ERROR | [x] There must be no blank lines after the function comment
+ 65 | ERROR | [x] Expected 1 newline at end of file; 0 found
+ 65 | ERROR | [x] The closing brace for the class must go on the next line after the body
+------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 5 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+------------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/DataFixtures/CurrencyFixtures.php
+----------------------------------------------------------------------------------------
+FOUND 5 ERRORS AND 30 WARNINGS AFFECTING 32 LINES
+----------------------------------------------------------------------------------------
+  1 | ERROR   | [x] End of line character is invalid; expected "\n" but found "\r\n"
+  2 | WARNING | [x] Please trim any trailing whitespace
+  5 | WARNING | [x] Please trim any trailing whitespace
+  6 | WARNING | [x] Please trim any trailing whitespace
+  7 | ERROR   | [x] There must be one blank line after the namespace declaration
+  7 | WARNING | [x] Please trim any trailing whitespace
+  8 | WARNING | [x] Please trim any trailing whitespace
+  9 | WARNING | [x] Please trim any trailing whitespace
+ 10 | WARNING | [x] Please trim any trailing whitespace
+ 11 | ERROR   | [x] There must be one blank line after the last USE statement; 3 found;
+ 11 | WARNING | [x] Please trim any trailing whitespace
+ 12 | WARNING | [x] Please trim any trailing whitespace
+ 13 | WARNING | [x] Please trim any trailing whitespace
+ 14 | WARNING | [x] Please trim any trailing whitespace
+ 17 | WARNING | [x] Please trim any trailing whitespace
+ 18 | WARNING | [x] Please trim any trailing whitespace
+ 19 | WARNING | [x] Please trim any trailing whitespace
+ 20 | WARNING | [x] Please trim any trailing whitespace
+ 21 | WARNING | [x] Please trim any trailing whitespace
+ 24 | ERROR   | [x] There must be no blank lines after the function comment
+ 24 | WARNING | [x] Please trim any trailing whitespace
+ 25 | WARNING | [x] Please trim any trailing whitespace
+ 26 | WARNING | [x] Please trim any trailing whitespace
+ 27 | WARNING | [x] Please trim any trailing whitespace
+ 28 | WARNING | [x] Please trim any trailing whitespace
+ 29 | WARNING | [x] Please trim any trailing whitespace
+ 30 | WARNING | [x] Please trim any trailing whitespace
+ 31 | WARNING | [x] Please trim any trailing whitespace
+ 32 | WARNING | [x] Please trim any trailing whitespace
+ 33 | WARNING | [x] Please trim any trailing whitespace
+ 34 | WARNING | [x] Please trim any trailing whitespace
+ 35 | WARNING | [x] Please trim any trailing whitespace
+ 36 | WARNING | [x] Please trim any trailing whitespace
+ 37 | WARNING | [x] Please trim any trailing whitespace
+ 38 | ERROR   | [x] Expected 1 newline at end of file; 0 found
+----------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 35 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+----------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/DataFixtures/TransactionFixtures.php
+-------------------------------------------------------------------------------------
+FOUND 2 ERRORS AND 64 WARNINGS AFFECTING 66 LINES
+-------------------------------------------------------------------------------------
+  1 | ERROR   | [x] End of line character is invalid; expected "\n" but found "\r\n"
+  4 | WARNING | [x] Please trim any trailing whitespace
+  5 | WARNING | [x] Please trim any trailing whitespace
+  6 | WARNING | [x] Please trim any trailing whitespace
+  7 | WARNING | [x] Please trim any trailing whitespace
+  8 | WARNING | [x] Please trim any trailing whitespace
+  9 | WARNING | [x] Please trim any trailing whitespace
+ 10 | WARNING | [x] Please trim any trailing whitespace
+ 11 | WARNING | [x] Please trim any trailing whitespace
+ 12 | WARNING | [x] Please trim any trailing whitespace
+ 13 | WARNING | [x] Please trim any trailing whitespace
+ 14 | WARNING | [x] Please trim any trailing whitespace
+ 15 | WARNING | [x] Please trim any trailing whitespace
+ 16 | WARNING | [x] Please trim any trailing whitespace
+ 19 | WARNING | [x] Please trim any trailing whitespace
+ 20 | WARNING | [x] Please trim any trailing whitespace
+ 21 | WARNING | [x] Please trim any trailing whitespace
+ 24 | WARNING | [x] Please trim any trailing whitespace
+ 25 | WARNING | [x] Please trim any trailing whitespace
+ 26 | WARNING | [x] Please trim any trailing whitespace
+ 27 | WARNING | [x] Please trim any trailing whitespace
+ 28 | WARNING | [x] Please trim any trailing whitespace
+ 29 | WARNING | [x] Please trim any trailing whitespace
+ 30 | WARNING | [x] Please trim any trailing whitespace
+ 31 | WARNING | [x] Please trim any trailing whitespace
+ 32 | WARNING | [x] Please trim any trailing whitespace
+ 33 | WARNING | [x] Please trim any trailing whitespace
+ 34 | WARNING | [x] Please trim any trailing whitespace
+ 35 | WARNING | [x] Please trim any trailing whitespace
+ 36 | WARNING | [x] Please trim any trailing whitespace
+ 37 | WARNING | [x] Please trim any trailing whitespace
+ 38 | WARNING | [x] Please trim any trailing whitespace
+ 39 | WARNING | [x] Please trim any trailing whitespace
+ 40 | WARNING | [x] Please trim any trailing whitespace
+ 41 | WARNING | [x] Please trim any trailing whitespace
+ 42 | WARNING | [x] Please trim any trailing whitespace
+ 43 | WARNING | [x] Please trim any trailing whitespace
+ 44 | WARNING | [x] Please trim any trailing whitespace
+ 45 | WARNING | [x] Please trim any trailing whitespace
+ 46 | WARNING | [x] Please trim any trailing whitespace
+ 47 | WARNING | [x] Please trim any trailing whitespace
+ 48 | WARNING | [x] Please trim any trailing whitespace
+ 49 | WARNING | [x] Please trim any trailing whitespace
+ 50 | WARNING | [x] Please trim any trailing whitespace
+ 51 | WARNING | [x] Please trim any trailing whitespace
+ 52 | WARNING | [x] Please trim any trailing whitespace
+ 53 | WARNING | [x] Please trim any trailing whitespace
+ 54 | WARNING | [x] Please trim any trailing whitespace
+ 55 | WARNING | [x] Please trim any trailing whitespace
+ 56 | WARNING | [x] Please trim any trailing whitespace
+ 57 | WARNING | [x] Please trim any trailing whitespace
+ 58 | WARNING | [x] Please trim any trailing whitespace
+ 59 | WARNING | [x] Please trim any trailing whitespace
+ 60 | WARNING | [x] Please trim any trailing whitespace
+ 61 | WARNING | [x] Please trim any trailing whitespace
+ 62 | WARNING | [x] Please trim any trailing whitespace
+ 63 | WARNING | [x] Please trim any trailing whitespace
+ 64 | WARNING | [x] Please trim any trailing whitespace
+ 65 | WARNING | [x] Please trim any trailing whitespace
+ 66 | WARNING | [x] Please trim any trailing whitespace
+ 72 | WARNING | [x] Please trim any trailing whitespace
+ 73 | WARNING | [x] Please trim any trailing whitespace
+ 74 | WARNING | [x] Please trim any trailing whitespace
+ 75 | WARNING | [x] Please trim any trailing whitespace
+ 76 | WARNING | [x] Please trim any trailing whitespace
+ 77 | ERROR   | [x] Expected 1 newline at end of file; 0 found
+-------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 66 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+-------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/DataFixtures/UserFixtures.php
+-------------------------------------------------------------------------------------
+FOUND 2 ERRORS AND 59 WARNINGS AFFECTING 60 LINES
+-------------------------------------------------------------------------------------
+  1 | ERROR   | [x] End of line character is invalid; expected "\n" but found "\r\n"
+  4 | WARNING | [x] Please trim any trailing whitespace
+  5 | WARNING | [x] Please trim any trailing whitespace
+  6 | WARNING | [x] Please trim any trailing whitespace
+  7 | WARNING | [x] Please trim any trailing whitespace
+  8 | WARNING | [x] Please trim any trailing whitespace
+  9 | WARNING | [x] Please trim any trailing whitespace
+ 10 | WARNING | [x] Please trim any trailing whitespace
+ 11 | WARNING | [x] Please trim any trailing whitespace
+ 14 | WARNING | [x] Please trim any trailing whitespace
+ 15 | WARNING | [x] Please trim any trailing whitespace
+ 16 | WARNING | [x] Please trim any trailing whitespace
+ 19 | WARNING | [x] Please trim any trailing whitespace
+ 20 | WARNING | [x] Please trim any trailing whitespace
+ 21 | WARNING | [x] Please trim any trailing whitespace
+ 24 | WARNING | [x] Please trim any trailing whitespace
+ 25 | WARNING | [x] Please trim any trailing whitespace
+ 26 | WARNING | [x] Please trim any trailing whitespace
+ 27 | WARNING | [x] Please trim any trailing whitespace
+ 28 | WARNING | [x] Please trim any trailing whitespace
+ 29 | WARNING | [x] Please trim any trailing whitespace
+ 32 | WARNING | [x] Please trim any trailing whitespace
+ 33 | WARNING | [x] Please trim any trailing whitespace
+ 34 | WARNING | [x] Please trim any trailing whitespace
+ 35 | WARNING | [x] Please trim any trailing whitespace
+ 36 | WARNING | [x] Please trim any trailing whitespace
+ 37 | WARNING | [x] Please trim any trailing whitespace
+ 38 | WARNING | [x] Please trim any trailing whitespace
+ 39 | WARNING | [x] Please trim any trailing whitespace
+ 40 | WARNING | [x] Please trim any trailing whitespace
+ 41 | WARNING | [x] Please trim any trailing whitespace
+ 42 | WARNING | [x] Please trim any trailing whitespace
+ 43 | WARNING | [x] Please trim any trailing whitespace
+ 44 | WARNING | [x] Please trim any trailing whitespace
+ 45 | WARNING | [x] Please trim any trailing whitespace
+ 46 | WARNING | [x] Please trim any trailing whitespace
+ 47 | WARNING | [x] Please trim any trailing whitespace
+ 48 | WARNING | [x] Please trim any trailing whitespace
+ 49 | WARNING | [x] Please trim any trailing whitespace
+ 50 | WARNING | [x] Please trim any trailing whitespace
+ 51 | WARNING | [x] Please trim any trailing whitespace
+ 52 | WARNING | [x] Please trim any trailing whitespace
+ 53 | WARNING | [x] Please trim any trailing whitespace
+ 54 | WARNING | [x] Please trim any trailing whitespace
+ 55 | WARNING | [x] Please trim any trailing whitespace
+ 56 | WARNING | [x] Please trim any trailing whitespace
+ 57 | WARNING | [x] Please trim any trailing whitespace
+ 58 | WARNING | [x] Please trim any trailing whitespace
+ 59 | WARNING | [x] Please trim any trailing whitespace
+ 60 | WARNING | [x] Please trim any trailing whitespace
+ 61 | WARNING | [x] Please trim any trailing whitespace
+ 62 | WARNING | [x] Please trim any trailing whitespace
+ 63 | WARNING | [x] Please trim any trailing whitespace
+ 64 | WARNING | [x] Please trim any trailing whitespace
+ 65 | WARNING | [x] Please trim any trailing whitespace
+ 66 | WARNING | [x] Please trim any trailing whitespace
+ 67 | WARNING | [x] Please trim any trailing whitespace
+ 68 | WARNING | [x] Please trim any trailing whitespace
+ 69 | ERROR   | [x] Expected 1 blank line at end of file; 2 found
+ 69 | WARNING | [x] Please trim any trailing whitespace
+ 70 | WARNING | [x] Please trim any trailing whitespace
+-------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 61 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+-------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/DataFixtures/WalletFixtures.php
+--------------------------------------------------------------------------------------------
+FOUND 3 ERRORS AND 71 WARNINGS AFFECTING 73 LINES
+--------------------------------------------------------------------------------------------
+  1 | ERROR   | [x] End of line character is invalid; expected "\n" but found "\r\n"
+  4 | WARNING | [x] Please trim any trailing whitespace
+  5 | WARNING | [x] Please trim any trailing whitespace
+  6 | WARNING | [x] Please trim any trailing whitespace
+  7 | WARNING | [x] Please trim any trailing whitespace
+  8 | WARNING | [x] Please trim any trailing whitespace
+  9 | WARNING | [x] Please trim any trailing whitespace
+ 10 | WARNING | [x] Please trim any trailing whitespace
+ 11 | WARNING | [x] Please trim any trailing whitespace
+ 12 | WARNING | [x] Please trim any trailing whitespace
+ 13 | WARNING | [x] Please trim any trailing whitespace
+ 14 | WARNING | [x] Please trim any trailing whitespace
+ 15 | WARNING | [x] Please trim any trailing whitespace
+ 18 | WARNING | [x] Please trim any trailing whitespace
+ 19 | WARNING | [x] Please trim any trailing whitespace
+ 20 | WARNING | [x] Please trim any trailing whitespace
+ 23 | WARNING | [x] Please trim any trailing whitespace
+ 24 | WARNING | [x] Please trim any trailing whitespace
+ 25 | WARNING | [x] Please trim any trailing whitespace
+ 26 | WARNING | [x] Please trim any trailing whitespace
+ 27 | WARNING | [x] Please trim any trailing whitespace
+ 28 | WARNING | [x] Please trim any trailing whitespace
+ 29 | WARNING | [x] Please trim any trailing whitespace
+ 30 | WARNING | [x] Please trim any trailing whitespace
+ 31 | WARNING | [x] Please trim any trailing whitespace
+ 32 | WARNING | [x] Please trim any trailing whitespace
+ 33 | WARNING | [x] Please trim any trailing whitespace
+ 34 | WARNING | [x] Please trim any trailing whitespace
+ 35 | WARNING | [x] Please trim any trailing whitespace
+ 36 | WARNING | [x] Please trim any trailing whitespace
+ 37 | WARNING | [x] Please trim any trailing whitespace
+ 38 | WARNING | [x] Please trim any trailing whitespace
+ 39 | WARNING | [x] Please trim any trailing whitespace
+ 40 | WARNING | [x] Please trim any trailing whitespace
+ 41 | WARNING | [x] Please trim any trailing whitespace
+ 42 | WARNING | [x] Please trim any trailing whitespace
+ 43 | WARNING | [x] Please trim any trailing whitespace
+ 44 | WARNING | [x] Please trim any trailing whitespace
+ 45 | WARNING | [x] Please trim any trailing whitespace
+ 46 | WARNING | [x] Please trim any trailing whitespace
+ 47 | WARNING | [x] Please trim any trailing whitespace
+ 48 | WARNING | [x] Please trim any trailing whitespace
+ 49 | WARNING | [x] Please trim any trailing whitespace
+ 50 | WARNING | [x] Please trim any trailing whitespace
+ 51 | WARNING | [x] Please trim any trailing whitespace
+ 52 | WARNING | [x] Please trim any trailing whitespace
+ 53 | WARNING | [x] Please trim any trailing whitespace
+ 54 | WARNING | [x] Please trim any trailing whitespace
+ 55 | WARNING | [x] Please trim any trailing whitespace
+ 56 | WARNING | [x] Please trim any trailing whitespace
+ 57 | WARNING | [x] Please trim any trailing whitespace
+ 58 | WARNING | [x] Please trim any trailing whitespace
+ 59 | WARNING | [x] Please trim any trailing whitespace
+ 60 | WARNING | [x] Please trim any trailing whitespace
+ 61 | WARNING | [x] Please trim any trailing whitespace
+ 62 | WARNING | [x] Please trim any trailing whitespace
+ 63 | WARNING | [x] Please trim any trailing whitespace
+ 64 | WARNING | [x] Please trim any trailing whitespace
+ 65 | WARNING | [x] Please trim any trailing whitespace
+ 72 | WARNING | [x] Please trim any trailing whitespace
+ 73 | WARNING | [x] Please trim any trailing whitespace
+ 74 | WARNING | [x] Please trim any trailing whitespace
+ 75 | WARNING | [x] Please trim any trailing whitespace
+ 76 | WARNING | [x] Please trim any trailing whitespace
+ 77 | WARNING | [x] Please trim any trailing whitespace
+ 78 | WARNING | [x] Please trim any trailing whitespace
+ 79 | WARNING | [x] Please trim any trailing whitespace
+ 80 | WARNING | [x] Please trim any trailing whitespace
+ 81 | WARNING | [x] Please trim any trailing whitespace
+ 82 | WARNING | [x] Please trim any trailing whitespace
+ 83 | WARNING | [x] Please trim any trailing whitespace
+ 84 | WARNING | [x] Please trim any trailing whitespace
+ 85 | ERROR   | [x] Expected 1 newline at end of file; 0 found
+ 85 | ERROR   | [x] The closing brace for the class must go on the next line after the body
+--------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 74 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+--------------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Entity/Category.php
+------------------------------------------------------------------------------------------------------------------------
+FOUND 15 ERRORS AFFECTING 15 LINES
+------------------------------------------------------------------------------------------------------------------------
+  13 | ERROR | [x] There must be one blank line after the last USE statement; 2 found;
+  84 | ERROR | [x] There must be no blank lines after the function comment
+  96 | ERROR | [x] There must be no blank lines after the function comment
+ 105 | ERROR | [ ] Doc comment for parameter "$name" missing
+ 108 | ERROR | [ ] Doc comment for parameter $title does not match actual variable name $name
+ 115 | ERROR | [x] Function closing brace must go on the next line following the body; found 2 blank lines before brace
+ 123 | ERROR | [x] There must be no blank lines after the function comment
+ 141 | ERROR | [x] Function closing brace must go on the next line following the body; found 2 blank lines before brace
+ 147 | ERROR | [x] There must be no blank lines after the function comment
+ 159 | ERROR | [x] There must be no blank lines after the function comment
+ 166 | ERROR | [x] Function closing brace must go on the next line following the body; found 2 blank lines before brace
+ 168 | ERROR | [ ] Missing doc comment for function getAuthor()
+ 173 | ERROR | [ ] Missing doc comment for function setAuthor()
+ 178 | ERROR | [x] Function closing brace must go on the next line following the body; found 2 blank lines before brace
+ 187 | ERROR | [x] The closing brace for the class must go on the next line after the body
+------------------------------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 11 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+------------------------------------------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Entity/Currency.php
+-----------------------------------------------------------------------------------------------------------------------
+FOUND 1 ERROR AFFECTING 1 LINE
+-----------------------------------------------------------------------------------------------------------------------
+ 62 | ERROR | [x] Function closing brace must go on the next line following the body; found 1 blank lines before brace
+-----------------------------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 1 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+-----------------------------------------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Entity/Enum/UserRole.php
+-------------------------------------------------------------------------------------
+FOUND 1 ERROR AND 19 WARNINGS AFFECTING 20 LINES
+-------------------------------------------------------------------------------------
+  1 | ERROR   | [x] End of line character is invalid; expected "\n" but found "\r\n"
+  4 | WARNING | [x] Please trim any trailing whitespace
+  5 | WARNING | [x] Please trim any trailing whitespace
+  6 | WARNING | [x] Please trim any trailing whitespace
+  7 | WARNING | [x] Please trim any trailing whitespace
+ 10 | WARNING | [x] Please trim any trailing whitespace
+ 11 | WARNING | [x] Please trim any trailing whitespace
+ 12 | WARNING | [x] Please trim any trailing whitespace
+ 13 | WARNING | [x] Please trim any trailing whitespace
+ 14 | WARNING | [x] Please trim any trailing whitespace
+ 15 | WARNING | [x] Please trim any trailing whitespace
+ 20 | WARNING | [x] Please trim any trailing whitespace
+ 21 | WARNING | [x] Please trim any trailing whitespace
+ 22 | WARNING | [x] Please trim any trailing whitespace
+ 23 | WARNING | [x] Please trim any trailing whitespace
+ 24 | WARNING | [x] Please trim any trailing whitespace
+ 25 | WARNING | [x] Please trim any trailing whitespace
+ 26 | WARNING | [x] Please trim any trailing whitespace
+ 27 | WARNING | [x] Please trim any trailing whitespace
+ 28 | WARNING | [x] Please trim any trailing whitespace
+-------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 20 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+-------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Entity/Transaction.php
+------------------------------------------------------------------------------------------------------------------------
+FOUND 24 ERRORS AFFECTING 24 LINES
+------------------------------------------------------------------------------------------------------------------------
+  64 | ERROR | [x] Add a single space around assignment operators
+  93 | ERROR | [ ] Missing doc comment for function getCategory()
+  98 | ERROR | [ ] Missing doc comment for function setCategory()
+ 101 | ERROR | [x] Line indented incorrectly; expected at least 8 spaces, found 0
+ 123 | ERROR | [x] Function closing brace must go on the next line following the body; found 1 blank lines before brace
+ 144 | ERROR | [x] Function closing brace must go on the next line following the body; found 1 blank lines before brace
+ 147 | ERROR | [ ] Missing doc comment for function getValue()
+ 152 | ERROR | [ ] Missing doc comment for function getSum()
+ 157 | ERROR | [ ] Missing doc comment for function setSum()
+ 161 | ERROR | [x] Function closing brace must go on the next line following the body; found 1 blank lines before brace
+ 163 | ERROR | [ ] Missing doc comment for function getCurrency()
+ 168 | ERROR | [ ] Missing doc comment for function setCurrency()
+ 172 | ERROR | [x] Function closing brace must go on the next line following the body; found 1 blank lines before brace
+ 176 | ERROR | [ ] Missing doc comment for function isValue()
+ 181 | ERROR | [ ] Missing doc comment for function setValue()
+ 185 | ERROR | [x] Function closing brace must go on the next line following the body; found 1 blank lines before brace
+ 205 | ERROR | [ ] You must use "/**" style comments for a function comment
+ 210 | ERROR | [ ] Missing doc comment for function setWallet()
+ 214 | ERROR | [x] Function closing brace must go on the next line following the body; found 1 blank lines before brace
+ 216 | ERROR | [ ] Missing doc comment for function getAuthor()
+ 221 | ERROR | [ ] Missing doc comment for function setAuthor()
+ 225 | ERROR | [x] Function closing brace must go on the next line following the body; found 1 blank lines before brace
+ 227 | ERROR | [ ] Missing doc comment for function getName()
+ 232 | ERROR | [ ] Missing doc comment for function setName()
+------------------------------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 9 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+------------------------------------------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Entity/User.php
+----------------------------------------------------------------------
+FOUND 1 ERROR AFFECTING 1 LINE
+----------------------------------------------------------------------
+ 166 | ERROR | Missing @return tag in function comment
+----------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Entity/Wallet.php
+------------------------------------------------------------------------------------------------------------------------
+FOUND 22 ERRORS AFFECTING 20 LINES
+------------------------------------------------------------------------------------------------------------------------
+   6 | ERROR | [x] There must be one blank line after the namespace declaration
+  71 | ERROR | [ ] Member variable "Sum" is not in valid camel caps format
+  73 | ERROR | [ ] Missing doc comment for function __construct()
+  99 | ERROR | [ ] Missing doc comment for function setName()
+ 103 | ERROR | [x] Function closing brace must go on the next line following the body; found 1 blank lines before brace
+ 113 | ERROR | [ ] Missing doc comment for function addCurrency()
+ 122 | ERROR | [ ] Missing doc comment for function removeCurrency()
+ 137 | ERROR | [ ] Missing doc comment for function addTransaction()
+ 147 | ERROR | [x] Function closing brace must go on the next line following the body; found 2 blank lines before brace
+ 149 | ERROR | [ ] Missing doc comment for function removeTransaction()
+ 178 | ERROR | [x] Function closing brace must go on the next line following the body; found 1 blank lines before brace
+ 199 | ERROR | [x] Function closing brace must go on the next line following the body; found 1 blank lines before brace
+ 201 | ERROR | [ ] Missing doc comment for function getAuthor()
+ 206 | ERROR | [ ] Missing doc comment for function setAuthor()
+ 210 | ERROR | [x] Function closing brace must go on the next line following the body; found 1 blank lines before brace
+ 212 | ERROR | [ ] Missing doc comment for function getSum()
+ 214 | ERROR | [ ] Variable "Sum" is not in valid camel caps format
+ 217 | ERROR | [ ] Missing doc comment for function setSum()
+ 217 | ERROR | [ ] Variable "Sum" is not in valid camel caps format
+ 219 | ERROR | [ ] Variable "Sum" is not in valid camel caps format
+ 219 | ERROR | [ ] Variable "Sum" is not in valid camel caps format
+ 221 | ERROR | [x] Function closing brace must go on the next line following the body; found 1 blank lines before brace
+------------------------------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 7 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+------------------------------------------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Form/Type/AdminType.php
+-------------------------------------------------------------------------------------
+FOUND 2 ERRORS AND 70 WARNINGS AFFECTING 72 LINES
+-------------------------------------------------------------------------------------
+  1 | ERROR   | [x] End of line character is invalid; expected "\n" but found "\r\n"
+  4 | WARNING | [x] Please trim any trailing whitespace
+  5 | WARNING | [x] Please trim any trailing whitespace
+  6 | WARNING | [x] Please trim any trailing whitespace
+  7 | WARNING | [x] Please trim any trailing whitespace
+  8 | WARNING | [x] Please trim any trailing whitespace
+  9 | WARNING | [x] Please trim any trailing whitespace
+ 10 | WARNING | [x] Please trim any trailing whitespace
+ 11 | WARNING | [x] Please trim any trailing whitespace
+ 12 | WARNING | [x] Please trim any trailing whitespace
+ 13 | WARNING | [x] Please trim any trailing whitespace
+ 14 | WARNING | [x] Please trim any trailing whitespace
+ 15 | WARNING | [x] Please trim any trailing whitespace
+ 16 | WARNING | [x] Please trim any trailing whitespace
+ 17 | WARNING | [x] Please trim any trailing whitespace
+ 20 | WARNING | [x] Please trim any trailing whitespace
+ 21 | WARNING | [x] Please trim any trailing whitespace
+ 22 | WARNING | [x] Please trim any trailing whitespace
+ 33 | WARNING | [x] Please trim any trailing whitespace
+ 34 | WARNING | [x] Please trim any trailing whitespace
+ 35 | WARNING | [x] Please trim any trailing whitespace
+ 36 | WARNING | [x] Please trim any trailing whitespace
+ 37 | WARNING | [x] Please trim any trailing whitespace
+ 38 | WARNING | [x] Please trim any trailing whitespace
+ 39 | WARNING | [x] Please trim any trailing whitespace
+ 40 | WARNING | [x] Please trim any trailing whitespace
+ 41 | WARNING | [x] Please trim any trailing whitespace
+ 42 | WARNING | [x] Please trim any trailing whitespace
+ 43 | WARNING | [x] Please trim any trailing whitespace
+ 44 | WARNING | [x] Please trim any trailing whitespace
+ 45 | WARNING | [x] Please trim any trailing whitespace
+ 46 | WARNING | [x] Please trim any trailing whitespace
+ 47 | WARNING | [x] Please trim any trailing whitespace
+ 48 | WARNING | [x] Please trim any trailing whitespace
+ 49 | WARNING | [x] Please trim any trailing whitespace
+ 50 | WARNING | [x] Please trim any trailing whitespace
+ 51 | WARNING | [x] Please trim any trailing whitespace
+ 52 | WARNING | [x] Please trim any trailing whitespace
+ 53 | WARNING | [x] Please trim any trailing whitespace
+ 54 | WARNING | [x] Please trim any trailing whitespace
+ 55 | WARNING | [x] Please trim any trailing whitespace
+ 56 | WARNING | [x] Please trim any trailing whitespace
+ 57 | WARNING | [x] Please trim any trailing whitespace
+ 58 | WARNING | [x] Please trim any trailing whitespace
+ 59 | WARNING | [x] Please trim any trailing whitespace
+ 60 | WARNING | [x] Please trim any trailing whitespace
+ 61 | WARNING | [x] Please trim any trailing whitespace
+ 62 | WARNING | [x] Please trim any trailing whitespace
+ 63 | WARNING | [x] Please trim any trailing whitespace
+ 64 | WARNING | [x] Please trim any trailing whitespace
+ 65 | WARNING | [x] Please trim any trailing whitespace
+ 66 | WARNING | [x] Please trim any trailing whitespace
+ 67 | WARNING | [x] Please trim any trailing whitespace
+ 68 | WARNING | [x] Please trim any trailing whitespace
+ 69 | WARNING | [x] Please trim any trailing whitespace
+ 70 | WARNING | [x] Please trim any trailing whitespace
+ 71 | WARNING | [x] Please trim any trailing whitespace
+ 72 | WARNING | [x] Please trim any trailing whitespace
+ 73 | WARNING | [x] Please trim any trailing whitespace
+ 74 | WARNING | [x] Please trim any trailing whitespace
+ 79 | WARNING | [x] Please trim any trailing whitespace
+ 80 | WARNING | [x] Please trim any trailing whitespace
+ 81 | WARNING | [x] Please trim any trailing whitespace
+ 82 | WARNING | [x] Please trim any trailing whitespace
+ 83 | WARNING | [x] Please trim any trailing whitespace
+ 84 | WARNING | [x] Please trim any trailing whitespace
+ 92 | WARNING | [x] Please trim any trailing whitespace
+ 93 | WARNING | [x] Please trim any trailing whitespace
+ 94 | WARNING | [x] Please trim any trailing whitespace
+ 95 | WARNING | [x] Please trim any trailing whitespace
+ 96 | WARNING | [x] Please trim any trailing whitespace
+ 97 | ERROR   | [x] Expected 1 newline at end of file; 0 found
+-------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 72 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+-------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Form/Type/CategoryType.php
+----------------------------------------------------------------------------------------------------
+FOUND 5 ERRORS AND 37 WARNINGS AFFECTING 39 LINES
+----------------------------------------------------------------------------------------------------
+  1 | ERROR   | [x] End of line character is invalid; expected "\n" but found "\r\n"
+  4 | WARNING | [x] Please trim any trailing whitespace
+  5 | WARNING | [x] Please trim any trailing whitespace
+  6 | WARNING | [x] Please trim any trailing whitespace
+  7 | WARNING | [x] Please trim any trailing whitespace
+  8 | WARNING | [x] Please trim any trailing whitespace
+  9 | WARNING | [x] Please trim any trailing whitespace
+ 10 | WARNING | [x] Please trim any trailing whitespace
+ 11 | WARNING | [x] Please trim any trailing whitespace
+ 12 | WARNING | [x] Please trim any trailing whitespace
+ 13 | WARNING | [x] Please trim any trailing whitespace
+ 16 | WARNING | [x] Please trim any trailing whitespace
+ 17 | WARNING | [x] Please trim any trailing whitespace
+ 18 | WARNING | [x] Please trim any trailing whitespace
+ 29 | WARNING | [x] Please trim any trailing whitespace
+ 30 | WARNING | [x] Please trim any trailing whitespace
+ 31 | WARNING | [x] Please trim any trailing whitespace
+ 32 | WARNING | [x] Please trim any trailing whitespace
+ 33 | WARNING | [x] Please trim any trailing whitespace
+ 34 | WARNING | [x] Please trim any trailing whitespace
+ 35 | WARNING | [x] Please trim any trailing whitespace
+ 36 | WARNING | [x] Please trim any trailing whitespace
+ 37 | WARNING | [x] Please trim any trailing whitespace
+ 38 | WARNING | [x] Please trim any trailing whitespace
+ 39 | ERROR   | [x] Multi-line function call not indented correctly; expected 8 spaces but found 12
+ 39 | ERROR   | [x] Multi-line function call not indented correctly; expected 8 spaces but found 12
+ 39 | ERROR   | [x] Closing parenthesis of a multi-line function call must be on a line by itself
+ 39 | WARNING | [x] Please trim any trailing whitespace
+ 40 | WARNING | [x] Please trim any trailing whitespace
+ 41 | WARNING | [x] Please trim any trailing whitespace
+ 46 | WARNING | [x] Please trim any trailing whitespace
+ 47 | WARNING | [x] Please trim any trailing whitespace
+ 48 | WARNING | [x] Please trim any trailing whitespace
+ 49 | WARNING | [x] Please trim any trailing whitespace
+ 50 | WARNING | [x] Please trim any trailing whitespace
+ 51 | WARNING | [x] Please trim any trailing whitespace
+ 59 | WARNING | [x] Please trim any trailing whitespace
+ 60 | WARNING | [x] Please trim any trailing whitespace
+ 61 | WARNING | [x] Please trim any trailing whitespace
+ 62 | WARNING | [x] Please trim any trailing whitespace
+ 63 | WARNING | [x] Please trim any trailing whitespace
+ 64 | ERROR   | [x] Expected 1 newline at end of file; 0 found
+----------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 42 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+----------------------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Form/Type/FilterType.php
+-------------------------------------------------------------------------------------
+FOUND 4 ERRORS AND 27 WARNINGS AFFECTING 28 LINES
+-------------------------------------------------------------------------------------
+  1 | ERROR   | [x] End of line character is invalid; expected "\n" but found "\r\n"
+  2 | WARNING | [x] Please trim any trailing whitespace
+  3 | WARNING | [ ] The license block has to be present at the top
+    |         |                     of every PHP file, before the namespace
+  3 | WARNING | [x] Please trim any trailing whitespace
+  4 | WARNING | [x] Please trim any trailing whitespace
+  5 | WARNING | [x] Please trim any trailing whitespace
+  6 | WARNING | [x] Please trim any trailing whitespace
+  7 | WARNING | [x] Please trim any trailing whitespace
+  8 | WARNING | [x] Please trim any trailing whitespace
+  9 | WARNING | [x] Please trim any trailing whitespace
+ 10 | ERROR   | [ ] Missing doc comment for class FilterType
+ 10 | WARNING | [x] Please trim any trailing whitespace
+ 11 | WARNING | [x] Please trim any trailing whitespace
+ 12 | ERROR   | [ ] Missing doc comment for function buildForm()
+ 12 | WARNING | [x] Please trim any trailing whitespace
+ 13 | WARNING | [x] Please trim any trailing whitespace
+ 14 | WARNING | [x] Please trim any trailing whitespace
+ 15 | WARNING | [x] Please trim any trailing whitespace
+ 16 | WARNING | [x] Please trim any trailing whitespace
+ 17 | WARNING | [x] Please trim any trailing whitespace
+ 20 | WARNING | [x] Please trim any trailing whitespace
+ 23 | WARNING | [x] Please trim any trailing whitespace
+ 24 | WARNING | [x] Please trim any trailing whitespace
+ 25 | WARNING | [x] Please trim any trailing whitespace
+ 26 | WARNING | [x] Please trim any trailing whitespace
+ 27 | WARNING | [x] Please trim any trailing whitespace
+ 30 | WARNING | [x] Please trim any trailing whitespace
+ 33 | WARNING | [x] Please trim any trailing whitespace
+ 34 | WARNING | [x] Please trim any trailing whitespace
+ 35 | WARNING | [x] Please trim any trailing whitespace
+ 36 | ERROR   | [x] Expected 1 newline at end of file; 0 found
+-------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 28 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+-------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Form/Type/TransactionType.php
+-----------------------------------------------------------------------------------------------------
+FOUND 25 ERRORS AND 168 WARNINGS AFFECTING 170 LINES
+-----------------------------------------------------------------------------------------------------
+   1 | ERROR   | [x] End of line character is invalid; expected "\n" but found "\r\n"
+   4 | WARNING | [x] Please trim any trailing whitespace
+   5 | WARNING | [x] Please trim any trailing whitespace
+   6 | WARNING | [x] Please trim any trailing whitespace
+   7 | WARNING | [x] Please trim any trailing whitespace
+   8 | WARNING | [x] Please trim any trailing whitespace
+   9 | WARNING | [x] Please trim any trailing whitespace
+  10 | WARNING | [x] Please trim any trailing whitespace
+  11 | WARNING | [x] Please trim any trailing whitespace
+  12 | WARNING | [x] Please trim any trailing whitespace
+  13 | WARNING | [x] Please trim any trailing whitespace
+  14 | WARNING | [x] Please trim any trailing whitespace
+  15 | WARNING | [x] Please trim any trailing whitespace
+  16 | WARNING | [x] Please trim any trailing whitespace
+  17 | WARNING | [x] Please trim any trailing whitespace
+  18 | WARNING | [x] Please trim any trailing whitespace
+  19 | WARNING | [x] Please trim any trailing whitespace
+  20 | WARNING | [x] Please trim any trailing whitespace
+  21 | WARNING | [x] Please trim any trailing whitespace
+  22 | WARNING | [x] Please trim any trailing whitespace
+  23 | WARNING | [x] Please trim any trailing whitespace
+  24 | WARNING | [x] Please trim any trailing whitespace
+  25 | ERROR   | [x] There must be one blank line after the last USE statement; 3 found;
+  25 | WARNING | [x] Please trim any trailing whitespace
+  26 | WARNING | [x] Please trim any trailing whitespace
+  27 | WARNING | [x] Please trim any trailing whitespace
+  28 | WARNING | [x] Please trim any trailing whitespace
+  31 | WARNING | [x] Please trim any trailing whitespace
+  32 | WARNING | [x] Please trim any trailing whitespace
+  33 | WARNING | [x] Please trim any trailing whitespace
+  44 | WARNING | [x] Please trim any trailing whitespace
+  45 | WARNING | [x] Please trim any trailing whitespace
+  46 | WARNING | [x] Please trim any trailing whitespace
+  47 | WARNING | [x] Please trim any trailing whitespace
+  48 | ERROR   | [ ] Missing doc comment for function __construct()
+  48 | WARNING | [x] Please trim any trailing whitespace
+  49 | WARNING | [x] Please trim any trailing whitespace
+  50 | WARNING | [x] Please trim any trailing whitespace
+  51 | WARNING | [x] Please trim any trailing whitespace
+  52 | WARNING | [x] Please trim any trailing whitespace
+  53 | WARNING | [x] Please trim any trailing whitespace
+  54 | WARNING | [x] Please trim any trailing whitespace
+  55 | ERROR   | [ ] Missing doc comment for function buildForm()
+  55 | WARNING | [x] Please trim any trailing whitespace
+  56 | WARNING | [x] Please trim any trailing whitespace
+  57 | WARNING | [x] Please trim any trailing whitespace
+  58 | WARNING | [x] Please trim any trailing whitespace
+  59 | WARNING | [x] Please trim any trailing whitespace
+  60 | WARNING | [x] Please trim any trailing whitespace
+  61 | ERROR   | [x] Add a comma after each item in a multi-line array
+  61 | WARNING | [x] Please trim any trailing whitespace
+  62 | WARNING | [x] Please trim any trailing whitespace
+  63 | WARNING | [x] Please trim any trailing whitespace
+  64 | WARNING | [x] Please trim any trailing whitespace
+  65 | WARNING | [x] Please trim any trailing whitespace
+  66 | WARNING | [x] Please trim any trailing whitespace
+  67 | WARNING | [x] Please trim any trailing whitespace
+  68 | WARNING | [x] Please trim any trailing whitespace
+  69 | WARNING | [x] Please trim any trailing whitespace
+  70 | WARNING | [x] Please trim any trailing whitespace
+  71 | WARNING | [x] Please trim any trailing whitespace
+  72 | WARNING | [x] Please trim any trailing whitespace
+  73 | WARNING | [x] Please trim any trailing whitespace
+  74 | WARNING | [x] Please trim any trailing whitespace
+  75 | WARNING | [x] Please trim any trailing whitespace
+  75 | ERROR   | [x] Empty lines are not allowed in multi-line function calls
+  75 | ERROR   | [x] Empty lines are not allowed in multi-line function calls
+  76 | WARNING | [x] Please trim any trailing whitespace
+  77 | WARNING | [x] Please trim any trailing whitespace
+  78 | WARNING | [x] Please trim any trailing whitespace
+  79 | WARNING | [x] Please trim any trailing whitespace
+  80 | WARNING | [x] Please trim any trailing whitespace
+  81 | WARNING | [x] Please trim any trailing whitespace
+  82 | WARNING | [x] Please trim any trailing whitespace
+  83 | WARNING | [x] Please trim any trailing whitespace
+  84 | ERROR   | [x] Multi-line function call not indented correctly; expected 8 spaces but found 12
+  84 | ERROR   | [x] Multi-line function call not indented correctly; expected 8 spaces but found 12
+  84 | ERROR   | [x] Closing parenthesis of a multi-line function call must be on a line by itself
+  84 | WARNING | [x] Please trim any trailing whitespace
+  85 | WARNING | [x] Please trim any trailing whitespace
+  86 | WARNING | [x] Please trim any trailing whitespace
+  87 | WARNING | [x] Please trim any trailing whitespace
+  88 | WARNING | [x] Please trim any trailing whitespace
+  89 | WARNING | [x] Please trim any trailing whitespace
+  90 | WARNING | [x] Please trim any trailing whitespace
+  91 | WARNING | [x] Please trim any trailing whitespace
+  92 | WARNING | [x] Please trim any trailing whitespace
+  93 | WARNING | [x] Please trim any trailing whitespace
+  94 | ERROR   | [x] Add a single space around assignment operators
+  94 | WARNING | [x] Please trim any trailing whitespace
+  95 | ERROR   | [x] Multi-line function call not indented correctly; expected 8 spaces but found 12
+  95 | ERROR   | [x] Multi-line function call not indented correctly; expected 8 spaces but found 12
+  95 | ERROR   | [x] Closing parenthesis of a multi-line function call must be on a line by itself
+  95 | WARNING | [x] Please trim any trailing whitespace
+  96 | WARNING | [x] Please trim any trailing whitespace
+  97 | WARNING | [x] Please trim any trailing whitespace
+  98 | WARNING | [x] Please trim any trailing whitespace
+  99 | WARNING | [x] Please trim any trailing whitespace
+ 100 | WARNING | [x] Please trim any trailing whitespace
+ 101 | WARNING | [x] Please trim any trailing whitespace
+ 102 | WARNING | [x] Please trim any trailing whitespace
+ 103 | WARNING | [x] Please trim any trailing whitespace
+ 104 | WARNING | [x] Please trim any trailing whitespace
+ 105 | WARNING | [x] Please trim any trailing whitespace
+ 106 | WARNING | [x] Please trim any trailing whitespace
+ 107 | WARNING | [x] Please trim any trailing whitespace
+ 108 | ERROR   | [x] Multi-line function call not indented correctly; expected 8 spaces but found 12
+ 108 | ERROR   | [x] Multi-line function call not indented correctly; expected 8 spaces but found 12
+ 108 | ERROR   | [x] Closing parenthesis of a multi-line function call must be on a line by itself
+ 108 | WARNING | [x] Please trim any trailing whitespace
+ 109 | WARNING | [x] Please trim any trailing whitespace
+ 110 | WARNING | [x] Please trim any trailing whitespace
+ 111 | WARNING | [x] Please trim any trailing whitespace
+ 112 | ERROR   | [x] No space found after comma in argument list
+ 112 | ERROR   | [x] Add a single space after each comma delimiter
+ 112 | ERROR   | [x] Only one argument is allowed per line in a multi-line function call
+ 112 | ERROR   | [x] Add a comma after each item in a multi-line array
+ 112 | WARNING | [x] Please trim any trailing whitespace
+ 113 | WARNING | [x] Please trim any trailing whitespace
+ 114 | WARNING | [x] Please trim any trailing whitespace
+ 115 | WARNING | [x] Please trim any trailing whitespace
+ 116 | ERROR   | [x] Multi-line function call not indented correctly; expected 8 spaces but found 12
+ 116 | ERROR   | [x] Multi-line function call not indented correctly; expected 8 spaces but found 12
+ 116 | ERROR   | [x] Closing parenthesis of a multi-line function call must be on a line by itself
+ 116 | WARNING | [x] Please trim any trailing whitespace
+ 117 | WARNING | [x] Please trim any trailing whitespace
+ 118 | WARNING | [x] Please trim any trailing whitespace
+ 119 | WARNING | [x] Please trim any trailing whitespace
+ 120 | WARNING | [x] Please trim any trailing whitespace
+ 121 | WARNING | [x] Please trim any trailing whitespace
+ 122 | WARNING | [x] Please trim any trailing whitespace
+ 123 | WARNING | [x] Please trim any trailing whitespace
+ 124 | WARNING | [x] Please trim any trailing whitespace
+ 125 | WARNING | [x] Please trim any trailing whitespace
+ 126 | WARNING | [x] Please trim any trailing whitespace
+ 127 | WARNING | [x] Please trim any trailing whitespace
+ 128 | WARNING | [x] Please trim any trailing whitespace
+ 129 | WARNING | [x] Please trim any trailing whitespace
+ 130 | WARNING | [x] Please trim any trailing whitespace
+ 131 | WARNING | [x] Please trim any trailing whitespace
+ 132 | WARNING | [x] Please trim any trailing whitespace
+ 133 | WARNING | [x] Please trim any trailing whitespace
+ 134 | WARNING | [x] Please trim any trailing whitespace
+ 135 | WARNING | [x] Please trim any trailing whitespace
+ 136 | WARNING | [x] Please trim any trailing whitespace
+ 137 | WARNING | [x] Please trim any trailing whitespace
+ 138 | WARNING | [x] Please trim any trailing whitespace
+ 139 | WARNING | [x] Please trim any trailing whitespace
+ 140 | WARNING | [x] Please trim any trailing whitespace
+ 141 | WARNING | [x] Please trim any trailing whitespace
+ 142 | WARNING | [x] Please trim any trailing whitespace
+ 143 | WARNING | [x] Please trim any trailing whitespace
+ 144 | WARNING | [x] Please trim any trailing whitespace
+ 145 | WARNING | [x] Please trim any trailing whitespace
+ 146 | WARNING | [x] Please trim any trailing whitespace
+ 147 | WARNING | [x] Please trim any trailing whitespace
+ 148 | WARNING | [x] Please trim any trailing whitespace
+ 149 | WARNING | [x] Please trim any trailing whitespace
+ 150 | WARNING | [x] Please trim any trailing whitespace
+ 151 | WARNING | [x] Please trim any trailing whitespace
+ 152 | WARNING | [x] Please trim any trailing whitespace
+ 153 | WARNING | [x] Please trim any trailing whitespace
+ 154 | WARNING | [x] Please trim any trailing whitespace
+ 155 | WARNING | [x] Please trim any trailing whitespace
+ 156 | WARNING | [x] Please trim any trailing whitespace
+ 157 | WARNING | [x] Please trim any trailing whitespace
+ 158 | WARNING | [x] Please trim any trailing whitespace
+ 159 | WARNING | [x] Please trim any trailing whitespace
+ 160 | WARNING | [x] Please trim any trailing whitespace
+ 161 | WARNING | [x] Please trim any trailing whitespace
+ 162 | WARNING | [x] Please trim any trailing whitespace
+ 163 | WARNING | [x] Please trim any trailing whitespace
+ 164 | WARNING | [x] Please trim any trailing whitespace
+ 165 | WARNING | [x] Please trim any trailing whitespace
+ 166 | WARNING | [x] Please trim any trailing whitespace
+ 167 | WARNING | [x] Please trim any trailing whitespace
+ 168 | WARNING | [x] Please trim any trailing whitespace
+ 169 | WARNING | [x] Please trim any trailing whitespace
+ 170 | WARNING | [x] Please trim any trailing whitespace
+ 171 | WARNING | [x] Please trim any trailing whitespace
+ 172 | WARNING | [x] Please trim any trailing whitespace
+ 177 | WARNING | [x] Please trim any trailing whitespace
+ 178 | WARNING | [x] Please trim any trailing whitespace
+ 179 | WARNING | [x] Please trim any trailing whitespace
+ 180 | WARNING | [x] Please trim any trailing whitespace
+ 181 | WARNING | [x] Please trim any trailing whitespace
+ 182 | WARNING | [x] Please trim any trailing whitespace
+ 190 | WARNING | [x] Please trim any trailing whitespace
+ 191 | WARNING | [x] Please trim any trailing whitespace
+ 192 | WARNING | [x] Please trim any trailing whitespace
+ 193 | WARNING | [x] Please trim any trailing whitespace
+ 194 | WARNING | [x] Please trim any trailing whitespace
+ 195 | ERROR   | [x] Expected 1 newline at end of file; 0 found
+-----------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 191 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+-----------------------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Form/Type/WalletType.php
+---------------------------------------------------------------------------------------------------------------------------
+FOUND 10 ERRORS AND 86 WARNINGS AFFECTING 88 LINES
+---------------------------------------------------------------------------------------------------------------------------
+   1 | ERROR   | [x] End of line character is invalid; expected "\n" but found "\r\n"
+   4 | WARNING | [x] Please trim any trailing whitespace
+   5 | WARNING | [x] Please trim any trailing whitespace
+   6 | WARNING | [x] Please trim any trailing whitespace
+   7 | WARNING | [x] Please trim any trailing whitespace
+   8 | WARNING | [x] Please trim any trailing whitespace
+   9 | WARNING | [x] Please trim any trailing whitespace
+  10 | WARNING | [x] Please trim any trailing whitespace
+  11 | WARNING | [x] Please trim any trailing whitespace
+  12 | WARNING | [x] Please trim any trailing whitespace
+  13 | WARNING | [x] Please trim any trailing whitespace
+  14 | WARNING | [x] Please trim any trailing whitespace
+  15 | WARNING | [x] Please trim any trailing whitespace
+  16 | WARNING | [x] Please trim any trailing whitespace
+  17 | WARNING | [x] Please trim any trailing whitespace
+  18 | WARNING | [x] Please trim any trailing whitespace
+  19 | ERROR   | [x] There must be one blank line after the last USE statement; 2 found;
+  19 | WARNING | [x] Please trim any trailing whitespace
+  20 | WARNING | [x] Please trim any trailing whitespace
+  21 | WARNING | [x] Please trim any trailing whitespace
+  24 | WARNING | [x] Please trim any trailing whitespace
+  25 | WARNING | [x] Please trim any trailing whitespace
+  26 | WARNING | [x] Please trim any trailing whitespace
+  37 | WARNING | [x] Please trim any trailing whitespace
+  38 | WARNING | [x] Please trim any trailing whitespace
+  39 | WARNING | [x] Please trim any trailing whitespace
+  40 | WARNING | [x] Please trim any trailing whitespace
+  41 | WARNING | [x] Please trim any trailing whitespace
+  42 | WARNING | [x] Please trim any trailing whitespace
+  43 | WARNING | [x] Please trim any trailing whitespace
+  44 | WARNING | [x] Please trim any trailing whitespace
+  45 | WARNING | [x] Please trim any trailing whitespace
+  46 | WARNING | [x] Please trim any trailing whitespace
+  47 | ERROR   | [x] Multi-line function call not indented correctly; expected 8 spaces but found 12
+  47 | ERROR   | [x] Multi-line function call not indented correctly; expected 8 spaces but found 12
+  47 | ERROR   | [x] Closing parenthesis of a multi-line function call must be on a line by itself
+  47 | WARNING | [x] Please trim any trailing whitespace
+  48 | WARNING | [x] Please trim any trailing whitespace
+  49 | WARNING | [x] Please trim any trailing whitespace
+  50 | WARNING | [x] Please trim any trailing whitespace
+  51 | WARNING | [x] Please trim any trailing whitespace
+  52 | WARNING | [x] Please trim any trailing whitespace
+  53 | WARNING | [x] Please trim any trailing whitespace
+  54 | WARNING | [x] Please trim any trailing whitespace
+  55 | WARNING | [x] Please trim any trailing whitespace
+  56 | WARNING | [x] Please trim any trailing whitespace
+  57 | WARNING | [x] Please trim any trailing whitespace
+  58 | WARNING | [x] Please trim any trailing whitespace
+  59 | WARNING | [x] Please trim any trailing whitespace
+  60 | WARNING | [x] Please trim any trailing whitespace
+  61 | WARNING | [x] Please trim any trailing whitespace
+  62 | WARNING | [x] Please trim any trailing whitespace
+  63 | WARNING | [x] Please trim any trailing whitespace
+  64 | WARNING | [x] Please trim any trailing whitespace
+  65 | WARNING | [x] Please trim any trailing whitespace
+  66 | WARNING | [x] Please trim any trailing whitespace
+  67 | WARNING | [x] Please trim any trailing whitespace
+  68 | WARNING | [x] Please trim any trailing whitespace
+  69 | WARNING | [x] Please trim any trailing whitespace
+  70 | WARNING | [x] Please trim any trailing whitespace
+  71 | WARNING | [x] Please trim any trailing whitespace
+  72 | WARNING | [x] Please trim any trailing whitespace
+  73 | WARNING | [x] Please trim any trailing whitespace
+  74 | WARNING | [x] Please trim any trailing whitespace
+  75 | ERROR   | [x] Multi-line function call not indented correctly; expected 8 spaces but found 12
+  75 | ERROR   | [x] Multi-line function call not indented correctly; expected 8 spaces but found 12
+  75 | ERROR   | [x] Closing parenthesis of a multi-line function call must be on a line by itself
+  75 | WARNING | [x] Please trim any trailing whitespace
+  76 | WARNING | [x] Please trim any trailing whitespace
+  77 | WARNING | [x] Please trim any trailing whitespace
+  78 | WARNING | [x] Please trim any trailing whitespace
+  79 | WARNING | [x] Please trim any trailing whitespace
+  80 | WARNING | [x] Please trim any trailing whitespace
+  81 | WARNING | [x] Please trim any trailing whitespace
+  82 | WARNING | [x] Please trim any trailing whitespace
+  83 | WARNING | [x] Please trim any trailing whitespace
+  84 | WARNING | [x] Please trim any trailing whitespace
+  85 | WARNING | [x] Please trim any trailing whitespace
+  86 | WARNING | [x] Please trim any trailing whitespace
+  87 | WARNING | [x] Please trim any trailing whitespace
+  88 | WARNING | [x] Please trim any trailing whitespace
+  89 | ERROR   | [x] Function closing brace must go on the next line following the body; found 13 blank lines before brace
+  89 | WARNING | [x] Please trim any trailing whitespace
+  90 | WARNING | [x] Please trim any trailing whitespace
+  95 | WARNING | [x] Please trim any trailing whitespace
+  96 | WARNING | [x] Please trim any trailing whitespace
+  97 | WARNING | [x] Please trim any trailing whitespace
+  98 | WARNING | [x] Please trim any trailing whitespace
+  99 | WARNING | [x] Please trim any trailing whitespace
+ 100 | WARNING | [x] Please trim any trailing whitespace
+ 108 | WARNING | [x] Please trim any trailing whitespace
+ 109 | WARNING | [x] Please trim any trailing whitespace
+ 110 | WARNING | [x] Please trim any trailing whitespace
+ 111 | WARNING | [x] Please trim any trailing whitespace
+ 112 | WARNING | [x] Please trim any trailing whitespace
+ 113 | ERROR   | [x] Expected 1 newline at end of file; 0 found
+---------------------------------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 96 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+---------------------------------------------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Repository/CategoryRepository.php
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FOUND 8 ERRORS AND 1 WARNING AFFECTING 9 LINES
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+   3 | WARNING | [ ] The license block has to be present at the top
+     |         |                     of every PHP file, before the namespace
+  10 | ERROR   | [x] There must be one blank line after the last USE statement; 0 found;
+  17 | ERROR   | [x] Group annotations together so that annotations of the same type immediately follow each other, and annotations of a different type are separated by a single
+     |         |     blank line
+  38 | ERROR   | [x] There must be no blank lines after the function comment
+  71 | ERROR   | [ ] Doc comment for parameter "$user" missing
+  74 | ERROR   | [ ] Declare public methods first,then protected ones and finally private ones
+  92 | ERROR   | [ ] Missing doc comment for function add()
+ 101 | ERROR   | [ ] Missing doc comment for function remove()
+ 116 | ERROR   | [x] There must be no blank lines after the function comment
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 4 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Repository/CurrencyRepository.php
+------------------------------------------------------------------------
+FOUND 3 ERRORS AND 1 WARNING AFFECTING 4 LINES
+------------------------------------------------------------------------
+  3 | WARNING | The license block has to be present at the top
+    |         |                 of every PHP file, before the namespace
+ 19 | ERROR   | Missing doc comment for function __construct()
+ 24 | ERROR   | Missing doc comment for function add()
+ 33 | ERROR   | Missing doc comment for function remove()
+------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Repository/TransactionRepository.php
+--------------------------------------------------------------------------------------------------------------------------
+FOUND 22 ERRORS AND 1 WARNING AFFECTING 17 LINES
+--------------------------------------------------------------------------------------------------------------------------
+   3 | WARNING | [ ] The license block has to be present at the top
+     |         |                     of every PHP file, before the namespace
+  40 | ERROR   | [ ] Doc comment for parameter "$filters" missing
+  91 | ERROR   | [ ] Declare public methods first,then protected ones and finally private ones
+  91 | ERROR   | [ ] Missing doc comment for function add()
+ 100 | ERROR   | [ ] Missing doc comment for function remove()
+ 113 | ERROR   | [x] There must be no blank lines after the function comment
+ 133 | ERROR   | [ ] Doc comment for parameter "$user" missing
+ 133 | ERROR   | [ ] Doc comment for parameter "$filters" missing
+ 148 | ERROR   | [ ] Missing doc comment for function queryByWallet()
+ 185 | ERROR   | [x] Line indented incorrectly; expected 4 spaces, found 12
+ 185 | ERROR   | [ ] Declare public methods first,then protected ones and finally private ones
+ 185 | ERROR   | [ ] Missing doc comment for function queryByCategory()
+ 194 | ERROR   | [x] Line indented incorrectly; expected 4 spaces, found 12
+ 198 | ERROR   | [x] Line indented incorrectly; expected 4 spaces, found 12
+ 198 | ERROR   | [ ] You must use "/**" style comments for a function comment
+ 200 | ERROR   | [x] Perl-style comments are not allowed. Use "// Comment." or "/* comment */" instead.
+ 201 | ERROR   | [x] Perl-style comments are not allowed. Use "// Comment." or "/* comment */" instead.
+ 202 | ERROR   | [x] Perl-style comments are not allowed. Use "// Comment." or "/* comment */" instead.
+ 210 | ERROR   | [x] Perl-style comments are not allowed. Use "// Comment." or "/* comment */" instead.
+ 213 | ERROR   | [x] Perl-style comments are not allowed. Use "// Comment." or "/* comment */" instead.
+ 216 | ERROR   | [x] Line indented incorrectly; expected 4 spaces, found 12
+ 216 | ERROR   | [x] Function closing brace must go on the next line following the body; found 1 blank lines before brace
+ 219 | ERROR   | [ ] Missing doc comment for function calculateTotalAmount()
+--------------------------------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 11 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+--------------------------------------------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Repository/UserRepository.php
+--------------------------------------------------------------------------------------------------------------------------
+FOUND 11 ERRORS AND 1 WARNING AFFECTING 9 LINES
+--------------------------------------------------------------------------------------------------------------------------
+   3 | WARNING | [ ] The license block has to be present at the top
+     |         |                     of every PHP file, before the namespace
+  31 | ERROR   | [ ] Missing doc comment for function __construct()
+  36 | ERROR   | [ ] Missing doc comment for function add()
+  45 | ERROR   | [ ] Missing doc comment for function remove()
+  81 | ERROR   | [ ] Doc comment for parameter "$user" missing
+  81 | ERROR   | [ ] Doc comment for parameter "$newHashedPassword" missing
+  94 | ERROR   | [x] Function closing brace must go on the next line following the body; found 1 blank lines before brace
+ 103 | ERROR   | [x] Line indented incorrectly; expected 4 spaces, found 8
+ 104 | ERROR   | [x] Opening brace indented incorrectly; expected 8 spaces, found 4
+ 104 | ERROR   | [x] Opening brace indented incorrectly; expected 8 spaces, found 4
+ 106 | ERROR   | [x] Closing brace indented incorrectly; expected 8 spaces, found 4
+ 106 | ERROR   | [x] Closing brace indented incorrectly; expected 8 spaces, found 4
+--------------------------------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 6 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+--------------------------------------------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Repository/WalletRepository.php
+-----------------------------------------------------------------------------------------------
+FOUND 17 ERRORS AND 1 WARNING AFFECTING 16 LINES
+-----------------------------------------------------------------------------------------------
+   3 | WARNING | [ ] The license block has to be present at the top
+     |         |                     of every PHP file, before the namespace
+  34 | ERROR   | [ ] Missing doc comment for function __construct()
+  39 | ERROR   | [ ] Missing doc comment for function add()
+  48 | ERROR   | [ ] Missing doc comment for function remove()
+  93 | ERROR   | [x] There must be no blank lines after the function comment
+  95 | ERROR   | [ ] Declare public methods first,then protected ones and finally private ones
+ 114 | ERROR   | [ ] Doc comment for parameter "$user" missing
+ 127 | ERROR   | [ ] Missing doc comment for function countWalletBalance()
+ 133 | ERROR   | [x] Missing blank line before return statement
+ 134 | ERROR   | [x] Expected 1 space after closing brace; newline found
+ 135 | ERROR   | [x] Line indented incorrectly; expected 12 spaces, found 0
+ 136 | ERROR   | [x] Line indented incorrectly; expected at least 16 spaces, found 4
+ 137 | ERROR   | [x] Line indented incorrectly; expected 12 spaces, found 0
+ 141 | ERROR   | [x] Missing blank line before return statement
+ 142 | ERROR   | [x] Blank line found at start of control structure
+ 146 | ERROR   | [x] Line indented incorrectly; expected 4 spaces, found 0
+ 146 | ERROR   | [x] Closing brace indented incorrectly; expected 4 spaces, found 0
+ 146 | ERROR   | [x] Closing brace indented incorrectly; expected 4 spaces, found 0
+-----------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 11 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+-----------------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Security/LoginFormAuthenticator.php
+----------------------------------------------------------------------
+FOUND 1 ERROR AFFECTING 1 LINE
+----------------------------------------------------------------------
+ 143 | ERROR | [x] Expected 1 newline at end of file; 0 found
+----------------------------------------------------------------------
+PHPCBF CAN FIX THE 1 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+----------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Security/Voter/CategoryVoter.php
+---------------------------------------------------------------------------------------------------
+FOUND 11 ERRORS AND 1 WARNING AFFECTING 10 LINES
+---------------------------------------------------------------------------------------------------
+   3 | WARNING | [ ] The license block has to be present at the top
+     |         |                     of every PHP file, before the namespace
+  10 | ERROR   | [x] There must be one blank line after the last USE statement; 4 found;
+  15 | ERROR   | [ ] Missing doc comment for class CategoryVoter
+  60 | ERROR   | [ ] Missing doc comment for function supports()
+  68 | ERROR   | [ ] Missing doc comment for function voteOnAttribute()
+  89 | ERROR   | [ ] Doc comment for parameter "$category" missing
+  93 | ERROR   | [ ] Doc comment for parameter $user does not match actual variable name $category
+ 106 | ERROR   | [x] Expected 5 spaces after parameter type; 1 found
+ 106 | ERROR   | [x] Expected 5 spaces after parameter name; 1 found
+ 119 | ERROR   | [x] Expected 5 spaces after parameter type; 1 found
+ 119 | ERROR   | [x] Expected 5 spaces after parameter name; 1 found
+ 129 | ERROR   | [x] The closing brace for the class must go on the next line after the body
+---------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 6 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+---------------------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Security/Voter/TransactionVoter.php
+------------------------------------------------------------------------------------------------------
+FOUND 10 ERRORS AND 1 WARNING AFFECTING 9 LINES
+------------------------------------------------------------------------------------------------------
+   3 | WARNING | [ ] The license block has to be present at the top
+     |         |                     of every PHP file, before the namespace
+  12 | ERROR   | [ ] Missing doc comment for class TransactionVoter
+  53 | ERROR   | [ ] Missing doc comment for function supports()
+  61 | ERROR   | [ ] Missing doc comment for function voteOnAttribute()
+  82 | ERROR   | [ ] Doc comment for parameter "$transaction" missing
+  86 | ERROR   | [ ] Doc comment for parameter $user does not match actual variable name $transaction
+  99 | ERROR   | [x] Expected 8 spaces after parameter type; 1 found
+  99 | ERROR   | [x] Expected 8 spaces after parameter name; 1 found
+ 112 | ERROR   | [x] Expected 8 spaces after parameter type; 1 found
+ 112 | ERROR   | [x] Expected 8 spaces after parameter name; 1 found
+ 122 | ERROR   | [x] The closing brace for the class must go on the next line after the body
+------------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 5 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+------------------------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Security/Voter/WalletVoter.php
+-------------------------------------------------------------------------------------------------
+FOUND 11 ERRORS AND 1 WARNING AFFECTING 10 LINES
+-------------------------------------------------------------------------------------------------
+   3 | WARNING | [ ] The license block has to be present at the top
+     |         |                     of every PHP file, before the namespace
+  11 | ERROR   | [x] There must be one blank line after the last USE statement; 3 found;
+  15 | ERROR   | [ ] Missing doc comment for class WalletVoter
+  56 | ERROR   | [ ] Missing doc comment for function supports()
+  64 | ERROR   | [ ] Missing doc comment for function voteOnAttribute()
+  85 | ERROR   | [ ] Doc comment for parameter "$wallet" missing
+  89 | ERROR   | [ ] Doc comment for parameter $user does not match actual variable name $wallet
+ 102 | ERROR   | [x] Expected 3 spaces after parameter type; 1 found
+ 102 | ERROR   | [x] Expected 3 spaces after parameter name; 1 found
+ 115 | ERROR   | [x] Expected 3 spaces after parameter type; 1 found
+ 115 | ERROR   | [x] Expected 3 spaces after parameter name; 1 found
+ 125 | ERROR   | [x] The closing brace for the class must go on the next line after the body
+-------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 6 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+-------------------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Service/CategoryService.php
+---------------------------------------------------------------------------------------------
+FOUND 11 ERRORS AND 102 WARNINGS AFFECTING 106 LINES
+---------------------------------------------------------------------------------------------
+   1 | ERROR   | [x] End of line character is invalid; expected "\n" but found "\r\n"
+   4 | WARNING | [x] Please trim any trailing whitespace
+   5 | WARNING | [x] Please trim any trailing whitespace
+   6 | WARNING | [x] Please trim any trailing whitespace
+   7 | WARNING | [x] Please trim any trailing whitespace
+   8 | WARNING | [x] Please trim any trailing whitespace
+   9 | WARNING | [x] Please trim any trailing whitespace
+  10 | WARNING | [x] Please trim any trailing whitespace
+  11 | WARNING | [x] Please trim any trailing whitespace
+  12 | WARNING | [x] Please trim any trailing whitespace
+  13 | WARNING | [x] Please trim any trailing whitespace
+  14 | WARNING | [x] Please trim any trailing whitespace
+  15 | WARNING | [x] Please trim any trailing whitespace
+  16 | WARNING | [x] Please trim any trailing whitespace
+  17 | WARNING | [x] Please trim any trailing whitespace
+  18 | WARNING | [x] Please trim any trailing whitespace
+  21 | WARNING | [x] Please trim any trailing whitespace
+  22 | WARNING | [x] Please trim any trailing whitespace
+  23 | WARNING | [x] Please trim any trailing whitespace
+  26 | WARNING | [x] Please trim any trailing whitespace
+  27 | WARNING | [x] Please trim any trailing whitespace
+  28 | WARNING | [x] Please trim any trailing whitespace
+  31 | WARNING | [x] Please trim any trailing whitespace
+  32 | WARNING | [x] Please trim any trailing whitespace
+  33 | WARNING | [x] Please trim any trailing whitespace
+  34 | WARNING | [x] Please trim any trailing whitespace
+  35 | WARNING | [x] Please trim any trailing whitespace
+  38 | WARNING | [x] Please trim any trailing whitespace
+  39 | WARNING | [x] Please trim any trailing whitespace
+  40 | WARNING | [x] Please trim any trailing whitespace
+  41 | ERROR   | [ ] Doc comment for parameter "$transactionRepository" missing
+  44 | ERROR   | [x] Expected 1 spaces after parameter type; 2 found
+  45 | ERROR   | [x] Expected 10 spaces after parameter name; 6 found
+  46 | WARNING | [x] Please trim any trailing whitespace
+  47 | WARNING | [x] Please trim any trailing whitespace
+  48 | WARNING | [x] Please trim any trailing whitespace
+  49 | WARNING | [x] Please trim any trailing whitespace
+  50 | WARNING | [x] Please trim any trailing whitespace
+  51 | WARNING | [x] Please trim any trailing whitespace
+  52 | WARNING | [x] Please trim any trailing whitespace
+  53 | WARNING | [x] Please trim any trailing whitespace
+  54 | WARNING | [x] Please trim any trailing whitespace
+  55 | WARNING | [x] Please trim any trailing whitespace
+  56 | WARNING | [x] Please trim any trailing whitespace
+  57 | WARNING | [x] Please trim any trailing whitespace
+  62 | WARNING | [x] Please trim any trailing whitespace
+  63 | WARNING | [x] Please trim any trailing whitespace
+  64 | WARNING | [x] Please trim any trailing whitespace
+  65 | WARNING | [ ] Always use identical comparison unless you need type juggling
+  65 | WARNING | [x] Please trim any trailing whitespace
+  66 | WARNING | [x] Please trim any trailing whitespace
+  67 | WARNING | [x] Please trim any trailing whitespace
+  68 | WARNING | [x] Please trim any trailing whitespace
+  69 | WARNING | [x] Please trim any trailing whitespace
+  70 | WARNING | [x] Please trim any trailing whitespace
+  71 | WARNING | [x] Please trim any trailing whitespace
+  72 | WARNING | [x] Please trim any trailing whitespace
+  73 | WARNING | [x] Please trim any trailing whitespace
+  74 | WARNING | [x] Please trim any trailing whitespace
+  75 | ERROR   | [ ] Missing doc comment for function delete()
+  75 | WARNING | [x] Please trim any trailing whitespace
+  76 | WARNING | [x] Please trim any trailing whitespace
+  77 | WARNING | [x] Please trim any trailing whitespace
+  78 | WARNING | [x] Please trim any trailing whitespace
+  79 | WARNING | [x] Please trim any trailing whitespace
+  80 | WARNING | [x] Please trim any trailing whitespace
+  81 | ERROR   | [ ] Doc comment for parameter "$author" missing
+  87 | WARNING | [x] Please trim any trailing whitespace
+  88 | WARNING | [x] Please trim any trailing whitespace
+  89 | WARNING | [x] Please trim any trailing whitespace
+  90 | WARNING | [x] Please trim any trailing whitespace
+  91 | WARNING | [x] Please trim any trailing whitespace
+  92 | WARNING | [x] Please trim any trailing whitespace
+  93 | WARNING | [x] Please trim any trailing whitespace
+  94 | WARNING | [x] Please trim any trailing whitespace
+  95 | WARNING | [x] Please trim any trailing whitespace
+  96 | WARNING | [x] Please trim any trailing whitespace
+  97 | WARNING | [x] Please trim any trailing whitespace
+ 106 | WARNING | [x] Please trim any trailing whitespace
+ 107 | WARNING | [x] Please trim any trailing whitespace
+ 108 | WARNING | [x] Please trim any trailing whitespace
+ 109 | WARNING | [x] Please trim any trailing whitespace
+ 110 | WARNING | [x] Please trim any trailing whitespace
+ 111 | WARNING | [x] Please trim any trailing whitespace
+ 112 | WARNING | [x] Please trim any trailing whitespace
+ 113 | WARNING | [x] Please trim any trailing whitespace
+ 114 | ERROR   | [ ] Missing doc comment for function canBeDeleted()
+ 114 | WARNING | [x] Please trim any trailing whitespace
+ 115 | WARNING | [x] Please trim any trailing whitespace
+ 116 | WARNING | [x] Please trim any trailing whitespace
+ 117 | WARNING | [x] Please trim any trailing whitespace
+ 118 | WARNING | [x] Please trim any trailing whitespace
+ 119 | WARNING | [x] Please trim any trailing whitespace
+ 120 | WARNING | [x] Please trim any trailing whitespace
+ 120 | ERROR   | [x] Blank line found at end of control structure
+ 121 | WARNING | [x] Please trim any trailing whitespace
+ 122 | WARNING | [x] Please trim any trailing whitespace
+ 123 | WARNING | [x] Please trim any trailing whitespace
+ 123 | ERROR   | [x] Blank line found at end of control structure
+ 124 | WARNING | [x] Please trim any trailing whitespace
+ 125 | WARNING | [x] Please trim any trailing whitespace
+ 126 | WARNING | [x] Please trim any trailing whitespace
+ 127 | WARNING | [x] Please trim any trailing whitespace
+ 128 | WARNING | [x] Please trim any trailing whitespace
+ 129 | WARNING | [x] Please trim any trailing whitespace
+ 130 | WARNING | [x] Please trim any trailing whitespace
+ 131 | WARNING | [x] Please trim any trailing whitespace
+ 132 | WARNING | [x] Please trim any trailing whitespace
+ 133 | WARNING | [x] Please trim any trailing whitespace
+ 134 | ERROR   | [x] Expected 1 blank line at end of file; 2 found
+ 134 | ERROR   | [x] The closing brace for the class must go on the next line after the body
+ 134 | WARNING | [x] Please trim any trailing whitespace
+ 135 | WARNING | [x] Please trim any trailing whitespace
+---------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 108 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+---------------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Service/CategoryServiceInterface.php
+------------------------------------------------------------------------------------------------
+FOUND 6 ERRORS AND 31 WARNINGS AFFECTING 33 LINES
+------------------------------------------------------------------------------------------------
+  1 | ERROR   | [x] End of line character is invalid; expected "\n" but found "\r\n"
+  4 | WARNING | [x] Please trim any trailing whitespace
+  5 | WARNING | [x] Please trim any trailing whitespace
+  6 | WARNING | [x] Please trim any trailing whitespace
+  7 | WARNING | [x] Please trim any trailing whitespace
+  8 | WARNING | [x] Please trim any trailing whitespace
+  9 | WARNING | [x] Please trim any trailing whitespace
+ 10 | WARNING | [x] Please trim any trailing whitespace
+ 11 | WARNING | [x] Please trim any trailing whitespace
+ 12 | WARNING | [x] Please trim any trailing whitespace
+ 13 | WARNING | [x] Please trim any trailing whitespace
+ 16 | WARNING | [x] Please trim any trailing whitespace
+ 17 | WARNING | [x] Please trim any trailing whitespace
+ 18 | WARNING | [x] Please trim any trailing whitespace
+ 19 | ERROR   | [ ] Doc comment for parameter "$author" missing
+ 25 | WARNING | [x] Please trim any trailing whitespace
+ 26 | WARNING | [x] Please trim any trailing whitespace
+ 27 | WARNING | [x] Please trim any trailing whitespace
+ 32 | WARNING | [x] Please trim any trailing whitespace
+ 33 | WARNING | [x] Please trim any trailing whitespace
+ 34 | WARNING | [x] Please trim any trailing whitespace
+ 39 | WARNING | [x] Please trim any trailing whitespace
+ 40 | WARNING | [x] Please trim any trailing whitespace
+ 41 | WARNING | [x] Please trim any trailing whitespace
+ 42 | WARNING | [x] Please trim any trailing whitespace
+ 43 | ERROR   | [ ] Missing doc comment for function findOneById()
+ 43 | WARNING | [x] Please trim any trailing whitespace
+ 44 | WARNING | [x] Please trim any trailing whitespace
+ 45 | WARNING | [x] Please trim any trailing whitespace
+ 46 | ERROR   | [ ] Missing doc comment for function canBeDeleted()
+ 46 | WARNING | [x] Please trim any trailing whitespace
+ 47 | WARNING | [x] Please trim any trailing whitespace
+ 48 | ERROR   | [x] Expected 1 blank line at end of file; 3 found
+ 48 | ERROR   | [x] The closing brace for the interface must go on the next line after the body
+ 48 | WARNING | [x] Please trim any trailing whitespace
+ 49 | WARNING | [x] Please trim any trailing whitespace
+ 50 | WARNING | [x] Please trim any trailing whitespace
+------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 34 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+------------------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Service/TransactionService.php
+-------------------------------------------------------------------------------------------------------------------------------------
+FOUND 19 ERRORS AND 142 WARNINGS AFFECTING 146 LINES
+-------------------------------------------------------------------------------------------------------------------------------------
+   1 | ERROR   | [x] End of line character is invalid; expected "\n" but found "\r\n"
+   4 | WARNING | [x] Please trim any trailing whitespace
+   5 | WARNING | [x] Please trim any trailing whitespace
+   6 | WARNING | [x] Please trim any trailing whitespace
+   7 | WARNING | [x] Please trim any trailing whitespace
+   8 | WARNING | [x] Please trim any trailing whitespace
+   9 | WARNING | [x] Please trim any trailing whitespace
+  10 | WARNING | [x] Please trim any trailing whitespace
+  11 | WARNING | [x] Please trim any trailing whitespace
+  12 | WARNING | [x] Please trim any trailing whitespace
+  13 | WARNING | [x] Please trim any trailing whitespace
+  14 | WARNING | [x] Please trim any trailing whitespace
+  15 | WARNING | [x] Please trim any trailing whitespace
+  16 | WARNING | [x] Please trim any trailing whitespace
+  17 | ERROR   | [x] There must be one blank line after the last USE statement; 2 found;
+  17 | WARNING | [x] Please trim any trailing whitespace
+  18 | WARNING | [x] Please trim any trailing whitespace
+  19 | WARNING | [x] Please trim any trailing whitespace
+  22 | WARNING | [x] Please trim any trailing whitespace
+  23 | WARNING | [x] Please trim any trailing whitespace
+  24 | WARNING | [x] Please trim any trailing whitespace
+  27 | WARNING | [x] Please trim any trailing whitespace
+  28 | WARNING | [x] Please trim any trailing whitespace
+  29 | WARNING | [x] Please trim any trailing whitespace
+  32 | WARNING | [x] Please trim any trailing whitespace
+  33 | WARNING | [x] Please trim any trailing whitespace
+  34 | WARNING | [x] Please trim any trailing whitespace
+  35 | WARNING | [x] Please trim any trailing whitespace
+  36 | WARNING | [x] Please trim any trailing whitespace
+  39 | WARNING | [x] Please trim any trailing whitespace
+  40 | WARNING | [x] Please trim any trailing whitespace
+  41 | WARNING | [x] Please trim any trailing whitespace
+  42 | WARNING | [x] Please trim any trailing whitespace
+  43 | WARNING | [x] Please trim any trailing whitespace
+  44 | WARNING | [x] Please trim any trailing whitespace
+  45 | WARNING | [x] Please trim any trailing whitespace
+  49 | ERROR   | [x] Expected 7 spaces after parameter name; 1 found
+  50 | ERROR   | [x] Expected 13 spaces after parameter name; 7 found
+  51 | ERROR   | [x] Expected 4 spaces after parameter type; 7 found
+  51 | ERROR   | [x] Expected 1 spaces after parameter name; 2 found
+  52 | WARNING | [x] Please trim any trailing whitespace
+  53 | ERROR   | [ ] Declare all the arguments on the same line as the method/function name, no matter how many arguments there are.
+  53 | WARNING | [x] Please trim any trailing whitespace
+  54 | WARNING | [x] Please trim any trailing whitespace
+  55 | WARNING | [x] Please trim any trailing whitespace
+  56 | WARNING | [x] Please trim any trailing whitespace
+  57 | WARNING | [x] Please trim any trailing whitespace
+  57 | ERROR   | [x] Blank lines are not allowed in a multi-line function declaration
+  58 | WARNING | [x] Please trim any trailing whitespace
+  59 | WARNING | [x] Please trim any trailing whitespace
+  60 | WARNING | [x] Please trim any trailing whitespace
+  61 | WARNING | [x] Please trim any trailing whitespace
+  62 | WARNING | [x] Please trim any trailing whitespace
+  63 | WARNING | [x] Please trim any trailing whitespace
+  64 | WARNING | [x] Please trim any trailing whitespace
+  65 | WARNING | [x] Please trim any trailing whitespace
+  66 | WARNING | [x] Please trim any trailing whitespace
+  67 | WARNING | [x] Please trim any trailing whitespace
+  68 | WARNING | [x] Please trim any trailing whitespace
+  73 | WARNING | [x] Please trim any trailing whitespace
+  74 | WARNING | [x] Please trim any trailing whitespace
+  75 | WARNING | [x] Please trim any trailing whitespace
+  76 | WARNING | [ ] Always use identical comparison unless you need type juggling
+  76 | WARNING | [x] Please trim any trailing whitespace
+  77 | WARNING | [x] Please trim any trailing whitespace
+  78 | WARNING | [x] Please trim any trailing whitespace
+  79 | WARNING | [x] Please trim any trailing whitespace
+  80 | WARNING | [x] Please trim any trailing whitespace
+  81 | WARNING | [x] Please trim any trailing whitespace
+  82 | WARNING | [x] Please trim any trailing whitespace
+  83 | WARNING | [x] Please trim any trailing whitespace
+  84 | WARNING | [x] Please trim any trailing whitespace
+  85 | WARNING | [x] Please trim any trailing whitespace
+  86 | ERROR   | [ ] Missing doc comment for function delete()
+  86 | WARNING | [x] Please trim any trailing whitespace
+  87 | WARNING | [x] Please trim any trailing whitespace
+  88 | WARNING | [x] Please trim any trailing whitespace
+  89 | WARNING | [x] Please trim any trailing whitespace
+  90 | WARNING | [x] Please trim any trailing whitespace
+  91 | WARNING | [x] Please trim any trailing whitespace
+  98 | WARNING | [x] Please trim any trailing whitespace
+  99 | WARNING | [x] Please trim any trailing whitespace
+ 112 | WARNING | [x] Please trim any trailing whitespace
+ 113 | WARNING | [x] Please trim any trailing whitespace
+ 114 | WARNING | [x] Please trim any trailing whitespace
+ 115 | ERROR   | [ ] You must use "/**" style comments for a function comment
+ 115 | WARNING | [x] Please trim any trailing whitespace
+ 116 | WARNING | [x] Please trim any trailing whitespace
+ 117 | WARNING | [x] Please trim any trailing whitespace
+ 118 | WARNING | [x] Please trim any trailing whitespace
+ 119 | WARNING | [x] Please trim any trailing whitespace
+ 120 | WARNING | [x] Please trim any trailing whitespace
+ 121 | WARNING | [x] Please trim any trailing whitespace
+ 122 | WARNING | [x] Please trim any trailing whitespace
+ 123 | WARNING | [x] Please trim any trailing whitespace
+ 124 | WARNING | [x] Please trim any trailing whitespace
+ 125 | WARNING | [x] Please trim any trailing whitespace
+ 126 | WARNING | [x] Please trim any trailing whitespace
+ 127 | WARNING | [x] Please trim any trailing whitespace
+ 128 | WARNING | [x] Please trim any trailing whitespace
+ 129 | WARNING | [x] Please trim any trailing whitespace
+ 130 | WARNING | [x] Please trim any trailing whitespace
+ 131 | WARNING | [x] Please trim any trailing whitespace
+ 132 | WARNING | [x] Please trim any trailing whitespace
+ 133 | WARNING | [x] Please trim any trailing whitespace
+ 134 | WARNING | [x] Please trim any trailing whitespace
+ 135 | WARNING | [x] Please trim any trailing whitespace
+ 136 | ERROR   | [x] Line indented incorrectly; expected 4 spaces, found 5
+ 136 | ERROR   | [ ] Missing doc comment for function getByDate()
+ 136 | ERROR   | [x] Expected 1 space between comma and type hint "\DateTimeInterface"; 0 found
+ 136 | ERROR   | [x] Add a single space after each comma delimiter
+ 136 | WARNING | [x] Please trim any trailing whitespace
+ 137 | WARNING | [x] Please trim any trailing whitespace
+ 138 | WARNING | [x] Please trim any trailing whitespace
+ 139 | WARNING | [x] Please trim any trailing whitespace
+ 140 | WARNING | [x] Please trim any trailing whitespace
+ 141 | ERROR   | [x] Opening statement of multi-line function call not indented correctly; expected 8 spaces but found 9
+ 141 | WARNING | [x] Please trim any trailing whitespace
+ 142 | WARNING | [x] Please trim any trailing whitespace
+ 143 | WARNING | [x] Please trim any trailing whitespace
+ 144 | WARNING | [x] Please trim any trailing whitespace
+ 145 | WARNING | [x] Please trim any trailing whitespace
+ 146 | WARNING | [x] Please trim any trailing whitespace
+ 147 | WARNING | [x] Please trim any trailing whitespace
+ 148 | WARNING | [x] Please trim any trailing whitespace
+ 149 | WARNING | [x] Please trim any trailing whitespace
+ 150 | WARNING | [x] Please trim any trailing whitespace
+ 151 | WARNING | [x] Please trim any trailing whitespace
+ 152 | WARNING | [x] Please trim any trailing whitespace
+ 153 | ERROR   | [x] Line indented incorrectly; expected 4 spaces, found 5
+ 153 | ERROR   | [x] Function closing brace must go on the next line following the body; found 1 blank lines before brace
+ 153 | WARNING | [x] Please trim any trailing whitespace
+ 154 | WARNING | [x] Please trim any trailing whitespace
+ 155 | WARNING | [x] Please trim any trailing whitespace
+ 156 | WARNING | [x] Please trim any trailing whitespace
+ 163 | WARNING | [x] Please trim any trailing whitespace
+ 164 | WARNING | [x] Please trim any trailing whitespace
+ 165 | WARNING | [x] Please trim any trailing whitespace
+ 166 | WARNING | [x] Please trim any trailing whitespace
+ 167 | WARNING | [x] Please trim any trailing whitespace
+ 168 | WARNING | [x] Please trim any trailing whitespace
+ 169 | WARNING | [x] Please trim any trailing whitespace
+ 170 | WARNING | [x] Please trim any trailing whitespace
+ 171 | WARNING | [x] Please trim any trailing whitespace
+ 172 | WARNING | [x] Please trim any trailing whitespace
+ 173 | WARNING | [x] Please trim any trailing whitespace
+ 174 | WARNING | [x] Please trim any trailing whitespace
+ 175 | WARNING | [x] Please trim any trailing whitespace
+ 176 | WARNING | [x] Please trim any trailing whitespace
+ 177 | WARNING | [x] Please trim any trailing whitespace
+ 178 | WARNING | [x] Please trim any trailing whitespace
+ 179 | WARNING | [x] Please trim any trailing whitespace
+ 180 | WARNING | [x] Please trim any trailing whitespace
+ 181 | WARNING | [x] Please trim any trailing whitespace
+ 182 | WARNING | [x] Please trim any trailing whitespace
+ 183 | WARNING | [x] Please trim any trailing whitespace
+ 184 | WARNING | [x] Please trim any trailing whitespace
+ 185 | WARNING | [x] Please trim any trailing whitespace
+ 186 | WARNING | [x] Please trim any trailing whitespace
+ 187 | ERROR   | [x] Expected 1 newline at end of file; 0 found
+ 187 | ERROR   | [x] The closing brace for the class must go on the next line after the body
+-------------------------------------------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 156 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+-------------------------------------------------------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Service/TransactionServiceInterface.php
+------------------------------------------------------------------------------------------------
+FOUND 13 ERRORS AND 40 WARNINGS AFFECTING 44 LINES
+------------------------------------------------------------------------------------------------
+  1 | ERROR   | [x] End of line character is invalid; expected "\n" but found "\r\n"
+  4 | WARNING | [x] Please trim any trailing whitespace
+  5 | WARNING | [x] Please trim any trailing whitespace
+  6 | WARNING | [x] Please trim any trailing whitespace
+  7 | WARNING | [x] Please trim any trailing whitespace
+  8 | WARNING | [x] Please trim any trailing whitespace
+  9 | WARNING | [x] Please trim any trailing whitespace
+ 10 | WARNING | [x] Please trim any trailing whitespace
+ 11 | WARNING | [x] Please trim any trailing whitespace
+ 12 | WARNING | [x] Please trim any trailing whitespace
+ 15 | WARNING | [x] Please trim any trailing whitespace
+ 16 | WARNING | [x] Please trim any trailing whitespace
+ 17 | WARNING | [x] Please trim any trailing whitespace
+ 18 | ERROR   | [ ] Doc comment for parameter "$author" missing
+ 18 | ERROR   | [ ] Doc comment for parameter "$filters" missing
+ 24 | WARNING | [x] Please trim any trailing whitespace
+ 25 | WARNING | [x] Please trim any trailing whitespace
+ 26 | WARNING | [x] Please trim any trailing whitespace
+ 27 | WARNING | [x] Please trim any trailing whitespace
+ 28 | WARNING | [x] Please trim any trailing whitespace
+ 29 | ERROR   | [ ] Doc comment for parameter "$user" missing
+ 29 | ERROR   | [ ] Doc comment for parameter "$startDate" missing
+ 29 | ERROR   | [ ] Doc comment for parameter "$endDate" missing
+ 35 | ERROR   | [x] There must be no blank lines after the function comment
+ 35 | WARNING | [x] Please trim any trailing whitespace
+ 36 | WARNING | [x] Please trim any trailing whitespace
+ 37 | ERROR   | [x] Expected 1 space between comma and type hint "\DateTimeInterface"; 0 found
+ 37 | ERROR   | [x] Add a single space after each comma delimiter
+ 37 | ERROR   | [x] Expected 1 space between comma and type hint "\DateTimeInterface"; 0 found
+ 37 | ERROR   | [x] Add a single space after each comma delimiter
+ 37 | WARNING | [x] Please trim any trailing whitespace
+ 38 | WARNING | [x] Please trim any trailing whitespace
+ 39 | WARNING | [x] Please trim any trailing whitespace
+ 40 | WARNING | [x] Please trim any trailing whitespace
+ 41 | WARNING | [x] Please trim any trailing whitespace
+ 42 | WARNING | [x] Please trim any trailing whitespace
+ 43 | WARNING | [x] Please trim any trailing whitespace
+ 48 | WARNING | [x] Please trim any trailing whitespace
+ 49 | WARNING | [x] Please trim any trailing whitespace
+ 50 | WARNING | [x] Please trim any trailing whitespace
+ 51 | WARNING | [x] Please trim any trailing whitespace
+ 52 | WARNING | [x] Please trim any trailing whitespace
+ 57 | WARNING | [x] Please trim any trailing whitespace
+ 58 | WARNING | [x] Please trim any trailing whitespace
+ 59 | WARNING | [x] Please trim any trailing whitespace
+ 60 | WARNING | [x] Please trim any trailing whitespace
+ 61 | WARNING | [x] Please trim any trailing whitespace
+ 62 | WARNING | [x] Please trim any trailing whitespace
+ 63 | WARNING | [x] Please trim any trailing whitespace
+ 64 | WARNING | [x] Please trim any trailing whitespace
+ 65 | WARNING | [x] Please trim any trailing whitespace
+ 66 | ERROR   | [x] Expected 1 newline at end of file; 0 found
+ 66 | ERROR   | [x] The closing brace for the interface must go on the next line after the body
+------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 48 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+------------------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Service/UserService.php
+--------------------------------------------------------------------------------------------
+FOUND 5 ERRORS AND 42 WARNINGS AFFECTING 46 LINES
+--------------------------------------------------------------------------------------------
+  1 | ERROR   | [x] End of line character is invalid; expected "\n" but found "\r\n"
+  2 | WARNING | [x] Please trim any trailing whitespace
+  5 | WARNING | [x] Please trim any trailing whitespace
+  6 | WARNING | [x] Please trim any trailing whitespace
+  7 | WARNING | [x] Please trim any trailing whitespace
+  8 | WARNING | [x] Please trim any trailing whitespace
+  9 | WARNING | [x] Please trim any trailing whitespace
+ 10 | WARNING | [x] Please trim any trailing whitespace
+ 11 | WARNING | [x] Please trim any trailing whitespace
+ 12 | WARNING | [x] Please trim any trailing whitespace
+ 13 | WARNING | [x] Please trim any trailing whitespace
+ 16 | WARNING | [x] Please trim any trailing whitespace
+ 17 | WARNING | [x] Please trim any trailing whitespace
+ 18 | WARNING | [x] Please trim any trailing whitespace
+ 21 | WARNING | [x] Please trim any trailing whitespace
+ 22 | WARNING | [x] Please trim any trailing whitespace
+ 23 | WARNING | [x] Please trim any trailing whitespace
+ 26 | WARNING | [x] Please trim any trailing whitespace
+ 27 | WARNING | [x] Please trim any trailing whitespace
+ 28 | WARNING | [x] Please trim any trailing whitespace
+ 32 | ERROR   | [x] Expected 5 spaces after parameter type; 1 found
+ 33 | ERROR   | [x] Expected 6 spaces after parameter name; 1 found
+ 34 | WARNING | [x] Please trim any trailing whitespace
+ 35 | WARNING | [x] Please trim any trailing whitespace
+ 36 | WARNING | [x] Please trim any trailing whitespace
+ 37 | WARNING | [x] Please trim any trailing whitespace
+ 38 | WARNING | [x] Please trim any trailing whitespace
+ 39 | WARNING | [x] Please trim any trailing whitespace
+ 40 | WARNING | [x] Please trim any trailing whitespace
+ 47 | WARNING | [x] Please trim any trailing whitespace
+ 48 | WARNING | [x] Please trim any trailing whitespace
+ 49 | WARNING | [x] Please trim any trailing whitespace
+ 50 | WARNING | [x] Please trim any trailing whitespace
+ 51 | WARNING | [x] Please trim any trailing whitespace
+ 52 | WARNING | [x] Please trim any trailing whitespace
+ 53 | WARNING | [x] Please trim any trailing whitespace
+ 54 | WARNING | [x] Please trim any trailing whitespace
+ 55 | WARNING | [x] Please trim any trailing whitespace
+ 56 | WARNING | [x] Please trim any trailing whitespace
+ 63 | WARNING | [x] Please trim any trailing whitespace
+ 64 | WARNING | [x] Please trim any trailing whitespace
+ 65 | WARNING | [x] Please trim any trailing whitespace
+ 66 | WARNING | [x] Please trim any trailing whitespace
+ 67 | WARNING | [x] Please trim any trailing whitespace
+ 68 | WARNING | [x] Please trim any trailing whitespace
+ 69 | ERROR   | [x] Expected 1 newline at end of file; 0 found
+ 69 | ERROR   | [x] The closing brace for the class must go on the next line after the body
+--------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 47 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+--------------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Service/UserServiceInterface.php
+------------------------------------------------------------------------------------------------
+FOUND 3 ERRORS AND 18 WARNINGS AFFECTING 20 LINES
+------------------------------------------------------------------------------------------------
+  1 | ERROR   | [x] End of line character is invalid; expected "\n" but found "\r\n"
+  2 | WARNING | [x] Please trim any trailing whitespace
+  5 | WARNING | [x] Please trim any trailing whitespace
+  6 | WARNING | [x] Please trim any trailing whitespace
+  7 | WARNING | [x] Please trim any trailing whitespace
+  8 | WARNING | [x] Please trim any trailing whitespace
+  9 | WARNING | [x] Please trim any trailing whitespace
+ 10 | WARNING | [x] Please trim any trailing whitespace
+ 11 | WARNING | [x] Please trim any trailing whitespace
+ 14 | WARNING | [x] Please trim any trailing whitespace
+ 15 | WARNING | [x] Please trim any trailing whitespace
+ 16 | WARNING | [x] Please trim any trailing whitespace
+ 23 | WARNING | [x] Please trim any trailing whitespace
+ 24 | WARNING | [x] Please trim any trailing whitespace
+ 25 | WARNING | [x] Please trim any trailing whitespace
+ 32 | WARNING | [x] Please trim any trailing whitespace
+ 33 | WARNING | [x] Please trim any trailing whitespace
+ 34 | WARNING | [x] Please trim any trailing whitespace
+ 35 | WARNING | [x] Please trim any trailing whitespace
+ 36 | ERROR   | [x] Expected 1 newline at end of file; 0 found
+ 36 | ERROR   | [x] The closing brace for the interface must go on the next line after the body
+------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 21 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+------------------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Service/WalletService.php
+--------------------------------------------------------------------------------------------------------------------------
+FOUND 21 ERRORS AND 114 WARNINGS AFFECTING 118 LINES
+--------------------------------------------------------------------------------------------------------------------------
+   1 | ERROR   | [x] End of line character is invalid; expected "\n" but found "\r\n"
+   4 | WARNING | [x] Please trim any trailing whitespace
+   5 | WARNING | [x] Please trim any trailing whitespace
+   6 | WARNING | [x] Please trim any trailing whitespace
+   7 | WARNING | [x] Please trim any trailing whitespace
+   8 | WARNING | [x] Please trim any trailing whitespace
+   9 | WARNING | [x] Please trim any trailing whitespace
+  10 | WARNING | [x] Please trim any trailing whitespace
+  11 | WARNING | [x] Please trim any trailing whitespace
+  12 | WARNING | [x] Please trim any trailing whitespace
+  13 | WARNING | [x] Please trim any trailing whitespace
+  14 | WARNING | [x] Please trim any trailing whitespace
+  15 | WARNING | [x] Please trim any trailing whitespace
+  16 | WARNING | [x] Please trim any trailing whitespace
+  17 | WARNING | [x] Please trim any trailing whitespace
+  20 | WARNING | [x] Please trim any trailing whitespace
+  21 | WARNING | [x] Please trim any trailing whitespace
+  22 | WARNING | [x] Please trim any trailing whitespace
+  25 | WARNING | [x] Please trim any trailing whitespace
+  26 | WARNING | [x] Please trim any trailing whitespace
+  27 | WARNING | [x] Please trim any trailing whitespace
+  30 | WARNING | [x] Please trim any trailing whitespace
+  31 | WARNING | [x] Please trim any trailing whitespace
+  32 | WARNING | [x] Please trim any trailing whitespace
+  33 | WARNING | [x] Please trim any trailing whitespace
+  34 | WARNING | [x] Please trim any trailing whitespace
+  35 | WARNING | [x] Please trim any trailing whitespace
+  38 | WARNING | [x] Please trim any trailing whitespace
+  39 | WARNING | [x] Please trim any trailing whitespace
+  40 | WARNING | [x] Please trim any trailing whitespace
+  41 | ERROR   | [ ] Doc comment for parameter "$transactionRepository" missing
+  44 | ERROR   | [x] Expected 3 spaces after parameter type; 5 found
+  44 | ERROR   | [x] Expected 1 spaces after parameter name; 2 found
+  45 | ERROR   | [x] Expected 8 spaces after parameter name; 6 found
+  46 | WARNING | [x] Please trim any trailing whitespace
+  47 | WARNING | [x] Please trim any trailing whitespace
+  48 | WARNING | [x] Please trim any trailing whitespace
+  49 | WARNING | [x] Please trim any trailing whitespace
+  50 | WARNING | [x] Please trim any trailing whitespace
+  51 | WARNING | [x] Please trim any trailing whitespace
+  52 | WARNING | [x] Please trim any trailing whitespace
+  53 | WARNING | [x] Please trim any trailing whitespace
+  54 | WARNING | [x] Please trim any trailing whitespace
+  55 | WARNING | [x] Please trim any trailing whitespace
+  60 | WARNING | [x] Please trim any trailing whitespace
+  61 | WARNING | [x] Please trim any trailing whitespace
+  62 | WARNING | [x] Please trim any trailing whitespace
+  63 | WARNING | [ ] Always use identical comparison unless you need type juggling
+  63 | WARNING | [x] Please trim any trailing whitespace
+  64 | WARNING | [x] Please trim any trailing whitespace
+  65 | WARNING | [x] Please trim any trailing whitespace
+  66 | WARNING | [x] Please trim any trailing whitespace
+  67 | WARNING | [x] Please trim any trailing whitespace
+  68 | WARNING | [x] Please trim any trailing whitespace
+  69 | WARNING | [x] Please trim any trailing whitespace
+  70 | WARNING | [x] Please trim any trailing whitespace
+  71 | WARNING | [x] Please trim any trailing whitespace
+  72 | WARNING | [x] Please trim any trailing whitespace
+  73 | WARNING | [x] Please trim any trailing whitespace
+  74 | ERROR   | [ ] Missing doc comment for function delete()
+  74 | WARNING | [x] Please trim any trailing whitespace
+  75 | WARNING | [x] Please trim any trailing whitespace
+  76 | WARNING | [x] Please trim any trailing whitespace
+  77 | WARNING | [x] Please trim any trailing whitespace
+  78 | WARNING | [x] Please trim any trailing whitespace
+  79 | WARNING | [x] Please trim any trailing whitespace
+  80 | WARNING | [x] Please trim any trailing whitespace
+  81 | ERROR   | [ ] Doc comment for parameter "$author" missing
+  87 | WARNING | [x] Please trim any trailing whitespace
+  88 | WARNING | [x] Please trim any trailing whitespace
+  89 | WARNING | [x] Please trim any trailing whitespace
+  90 | WARNING | [x] Please trim any trailing whitespace
+  91 | WARNING | [x] Please trim any trailing whitespace
+  92 | WARNING | [x] Please trim any trailing whitespace
+  93 | WARNING | [x] Please trim any trailing whitespace
+  94 | WARNING | [x] Please trim any trailing whitespace
+  95 | WARNING | [x] Please trim any trailing whitespace
+  96 | WARNING | [x] Please trim any trailing whitespace
+  97 | WARNING | [x] Please trim any trailing whitespace
+  98 | WARNING | [x] Please trim any trailing whitespace
+  99 | ERROR   | [ ] Missing doc comment for function canBeDeleted()
+  99 | WARNING | [x] Please trim any trailing whitespace
+ 100 | WARNING | [x] Please trim any trailing whitespace
+ 101 | WARNING | [x] Please trim any trailing whitespace
+ 102 | WARNING | [x] Please trim any trailing whitespace
+ 103 | WARNING | [x] Please trim any trailing whitespace
+ 104 | ERROR   | [x] Expected 1 space after FOREACH keyword; 0 found
+ 104 | ERROR   | [x] Expected 1 space after closing parenthesis; found 0
+ 104 | ERROR   | [x] Blank line found at start of control structure
+ 104 | WARNING | [x] Please trim any trailing whitespace
+ 105 | WARNING | [x] Please trim any trailing whitespace
+ 106 | WARNING | [x] Please trim any trailing whitespace
+ 107 | WARNING | [x] Please trim any trailing whitespace
+ 108 | WARNING | [x] Please trim any trailing whitespace
+ 109 | WARNING | [x] Please trim any trailing whitespace
+ 110 | WARNING | [x] Please trim any trailing whitespace
+ 111 | ERROR   | [x] Function closing brace must go on the next line following the body; found 3 blank lines before brace
+ 111 | WARNING | [x] Please trim any trailing whitespace
+ 112 | WARNING | [x] Please trim any trailing whitespace
+ 113 | WARNING | [x] Please trim any trailing whitespace
+ 114 | WARNING | [x] Please trim any trailing whitespace
+ 115 | ERROR   | [ ] Missing doc comment for function CountWalletSum()
+ 115 | ERROR   | [ ] Method name "WalletService::CountWalletSum" is not in camel caps format
+ 115 | WARNING | [x] Please trim any trailing whitespace
+ 116 | WARNING | [x] Please trim any trailing whitespace
+ 117 | WARNING | [x] Please trim any trailing whitespace
+ 120 | WARNING | [x] Please trim any trailing whitespace
+ 121 | ERROR   | [x] Space after opening parenthesis of function call prohibited
+ 121 | ERROR   | [x] Space after opening parenthesis of function call prohibited
+ 121 | WARNING | [x] Please trim any trailing whitespace
+ 122 | WARNING | [x] Please trim any trailing whitespace
+ 123 | WARNING | [x] Please trim any trailing whitespace
+ 124 | WARNING | [x] Please trim any trailing whitespace
+ 125 | ERROR   | [x] Line indented incorrectly; expected 4 spaces, found 16
+ 125 | ERROR   | [x] Function closing brace must go on the next line following the body; found 3 blank lines before brace
+ 125 | ERROR   | [x] Closing brace indented incorrectly; expected 4 spaces, found 16
+ 125 | ERROR   | [x] Closing brace indented incorrectly; expected 4 spaces, found 16
+ 125 | WARNING | [x] Please trim any trailing whitespace
+ 126 | WARNING | [x] Please trim any trailing whitespace
+ 127 | WARNING | [x] Please trim any trailing whitespace
+ 128 | WARNING | [x] Please trim any trailing whitespace
+ 129 | WARNING | [x] Please trim any trailing whitespace
+ 130 | WARNING | [x] Please trim any trailing whitespace
+ 131 | WARNING | [x] Please trim any trailing whitespace
+ 132 | WARNING | [x] Please trim any trailing whitespace
+ 133 | WARNING | [x] Please trim any trailing whitespace
+ 134 | WARNING | [x] Please trim any trailing whitespace
+ 135 | WARNING | [x] Please trim any trailing whitespace
+ 136 | WARNING | [x] Please trim any trailing whitespace
+ 137 | WARNING | [x] Please trim any trailing whitespace
+ 138 | WARNING | [x] Please trim any trailing whitespace
+ 139 | WARNING | [x] Please trim any trailing whitespace
+ 140 | WARNING | [x] Please trim any trailing whitespace
+ 141 | ERROR   | [x] The closing brace for the class must go on the next line after the body
+ 141 | WARNING | [x] Please trim any trailing whitespace
+--------------------------------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 128 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+--------------------------------------------------------------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Service/WalletServiceInterface.php
+-----------------------------------------------------------------------------------------------------
+FOUND 9 ERRORS AND 38 WARNINGS AFFECTING 41 LINES
+-----------------------------------------------------------------------------------------------------
+  1 | ERROR   | [x] End of line character is invalid; expected "\n" but found "\r\n"
+  4 | WARNING | [x] Please trim any trailing whitespace
+  5 | WARNING | [x] Please trim any trailing whitespace
+  6 | WARNING | [x] Please trim any trailing whitespace
+  7 | WARNING | [x] Please trim any trailing whitespace
+  8 | WARNING | [x] Please trim any trailing whitespace
+  9 | WARNING | [x] Please trim any trailing whitespace
+ 10 | WARNING | [x] Please trim any trailing whitespace
+ 11 | WARNING | [x] Please trim any trailing whitespace
+ 12 | WARNING | [x] Please trim any trailing whitespace
+ 13 | WARNING | [x] Please trim any trailing whitespace
+ 14 | WARNING | [x] Please trim any trailing whitespace
+ 17 | WARNING | [x] Please trim any trailing whitespace
+ 18 | WARNING | [x] Please trim any trailing whitespace
+ 19 | WARNING | [x] Please trim any trailing whitespace
+ 20 | ERROR   | [ ] Doc comment for parameter "$author" missing
+ 26 | WARNING | [x] Please trim any trailing whitespace
+ 27 | ERROR   | [x] Expected 1 space between comma and type hint "User"; 0 found
+ 27 | ERROR   | [x] Add a single space after each comma delimiter
+ 27 | WARNING | [x] Please trim any trailing whitespace
+ 28 | WARNING | [x] Please trim any trailing whitespace
+ 29 | WARNING | [x] Please trim any trailing whitespace
+ 30 | WARNING | [x] Please trim any trailing whitespace
+ 35 | WARNING | [x] Please trim any trailing whitespace
+ 36 | WARNING | [x] Please trim any trailing whitespace
+ 37 | WARNING | [x] Please trim any trailing whitespace
+ 38 | WARNING | [x] Please trim any trailing whitespace
+ 43 | WARNING | [x] Please trim any trailing whitespace
+ 44 | WARNING | [x] Please trim any trailing whitespace
+ 45 | WARNING | [x] Please trim any trailing whitespace
+ 46 | WARNING | [x] Please trim any trailing whitespace
+ 47 | WARNING | [x] Please trim any trailing whitespace
+ 48 | ERROR   | [ ] Missing doc comment for function canBeDeleted()
+ 48 | WARNING | [x] Please trim any trailing whitespace
+ 49 | WARNING | [x] Please trim any trailing whitespace
+ 50 | WARNING | [x] Please trim any trailing whitespace
+ 51 | ERROR   | [ ] Missing doc comment for function CountWalletSum()
+ 51 | ERROR   | [ ] Method name "WalletServiceInterface::CountWalletSum" is not in camel caps format
+ 51 | WARNING | [x] Please trim any trailing whitespace
+ 52 | WARNING | [x] Please trim any trailing whitespace
+ 53 | WARNING | [x] Please trim any trailing whitespace
+ 54 | WARNING | [x] Please trim any trailing whitespace
+ 55 | WARNING | [x] Please trim any trailing whitespace
+ 56 | WARNING | [x] Please trim any trailing whitespace
+ 57 | WARNING | [x] Please trim any trailing whitespace
+ 58 | ERROR   | [x] Expected 1 newline at end of file; 0 found
+ 58 | ERROR   | [x] The closing brace for the interface must go on the next line after the body
+-----------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 43 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+-----------------------------------------------------------------------------------------------------
+
+Time: 4.66 secs; Memory: 14MB
+
+ ----------- ---------- ------------------------------ ------------------------------ 
+  State       Domain     Id                             Message Preview (en)          
+ ----------- ---------- ------------------------------ ------------------------------ 
+   missing    messages   message.data_missing           message.data_missing          
+   missing    messages   message.deleted_successfully   message.deleted_successfully  
+   missing    messages   message.empty_list             message.empty_list            
+   missing    messages   message.record_not_found       message.record_not_found      
+   missing    messages   message.form_error             message.form_error            
+   missing    messages   action.user                    action.user                   
+   missing    messages   title.user_edit                title.user_edit               
+   missing    messages   title.user_list                title.user_list               
+   missing    messages   label.email                    label.email                   
+   missing    messages   label.roles                    label.roles                   
+   missing    messages   title.wallet_edit              title.wallet_edit             
+ ----------- ---------- ------------------------------ ------------------------------ 
+
+ ----------- ---------- ------------------------------ ------------------------------ ------------------------------- 
+  State       Domain     Id                             Message Preview (pl)           Fallback Message Preview (en)  
+ ----------- ---------- ------------------------------ ------------------------------ ------------------------------- 
+   missing    messages   message.data_missing           message.data_missing           message.data_missing           
+   missing    messages   message.deleted_successfully   message.deleted_successfully   message.deleted_successfully   
+   missing    messages   message.empty_list             message.empty_list             message.empty_list             
+   missing    messages   message.record_not_found       message.record_not_found       message.record_not_found       
+   missing    messages   message.form_error             message.form_error             message.form_error             
+   missing    messages   action.user                    action.user                    action.user                    
+   missing    messages   title.user_edit                title.user_edit                title.user_edit                
+   missing    messages   title.user_list                title.user_list                title.user_list                
+   missing    messages   label.email                    label.email                    label.email                    
+   missing    messages   label.roles                    label.roles                    label.roles                    
+   missing    messages   title.wallet_edit              title.wallet_edit              title.wallet_edit              
+ ----------- ---------- ------------------------------ ------------------------------ ------------------------------- 
+
+[notice] Migrating up to DoctrineMigrations\Version20231004171252
+[notice] finished in 977.5ms, used 26M memory, 1 migrations executed, 15 sql queries
+
+ [OK] Successfully migrated to version: DoctrineMigrations\Version20231004171252                                        
+
+
+   > purging database
+   > loading App\DataFixtures\UserFixtures
+   > loading App\DataFixtures\CurrencyFixtures
+   > loading App\DataFixtures\CategoryFixtures
+   > loading App\DataFixtures\WalletFixtures
+   > loading App\DataFixtures\TransactionFixtures

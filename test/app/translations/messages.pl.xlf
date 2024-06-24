@@ -211,6 +211,47 @@
                <source>message.value</source>
                <target> Nie masz wystarczających środków, aby wykonać taką transakcję </target>
             </trans-unit>
+               <trans-unit id="message.deleted_successfully">
+               <source>message.deleted_successfully</source>
+               <target> Usunięto element </target>
+            </trans-unit>
+               <trans-unit id="message.data_missing">
+               <source>message.data_missing</source>
+               <target> Brakuje poprawnych danych </target>
+            </trans-unit>
+               <trans-unit id="label.email">
+               <source>label.email</source>
+               <target> email </target>
+            </trans-unit>
+               <trans-unit id="label.roles">
+               <source>label.roles</source>
+               <target> role </target>
+            </trans-unit>
+               <trans-unit id="title.user_list">
+               <source>title.user_list</source>
+               <target> lista użytkowników </target>
+            </trans-unit>
+               <trans-unit id="action.user">
+               <source>action.user</source>
+               <target> Panel administracyjny </target>
+            </trans-unit>
+               <trans-unit id="message.empty_list">
+               <source>message.empty_list</source>
+               <target> nie ma żadnych elementów do wyświetlenia </target>
+            </trans-unit>
+               <trans-unit id="title.user_edit">
+               <source>title.user_edit</source>
+               <target> Edycja użytkownika </target>
+            </trans-unit>
+            <trans-unit id="label.password_new">
+              <source>label.password_new</source>
+              <target>nowe hasło</target>
+            </trans-unit>
+            <trans-unit id="label.password_confirm">
+              <source>label.password_confirm</source>
+              <target>potwierdź</target>
+            </trans-unit>
+
     </body>
   </file>
 </xliff>

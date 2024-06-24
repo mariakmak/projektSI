@@ -11,8 +11,6 @@ use App\Repository\CategoryRepository;
 use App\Repository\TransactionRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\Security;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 
@@ -31,8 +29,6 @@ class CategoryService implements CategoryServiceInterface
      */
     private PaginatorInterface $paginator;
 
-
-
     /**
      * Transaction repository.
      */
@@ -41,8 +37,9 @@ class CategoryService implements CategoryServiceInterface
     /**
      * Constructor.
      *
-     * @param CategoryRepository  $categoryRepository CategoryRepository
-     * @param PaginatorInterface $paginator      Paginator
+     * @param CategoryRepository    $categoryRepository    CategoryRepository
+     * @param PaginatorInterface    $paginator             Paginator
+     * @param TransactionRepository $transactionRepository TransactionRepository
      */
     public function __construct(CategoryRepository $categoryRepository, PaginatorInterface $paginator, TransactionRepository $transactionRepository)
     {
@@ -51,10 +48,6 @@ class CategoryService implements CategoryServiceInterface
         $this->transactionRepository = $transactionRepository;
     }
 
-
-
-
-
     /**
      * Save entity.
      *
@@ -62,7 +55,7 @@ class CategoryService implements CategoryServiceInterface
      */
     public function save(Category $category): void
     {
-        if ($category->getId() == null) {
+        if (null === $category->getId()) {
             $category->setCreatedAt(new \DateTimeImmutable());
         }
         $category->setUpdatedAt(new \DateTimeImmutable());
@@ -70,18 +63,21 @@ class CategoryService implements CategoryServiceInterface
         $this->categoryRepository->save($category);
     }
 
-
-
+    /**
+     * Delete category.
+     *
+     * @param Category $category Category entity
+     */
     public function delete(Category $category): void
     {
         $this->categoryRepository->delete($category);
     }
 
-
     /**
      * Get paginated list.
      *
-     * @param int $page Page number
+     * @param int  $page   Page number
+     * @param User $author Author of the categories
      *
      * @return PaginationInterface<string, mixed> Paginated list
      */
@@ -93,7 +89,6 @@ class CategoryService implements CategoryServiceInterface
             CategoryRepository::PAGINATOR_ITEMS_PER_PAGE
         );
     }
-
 
     /**
      * Find by id.
@@ -109,27 +104,21 @@ class CategoryService implements CategoryServiceInterface
         return $this->categoryRepository->findOneById($id);
     }
 
-
-
+    /**
+     * Check if the category can be deleted.
+     *
+     * @param Category $category Category entity
+     *
+     * @return bool True if the category can be deleted, false otherwise
+     */
     public function canBeDeleted(Category $category): bool
     {
         try {
             $result = $this->transactionRepository->queryByCategory($category);
 
             return $result <= 0;
-
         } catch (NoResultException|NonUniqueResultException) {
             return false;
-
         }
     }
-
-
-
-
-
-
-
-
 }
-

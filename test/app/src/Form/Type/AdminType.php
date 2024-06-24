@@ -11,7 +11,6 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -49,14 +48,14 @@ class AdminType extends AbstractType
             [
                 'type' => PasswordType::class,
                 'required' => false,
-                'first_options' => ['label' => 'Nowe hasło'],
-                'second_options' => ['label' => 'Potwierdź nowe hasło'],
+                'first_options' => ['label' => 'label.password_new'],
+                'second_options' => ['label' => 'label.password_confirm'],
             ]
         );
         $builder->add(
             'roles',
             ChoiceType::class,
-            [
+            [   'label' => 'label.roles',
                 'attr' => ['class' => 'form-control'],
                 'choices' => [
                     'ROLE_ADMIN' => [

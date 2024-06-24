@@ -7,17 +7,15 @@ namespace App\DataFixtures;
 
 use App\Entity\Currency;
 use App\Entity\Transaction;
-use App\Entity\Enum\TaskStatus;
-use App\Entity\User;
 use App\Entity\Category;
+use App\Entity\User;
 use App\Entity\Wallet;
-use DateTimeImmutable;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 /**
  * Class TransactionFixtures.
  */
-class TransactionFixtures extends AppFixtures implements DependentFixtureInterface
+class TransactionFixtures extends AbstractBaseFixtures implements DependentFixtureInterface
 {
     /**
      * Load data.
@@ -38,7 +36,7 @@ class TransactionFixtures extends AppFixtures implements DependentFixtureInterfa
 
             $transaction->setDescription($this->faker->sentence);
             $transaction->setCreatedAt(
-                DateTimeImmutable::createFromMutable(
+                \DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-100 days', '-1 days')
                 )
             );
@@ -53,10 +51,9 @@ class TransactionFixtures extends AppFixtures implements DependentFixtureInterfa
             $wallet = $this->getRandomReference('wallets');
             $transaction->setWallet($wallet);
 
-
             $author = $this->getRandomReference('users');
+            assert($author instanceof User);
             $transaction->setAuthor($author);
-
 
             return $transaction;
         });
@@ -72,6 +69,6 @@ class TransactionFixtures extends AppFixtures implements DependentFixtureInterfa
      */
     public function getDependencies(): array
     {
-        return [CategoryFixtures::class, CurrencyFixtures::class, WalletFixtures::class, UserFixtures::class  ];
+        return [CategoryFixtures::class, CurrencyFixtures::class, WalletFixtures::class, UserFixtures::class];
     }
 }

@@ -211,6 +211,47 @@
                <source>message.value</source>
                <target> You do not have sufficient funds to complete this transaction </target>
             </trans-unit>
+               <trans-unit id="message.deleted_successfully">
+               <source>message.deleted_successfully</source>
+               <target> The item has been deleted </target>
+            </trans-unit>
+               <trans-unit id="message.data_missing">
+               <source>message.data_missing</source>
+               <target> The data is incorrect </target>
+            </trans-unit>
+               <trans-unit id="label.email">
+               <source>label.email</source>
+               <target> email </target>
+            </trans-unit>
+               <trans-unit id="label.roles">
+               <source>label.roles</source>
+               <target> roles </target>
+            </trans-unit>
+               <trans-unit id="title.user_list">
+               <source>title.user_list</source>
+               <target> Users </target>
+            </trans-unit>
+               <trans-unit id="action.user">
+               <source>action.user</source>
+               <target> Administration </target>
+            </trans-unit>
+               <trans-unit id="message.empty_list">
+               <source>message.empty_list</source>
+               <target> There is no elements to show </target>
+            </trans-unit>
+               <trans-unit id="title.user_edit">
+               <source>title.user_edit</source>
+               <target> Edit user </target>
+            </trans-unit>
+            <trans-unit id="label.password_new">
+              <source>label.password_new</source>
+              <target>new password</target>
+            </trans-unit>
+            <trans-unit id="label.password_confirm">
+              <source>label.password_confirm</source>
+              <target>confirm new password</target>
+            </trans-unit>
+
     </body>
   </file>
 </xliff>

@@ -19,11 +19,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
-use App\Repository\TransactionRepository;
-use App\Config\TextAlign;
 use Symfony\Component\Security\Core\Security;
-
 
 
 /**
@@ -42,37 +38,50 @@ class TransactionType extends AbstractType
      *
      * @see FormTypeExtensionInterface::buildForm()
      */
+    private Security $security;
 
-    private $security;
-
+    /**
+     * TransactionType constructor.
+     *
+     * @param Security $security Security component
+     */
     public function __construct(Security $security)
     {
         $this->security = $security;
     }
 
-
-
+    /**
+     * Builds the form.
+     *
+     * This method is called for each type in the hierarchy starting from the
+     * top most type. Type extensions can further modify the form.
+     *
+     * @param FormBuilderInterface $builder The form builder
+     * @param array<string, mixed> $options Form options
+     *
+     * @see FormTypeExtensionInterface::buildForm()
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-
         $builder->add(
             'category',
             EntityType::class,
             [
                 'class' => Category::class,
                 'choice_label' => function ($category): string {
-                    return $category ->getName() ;
+                    return $category->getName();
                 },
                 'label' => 'label.category',
                 'placeholder' => 'label.none',
                 'required' => true,
                 'expanded' => true,
                 'multiple' => false,
-                'query_builder' => function (CategoryRepository $tg) {
-                    return $tg->queryByAuthor($this->security->getUser());
-                }
-                ],
-
+                'query_builder' => function (CategoryRepository $repository) {
+                    return $repository->createQueryBuilder('c')
+                        ->andWhere('c.author = :author')
+                        ->setParameter('author', $this->security->getUser());
+                },
+            ],
         );
         $builder->add(
             'name',
@@ -81,9 +90,8 @@ class TransactionType extends AbstractType
                 'label' => 'label.name',
                 'required' => true,
                 'attr' => ['max_length' => 64],
-            ]);
-
-
+            ]
+        );
 
         $builder->add(
             'description',
@@ -91,12 +99,9 @@ class TransactionType extends AbstractType
             [
                 'label' => 'label.description',
                 'required' => false,
-                'attr' => ['max_length' =>250],
-            ]);
-
-
-
-
+                'attr' => ['max_length' => 250],
+            ]
+        );
 
         $builder->add(
             'sum',
@@ -104,20 +109,17 @@ class TransactionType extends AbstractType
             [
                 'label' => 'label.sum',
                 'required' => true,
-
-            ]);
+            ]
+        );
 
         $builder->add(
             'value',
-            CheckboxType::class,[
-            'label' => 'label.income',
-            'required' => false
-
-            ]);
-
-
-
-
+            CheckboxType::class,
+            [
+                'label' => 'label.income',
+                'required' => false,
+            ]
+        );
 
         $builder->add(
             'currency',
@@ -135,8 +137,6 @@ class TransactionType extends AbstractType
             ]
         );
 
-
-
         $builder->add(
             'wallet',
             EntityType::class,
@@ -150,25 +150,14 @@ class TransactionType extends AbstractType
                 'required' => true,
                 'expanded' => true,
                 'multiple' => false,
-                'query_builder' => function (WalletRepository $tg) {
-                    return $tg->queryByAuthor($this->security->getUser());
-                },
+                'query_builder' => function (WalletRepository $repository) {
+                    return $repository->createQueryBuilder('c')
+                        ->andWhere('c.author = :author')
+                        ->setParameter('author', $this->security->getUser());
+                }
             ]
         );
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     /**
      * Configures the options for this type.

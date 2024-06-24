@@ -6,17 +6,14 @@
 namespace App\DataFixtures;
 
 use App\Entity\Currency;
-use App\Entity\Transaction;
 use App\Entity\User;
-use App\Entity\Enum\TaskStatus;
 use App\Entity\Wallet;
-use DateTimeImmutable;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 /**
  * Class WalletFixtures.
  */
-class WalletFixtures extends AppFixtures implements DependentFixtureInterface
+class WalletFixtures extends AbstractBaseFixtures implements DependentFixtureInterface
 {
     /**
      * Load data.
@@ -30,21 +27,18 @@ class WalletFixtures extends AppFixtures implements DependentFixtureInterface
         $this->createMany(40, 'wallets', function (int $i) {
             $wallet = new Wallet();
 
-
-
             $wallet->setName($this->faker->word);
             $wallet->setCreatedAt(
-                DateTimeImmutable::createFromMutable(
+                \DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-100 days', '-1 days')
                 )
             );
 
             $wallet->setUpdatedAt(
-                DateTimeImmutable::createFromMutable(
+                \DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-100 days', '-1 days')
                 )
             );
-
 
             /** @var Currency $currency */
             $currency = $this->getRandomReferences('currencies', 4);
@@ -53,9 +47,9 @@ class WalletFixtures extends AppFixtures implements DependentFixtureInterface
             }
 
             $author = $this->getRandomReference('users');
+            assert($author instanceof User);
             $wallet->setAuthor($author);
             $wallet->setSum($this->faker->biasedNumberBetween($min = 1, $max = 1000));
-
 
             return $wallet;
         });
@@ -68,18 +62,9 @@ class WalletFixtures extends AppFixtures implements DependentFixtureInterface
      * on which the implementing class depends on.
      *
      * @return string[] of dependencies
-     *
      */
     public function getDependencies(): array
     {
         return [CurrencyFixtures::class, UserFixtures::class];
     }
-
-
-
-
-
-
-
-
 }

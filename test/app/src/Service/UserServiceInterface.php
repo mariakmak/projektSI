@@ -31,6 +31,4 @@ interface UserServiceInterface
      * @return void Void
      */
     public function save(User $user): void;
-
-
 }

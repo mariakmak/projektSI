@@ -1,4 +1,7 @@
 <?php
+/**
+ * Wallet repository.
+ */
 
 namespace App\Repository;
 
@@ -8,7 +11,6 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 /**
  * @extends ServiceEntityRepository<Wallet>
@@ -31,11 +33,22 @@ class WalletRepository extends ServiceEntityRepository
      */
     public const PAGINATOR_ITEMS_PER_PAGE = 3;
 
+    /**
+     * Constructor.
+     *
+     * @param ManagerRegistry $registry Manager registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Wallet::class);
     }
 
+    /**
+     * Add entity to the database.
+     *
+     * @param Wallet $entity Wallet entity
+     * @param bool   $flush  Whether to flush the changes (default: false)
+     */
     public function add(Wallet $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
@@ -45,6 +58,12 @@ class WalletRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Remove entity from the database.
+     *
+     * @param Wallet $entity Wallet entity
+     * @param bool   $flush  Whether to flush the changes (default: false)
+     */
     public function remove(Wallet $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
@@ -53,7 +72,6 @@ class WalletRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
 
     /**
      * Query all records.
@@ -80,24 +98,21 @@ class WalletRepository extends ServiceEntityRepository
      *
      * @return QueryBuilder Query builder
      */
-    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
+    private function getOrCreateQueryBuilder(?QueryBuilder $queryBuilder = null): QueryBuilder
     {
         return $queryBuilder ?? $this->createQueryBuilder('wallet');
     }
-
 
     /**
      * Save entity.
      *
      * @param Wallet $wallet Wallet entity
      */
-
     public function save(Wallet $wallet): void
     {
         $this->_em->persist($wallet);
         $this->_em->flush();
     }
-
 
     /**
      * Delete entity.
@@ -110,8 +125,11 @@ class WalletRepository extends ServiceEntityRepository
         $this->_em->flush();
     }
 
-
     /**
+     * Query wallets by author.
+     *
+     * @param User $user User entity
+     *
      * @return QueryBuilder Query builder
      */
     public function queryByAuthor(User $user): QueryBuilder
@@ -124,52 +142,57 @@ class WalletRepository extends ServiceEntityRepository
         return $queryBuilder;
     }
 
+    /**
+     * Count wallet balance and update it if possible.
+     *
+     * @param int    $sum       Amount to add or subtract
+     * @param bool   $value     Whether to add (true) or subtract (false)
+     * @param Wallet $wallet    Wallet entity
+     * @param int    $walletSum Current wallet balance
+     *
+     * @return bool Whether the operation was successful
+     */
     public function countWalletBalance(int $sum, bool $value, Wallet $wallet, int $walletSum): bool
     {
         if ($value) {
             if ($walletSum + $sum >= 0) {
                 $wallet->setSum($walletSum + $sum);
                 $this->save($wallet);
+
                 return true;
             }
-else {
-    return false;
-}
         } elseif ($walletSum - $sum >= 0) {
             $wallet->setSum($walletSum - $sum);
             $this->save($wallet);
+
             return true;
-        } else {
-
-            return false;
         }
-}
 
+        return false;
+    }
 
+    //    /**
+    //     * @return Wallet[] Returns an array of Wallet objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('w')
+    //            ->andWhere('w.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('w.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-
-//    /**
-//     * @return Wallet[] Returns an array of Wallet objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('w')
-//            ->andWhere('w.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('w.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Wallet
-//    {
-//        return $this->createQueryBuilder('w')
-//            ->andWhere('w.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?Wallet
+    //    {
+    //        return $this->createQueryBuilder('w')
+    //            ->andWhere('w.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }

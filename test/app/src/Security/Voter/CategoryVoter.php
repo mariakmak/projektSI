@@ -1,4 +1,7 @@
 <?php
+/**
+ * Category voter.
+ */
 
 namespace App\Security\Voter;
 
@@ -9,13 +12,13 @@ use App\Entity\Category;
 use App\Entity\User;
 use Symfony\Component\Security\Core\Security;
 
-
-
-
+/**
+ * Class CategoryVoter.
+ *
+ * Voter class for managing permissions related to Category entity.
+ */
 class CategoryVoter extends Voter
 {
-
-
     /**
      * Edit permission.
      *
@@ -39,8 +42,6 @@ class CategoryVoter extends Voter
 
     /**
      * Security helper.
-     *
-     * @var Security
      */
     private Security $security;
 
@@ -54,18 +55,33 @@ class CategoryVoter extends Voter
         $this->security = $security;
     }
 
-
-
-
-    protected function supports(string $attribute, $subject): bool
+    /**
+     * Determines if the attribute and subject are supported by this voter.
+     *
+     * @param string $attribute An attribute
+     * @param mixed  $subject   The subject to secure, e.g. an object the user wants to access or any other PHP type
+     *
+     * @return bool Result
+     */
+    protected function supports(string $attribute, mixed $subject): bool
     {
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
         return in_array($attribute, [self::DELETE, self::EDIT, self::VIEW])
-            && $subject instanceof \App\Entity\Category;
+            && $subject instanceof Category;
     }
 
-    protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
+    /**
+     * Perform a single access check operation on a given attribute, subject and token.
+     * It is safe to assume that $attribute and $subject already passed the "supports()" method check.
+     *
+     * @param string         $attribute Permission name
+     * @param mixed          $subject   Object
+     * @param TokenInterface $token     Security token
+     *
+     * @return bool Vote result
+     */
+    protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();
         // if the user is anonymous, do not grant access
@@ -89,8 +105,8 @@ class CategoryVoter extends Voter
     /**
      * Checks if user can edit category.
      *
-
-     * @param User $user User
+     * @param Category $category category entity
+     * @param User     $user     User
      *
      * @return bool Result
      */
@@ -103,7 +119,7 @@ class CategoryVoter extends Voter
      * Checks if user can view category.
      *
      * @param Category $category categories entity
-     * @param User $user User
+     * @param User     $user     User
      *
      * @return bool Result
      */
@@ -116,7 +132,7 @@ class CategoryVoter extends Voter
      * Checks if user can delete category.
      *
      * @param Category $category category entity
-     * @param User $user User
+     * @param User     $user     User
      *
      * @return bool Result
      */
@@ -124,6 +140,4 @@ class CategoryVoter extends Voter
     {
         return $category->getAuthor() === $user;
     }
-
-
 }

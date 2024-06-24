@@ -1,4 +1,7 @@
 <?php
+/**
+ * Category repository.
+ */
 
 namespace App\Repository;
 
@@ -7,7 +10,7 @@ use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\Security\Core\User\UserInterface;
+
 /**
  * @extends ServiceEntityRepository<Category>
  *
@@ -15,6 +18,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @method Category|null findOneBy(array $criteria, array $orderBy = null)
  * @method Category[]    findAll()
  * @method Category[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
  * @extends ServiceEntityRepository<Category>
  */
 class CategoryRepository extends ServiceEntityRepository
@@ -30,19 +34,15 @@ class CategoryRepository extends ServiceEntityRepository
      */
     public const PAGINATOR_ITEMS_PER_PAGE = 5;
 
-
     /**
      * Constructor.
      *
      * @param ManagerRegistry $registry Manager registry
      */
-
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Category::class);
     }
-
-
 
     /**
      * Query all records.
@@ -62,15 +62,18 @@ class CategoryRepository extends ServiceEntityRepository
      *
      * @return QueryBuilder Query builder
      */
-    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
+    private function getOrCreateQueryBuilder(?QueryBuilder $queryBuilder = null): QueryBuilder
     {
         return $queryBuilder ?? $this->createQueryBuilder('category');
     }
 
-
     /**
-* @return QueryBuilder Query builder
-*/
+     * Query categories by author.
+     *
+     * @param User $user The user
+     *
+     * @return QueryBuilder Query builder
+     */
     public function queryByAuthor(User $user): QueryBuilder
     {
         $queryBuilder = $this->queryAll();
@@ -81,14 +84,12 @@ class CategoryRepository extends ServiceEntityRepository
         return $queryBuilder;
     }
 
-
-
-
-
-
-
-
-
+    /**
+     * Add category.
+     *
+     * @param Category $entity Category entity
+     * @param bool     $flush  Whether to flush the changes (default: false)
+     */
     public function add(Category $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
@@ -98,6 +99,12 @@ class CategoryRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Remove category.
+     *
+     * @param Category $entity Category entity
+     * @param bool     $flush  Whether to flush the changes (default: false)
+     */
     public function remove(Category $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
@@ -107,14 +114,11 @@ class CategoryRepository extends ServiceEntityRepository
         }
     }
 
-
-
     /**
      * Save entity.
      *
      * @param Category $category Category entity
      */
-
     public function save(Category $category): void
     {
         $this->_em->persist($category);
@@ -132,30 +136,28 @@ class CategoryRepository extends ServiceEntityRepository
         $this->_em->flush();
     }
 
+    //    /**
+    //     * @return Category[] Returns an array of Category objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('c')
+    //            ->andWhere('c.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('c.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-
-//    /**
-//     * @return Category[] Returns an array of Category objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Category
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?Category
+    //    {
+    //        return $this->createQueryBuilder('c')
+    //            ->andWhere('c.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }

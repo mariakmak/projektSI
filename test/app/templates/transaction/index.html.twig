@@ -37,6 +37,7 @@
             <thead>
             <tr>
                 <th>{{ knp_pagination_sortable(pagination, 'label.id'|trans, 'transaction.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.name'|trans, 'transaction.name') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.category'|trans, 'categories.name' ) }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.description'|trans, 'transaction.description') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.created_at'|trans, 'transaction.createdAt') }}</th>
@@ -53,6 +54,7 @@
             {% for task in pagination.items %}
                 <tr>
                     <td>{{ task.id }}</td>
+                    <td>{{ task.name }}</td>
                     <td>
                         <a href="{{ url('transaction_index', {'filters.category_id' : task.category.id}) }}" title="{{ task.category.name }}">
                         {{ task.category.name }}

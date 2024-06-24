@@ -5,26 +5,21 @@
 
 namespace App\Entity;
 
-
 use App\Repository\WalletRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use DateTimeImmutable;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Wallet.
  */
-
 #[ORM\Entity(repositoryClass: WalletRepository::class)]
 #[ORM\Table(name: 'wallets')]
 class Wallet
 {
     /**
      * Primary key.
-     *
-     * @var int|null
      */
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -33,8 +28,6 @@ class Wallet
 
     /**
      * Name.
-     *
-     * @var string|null
      */
     #[ORM\Column(length: 255)]
     private ?string $name = null;
@@ -47,16 +40,12 @@ class Wallet
 
     /**
      * Created at.
-     *
-     * @var DateTimeImmutable|null
      */
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
     /**
      * Updated at.
-     *
-     * @var DateTimeImmutable|null
      */
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
@@ -68,8 +57,11 @@ class Wallet
     private ?User $author = null;
 
     #[ORM\Column]
-    private ?int $Sum = null;
+    private ?int $sum = null;
 
+    /**
+     * Constructor.
+     */
     public function __construct()
     {
         $this->currency = new ArrayCollection();
@@ -96,10 +88,14 @@ class Wallet
         return $this->name;
     }
 
+    /**
+     * Setter for name.
+     *
+     * @param string $name Name
+     */
     public function setName(string $name): void
     {
         $this->name = $name;
-
     }
 
     /**
@@ -110,6 +106,11 @@ class Wallet
         return $this->currency;
     }
 
+    /**
+     * Add currency.
+     *
+     * @param Currency $currency Currency entity
+     */
     public function addCurrency(Currency $currency): self
     {
         if (!$this->currency->contains($currency)) {
@@ -119,6 +120,11 @@ class Wallet
         return $this;
     }
 
+    /**
+     * Remove currency.
+     *
+     * @param Currency $currency Currency entity
+     */
     public function removeCurrency(Currency $currency): self
     {
         $this->currency->removeElement($currency);
@@ -134,6 +140,11 @@ class Wallet
         return $this->transaction;
     }
 
+    /**
+     * Add transaction.
+     *
+     * @param Transaction $transaction Transaction entity
+     */
     public function addTransaction(Transaction $transaction): self
     {
         if (!$this->transaction->contains($transaction)) {
@@ -142,10 +153,13 @@ class Wallet
         }
 
         return $this;
-
-
     }
 
+    /**
+     * Remove transaction.
+     *
+     * @param Transaction $transaction Transaction entity
+     */
     public function removeTransaction(Transaction $transaction): self
     {
         // set the owning side to null (unless already changed)
@@ -159,7 +173,7 @@ class Wallet
     /**
      * Getter for created at.
      *
-     * @return DateTimeImmutable|null Created at
+     * @return \DateTimeImmutable|null Created at
      */
     public function getCreatedAt(): ?\DateTimeImmutable
     {
@@ -169,18 +183,17 @@ class Wallet
     /**
      * Setter for created at.
      *
-     * @param DateTimeImmutable|null $createdAt Created at
+     * @param \DateTimeImmutable $createdAt Created at
      */
     public function setCreatedAt(\DateTimeImmutable $createdAt): void
     {
         $this->createdAt = $createdAt;
-
     }
 
     /**
      * Getter for updated at.
      *
-     * @return DateTimeImmutable|null Updated at
+     * @return \DateTimeImmutable|null Updated at
      */
     public function getUpdatedAt(): ?\DateTimeImmutable
     {
@@ -190,33 +203,50 @@ class Wallet
     /**
      * Setter for updated at.
      *
-     * @param DateTimeImmutable|null $updatedAt Updated at
+     * @param \DateTimeImmutable $updatedAt Updated at
      */
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
-
     }
 
+    /**
+     * Getter for author.
+     *
+     * @return User|null Author
+     */
     public function getAuthor(): ?User
     {
         return $this->author;
     }
 
+    /**
+     * Setter for author.
+     *
+     * @param User|null $author Author
+     */
     public function setAuthor(?User $author): void
     {
         $this->author = $author;
-
     }
 
+    /**
+     * Getter for sum.
+     *
+     * @return int|null Sum
+     */
     public function getSum(): ?int
     {
-        return $this->Sum;
+        return $this->sum;
     }
 
-    public function setSum(int $Sum): void
+    /**
+     * Setter for sum.
+     *
+     * @param int $sum Sum
+     */
+    public function setSum(int $sum): void
     {
-        $this->Sum = $Sum;
-
+        $this->sum = $sum;
     }
 }

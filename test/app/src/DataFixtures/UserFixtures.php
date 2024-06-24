@@ -12,7 +12,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 /**
  * Class UserFixtures.
  */
-class UserFixtures extends AppFixtures
+class UserFixtures extends AbstractBaseFixtures
 {
     /**
      * Password hasher.
@@ -67,4 +67,3 @@ class UserFixtures extends AppFixtures
         $this->manager->flush();
     }
 }
-

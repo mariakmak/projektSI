@@ -1,4 +1,7 @@
 <?php
+/**
+ * Currency repository.
+ */
 
 namespace App\Repository;
 
@@ -16,11 +19,22 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class CurrencyRepository extends ServiceEntityRepository
 {
+    /**
+     * Constructor.
+     *
+     * @param ManagerRegistry $registry Manager registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Currency::class);
     }
 
+    /**
+     * Add currency entity.
+     *
+     * @param Currency $entity Currency entity to add
+     * @param bool     $flush  Whether to flush EntityManager after persisting (default: false)
+     */
     public function add(Currency $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
@@ -30,6 +44,12 @@ class CurrencyRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Remove currency entity.
+     *
+     * @param Currency $entity Currency entity to remove
+     * @param bool     $flush  Whether to flush EntityManager after removing (default: false)
+     */
     public function remove(Currency $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
@@ -39,32 +59,28 @@ class CurrencyRepository extends ServiceEntityRepository
         }
     }
 
+    //    /**
+    //     * @return Currency[] Returns an array of Currency objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('c')
+    //            ->andWhere('c.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('c.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-
-
-
-//    /**
-//     * @return Currency[] Returns an array of Currency objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Currency
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?Currency
+    //    {
+    //        return $this->createQueryBuilder('c')
+    //            ->andWhere('c.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }

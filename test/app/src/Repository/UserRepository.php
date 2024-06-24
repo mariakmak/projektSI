@@ -1,4 +1,7 @@
 <?php
+/**
+ * User repository.
+ */
 
 namespace App\Repository;
 
@@ -20,19 +23,24 @@ use Doctrine\ORM\QueryBuilder;
  */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
-
-
-
     public const PAGINATOR_ITEMS_PER_PAGE = 8;
 
-
-
-
+    /**
+     * Constructor.
+     *
+     * @param ManagerRegistry $registry Manager registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, User::class);
     }
 
+    /**
+     * Add entity to the database.
+     *
+     * @param User $entity User entity
+     * @param bool $flush  Whether to flush the changes (default: false)
+     */
     public function add(User $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
@@ -42,6 +50,12 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         }
     }
 
+    /**
+     * Remove entity from the database.
+     *
+     * @param User $entity User entity
+     * @param bool $flush  Whether to flush the changes (default: false)
+     */
     public function remove(User $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
@@ -50,7 +64,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             $this->getEntityManager()->flush();
         }
     }
-
 
     /**
      * Query all records.
@@ -74,12 +87,13 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
-
-
-
-
     /**
-     * Used to upgrade (rehash) the user's password automatically over time.
+     * Upgrade the user's password.
+     *
+     * @param PasswordAuthenticatedUserInterface $user              User object
+     * @param string                             $newHashedPassword New hashed password
+     *
+     * @throws UnsupportedUserException If the user object is not supported
      */
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
     {
@@ -90,44 +104,42 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $user->setPassword($newHashedPassword);
 
         $this->add($user, true);
-
     }
 
-        /**
-         * Get or create new query builder.
-         *
-         * @param QueryBuilder|null $queryBuilder Query builder
-         *
-         * @return QueryBuilder Query builder
-         */
-        private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
+    /**
+     * Get or create new query builder.
+     *
+     * @param QueryBuilder|null $queryBuilder Query builder
+     *
+     * @return QueryBuilder Query builder
+     */
+    private function getOrCreateQueryBuilder(?QueryBuilder $queryBuilder = null): QueryBuilder
     {
         return $queryBuilder ?? $this->createQueryBuilder('user');
     }
 
+    //    /**
+    //     * @return User[] Returns an array of User objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('u')
+    //            ->andWhere('u.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('u.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    /**
-//     * @return User[] Returns an array of User objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('u.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?User
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?User
+    //    {
+    //        return $this->createQueryBuilder('u')
+    //            ->andWhere('u.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }

@@ -7,17 +7,12 @@
 namespace App\Entity;
 
 use App\Repository\CategoryRepository;
-use App\Repository\TransactionRepository;
 use Doctrine\ORM\Mapping as ORM;
-use phpDocumentor\Reflection\Types\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
-
 
 /**
  * Class Category.
  */
-
-
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 #[ORM\Table(name: 'categories')]
 class Category
@@ -29,8 +24,6 @@ class Category
 
     /**
      * Name.
-     *
-     * @var string|null
      */
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\Type('string')]
@@ -41,25 +34,18 @@ class Category
     /**
      * Created at.
      *
-     * @var DateTimeImmutable|null
-     *
+     * @var \DateTimeImmutable|null
      */
-
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
     /**
      * Updated at.
      *
-     * @var DateTimeImmutable|null
-     *
+     * @var \DateTimeImmutable|null
      */
-
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
-
-
-
 
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EXTRA_LAZY')]
     #[ORM\JoinColumn(nullable: false)]
@@ -67,121 +53,91 @@ class Category
     #[Assert\Type(User::class)]
     private ?User $author = null;
 
-
-
-
-
-
-
-
-
-
-
     /**
      * Getter for Id.
      *
      * @return int|null Id
      */
-
     public function getId(): ?int
     {
         return $this->id;
     }
-
 
     /**
      * Getter for name.
      *
      * @return string|null Name
      */
-
     public function getName(): ?string
     {
         return $this->name;
     }
 
-
-
     /**
      * Setter for name.
-     *
-     * @param string|null $title Name
      */
     public function setName(string $name): void
     {
         $this->name = $name;
-
-
     }
-
-
 
     /**
      * Getter for created at.
      *
-     * @return DateTimeImmutable|null Created at
+     * @return \DateTimeImmutable|null Created at
      */
-
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
     }
 
-
     /**
      * Setter for created at.
      *
-     * @param DateTimeImmutable|null $createdAt Created at
+     * @param \DateTimeImmutable|null $createdAt Created at
      */
     public function setCreatedAt(\DateTimeImmutable $createdAt): void
     {
         $this->createdAt = $createdAt;
-
-
     }
 
     /**
      * Getter for updated at.
      *
-     * @return DateTimeImmutable|null Updated at
+     * @return \DateTimeImmutable|null Updated at
      */
-
     public function getUpdatedAt(): ?\DateTimeImmutable
     {
         return $this->updatedAt;
     }
 
-
     /**
      * Setter for updated at.
      *
-     * @param DateTimeImmutable|null $updatedAt Updated at
+     * @param \DateTimeImmutable $updatedAt The updated at timestamp, or null if not set
      */
-
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
-
-
     }
 
+    /**
+     * Getter for author.
+     *
+     * @return User|null Author
+     */
     public function getAuthor(): ?User
     {
         return $this->author;
     }
 
+    /**
+     * Setter for author.
+     *
+     * @param User|null $author Author
+     */
     public function setAuthor(?User $author): void
     {
         $this->author = $author;
-
-
     }
-
-
-
-
-
-
-
-
 }

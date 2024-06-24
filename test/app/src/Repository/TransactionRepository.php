@@ -1,4 +1,7 @@
 <?php
+/**
+ * Transaction repository.
+ */
 
 namespace App\Repository;
 
@@ -11,6 +14,8 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\NoResultException;
+use Doctrine\ORM\NonUniqueResultException;
 
 /**
  * @extends ServiceEntityRepository<Transaction>
@@ -22,7 +27,6 @@ use Doctrine\Common\Collections\Collection;
  */
 class TransactionRepository extends ServiceEntityRepository
 {
-
     /**
      * Items per page.
      *
@@ -34,13 +38,12 @@ class TransactionRepository extends ServiceEntityRepository
      */
     public const PAGINATOR_ITEMS_PER_PAGE = 5;
 
-
-
-
     /**
      * Query all records.
      *
-     * @return \Doctrine\ORM\QueryBuilder Query builder
+     * @param array<string, object> $filters Filters array
+     *
+     * @return QueryBuilder Query builder
      */
     public function queryAll(array $filters): QueryBuilder
     {
@@ -59,11 +62,6 @@ class TransactionRepository extends ServiceEntityRepository
         return $this->applyFiltersToList($queryBuilder, $filters);
     }
 
-
-
-
-
-
     /**
      * Get or create new query builder.
      *
@@ -71,12 +69,10 @@ class TransactionRepository extends ServiceEntityRepository
      *
      * @return QueryBuilder Query builder
      */
-    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
+    private function getOrCreateQueryBuilder(?QueryBuilder $queryBuilder = null): QueryBuilder
     {
         return $queryBuilder ?? $this->createQueryBuilder('transaction');
     }
-
-
 
     /**
      * Constructor.
@@ -88,6 +84,12 @@ class TransactionRepository extends ServiceEntityRepository
         parent::__construct($registry, Transaction::class);
     }
 
+    /**
+     * Add transaction entity.
+     *
+     * @param Transaction $entity Transaction entity to add
+     * @param bool        $flush  Whether to flush EntityManager after persisting (default: false)
+     */
     public function add(Transaction $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
@@ -97,6 +99,12 @@ class TransactionRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Remove transaction entity.
+     *
+     * @param Transaction $entity Transaction entity to remove
+     * @param bool        $flush  Whether to flush EntityManager after removing (default: false)
+     */
     public function remove(Transaction $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
@@ -111,13 +119,11 @@ class TransactionRepository extends ServiceEntityRepository
      *
      * @param Transaction $transaction Transaction entity
      */
-
     public function save(Transaction $transaction): void
     {
         $this->_em->persist($transaction);
         $this->_em->flush();
     }
-
 
     /**
      * Delete entity.
@@ -131,6 +137,11 @@ class TransactionRepository extends ServiceEntityRepository
     }
 
     /**
+     * Query transactions by author.
+     *
+     * @param UserInterface         $user    User entity
+     * @param array<string, object> $filters Filters array
+     *
      * @return QueryBuilder Query builder
      */
     public function queryByAuthor(UserInterface $user, array $filters = []): QueryBuilder
@@ -143,8 +154,14 @@ class TransactionRepository extends ServiceEntityRepository
         return $queryBuilder;
     }
 
-
-
+    /**
+     * Query transactions by wallet.
+     *
+     * @param Wallet                $wallet  Wallet entity
+     * @param array<string, object> $filters Filters array
+     *
+     * @return QueryBuilder Query builder
+     */
     public function queryByWallet(Wallet $wallet, array $filters = []): QueryBuilder
     {
         $queryBuilder = $this->queryAll($filters);
@@ -154,11 +171,6 @@ class TransactionRepository extends ServiceEntityRepository
 
         return $queryBuilder;
     }
-
-
-
-
-
 
     /**
      * Apply filters to paginated list.
@@ -175,47 +187,69 @@ class TransactionRepository extends ServiceEntityRepository
                 ->setParameter('category', $filters['category']);
         }
 
-
         return $queryBuilder;
     }
 
+    /**
+     * Query transactions count by category.
+     *
+     * @param Category $category The category entity
+     *
+     * @return int The number of transactions
+     *
+     * @throws \RuntimeException If an error occurs during the query
+     */
+    public function queryByCategory(Category $category): int
+    {
+        $queryBuilder = $this->getOrCreateQueryBuilder();
 
+        try {
+            return $queryBuilder->select($queryBuilder->expr()->countDistinct('transaction.id'))
+                ->where('transaction.category = :category')
+                ->setParameter(':category', $category)
+                ->getQuery()
+                ->getSingleScalarResult();
+        } catch (NonUniqueResultException | NoResultException $e) {
+            throw new \RuntimeException('Error while querying by category: ' . $e->getMessage());
+        }
+    }
 
+    /**
+     * Find transactions by date range and user.
+     *
+     * @param \DateTimeInterface $startDate Start date
+     * @param \DateTimeInterface $endDate   End date
+     * @param User               $user      User entity
+     *
+     * @return array<Transaction> Array of Transaction objects
+     */
+    public function findByDate(\DateTimeInterface $startDate, \DateTimeInterface $endDate, User $user): array
+    {
+        // var_dump($startDate);
+        // var_dump($endDate);
+        // var_dump($user);
+        $queryBuilder = $this->createQueryBuilder('t')
+            ->andWhere('t.createdAt >= :startDate')
+            ->andWhere('t.createdAt <= :endDate')
+            ->andWhere('t.author = :user')
+            ->setParameter('startDate', $startDate->format('Y-m-d'))
+            ->setParameter('endDate', $endDate->format('Y-m-d '))
+            ->setParameter('user', $user);
+        // var_dump($queryBuilder);
 
-            public function queryByCategory(Category $category): int
-            {
-                $queryBuilder = $this->getOrCreateQueryBuilder();
+        $query = $queryBuilder->getQuery();
 
-                return $queryBuilder->select($queryBuilder->expr()->countDistinct('transaction.id'))
-                    ->where('transaction.category = :category')
-                    ->setParameter(':category', $category)
-                    ->getQuery()
-                    ->getSingleScalarResult();
-            }
+        // var_dump($query);
+        return $query->getResult();
+    }
 
-
-            // funkcja do pobierania transakcji po dacie
-            public function findByDate(\DateTimeInterface $startDate, \DateTimeInterface $endDate, User $user)
-            {
-                #var_dump($startDate);
-                #var_dump($endDate);
-                #var_dump($user);
-                $queryBuilder = $this->createQueryBuilder('t')
-                    ->andWhere('t.createdAt >= :startDate')
-                    ->andWhere('t.createdAt <= :endDate')
-                    ->andWhere('t.author = :user')
-                    ->setParameter('startDate', $startDate->format('Y-m-d'))
-                    ->setParameter('endDate', $endDate->format('Y-m-d '))
-                    ->setParameter('user', $user);
-                #var_dump($queryBuilder);
-
-                $query = $queryBuilder->getQuery();
-                #var_dump($query);
-                return $query->getResult();
-
-            }
-
-
+    /**
+     * Calculate total amount from a collection of transactions.
+     *
+     * @param Collection<Transaction> $transactions Collection of Transaction objects
+     *
+     * @return float Total amount calculated
+     */
     public function calculateTotalAmount(Collection $transactions): float
     {
         $totalAmount = 0;
@@ -227,29 +261,28 @@ class TransactionRepository extends ServiceEntityRepository
         return $totalAmount;
     }
 
+    //    /**
+    //     * @return Transaction[] Returns an array of Transaction objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('t')
+    //            ->andWhere('t.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('t.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-        //    /**
-        //     * @return Transaction[] Returns an array of Transaction objects
-        //     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('t')
-//            ->andWhere('t.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('t.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Transaction
-//    {
-//        return $this->createQueryBuilder('t')
-//            ->andWhere('t.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?Transaction
+    //    {
+    //        return $this->createQueryBuilder('t')
+    //            ->andWhere('t.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }

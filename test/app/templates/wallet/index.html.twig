@@ -19,6 +19,7 @@
             <tr>
                 <th>{{ knp_pagination_sortable(pagination, 'label.id'|trans, 'wallet.id')}}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.name'|trans, 'wallet.name') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.sum'|trans, 'wallet.sum')}}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.created_at'|trans, 'wallet.createdAt')}}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.updated_at'|trans, 'wallet.updatedAt')}}</th>
                 {# <th> {{ knp_pagination_sortable(pagination, 'label.currency'|trans, 'currency.name')}}</th>
@@ -37,6 +38,7 @@
                 <tr>
                     <td>{{  task.id }}</td>
                     <td>{{ task.name }}</td>
+                    <td>{{ task.sum }}</td>
                     <td>{{ task.createdAt|format_date('long')}}</td>
                     <td>{{ task.updatedAt|format_date('long') }}</td>
                    {#  <td>{{ task.currency.name }}</td>

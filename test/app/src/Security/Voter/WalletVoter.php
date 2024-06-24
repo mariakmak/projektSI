@@ -1,4 +1,7 @@
 <?php
+/**
+ * Wallet voter.
+ */
 
 namespace App\Security\Voter;
 
@@ -6,12 +9,14 @@ use App\Entity\Wallet;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
-use App\Entity\Category;
 use App\Entity\User;
 use Symfony\Component\Security\Core\Security;
 
-
-
+/**
+ * Class WalletVoter.
+ *
+ * Voter class for managing permissions related to Transaction entity.
+ */
 class WalletVoter extends Voter
 {
     /**
@@ -37,8 +42,6 @@ class WalletVoter extends Voter
 
     /**
      * Security helper.
-     *
-     * @var Security
      */
     private Security $security;
 
@@ -52,16 +55,25 @@ class WalletVoter extends Voter
         $this->security = $security;
     }
 
-
-    protected function supports(string $attribute, $subject): bool
+    protected function supports(string $attribute, mixed $subject): bool
     {
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
         return in_array($attribute, [self::DELETE, self::EDIT, self::VIEW])
-            && $subject instanceof \App\Entity\Wallet;
+            && $subject instanceof Wallet;
     }
 
-    protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
+    /**
+     * Perform a single access check operation on a given attribute, subject and token.
+     * It is safe to assume that $attribute and $subject already passed the "supports()" method check.
+     *
+     * @param string         $attribute Permission name
+     * @param mixed          $subject   Object
+     * @param TokenInterface $token     Security token
+     *
+     * @return bool Vote result
+     */
+    protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();
         // if the user is anonymous, do not grant access
@@ -85,8 +97,8 @@ class WalletVoter extends Voter
     /**
      * Checks if user can edit wallet.
      *
-
-     * @param User $user User
+     * @param User   $user   User
+     * @param Wallet $wallet wallet entity
      *
      * @return bool Result
      */
@@ -99,7 +111,7 @@ class WalletVoter extends Voter
      * Checks if user can view wallet.
      *
      * @param Wallet $wallet wallet entity
-     * @param User $user User
+     * @param User   $user   User
      *
      * @return bool Result
      */
@@ -112,7 +124,7 @@ class WalletVoter extends Voter
      * Checks if user can delete wallet.
      *
      * @param Wallet $wallet wallet entity
-     * @param User $user User
+     * @param User   $user   User
      *
      * @return bool Result
      */
@@ -120,6 +132,4 @@ class WalletVoter extends Voter
     {
         return $wallet->getAuthor() === $user;
     }
-
-
 }

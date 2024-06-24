@@ -8,10 +8,8 @@ namespace App\Service;
 use App\Entity\Transaction;
 use App\Entity\User;
 use App\Repository\TransactionRepository;
-use App\Repository\UserRepository;
 use App\Repository\WalletRepository;
 use App\Entity\Wallet;
-use App\Service\WalletServiceInterface;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
@@ -30,9 +28,6 @@ class WalletService implements WalletServiceInterface
      */
     private TransactionRepository $transactionRepository;
 
-
-
-
     /**
      * Paginator.
      */
@@ -41,17 +36,16 @@ class WalletService implements WalletServiceInterface
     /**
      * Constructor.
      *
-     * @param WalletRepository     $walletRepository  Wallet repository
-     * @param PaginatorInterface $paginator      Paginator
+     * @param WalletRepository      $walletRepository      Wallet repository
+     * @param PaginatorInterface    $paginator             Paginator
+     * @param TransactionRepository $transactionRepository Transaction repository
      */
     public function __construct(WalletRepository $walletRepository, PaginatorInterface $paginator, TransactionRepository $transactionRepository)
     {
-
         $this->transactionRepository = $transactionRepository;
         $this->walletRepository = $walletRepository;
         $this->paginator = $paginator;
     }
-
 
     /**
      * Save entity.
@@ -60,7 +54,7 @@ class WalletService implements WalletServiceInterface
      */
     public function save(Wallet $wallet): void
     {
-        if ($wallet->getId() == null) {
+        if (null === $wallet->getId()) {
             $wallet->setCreatedAt(new \DateTimeImmutable());
         }
         $wallet->setUpdatedAt(new \DateTimeImmutable());
@@ -68,20 +62,21 @@ class WalletService implements WalletServiceInterface
         $this->walletRepository->save($wallet);
     }
 
-
-
-
+    /**
+     * Delete entity.
+     *
+     * @param Wallet $wallet Wallet entity
+     */
     public function delete(Wallet $wallet): void
     {
-
         $this->walletRepository->delete($wallet);
     }
-
 
     /**
      * Get paginated list.
      *
-     * @param int $page Page number
+     * @param int  $page   Page number
+     * @param User $author Author of the wallets
      *
      * @return PaginationInterface<string, mixed> Paginated list
      */
@@ -94,48 +89,34 @@ class WalletService implements WalletServiceInterface
         );
     }
 
-
-
+    /**
+     * Check if wallet can be deleted by deleting all associated transactions.
+     *
+     * @param Wallet $wallet Wallet entity to check
+     */
     public function canBeDeleted(Wallet $wallet): void
     {
         $result = $this->transactionRepository->queryByWallet($wallet);
         $query = $result->getQuery();
         $transactions = $query->getResult();
-        foreach($transactions as $elem){
-
+        foreach ($transactions as $elem) {
             $this->transactionRepository->delete($elem);
         }
-
-
-
     }
 
-
-
-    public function CountWalletSum(Wallet $selectedentity, int $sum, bool $value): void
+    /**
+     * Count wallet sum based on provided parameters.
+     *
+     * @param int  $sum   Sum to calculate
+     * @param bool $value Value to calculate
+     *
+     * @return bool True if the wallet balance was updated successfully, false otherwise
+     */
+    public function countWalletSum(Wallet $selectedentity, int $sum, bool $value): bool
     {
+        $wallet = $this->walletRepository->find($selectedentity->getId()); // szuka portfela z formu
+        $walletSum = $wallet->getSum(); // pobiera wartosc portfela
 
-        $wallet = $this->walletRepository->find($selectedentity->getId()); //szuka portfela z formu
-        $walletSum = $wallet->getSum(); //pobiera wartosc portfela
-
-        $this->walletRepository->countWalletBalance( $sum, $value, $wallet, $walletSum);
-
-
-
-                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        return $this->walletRepository->countWalletBalance($sum, $value, $wallet, $walletSum);
+    }
 }

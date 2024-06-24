@@ -11,15 +11,12 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class Currency.
  */
-
 #[ORM\Entity(repositoryClass: CurrencyRepository::class)]
 #[ORM\Table(name: 'currencies')]
 class Currency
 {
     /**
      * Primary key.
-     *
-     * @var int|null
      */
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -53,11 +50,10 @@ class Currency
     /**
      * Setter for name.
      *
-     * @param string|null $name Name
+     * @param string $name Name
      */
-    public function setName(string $name):void
+    public function setName(string $name): void
     {
         $this->name = $name;
-
     }
 }

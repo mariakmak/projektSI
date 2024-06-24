@@ -1,4 +1,7 @@
 <?php
+/**
+ *Transaction voter.
+ */
 
 namespace App\Security\Voter;
 
@@ -9,6 +12,11 @@ use App\Entity\Transaction;
 use App\Entity\User;
 use Symfony\Component\Security\Core\Security;
 
+/**
+ * Class TransactionVoter.
+ *
+ * Voter class for managing permissions related to Transaction entity.
+ */
 class TransactionVoter extends Voter
 {
     /**
@@ -34,8 +42,6 @@ class TransactionVoter extends Voter
 
     /**
      * Security helper.
-     *
-     * @var Security
      */
     private Security $security;
 
@@ -49,16 +55,33 @@ class TransactionVoter extends Voter
         $this->security = $security;
     }
 
-
-    protected function supports(string $attribute, $subject): bool
+    /**
+     * Determines if the attribute and subject are supported by this voter.
+     *
+     * @param string $attribute An attribute
+     * @param mixed  $subject   The subject to secure, e.g. an object the user wants to access or any other PHP type
+     *
+     * @return bool Result
+     */
+    protected function supports(string $attribute, mixed $subject): bool
     {
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
         return in_array($attribute, [self::EDIT, self::DELETE,  self::VIEW])
-            && $subject instanceof \App\Entity\Transaction;
+            && $subject instanceof Transaction;
     }
 
-    protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
+    /**
+     * Perform a single access check operation on a given attribute, subject and token.
+     * It is safe to assume that $attribute and $subject already passed the "supports()" method check.
+     *
+     * @param string         $attribute Permission name
+     * @param mixed          $subject   Object
+     * @param TokenInterface $token     Security token
+     *
+     * @return bool Vote result
+     */
+    protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();
         // if the user is anonymous, do not grant access
@@ -82,8 +105,8 @@ class TransactionVoter extends Voter
     /**
      * Checks if user can edit transaction.
      *
-
-     * @param User $user User
+     * @param User        $user        User
+     * @param Transaction $transaction transaction entity
      *
      * @return bool Result
      */
@@ -96,7 +119,7 @@ class TransactionVoter extends Voter
      * Checks if user can view transaction.
      *
      * @param Transaction $transaction transaction entity
-     * @param User $user User
+     * @param User        $user        User
      *
      * @return bool Result
      */
@@ -109,7 +132,7 @@ class TransactionVoter extends Voter
      * Checks if user can delete transaction.
      *
      * @param Transaction $transaction transaction entity
-     * @param User $user User
+     * @param User        $user        User
      *
      * @return bool Result
      */
@@ -117,6 +140,4 @@ class TransactionVoter extends Voter
     {
         return $transaction->getAuthor() === $user;
     }
-
-
 }

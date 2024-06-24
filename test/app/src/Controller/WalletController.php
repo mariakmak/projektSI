@@ -6,17 +6,12 @@
 namespace App\Controller;
 
 use App\Entity\Wallet;
-use App\Repository\TransactionRepository;
-use App\Repository\WalletRepository;
-
 use App\Service\WalletServiceInterface;
 use App\Form\Type\WalletType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -37,17 +32,14 @@ class WalletController extends AbstractController
 
     /**
      * Translator.
-     *
-     * @var TranslatorInterface
      */
     private TranslatorInterface $translator;
-
 
     /**
      * Constructor.
      *
      * @param WalletServiceInterface $walletService Wallet service
-     * @param TranslatorInterface $translator Translator
+     * @param TranslatorInterface    $translator    Translator
      */
     public function __construct(WalletServiceInterface $walletService, TranslatorInterface $translator)
     {
@@ -59,6 +51,7 @@ class WalletController extends AbstractController
      * Index action.
      *
      * @param Request $request HTTP Request
+     *
      * @return Response HTTP response
      */
     #[\Symfony\Component\Routing\Attribute\Route(
@@ -100,7 +93,6 @@ class WalletController extends AbstractController
         );
     }
 
-
     /**
      * Create action.
      *
@@ -115,7 +107,6 @@ class WalletController extends AbstractController
     )]
     public function create(Request $request): Response
     {
-
         /** @var User $user */
         $user = $this->getUser();
         $wallet = new Wallet();
@@ -123,20 +114,17 @@ class WalletController extends AbstractController
 
         $form = $this->createForm(WalletType::class, $wallet);
         $form->handleRequest($request);
-        //dd($request, $form);
+        // dd($request, $form);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $data = $form ->getData(); //dane z formu
+            $data = $form->getData(); // dane z formu
             $sum = $data->getSum();
 
-            if($sum === null){
+            if (null === $sum) {
                 $wallet->setSum(0);
-                $this->walletService->save($wallet);
             }
 
-            else{$this->walletService->save($wallet);}
-
+            $this->walletService->save($wallet);
 
             $this->addFlash(
                 'success',
@@ -150,15 +138,13 @@ class WalletController extends AbstractController
             'wallet/create.html.twig',
             ['form' => $form->createView()]
         );
-
     }
-
 
     /**
      * Edit action.
      *
      * @param Request $request HTTP request
-     * @param Wallet $wallet Wallet entity
+     * @param Wallet  $wallet  Wallet entity
      *
      * @return Response HTTP response
      */
@@ -177,15 +163,15 @@ class WalletController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form ->getData(); //dane z formu
+            $data = $form->getData(); // dane z formu
             $sum = $data->getSum();
 
-            if($sum === null){
+            if (null === $sum) {
                 $wallet->setSum(0);
                 $this->walletService->save($wallet);
+            } else {
+                $this->walletService->save($wallet);
             }
-
-            else{$this->walletService->save($wallet);}
 
             $this->addFlash(
                 'success',
@@ -204,18 +190,17 @@ class WalletController extends AbstractController
         );
     }
 
-
     /**
      * Delete action.
      *
      * @param Request $request HTTP request
-     * @param Wallet $wallet Wallet entity
+     * @param Wallet  $wallet  Wallet entity
      *
      * @return Response HTTP response
      */
     #[\Symfony\Component\Routing\Attribute\Route('/{id}/delete', name: 'wallet_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
     #[IsGranted('DELETE', subject: 'wallet')]
-    public function delete(Request $request, Wallet $wallet, TransactionRepository $transaction): Response
+    public function delete(Request $request, Wallet $wallet): Response
     {
         $form = $this->createForm(FormType::class, $wallet, [
             'method' => 'DELETE',

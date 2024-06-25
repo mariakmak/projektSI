@@ -251,6 +251,10 @@
               <source>label.password_confirm</source>
               <target>confirm new password</target>
             </trans-unit>
+            <trans-unit id="message.form_error">
+              <source>message.form_error</source>
+              <target>The data are incorrect</target>
+            </trans-unit>
 
     </body>
   </file>

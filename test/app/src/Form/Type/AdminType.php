@@ -48,6 +48,7 @@ class AdminType extends AbstractType
             [
                 'type' => PasswordType::class,
                 'required' => false,
+                'mapped' => false,
                 'first_options' => ['label' => 'label.password_new'],
                 'second_options' => ['label' => 'label.password_confirm'],
             ]

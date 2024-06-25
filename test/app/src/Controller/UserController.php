@@ -19,7 +19,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  * Class UserController.
  */
 #[\Symfony\Component\Routing\Attribute\Route('/user')]
-#[IsGranted('ROLE_ADMIN')]
 class UserController extends AbstractController
 {
     /**
@@ -59,6 +58,7 @@ class UserController extends AbstractController
      * @return Response Response
      */
     #[\Symfony\Component\Routing\Attribute\Route(name: 'user_index', methods: 'GET')]
+    #[IsGranted('ROLE_ADMIN')]
     public function index(Request $request): Response
     {
         $pagination = $this->userService->getPaginatedList(
@@ -80,6 +80,9 @@ class UserController extends AbstractController
     #[IsGranted('ROLE_ADMIN')]
     public function edit(Request $request, User $user): Response
     {
+        $originalPassword = $user->getPassword();
+        // var_dump('password:', $originalPassword);
+
         $form = $this->createForm(
             AdminType::class,
             $user,
@@ -91,11 +94,16 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $hashedPassword = $this->passwordHasher->hashPassword(
-                $user,
-                $user->getPassword()
-            );
-            $user->setPassword($hashedPassword);
+            $newPassword = $form->get('password')->getData();
+            if ($newPassword) {
+                $hashedPassword = $this->passwordHasher->hashPassword(
+                    $user,
+                    $newPassword
+                );
+                $user->setPassword($hashedPassword);
+            } else {
+                $user->setPassword($originalPassword);
+            }
             $this->userService->save($user);
 
             $this->addFlash(

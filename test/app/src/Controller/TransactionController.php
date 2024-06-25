@@ -242,19 +242,6 @@ class TransactionController extends AbstractController
     }
 
     /**
-     * Get filters from request.
-     *
-     * @param Request $request HTTP request
-     *
-     * @return array<string, int> Array of filters
-     */
-    #[ArrayShape(['category_id' => 'int', 'created_at' => 'int'])]
-    private function getFilters(Request $request): array
-    {
-        return ['category_id' => $request->query->getInt('filters_category_id'), 'created_at' => $request->query->getInt('filters_created_at')];
-    }
-
-    /**
      * Show action.
      *
      * @param Transaction $transaction Transaction entity
@@ -274,5 +261,18 @@ class TransactionController extends AbstractController
             'transaction/show.html.twig',
             ['transaction' => $transaction]
         );
+    }
+
+    /**
+     * Get filters from request.
+     *
+     * @param Request $request HTTP request
+     *
+     * @return array<string, int> Array of filters
+     */
+    #[ArrayShape(['category_id' => 'int', 'created_at' => 'int'])]
+    private function getFilters(Request $request): array
+    {
+        return ['category_id' => $request->query->getInt('filters_category_id'), 'created_at' => $request->query->getInt('filters_created_at')];
     }
 }

@@ -251,6 +251,10 @@
               <source>label.password_confirm</source>
               <target>potwierdź</target>
             </trans-unit>
+            <trans-unit id="message.form_error">
+              <source>message.form_error</source>
+              <target>Dane w formularzu są nieprawidłowe</target>
+            </trans-unit>
 
     </body>
   </file>

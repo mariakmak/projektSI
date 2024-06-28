@@ -28,19 +28,25 @@ class Category
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\Type('string')]
     #[Assert\NotBlank]
-    #[Assert\Length(min: 3, max: 255)]
+    #[Assert\Length(
+        min: 3,
+        max: 255,
+        maxMessage: 'The name cannot be longer than {{ limit }} characters.'
+    )]
     private ?string $name = null;
 
     /**
      * Created at.
      */
     #[ORM\Column]
+    #[Assert\Type(\DateTimeImmutable::class)]
     private ?\DateTimeImmutable $createdAt = null;
 
     /**
      * Updated at.
      */
     #[ORM\Column]
+    #[Assert\Type(\DateTimeImmutable::class)]
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EXTRA_LAZY')]

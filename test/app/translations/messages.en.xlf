@@ -255,6 +255,18 @@
               <source>message.form_error</source>
               <target>The data are incorrect</target>
             </trans-unit>
+            <trans-unit id="message.record_not_found">
+              <source>message.record_not_found</source>
+              <target>Item not found</target>
+            </trans-unit>
+            <trans-unit id="title.wallet_edit">
+              <source>title.wallet_edit</source>
+              <target>Wallet</target>
+            </trans-unit>
+            <trans-unit id="message.currency_wallet">
+              <source>message.currency_wallet</source>
+              <target>Selected currency is not associated with the selected wallet.</target>
+            </trans-unit>
 
     </body>
   </file>

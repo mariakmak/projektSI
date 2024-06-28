@@ -33,16 +33,27 @@ class Transaction
      * Description.
      */
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: 'Description cannot be longer than {{ limit }} characters.'
+    )]
     private ?string $description = null;
 
     /**
      * Created at.
      */
     #[ORM\Column]
+    #[Assert\Type(\DateTimeImmutable::class)]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
     #[Assert\NotNull]
+    #[Assert\NotBlank]
+    #[Assert\Range(
+        notInRangeMessage: 'The sum must be between {{ min }} and {{ max }}.',
+        min: 1,
+        max: 1000000,
+    )]
     private ?int $sum = null;
 
     #[ORM\ManyToOne]
@@ -67,6 +78,11 @@ class Transaction
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
     #[Assert\NotNull]
+    #[Assert\Length(
+        min: 3,
+        max: 255,
+        maxMessage: 'The name cannot be longer than {{ limit }} characters.'
+    )]
     private ?string $name = null;
 
     /**

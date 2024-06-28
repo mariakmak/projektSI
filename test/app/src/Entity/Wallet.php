@@ -30,11 +30,24 @@ class Wallet
      * Name.
      */
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\NotNull]
+    #[Assert\Length(
+        min: 3,
+        max: 255,
+        maxMessage: 'The name cannot be longer than {{ limit }} characters.'
+    )]
     private ?string $name = null;
 
+    /**
+     * Currency.
+     */
     #[ORM\ManyToMany(targetEntity: Currency::class)]
     private Collection $currency;
 
+    /**
+     * transaction.
+     */
     #[ORM\OneToMany(mappedBy: 'wallet', targetEntity: Transaction::class)]
     private Collection $transaction;
 
@@ -42,12 +55,14 @@ class Wallet
      * Created at.
      */
     #[ORM\Column]
+    #[Assert\Type(\DateTimeImmutable::class)]
     private ?\DateTimeImmutable $createdAt = null;
 
     /**
      * Updated at.
      */
     #[ORM\Column]
+    #[Assert\Type(\DateTimeImmutable::class)]
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EXTRA_LAZY')]
@@ -56,7 +71,7 @@ class Wallet
     #[Assert\Type(User::class)]
     private ?User $author = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $sum = null;
 
     /**

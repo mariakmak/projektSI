@@ -255,6 +255,18 @@
               <source>message.form_error</source>
               <target>Dane w formularzu są nieprawidłowe</target>
             </trans-unit>
+            <trans-unit id="message.record_not_found">
+              <source>message.record_not_found</source>
+              <target>Element nie został znaleziony</target>
+            </trans-unit>
+            <trans-unit id="title.wallet_edit">
+              <source>title.wallet_edit</source>
+              <target>Portfel</target>
+            </trans-unit>
+            <trans-unit id="message.currency_wallet">
+              <source>message.currency_wallet</source>
+              <target>Wybrany portfel nie zawiera wybranej waluty.</target>
+            </trans-unit>
 
     </body>
   </file>

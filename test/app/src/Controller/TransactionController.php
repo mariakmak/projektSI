@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Class TransactionController.
@@ -41,17 +42,24 @@ class TransactionController extends AbstractController
     private WalletService $walletService;
 
     /**
+     * Entity manager.
+     */
+    private EntityManagerInterface $entityManager;
+
+    /**
      * Constructor.
      *
      * @param TransactionServiceInterface $transactionService Transaction service
      * @param WalletService               $walletService      Wallet service
      * @param TranslatorInterface         $translator         Translator
+     * @param EntityManagerInterface      $entityManager      Entity Manager
      */
-    public function __construct(TransactionServiceInterface $transactionService, WalletService $walletService, TranslatorInterface $translator)
+    public function __construct(TransactionServiceInterface $transactionService, WalletService $walletService, TranslatorInterface $translator, EntityManagerInterface $entityManager)
     {
         $this->transactionService = $transactionService;
         $this->walletService = $walletService;
         $this->translator = $translator;
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -78,26 +86,18 @@ class TransactionController extends AbstractController
         ]);
 
         $form->handleRequest($request);
-        // var_dump('Form:', $form);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $formData = $form->getData();
-            // var_dump('Form Data:', $formData);
 
             $startDateString = $formData['start_date'] ? $formData['start_date']->format('Y-m-d') : null;
             $endDateString = $formData['end_date'] ? $formData['end_date']->format('Y-m-d') : null;
-
-            // var_dump('Start Date String:', $startDateString);
-            // var_dump('End Date String:', $endDateString);
 
             if ($startDateString && $endDateString) {
                 // $startDate = \DateTime::createFromFormat('Y-m-d', $startDateString . ' 00:00:00');
                 // $endDate = \DateTime::createFromFormat('Y-m-d', $endDateString . ' 23:59:59');
                 $startDate = \DateTime::createFromFormat('Y-m-d', $startDateString);
                 $endDate = \DateTime::createFromFormat('Y-m-d', $endDateString);
-
-                // var_dump('Start Date:', $startDate);
-                // var_dump('End Date:', $endDate);
 
                 if (false === $startDate || false === $endDate) {
                     $this->addFlash(
@@ -114,7 +114,6 @@ class TransactionController extends AbstractController
 
                     $transactions = $paginationData['transactions'];
                     $balance = $paginationData['balance'];
-                    // var_dump('Filtered Transactions:', $transactions);
                 }
             } else {
                 $this->addFlash(
@@ -124,7 +123,6 @@ class TransactionController extends AbstractController
             }
         } else {
             $filters = $this->getFilters($request);
-            // var_dump('Filters:', $filters);
 
             $paginationData = $this->transactionService->getPaginatedList(
                 $request->query->getInt('page', 1),
@@ -134,7 +132,6 @@ class TransactionController extends AbstractController
 
             $transactions = $paginationData['transactions'];
             $balance = $paginationData['balance'];
-            // var_dump('All Transactions:', $transactions);
         }
 
         // ob_end_flush();
@@ -223,6 +220,23 @@ class TransactionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $wallet = $transaction->getWallet();
+            $value = $transaction->getValue();
+
+            if ($wallet && null !== $transaction->getSum() && true === $value) {
+                $newSum = $wallet->getSum() - $transaction->getSum();
+                $wallet->setSum($newSum);
+                $this->entityManager->persist($wallet);
+                $this->entityManager->flush();
+            }
+
+            if ($wallet && null !== $transaction->getSum() && false === $value) {
+                $newSum = $wallet->getSum() + $transaction->getSum();
+                $wallet->setSum($newSum);
+                $this->entityManager->persist($wallet);
+                $this->entityManager->flush();
+            }
+
             $this->transactionService->delete($transaction);
             $this->addFlash(
                 'success',

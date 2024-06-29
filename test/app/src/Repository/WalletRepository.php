@@ -81,13 +81,13 @@ class WalletRepository extends ServiceEntityRepository
     public function queryAll(): QueryBuilder
     {
         return $this->getOrCreateQueryBuilder()
-          /*  ->select(
-                'partial wallet.{id, name, createdAt, updatedAt, currency, transaction }',
-                'partial transaction.{id}',
+            ->select(
+                'partial wallet.{id, name, sum, createdAt, updatedAt}',
                 'partial currency.{id, name}',
+                'partial author.{id, email}'
             )
-            ->join('wallet.transaction', 'transaction')
-            ->join('wallet.currency', 'currency') */
+            ->leftJoin('wallet.currency', 'currency')
+            ->leftJoin('wallet.author', 'author')
             ->orderBy('wallet.updatedAt', 'DESC');
     }
 

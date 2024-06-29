@@ -50,21 +50,15 @@ class Transaction
     #[Assert\NotNull]
     #[Assert\NotBlank]
     #[Assert\Range(
-        notInRangeMessage: 'The sum must be between {{ min }} and {{ max }}.',
         min: 1,
         max: 1000000,
     )]
     private ?int $sum = null;
 
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: true)]
-    #[Assert\NotNull]
-    private ?Currency $currency = null;
-
     #[ORM\Column(type: 'boolean', options: ['default: 0'])]
     private ?bool $value = null;
 
-    #[ORM\ManyToOne(inversedBy: 'transaction')]
+    #[ORM\ManyToOne(targetEntity: Wallet::class, inversedBy: 'transaction')]
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\NotNull]
     private ?Wallet $wallet = null;
@@ -81,7 +75,6 @@ class Transaction
     #[Assert\Length(
         min: 3,
         max: 255,
-        maxMessage: 'The name cannot be longer than {{ limit }} characters.'
     )]
     private ?string $name = null;
 
@@ -183,26 +176,6 @@ class Transaction
     public function setSum(int $sum): void
     {
         $this->sum = $sum;
-    }
-
-    /**
-     * Getter for currency.
-     *
-     * @return Currency|null Currency
-     */
-    public function getCurrency(): ?Currency
-    {
-        return $this->currency;
-    }
-
-    /**
-     * Setter for currency.
-     *
-     * @param Currency|null $currency Currency
-     */
-    public function setCurrency(?Currency $currency): void
-    {
-        $this->currency = $currency;
     }
 
     /**

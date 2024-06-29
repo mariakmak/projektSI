@@ -31,7 +31,6 @@ class Category
     #[Assert\Length(
         min: 3,
         max: 255,
-        maxMessage: 'The name cannot be longer than {{ limit }} characters.'
     )]
     private ?string $name = null;
 

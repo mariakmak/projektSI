@@ -7,7 +7,6 @@ namespace App\Form\Type;
 
 use App\Entity\Transaction;
 use App\Entity\Category;
-use App\Entity\Currency;
 use App\Entity\Wallet;
 use App\Entity\User;
 use App\Repository\CategoryRepository;
@@ -20,9 +19,6 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Security;
-use Symfony\Component\Validator\Constraints\Callback;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Class TransactionType.
@@ -43,20 +39,13 @@ class TransactionType extends AbstractType
     private Security $security;
 
     /**
-     * Translator.
-     */
-    private TranslatorInterface $translator;
-
-    /**
      * TransactionType constructor.
      *
-     * @param Security            $security   Security component
-     * @param TranslatorInterface $translator Translator
+     * @param Security $security Security component
      */
-    public function __construct(Security $security, TranslatorInterface $translator)
+    public function __construct(Security $security)
     {
         $this->security = $security;
-        $this->translator = $translator;
     }
 
     /**
@@ -150,25 +139,6 @@ class TransactionType extends AbstractType
                 },
             ]
         );
-
-        $builder->add(
-            'currency',
-            EntityType::class,
-            [
-                'class' => Currency::class,
-                'choice_label' => function ($currency): string {
-                    return $currency->getName();
-                },
-                'label' => 'label.currency',
-                'placeholder' => 'label.none',
-                'required' => true,
-                'expanded' => true,
-                'multiple' => false,
-                'constraints' => [
-                    new Callback([$this, 'validateCurrency']),
-                ],
-            ]
-        );
     }
 
     /**
@@ -179,26 +149,6 @@ class TransactionType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults(['data_class' => Transaction::class]);
-    }
-
-    /**
-     * Validates that the selected currency is associated with the selected wallet.
-     *
-     * @param mixed                     $value   The value to validate
-     * @param ExecutionContextInterface $context The validation context
-     */
-    public function validateCurrency(Currency $value, ExecutionContextInterface $context)
-    {
-        $form = $context->getRoot(); // Get the entire form
-
-        /** @var Wallet $wallet */
-        $wallet = $form->get('wallet')->getData();
-
-        if ($wallet && !$wallet->getCurrency()->contains($value)) {
-            $context->buildViolation($this->translator->trans('message.currency_wallet'))
-                ->atPath('currency')
-                ->addViolation();
-        }
     }
 
     /**

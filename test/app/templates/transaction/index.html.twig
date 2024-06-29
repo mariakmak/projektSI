@@ -11,9 +11,15 @@
 
 
     <form action="{{ path('transaction_index') }}" method="get">
-        {{ form_start(form, {'method': 'GET'}) }}
-        {{ form_row(form.start_date) }}
-        {{ form_row(form.end_date) }}
+        {{ form_start(form) }}
+        <div>
+            {{ form_label(form.start_date) }}
+            {{ form_widget(form.start_date) }}
+        </div>
+        <div>
+            {{ form_label(form.end_date) }}
+            {{ form_widget(form.end_date) }}
+        </div>
         <button type="submit">{{ 'action.search'|trans }}</button>
         {{ form_end(form) }}
     </form>
@@ -43,7 +49,7 @@
                 <th>{{ knp_pagination_sortable(pagination, 'label.created_at'|trans, 'transaction.createdAt') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.wallet'|trans, 'wallet.name') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.sum'|trans, 'transaction.sum') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label.currency'|trans, 'currency.name') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.currency'|trans, 'wallet.currency.name') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.value'|trans, 'transaction.value') }}</th>
                 <th>{{ knp_pagination_sortable(pagination,'label.author'|trans, 'author.email')}}</th>
                 <th>{{ 'label.actions'|trans }}</th>
@@ -64,7 +70,7 @@
                     <td>  {{ task.createdAt|format_date('long')}} </td>
                     <td>{{ task.wallet.name }}</td>
                     <td>{{ task.sum }}</td>
-                    <td>{{ task.currency.name }}</td>
+                    <td>{{ task.wallet.currency.name }}</td>
                     <td>{{ task.value ? '+' : '-' }}</td>
                     <td>{{ task.author.email }}</td>
                     <td>

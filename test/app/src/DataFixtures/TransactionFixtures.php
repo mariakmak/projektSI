@@ -5,7 +5,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Currency;
 use App\Entity\Transaction;
 use App\Entity\Category;
 use App\Entity\User;
@@ -42,10 +41,6 @@ class TransactionFixtures extends AbstractBaseFixtures implements DependentFixtu
             );
             $transaction->setSum($this->faker->biasedNumberBetween($min = 1, $max = 1000));
             $transaction->setValue($this->faker->boolean);
-
-            /** @var Currency $currency */
-            $currency = $this->getRandomReference('currencies');
-            $transaction->setCurrency($currency);
 
             /** @var Wallet $wallet */
             $wallet = $this->getRandomReference('wallets');

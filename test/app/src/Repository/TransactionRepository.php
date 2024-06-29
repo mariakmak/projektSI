@@ -49,14 +49,16 @@ class TransactionRepository extends ServiceEntityRepository
     {
         $queryBuilder = $this->getOrCreateQueryBuilder()
             ->select(
-                'partial transaction.{id, description, createdAt, sum, value}',
+                'partial transaction.{id, name, description, createdAt, sum, value}',
                 'partial category.{id, name}',
                 'partial currency.{id, name}',
                 'partial wallet.{id, name}',
+                'partial author.{id, email}',
             )
             ->join('transaction.category', 'category')
-            ->join('transaction.currency', 'currency')
             ->join('transaction.wallet', 'wallet')
+            ->join('wallet.currency', 'currency')
+            ->leftJoin('transaction.author', 'author')
             ->orderBy('transaction.createdAt', 'DESC');
 
         return $this->applyFiltersToList($queryBuilder, $filters);

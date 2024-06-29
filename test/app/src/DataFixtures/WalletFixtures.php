@@ -43,7 +43,7 @@ class WalletFixtures extends AbstractBaseFixtures implements DependentFixtureInt
             /** @var Currency $currency */
             $currency = $this->getRandomReferences('currencies', 4);
             foreach ($currency as $elem) {
-                $wallet->addCurrency($elem);
+                $wallet->setCurrency($elem);
             }
 
             $author = $this->getRandomReference('users');

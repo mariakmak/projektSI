@@ -35,15 +35,15 @@ class Wallet
     #[Assert\Length(
         min: 3,
         max: 255,
-        maxMessage: 'The name cannot be longer than {{ limit }} characters.'
     )]
     private ?string $name = null;
 
     /**
      * Currency.
      */
-    #[ORM\ManyToMany(targetEntity: Currency::class)]
-    private Collection $currency;
+    #[ORM\ManyToOne(targetEntity: Currency::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Currency $currency = null;
 
     /**
      * transaction.
@@ -79,7 +79,6 @@ class Wallet
      */
     public function __construct()
     {
-        $this->currency = new ArrayCollection();
         $this->transaction = new ArrayCollection();
     }
 
@@ -114,41 +113,23 @@ class Wallet
     }
 
     /**
-     * @return Collection<int, Currency>
+     * Getter for currency.
+     *
+     * @return Currency|null Currency
      */
-    public function getCurrency(): Collection
+    public function getCurrency(): ?Currency
     {
         return $this->currency;
     }
 
     /**
-     * Add currency.
+     * Setter for currency.
      *
      * @param Currency $currency Currency entity
-     *
-     * @return self This instance
      */
-    public function addCurrency(Currency $currency): self
+    public function setCurrency(Currency $currency): void
     {
-        if (!$this->currency->contains($currency)) {
-            $this->currency->add($currency);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Remove currency.
-     *
-     * @param Currency $currency Currency entity
-     *
-     * @return self This instance
-     */
-    public function removeCurrency(Currency $currency): self
-    {
-        $this->currency->removeElement($currency);
-
-        return $this;
+        $this->currency = $currency;
     }
 
     /**

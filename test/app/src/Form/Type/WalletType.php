@@ -53,8 +53,8 @@ class WalletType extends AbstractType
                 'label' => 'label.currency',
                 'placeholder' => 'label.none',
                 'required' => true,
+                'multiple' => false,
                 'expanded' => true,
-                'multiple' => true,
             ]
         );
 

@@ -263,9 +263,17 @@
               <source>title.wallet_edit</source>
               <target>Wallet</target>
             </trans-unit>
-            <trans-unit id="message.currency_wallet">
-              <source>message.currency_wallet</source>
-              <target>Selected currency is not associated with the selected wallet.</target>
+            <trans-unit id="Year">
+                <source>Year</source>
+                <target>Year</target>
+            </trans-unit>
+            <trans-unit id="Month">
+                <source>Month</source>
+                <target>Month</target>
+            </trans-unit>
+            <trans-unit id="Day">
+                <source>Day</source>
+                <target>Day</target>
             </trans-unit>
 
     </body>

@@ -263,9 +263,17 @@
               <source>title.wallet_edit</source>
               <target>Portfel</target>
             </trans-unit>
-            <trans-unit id="message.currency_wallet">
-              <source>message.currency_wallet</source>
-              <target>Wybrany portfel nie zawiera wybranej waluty.</target>
+            <trans-unit id="Year">
+                <source>Year</source>
+                <target>Rok</target>
+            </trans-unit>
+            <trans-unit id="Month">
+                <source>Month</source>
+                <target>Miesiąc</target>
+            </trans-unit>
+            <trans-unit id="Day">
+                <source>Day</source>
+                <target>Dzień</target>
             </trans-unit>
 
     </body>

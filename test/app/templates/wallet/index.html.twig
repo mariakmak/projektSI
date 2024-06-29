@@ -21,12 +21,9 @@
                 <th>{{ knp_pagination_sortable(pagination, 'label.name'|trans, 'wallet.name') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.sum'|trans, 'wallet.sum')}}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.created_at'|trans, 'wallet.createdAt')}}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label.updated_at'|trans, 'wallet.updatedAt')}}</th>
-                {# <th> {{ knp_pagination_sortable(pagination, 'label.currency'|trans, 'currency.name')}}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label.transaction'|trans, 'transaction.id')}}</th> #}
+                <th>{{ knp_pagination_sortable(pagination, 'label.updated_at'|trans, 'task.updatedAt') }}</th>
+                <th> {{ knp_pagination_sortable(pagination, 'label.currency'|trans, 'wallet.currency')}}</th>
                 <th>{{ knp_pagination_sortable(pagination,'label.author'|trans, 'author.email')}}</th>
-                <th>{{ knp_pagination_sortable(pagination,'label.currency'|trans, 'wallet.currency')}}</th>
-                <th>{{ knp_pagination_sortable(pagination,'label.transaction'|trans, 'wallet.transaction')}}</th>
                 <th>{{ 'label.actions'|trans }}</th>
 
 
@@ -41,42 +38,10 @@
                     <td>{{ task.sum }}</td>
                     <td>{{ task.createdAt|format_date('long')}}</td>
                     <td>{{ task.updatedAt|format_date('long') }}</td>
-                   {#  <td>{{ task.currency.name }}</td>
-                    <td>{{ task.transaction.id }}</td> #}
+                   <td>{{ task.currency.name }}</td>
                     <td>{{ task.author.email }}</td>
-                    <td>
 
 
-                        <div class="dropdown">
-                            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ 'currency.options'|trans }}
-                            </button>
-                            <ul class="dropdown-menu">
-                                {%  for a in task.currency %}
-                                <li>{{ a.name }}</li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-
-
-
-
-
-                    <td>
-
-                        <div class="dropdown">
-                            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ 'transaction.options'|trans }}
-                            </button>
-                            <ul class="dropdown-menu">
-                                {%  for a in task.transaction %}
-                                    <li>{{ a.name }}</li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-
-
-                    </td>
                     <td>
                         <div class="dropdown">
                             <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">

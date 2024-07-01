@@ -117,6 +117,7 @@ class WalletService implements WalletServiceInterface
     {
         $wallet = $this->walletRepository->find($select->getId()); // szuka portfela z formu
         $walletSum = $wallet->getSum(); // pobiera wartosc portfela
+        // dd($wallet, $walletSum);
 
         return $this->walletRepository->countWalletBalance($sum, $value, $wallet, $walletSum);
     }

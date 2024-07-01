@@ -1,23 +1,21 @@
 
-Found 0 of 40 files that can be fixed in 2.883 seconds, 20.00 MB memory used
- ----------- ---------- -------------------------- -------------------------- 
-  State       Domain     Id                         Message Preview (en)      
- ----------- ---------- -------------------------- -------------------------- 
-   missing    messages   message.record_not_found   message.record_not_found  
-   missing    messages   title.wallet_edit          title.wallet_edit         
- ----------- ---------- -------------------------- -------------------------- 
+Found 0 of 40 files that can be fixed in 1.789 seconds, 20.00 MB memory used
+ ----------- ------------ ----------------------------------------------------------- ------------------------------------------ 
+  State       Domain       Id                                                          Message Preview (en)                      
+ ----------- ------------ ----------------------------------------------------------- ------------------------------------------ 
+   missing    validators   Description cannot be longer than {{ limit }} characters.   Description cannot be longer than {{ ...  
+ ----------- ------------ ----------------------------------------------------------- ------------------------------------------ 
 
- ----------- ---------- -------------------------- -------------------------- ------------------------------- 
-  State       Domain     Id                         Message Preview (pl)       Fallback Message Preview (en)  
- ----------- ---------- -------------------------- -------------------------- ------------------------------- 
-   missing    messages   message.record_not_found   message.record_not_found   message.record_not_found       
-   missing    messages   title.wallet_edit          title.wallet_edit          title.wallet_edit              
- ----------- ---------- -------------------------- -------------------------- ------------------------------- 
+ ----------- ------------ ----------------------------------------------------------- ------------------------------------------ ------------------------------------------ 
+  State       Domain       Id                                                          Message Preview (pl)                       Fallback Message Preview (en)             
+ ----------- ------------ ----------------------------------------------------------- ------------------------------------------ ------------------------------------------ 
+   missing    validators   Description cannot be longer than {{ limit }} characters.   Description cannot be longer than {{ ...   Description cannot be longer than {{ ...  
+ ----------- ------------ ----------------------------------------------------------- ------------------------------------------ ------------------------------------------ 
 
-[notice] Migrating up to DoctrineMigrations\Version20231004171252
-[notice] finished in 934.5ms, used 26M memory, 1 migrations executed, 15 sql queries
+[notice] Migrating up to DoctrineMigrations\Version20240628155736
+[notice] finished in 630.7ms, used 26M memory, 1 migrations executed, 12 sql queries
 
- [OK] Successfully migrated to version: DoctrineMigrations\Version20231004171252                                        
+ [OK] Successfully migrated to version: DoctrineMigrations\Version20240628155736                                        
 
 
    > purging database

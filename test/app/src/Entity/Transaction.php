@@ -34,8 +34,7 @@ class Transaction
      */
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Length(
-        max: 255,
-        maxMessage: 'Description cannot be longer than {{ limit }} characters.'
+        max: 255
     )]
     private ?string $description = null;
 
@@ -51,7 +50,7 @@ class Transaction
     #[Assert\NotBlank]
     #[Assert\Range(
         min: 1,
-        max: 1000000,
+        max: 1000000
     )]
     private ?int $sum = null;
 
@@ -74,7 +73,7 @@ class Transaction
     #[Assert\NotNull]
     #[Assert\Length(
         min: 3,
-        max: 255,
+        max: 255
     )]
     private ?string $name = null;
 

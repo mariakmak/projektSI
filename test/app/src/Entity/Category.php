@@ -30,7 +30,7 @@ class Category
     #[Assert\NotBlank]
     #[Assert\Length(
         min: 3,
-        max: 255,
+        max: 255
     )]
     private ?string $name = null;
 

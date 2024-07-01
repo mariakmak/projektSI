@@ -172,26 +172,29 @@ class TransactionController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // dd($request);
             $data = $form->getData(); // dane z formu
-            $selectedentity = $data->getwallet();
+            $select = $data->getwallet();
 
             $sum = $data->getSum(); // sum z form
             $value = $data->isValue(); // value z form
+            // dd($sum, $value);
+            $a = $this->walletService->countWalletSum($select, $sum, $value);
+            // var_dump($select);
 
-            $a = $this->walletService->countWalletSum($selectedentity, $sum, $value);
-            if (false === $a) {
+            if (true === $a) {
+                $this->transactionService->save($transaction);
+
+                $this->addFlash(
+                    'success',
+                    $this->translator->trans('message.created_successfully')
+                );
+
+                return $this->redirectToRoute('transaction_index');
+            } else {
                 $this->addFlash(
                     'notice',
                     $this->translator->trans('message.value')
                 );
             }
-            $this->transactionService->save($transaction);
-
-            $this->addFlash(
-                'success',
-                $this->translator->trans('message.created_successfully')
-            );
-
-            return $this->redirectToRoute('transaction_index');
         }
 
         return $this->render(

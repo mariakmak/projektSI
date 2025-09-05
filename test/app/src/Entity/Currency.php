@@ -8,12 +8,15 @@ namespace App\Entity;
 use App\Repository\CurrencyRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Class Currency.
  */
 #[ORM\Entity(repositoryClass: CurrencyRepository::class)]
 #[ORM\Table(name: 'currencies')]
+#[ORM\UniqueConstraint(name: 'unique_currency_name', columns: ['name'])]
+#[UniqueEntity(fields: ['name'], message: 'Currency with this name already exists')]
 class Currency
 {
     /**

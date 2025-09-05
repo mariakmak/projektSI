@@ -161,6 +161,7 @@
       <excludeFolder url="file://$MODULE_DIR$/test/app/vendor/symfony/framework-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/test/app/vendor/phpdocumentor/type-resolver" />
       <excludeFolder url="file://$MODULE_DIR$/test/app/vendor/symfony/intl" />
+      <excludeFolder url="file://$MODULE_DIR$/test/app/vendor/dama/doctrine-test-bundle" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

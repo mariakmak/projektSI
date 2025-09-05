@@ -8,12 +8,15 @@ namespace App\Entity;
 use App\Repository\TransactionRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Class Transaction.
  */
 #[ORM\Entity(repositoryClass: TransactionRepository::class)]
 #[ORM\Table(name: 'transactions')]
+#[ORM\UniqueConstraint(name: 'unique_transaction_name_per_user', columns: ['name', 'author_id'])]
+#[UniqueEntity(fields: ['name', 'author'], message: 'Transaction with this name already exists for this user')]
 class Transaction
 {
     /**

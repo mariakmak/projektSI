@@ -43,35 +43,35 @@ class WalletRepository extends ServiceEntityRepository
         parent::__construct($registry, Wallet::class);
     }
 
-    /**
-     * Add entity to the database.
-     *
-     * @param Wallet $entity Wallet entity
-     * @param bool   $flush  Whether to flush the changes (default: false)
-     */
-    public function add(Wallet $entity, bool $flush = false): void
-    {
-        $this->getEntityManager()->persist($entity);
-
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
-    }
-
-    /**
-     * Remove entity from the database.
-     *
-     * @param Wallet $entity Wallet entity
-     * @param bool   $flush  Whether to flush the changes (default: false)
-     */
-    public function remove(Wallet $entity, bool $flush = false): void
-    {
-        $this->getEntityManager()->remove($entity);
-
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
-    }
+//    /**
+//     * Add entity to the database.
+//     *
+//     * @param Wallet $entity Wallet entity
+//     * @param bool   $flush  Whether to flush the changes (default: false)
+//     */
+//    public function add(Wallet $entity, bool $flush = false): void
+//    {
+//        $this->getEntityManager()->persist($entity);
+//
+//        if ($flush) {
+//            $this->getEntityManager()->flush();
+//        }
+//    }
+//
+//    /**
+//     * Remove entity from the database.
+//     *
+//     * @param Wallet $entity Wallet entity
+//     * @param bool   $flush  Whether to flush the changes (default: false)
+//     */
+//    public function remove(Wallet $entity, bool $flush = false): void
+//    {
+//        $this->getEntityManager()->remove($entity);
+//
+//        if ($flush) {
+//            $this->getEntityManager()->flush();
+//        }
+//    }
 
     /**
      * Query all records.

@@ -13,10 +13,9 @@ services:
           - php
 
     mysql:
-        image: mysql
+        image: mysql:8.3
         ports:
           - "3307:3306"
-        command: "--default-authentication-plugin=mysql_native_password"
         container_name: symfony_mysql
         environment:
             MYSQL_ROOT_PASSWORD: root
@@ -24,7 +23,16 @@ services:
             MYSQL_USER: symfony
             MYSQL_PASSWORD: symfony
 
-
+    mysql_test:
+      image: mysql:8.3
+      ports:
+        - "3308:3306"
+      container_name: symfony_mysql_test
+      environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: symfony_test
+        MYSQL_USER: symfony_test
+        MYSQL_PASSWORD: symfony_test
 
     php:
         build: .docker/php

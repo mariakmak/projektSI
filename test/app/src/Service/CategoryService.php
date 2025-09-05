@@ -13,6 +13,7 @@ use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
+use Symfony\Bundle\SecurityBundle\Security;
 
 /**
  * Class CategoryService.
@@ -33,6 +34,11 @@ class CategoryService implements CategoryServiceInterface
      * Transaction repository.
      */
     private TransactionRepository $transactionRepository;
+    /**
+     * Security.
+     */
+    private Security $security;
+
 
     /**
      * Constructor.
@@ -41,11 +47,12 @@ class CategoryService implements CategoryServiceInterface
      * @param PaginatorInterface    $paginator             Paginator
      * @param TransactionRepository $transactionRepository TransactionRepository
      */
-    public function __construct(CategoryRepository $categoryRepository, PaginatorInterface $paginator, TransactionRepository $transactionRepository)
+    public function __construct(CategoryRepository $categoryRepository, PaginatorInterface $paginator, TransactionRepository $transactionRepository, Security $security)
     {
         $this->categoryRepository = $categoryRepository;
         $this->paginator = $paginator;
         $this->transactionRepository = $transactionRepository;
+        $this->security = $security;
     }
 
     /**
@@ -57,6 +64,7 @@ class CategoryService implements CategoryServiceInterface
     {
         if (null === $category->getId()) {
             $category->setCreatedAt(new \DateTimeImmutable());
+            #$category->setAuthor($this->security->getUser());
         }
         $category->setUpdatedAt(new \DateTimeImmutable());
 

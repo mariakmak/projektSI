@@ -10,12 +10,15 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Class Wallet.
  */
 #[ORM\Entity(repositoryClass: WalletRepository::class)]
 #[ORM\Table(name: 'wallets')]
+#[ORM\UniqueConstraint(name: 'unique_wallet_name_per_user', columns: ['name', 'author_id'])]
+#[UniqueEntity(fields: ['name', 'author'], message: 'Wallet with this name already exists for this user')]
 class Wallet
 {
     /**

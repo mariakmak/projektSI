@@ -37,19 +37,12 @@
                     <td>{{ elem.name }}</td>
                     <td>{{ elem.author.email }}</td>
                     <td>
-                        <div class="dropdown">
-                            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ 'action.options'|trans }}
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{ url('category_show', {id: elem.id}) }}" title="{{ 'action.view'|trans }}">
-                                        {{ 'action.view'|trans }}</a></li>
-                                <li><a class="dropdown-item" href="{{ url('category_edit', {id: elem.id}) }}" title="{{ 'action.edit'|trans }}">
-                                        {{ 'action.edit'|trans }}</a></li>
-                                <li><a class="dropdown-item" href="{{ url('category_delete', {id: elem.id}) }}" title="{{ 'action.delete'|trans }}">
-                                        {{ 'action.delete'|trans }}</a></li>
-                            </ul>
-                        </div>
+                        {% set links = [
+                            { 'url': url('category_show', {id: elem.id}), 'label': 'action.view'|trans, 'title': 'action.view'|trans },
+                            { 'url': url('category_edit', {id: elem.id}), 'label': 'action.edit'|trans, 'title': 'action.edit'|trans },
+                            { 'url': url('category_delete', {id: elem.id}), 'label': 'action.delete'|trans, 'title': 'action.delete'|trans }
+                        ] %}
+                        {% include 'default/_dropdown_menu.html.twig' with { links: links } %}
                     </td>
 
 
@@ -59,7 +52,7 @@
         </table>
 
         <p>
-            <a href="{{ url('category_create') }}" title="{{ 'action.create'|trans }}">
+            <a href="{{url('category_create')}}" title="{{'action.create'|trans}}">
                 {{ 'action.create'|trans }}
             </a>
         </p>

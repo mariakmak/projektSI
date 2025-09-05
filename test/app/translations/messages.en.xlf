@@ -85,7 +85,7 @@
       </trans-unit>
          <trans-unit id="action.back_to_list">
          <source>action.back_to_list</source>
-         <target>back to list </target>
+         <target>back to list</target>
       </trans-unit>
                <trans-unit id="label.category">
                <source>label.category</source>
@@ -229,7 +229,7 @@
             </trans-unit>
                <trans-unit id="title.user_list">
                <source>title.user_list</source>
-               <target> Users </target>
+               <target>Users</target>
             </trans-unit>
                <trans-unit id="action.user">
                <source>action.user</source>
@@ -241,7 +241,7 @@
             </trans-unit>
                <trans-unit id="title.user_edit">
                <source>title.user_edit</source>
-               <target> Edit user </target>
+               <target>Edit user</target>
             </trans-unit>
             <trans-unit id="label.password_new">
               <source>label.password_new</source>

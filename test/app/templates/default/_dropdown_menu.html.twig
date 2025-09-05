@@ -1,0 +1,10 @@
+<div class="dropdown">
+    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        {{ 'action.options'|trans }}
+    </button>
+    <ul class="dropdown-menu">
+        {% for link in links %}
+            <li><a class="dropdown-item" href="{{ link.url }}" title="{{ link.title }}">{{ link.label }}</a></li>
+        {% endfor %}
+    </ul>
+</div> 

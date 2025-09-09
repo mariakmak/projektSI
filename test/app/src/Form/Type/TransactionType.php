@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Transaction type.
  */
@@ -8,7 +9,6 @@ namespace App\Form\Type;
 use App\Entity\Transaction;
 use App\Entity\Category;
 use App\Entity\Wallet;
-use App\Entity\User;
 use App\Repository\CategoryRepository;
 use App\Repository\WalletRepository;
 use Symfony\Component\Form\AbstractType;

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Abstract Test Controller.
  */
@@ -46,6 +47,8 @@ abstract class AbstractTestController extends WebTestCase
 
     /**
      * Provides user roles and expected outcomes.
+     *
+     * @return array<mixed> Test cases with roles, expected status and redirect URL
      */
     public function roleProvider(): array
     {
@@ -57,61 +60,6 @@ abstract class AbstractTestController extends WebTestCase
     }
 
     /**
-     * Create user.
-     *
-     * @param array $roles User roles
-     *
-     * @return User User entity
-     *
-     * @throws ContainerExceptionInterface|NotFoundExceptionInterface|ORMException|OptimisticLockException
-     */
-    protected function createUser(array $roles): User
-    {
-        $passwordHasher = static::getContainer()->get('security.password_hasher');
-        $user = new User();
-        $user->setEmail('user@example.com');
-        $user->setRoles($roles);
-        $user->setPassword(
-            $passwordHasher->hashPassword(
-                $user,
-                'p@55w0rd'
-            )
-        );
-        $userRepository = static::getContainer()->get(UserRepository::class);
-        $userRepository->save($user);
-
-        return $user;
-    }
-
-    /**
-     * Create user with specific email. It allows to create many unique users.
-     *
-     * @param array $roles User roles
-     * @param string $email User email
-     *
-     * @return User User entity
-     *
-     * @throws ContainerExceptionInterface|NotFoundExceptionInterface|ORMException|OptimisticLockException
-     */
-    protected function createUserWithEmail(array $roles, string $email): User
-    {
-        $passwordHasher = static::getContainer()->get('security.password_hasher');
-        $user = new User();
-        $user->setEmail($email);
-        $user->setRoles($roles);
-        $user->setPassword(
-            $passwordHasher->hashPassword(
-                $user,
-                'p@55w0rd'
-            )
-        );
-        $userRepository = static::getContainer()->get(UserRepository::class);
-        $userRepository->save($user);
-
-        return $user;
-    }
-
-    /**
      * Assert back to list functionality.
      */
     public function assertBackToList(): void
@@ -120,14 +68,14 @@ abstract class AbstractTestController extends WebTestCase
         $currentUrl = $crawler->getUri();
 
         $linkLabel = $this->translator->trans('action.back_to_list');
-        #echo "\nLink label: ".$linkLabel."\n";
+        // echo "\nLink label: ".$linkLabel."\n";
 
         $linkCrawler = $crawler->selectLink($linkLabel);
-        #echo "[DEBUG] selectLink count: " . $linkCrawler->count() . "\n";
+        // echo "[DEBUG] selectLink count: " . $linkCrawler->count() . "\n";
 
-        if ($linkCrawler->count() === 0) {
-            #echo "[DEBUG] Link with label '{$linkLabel}' NOT FOUND!\n";
-            #echo "[DEBUG] Page HTML:\n" . $crawler->filter('body')->html() . "\n";
+        if (0 === $linkCrawler->count()) {
+            // echo "[DEBUG] Link with label '{$linkLabel}' NOT FOUND!\n";
+            // echo "[DEBUG] Page HTML:\n" . $crawler->filter('body')->html() . "\n";
             $this->fail("Link with label '{$linkLabel}' was not found on the page.");
         }
 
@@ -162,19 +110,19 @@ abstract class AbstractTestController extends WebTestCase
             'No links found inside the navbar.'
         );
 
-        #echo "[DEBUG] Found " . $links->count() . " links in navbar.\n";
+        // echo "[DEBUG] Found " . $links->count() . " links in navbar.\n";
 
         $startUrl = $this->httpClient->getRequest()->getUri();
 
         foreach ($links as $linkElement) {
             $href = $linkElement->getAttribute('href');
-            #$text = trim($linkElement->textContent);
+            // $text = trim($linkElement->textContent);
 
-            #echo "[DEBUG] Checking link: {$text} ({$href})\n";
+            // echo "[DEBUG] Checking link: {$text} ({$href})\n";
 
             if (preg_match('#/logout$|^/$#', $href)) {
                 $this->assertNotEmpty($href, 'Logout link has empty href.');
-                #echo "[DEBUG] Skipping logout link: {$href}\n";
+                // echo "[DEBUG] Skipping logout link: {$href}\n";
                 continue;
             }
 
@@ -186,10 +134,65 @@ abstract class AbstractTestController extends WebTestCase
     }
 
     /**
+     * Create user.
+     *
+     * @param array $roles User roles
+     *
+     * @return User User entity
+     *
+     * @throws ContainerExceptionInterface|NotFoundExceptionInterface|ORMException|OptimisticLockException
+     */
+    protected function createUser(array $roles): User
+    {
+        $passwordHasher = static::getContainer()->get('security.password_hasher');
+        $user = new User();
+        $user->setEmail('user@example.com');
+        $user->setRoles($roles);
+        $user->setPassword(
+            $passwordHasher->hashPassword(
+                $user,
+                'p@55w0rd'
+            )
+        );
+        $userRepository = static::getContainer()->get(UserRepository::class);
+        $userRepository->save($user);
+
+        return $user;
+    }
+
+    /**
+     * Create user with specific email. It allows to create many unique users.
+     *
+     * @param array  $roles User roles
+     * @param string $email User email
+     *
+     * @return User User entity
+     *
+     * @throws ContainerExceptionInterface|NotFoundExceptionInterface|ORMException|OptimisticLockException
+     */
+    protected function createUserWithEmail(array $roles, string $email): User
+    {
+        $passwordHasher = static::getContainer()->get('security.password_hasher');
+        $user = new User();
+        $user->setEmail($email);
+        $user->setRoles($roles);
+        $user->setPassword(
+            $passwordHasher->hashPassword(
+                $user,
+                'p@55w0rd'
+            )
+        );
+        $userRepository = static::getContainer()->get(UserRepository::class);
+        $userRepository->save($user);
+
+        return $user;
+    }
+
+    /**
      * Assert dropdown menu in a table row.
      *
-     * @param \Symfony\Component\DomCrawler\Crawler $row Table row crawler
-     * @param int $expectedCount Oczekiwana liczba linków w dropdown menu (domyślnie 3)
+     * @param Crawler $row           Table row crawler
+     * @param int     $expectedCount Expected dropdown menu links
      */
     protected function assertDropdownMenu(Crawler $row, int $expectedCount = 3): void
     {
@@ -201,16 +204,16 @@ abstract class AbstractTestController extends WebTestCase
         // Linki w menu
         $id = $tds->eq(0)->text();
         $tds->eq($tds->count() - 1)->filter('a')->each(function ($link) use ($id) {
-            Assert::assertStringContainsString((string)$id, $link->attr('href'));
+            Assert::assertStringContainsString((string) $id, $link->attr('href'));
         });
     }
 
     /**
      * Assert presence and correctness of a 'create' link in the view.
      *
-     * @param \Symfony\Component\DomCrawler\Crawler $crawler
-     * @param string $routeName Symfony route name (e.g. 'category_create')
-     * @param string|null $label Optional label to search for (default: translated 'action.create')
+     * @param Crawler     $crawler   Symfony DomCrawler instance for the current page
+     * @param string      $routeName Symfony route name (e.g. 'category_create')
+     * @param string|null $label     Link label (defaults to translated 'action.create')
      */
     protected function assertCreateLink(Crawler $crawler, string $routeName, ?string $label = null): void
     {
@@ -226,18 +229,18 @@ abstract class AbstractTestController extends WebTestCase
      *
      * @param User $user User entity
      *
-     * @return \App\Entity\Wallet
+     * @return \App\Entity\Wallet Wallet entity
      */
     protected function createWalletForUser(User $user): \App\Entity\Wallet
     {
-        #$names = ['USD', 'EUR', 'GBP', 'JPY', 'PLN'];
-        $currency = new \App\Entity\Currency();
-        #$currency->setName($names[array_rand($names)]);
+        // $names = ['USD', 'EUR', 'GBP', 'JPY', 'PLN'];
+        $currency = new Currency();
+        // $currency->setName($names[array_rand($names)]);
         $currency->setName('USD');
-        $currencyRepository = static::getContainer()->get(\App\Repository\CurrencyRepository::class);
+        $currencyRepository = static::getContainer()->get(CurrencyRepository::class);
         $currencyRepository->add($currency, true);
         // DEBUG: wypisz ID i nazwę waluty po zapisie
-        #echo "[DEBUG] Created currency with ID: " . $currency->getId() . " and name: " . $currency->getName() . "\n";
+        // echo "[DEBUG] Created currency with ID: " . $currency->getId() . " and name: " . $currency->getName() . "\n";
 
         $wallet = new \App\Entity\Wallet();
         $wallet->setName('Test Wallet');
@@ -258,7 +261,7 @@ abstract class AbstractTestController extends WebTestCase
      *
      * @param User $user User entity
      *
-     * @return \App\Entity\Category
+     * @return \App\Entity\Category Category entity
      */
     protected function createCategoryForUser(User $user): \App\Entity\Category
     {
@@ -279,7 +282,7 @@ abstract class AbstractTestController extends WebTestCase
      *
      * @param User $user User entity
      *
-     * @return \App\Entity\Transaction
+     * @return \App\Entity\Transaction Transaction entity
      */
     protected function createTransactionForUser(User $user): \App\Entity\Transaction
     {
@@ -302,19 +305,18 @@ abstract class AbstractTestController extends WebTestCase
         return $transaction;
     }
 
-
-
-    protected function createCurrency( ): \App\Entity\Currency
+    /**
+     * Create currency for tests.
+     *
+     * @return Currency Currency entity
+     */
+    protected function createCurrency(): Currency
     {
-        $currency = new \App\Entity\Currency();
+        $currency = new Currency();
         $currency->setName('USD');
-        $currencyRepository = static::getContainer()->get(\App\Repository\CurrencyRepository::class);
+        $currencyRepository = static::getContainer()->get(CurrencyRepository::class);
         $currencyRepository->add($currency, true);
+
         return $currency;
     }
-
-
-
-
-
-} 
+}

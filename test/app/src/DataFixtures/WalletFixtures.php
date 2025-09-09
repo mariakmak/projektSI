@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Wallet fixtures.
  */
@@ -27,7 +28,7 @@ class WalletFixtures extends AbstractBaseFixtures implements DependentFixtureInt
         $this->createMany(40, 'wallets', function (int $i) {
             $wallet = new Wallet();
 
-            $wallet->setName($this->faker->word);
+            $wallet->setName($this->faker->unique()->word);
             $wallet->setCreatedAt(
                 \DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-100 days', '-1 days')

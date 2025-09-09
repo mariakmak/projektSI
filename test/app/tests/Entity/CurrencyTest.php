@@ -74,7 +74,7 @@ class CurrencyTest extends KernelTestCase
 
         // then
         $this->assertGreaterThanOrEqual(count($currencies), count($foundCurrencies));
-        
+
         foreach ($currencies as $currencyName) {
             $found = $this->entityManager->getRepository(Currency::class)->findOneBy(['name' => $currencyName]);
             $this->assertNotNull($found);
@@ -99,7 +99,7 @@ class CurrencyTest extends KernelTestCase
 
         // then
         $this->expectException(\Doctrine\DBAL\Exception\UniqueConstraintViolationException::class);
-        
+
         $this->entityManager->persist($currency2);
         $this->entityManager->flush();
     }
@@ -115,8 +115,3 @@ class CurrencyTest extends KernelTestCase
         $this->entityManager = null;
     }
 }
-
-
-
-
-

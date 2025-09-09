@@ -1,16 +1,11 @@
 <?php
+
 /**
  * Wallet Controller test.
  */
 
 namespace App\Tests\Controller;
 
-use App\Entity\Wallet;
-use App\Entity\Currency;
-use App\Entity\User;
-use App\Repository\WalletRepository;
-use App\Repository\CurrencyRepository;
-use Symfony\Component\DomCrawler\Crawler;
 use PHPUnit\Framework\Assert;
 
 /**
@@ -27,16 +22,17 @@ class WalletControllerTest extends AbstractTestController
 
     /**
      * @dataProvider roleProvider
+     *
+     * @param array<string>|null $roles              Roles of the user (null for unauthenticated)
+     * @param int                $expectedStatusCode Expected HTTP status code
+     * @param string|null        $expectedRedirect   Expected redirect URL, if any
      */
-    public function testIndexRoute(
-        ?array $roles,
-        int $expectedStatusCode,
-        ?string $expectedRedirect = null
-    ): void {
+    public function testIndexRoute(?array $roles, int $expectedStatusCode, ?string $expectedRedirect = null): void
+    {
         $user = null;
         $wallet = null;
 
-        if ($roles !== null) {
+        if (null !== $roles) {
             $user = $this->createUser($roles);
             $this->httpClient->loginUser($user);
             $wallet = $this->createWalletForUser($user);
@@ -47,9 +43,10 @@ class WalletControllerTest extends AbstractTestController
         $response = $this->httpClient->getResponse();
         $this->assertSame($expectedStatusCode, $response->getStatusCode());
 
-        if ($expectedRedirect !== null) {
+        if (null !== $expectedRedirect) {
             $this->assertTrue($response->isRedirect());
             $this->assertSame($expectedRedirect, $response->headers->get('Location'));
+
             return;
         }
 
@@ -68,36 +65,40 @@ class WalletControllerTest extends AbstractTestController
 
     /**
      * @dataProvider roleProvider
+     *
+     * @param array<string>|null $roles              Roles of the user (null for unauthenticated)
+     * @param int                $expectedStatusCode Expected HTTP status code
+     * @param string|null        $expectedRedirect   Expected redirect URL, if any
      */
     public function testShowWallet(?array $roles, int $expectedStatusCode, ?string $expectedRedirect = null): void
     {
         $user = null;
         $wallet = null;
 
-        if ($roles !== null) {
+        if (null !== $roles) {
             $user = $this->createUser($roles);
             $this->httpClient->loginUser($user);
             $wallet = $this->createWalletForUser($user);
         }
 
         $walletId = $wallet ? $wallet->getId() : 999;
-        $crawler = $this->httpClient->request('GET', '/wallet/' . $walletId);
+        $crawler = $this->httpClient->request('GET', '/wallet/'.$walletId);
 
         $response = $this->httpClient->getResponse();
         $this->assertSame($expectedStatusCode, $response->getStatusCode());
 
-        if ($expectedRedirect !== null) {
+        if (null !== $expectedRedirect) {
             $this->assertTrue($response->isRedirect($expectedRedirect));
+
             return;
         }
 
-        if ($wallet !== null) {
-
+        if (null !== $wallet) {
             $this->assertNavbar();
 
             $this->assertSelectorExists('dl.dl-horizontal');
 
-            $this->assertSelectorTextContains('dl.dl-horizontal dd:nth-of-type(1)', (string)$wallet->getId());
+            $this->assertSelectorTextContains('dl.dl-horizontal dd:nth-of-type(1)', (string) $wallet->getId());
             $this->assertSelectorTextContains('dl.dl-horizontal dd:nth-of-type(2)', $wallet->getName());
             $this->assertSelectorTextContains('dl.dl-horizontal dd:nth-of-type(3)', $wallet->getCurrency()->getName());
             $this->assertSelectorTextContains('dl.dl-horizontal dd:nth-of-type(4)', $wallet->getCreatedAt()->format('Y/m/d'));
@@ -109,12 +110,16 @@ class WalletControllerTest extends AbstractTestController
 
     /**
      * @dataProvider roleProvider
+     *
+     * @param array<string>|null $roles                    Roles of the user (null for unauthenticated)
+     * @param int                $expectedStatusCode       Expected HTTP status code
+     * @param string|null        $expectedRedirectLocation Expected redirect URL, if any
      */
     public function testCreateAction(?array $roles, int $expectedStatusCode, ?string $expectedRedirectLocation): void
     {
         $currency = null;
 
-        if ($roles !== null) {
+        if (null !== $roles) {
             $user = $this->createUser($roles);
             $this->httpClient->loginUser($user);
             $currency = $this->createCurrency();
@@ -145,16 +150,18 @@ class WalletControllerTest extends AbstractTestController
             $this->httpClient->followRedirect();
             $this->assertSelectorExists('.alert-success');
         }
-
-
     }
 
     /**
      * @dataProvider roleProvider
+     *
+     * @param array<string>|null $roles                    Roles of the user (null for unauthenticated)
+     * @param int                $expectedStatusCode       Expected HTTP status code
+     * @param string|null        $expectedRedirectLocation Expected redirect URL, if any
      */
     public function testEditAction(?array $roles, int $expectedStatusCode, ?string $expectedRedirectLocation): void
     {
-        if ($roles !== null) {
+        if (null !== $roles) {
             $user = $this->createUser($roles);
             $this->httpClient->loginUser($user);
             $wallet = $this->createWalletForUser($user);
@@ -163,7 +170,7 @@ class WalletControllerTest extends AbstractTestController
             $walletId = 1;
         }
 
-        $crawler = $this->httpClient->request('GET', '/wallet/' . $walletId . '/edit');
+        $crawler = $this->httpClient->request('GET', '/wallet/'.$walletId.'/edit');
 
         if ($expectedRedirectLocation) {
             $this->assertResponseRedirects($expectedRedirectLocation);
@@ -191,10 +198,14 @@ class WalletControllerTest extends AbstractTestController
 
     /**
      * @dataProvider roleProvider
+     *
+     * @param array<string>|null $roles                    Roles of the user (null for unauthenticated)
+     * @param int                $expectedStatusCode       Expected HTTP status code
+     * @param string|null        $expectedRedirectLocation Expected redirect URL, if any
      */
     public function testDeleteAction(?array $roles, int $expectedStatusCode, ?string $expectedRedirectLocation): void
     {
-        if ($roles !== null) {
+        if (null !== $roles) {
             $user = $this->createUser($roles);
             $this->httpClient->loginUser($user);
             $wallet = $this->createWalletForUser($user);
@@ -203,7 +214,7 @@ class WalletControllerTest extends AbstractTestController
             $walletId = 1;
         }
 
-        $crawler = $this->httpClient->request('GET', '/wallet/' . $walletId . '/delete');
+        $crawler = $this->httpClient->request('GET', '/wallet/'.$walletId.'/delete');
 
         if ($expectedRedirectLocation) {
             $this->assertResponseRedirects($expectedRedirectLocation);
@@ -225,7 +236,4 @@ class WalletControllerTest extends AbstractTestController
             $this->assertSelectorExists('.alert-success');
         }
     }
-
-
 }
-

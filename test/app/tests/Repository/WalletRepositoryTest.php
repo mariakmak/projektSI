@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * This file is part of the [Your Project Name] package.
+ */
+
 namespace App\Tests\Repository;
 
 use App\Entity\Currency;
@@ -9,11 +13,17 @@ use App\Repository\WalletRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
+/**
+ * Unit tests for the CurrencyRepository.
+ */
 class WalletRepositoryTest extends KernelTestCase
 {
     private ?EntityManagerInterface $em = null;
     private WalletRepository $repo;
 
+    /**
+     * Set up the test environment.
+     */
     protected function setUp(): void
     {
         self::bootKernel();
@@ -22,6 +32,9 @@ class WalletRepositoryTest extends KernelTestCase
         $this->repo = $container->get(WalletRepository::class);
     }
 
+    /**
+     * Tear down the test environment.
+     */
     protected function tearDown(): void
     {
         parent::tearDown();
@@ -29,43 +42,9 @@ class WalletRepositoryTest extends KernelTestCase
         $this->em = null;
     }
 
-    private function createUser(): User
-    {
-        $user = new User();
-        $user->setEmail(uniqid('u').'@example.com');
-        $user->setPassword('pwd');
-        $this->em->persist($user);
-        $this->em->flush();
-        return $user;
-    }
-
-    private function createCurrency(string $name = 'USD'): Currency
-    {
-        $currency = new Currency();
-        $currency->setName($name);
-        $this->em->persist($currency);
-        $this->em->flush();
-        return $currency;
-    }
-
-    private function createWallet(User $author, Currency $currency, string $name = null): Wallet
-    {
-        static $counter = 1;
-
-        $wallet = new Wallet();
-        $wallet->setName($name ?? 'wallet_' . $counter);
-        $wallet->setCurrency($currency);
-        $wallet->setAuthor($author);
-        $wallet->setCreatedAt(new \DateTimeImmutable('2024-01-01'));
-        $wallet->setUpdatedAt(new \DateTimeImmutable('2024-01-02'));
-        $wallet->setSum(0);
-
-        $counter++;
-
-        $this->repo->save($wallet);
-        return $wallet;
-    }
-
+    /**
+     * Test adding, saving, and deleting a Wallet entity.
+     */
     public function testAddRemoveSaveDelete(): void
     {
         $author = $this->createUser();
@@ -78,11 +57,11 @@ class WalletRepositoryTest extends KernelTestCase
         $wallet->setCreatedAt(new \DateTimeImmutable('2024-01-01'));
         $wallet->setUpdatedAt(new \DateTimeImmutable('2024-01-01'));
 
-//        $this->repo->add($wallet, true);
-//        $this->assertNotNull($this->repo->findOneBy(['name' => 'W1']));
-//
-//        $this->repo->remove($wallet, true);
-//        $this->assertNull($this->repo->findOneBy(['name' => 'W1']));
+        //        $this->repo->add($wallet, true);
+        //        $this->assertNotNull($this->repo->findOneBy(['name' => 'W1']));
+        //
+        //        $this->repo->remove($wallet, true);
+        //        $this->assertNull($this->repo->findOneBy(['name' => 'W1']));
 
         $this->repo->save($wallet);
         $this->assertNotNull($this->repo->findOneBy(['name' => 'W1']));
@@ -91,6 +70,9 @@ class WalletRepositoryTest extends KernelTestCase
         $this->assertNull($this->repo->findOneBy(['name' => 'W1']));
     }
 
+    /**
+     * Test querying wallets by author.
+     */
     public function testQueryByAuthor(): void
     {
         $author1 = $this->createUser();
@@ -110,6 +92,9 @@ class WalletRepositoryTest extends KernelTestCase
         }
     }
 
+    /**
+     * Test the wallet balance calculation method.
+     */
     public function testCountWalletBalance(): void
     {
         $author = $this->createUser();
@@ -127,9 +112,65 @@ class WalletRepositoryTest extends KernelTestCase
         $this->assertFalse($this->repo->countWalletBalance(200, false, $wallet, 120));
         $this->assertSame(120, $wallet->getSum());
     }
+
+    /**
+     * Create and persist a new User entity.
+     *
+     * @return User the created user
+     */
+    private function createUser(): User
+    {
+        $user = new User();
+        $user->setEmail(uniqid('u').'@example.com');
+        $user->setPassword('pwd');
+        $this->em->persist($user);
+        $this->em->flush();
+
+        return $user;
+    }
+
+    /**
+     * Create and persist a new Currency entity.
+     *
+     * @param string $name the currency name (default 'USD')
+     *
+     * @return Currency the created currency
+     */
+    private function createCurrency(string $name = 'USD'): Currency
+    {
+        $currency = new Currency();
+        $currency->setName($name);
+        $this->em->persist($currency);
+        $this->em->flush();
+
+        return $currency;
+    }
+
+    /**
+     * Create and persist a new Wallet entity.
+     *
+     * @param User        $author   the wallet owner
+     * @param Currency    $currency the wallet currency
+     * @param string|null $name     optional name for the wallet
+     *
+     * @return Wallet the created wallet
+     */
+    private function createWallet(User $author, Currency $currency, ?string $name = null): Wallet
+    {
+        static $counter = 1;
+
+        $wallet = new Wallet();
+        $wallet->setName($name ?? 'wallet_'.$counter);
+        $wallet->setCurrency($currency);
+        $wallet->setAuthor($author);
+        $wallet->setCreatedAt(new \DateTimeImmutable('2024-01-01'));
+        $wallet->setUpdatedAt(new \DateTimeImmutable('2024-01-02'));
+        $wallet->setSum(0);
+
+        ++$counter;
+
+        $this->repo->save($wallet);
+
+        return $wallet;
+    }
 }
-
-
-
-
-

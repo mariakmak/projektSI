@@ -1,4 +1,5 @@
 <?php
+
 /**
  * User controller test.
  */
@@ -7,8 +8,6 @@ namespace App\Tests\Controller;
 
 use App\Entity\Enum\UserRole;
 use App\Entity\User;
-use App\Repository\UserRepository;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -29,6 +28,8 @@ class UserControllerTest extends AbstractTestController
      * - Unauthenticated user: 302 redirect to login
      * - Regular user: 403 forbidden
      * - Admin user: 200 OK
+     *
+     * @return array<string, array{0: ?array<string>, 1: int, 2: ?string}> Role sets and expected outcomes
      */
     public function roleProvider(): array
     {
@@ -41,6 +42,10 @@ class UserControllerTest extends AbstractTestController
 
     /**
      * @dataProvider roleProvider
+     *
+     * @param array<string>|null $roles              Roles of the user (null for unauthenticated)
+     * @param int                $expectedStatusCode Expected HTTP status code
+     * @param string|null        $expectedRedirect   Expected redirect URL, if any
      */
     public function testIndexRoute(?array $roles, int $expectedStatusCode, ?string $expectedRedirect): void
     {
@@ -53,9 +58,9 @@ class UserControllerTest extends AbstractTestController
         $this->httpClient->request('GET', self::TEST_ROUTE);
         $response = $this->httpClient->getResponse();
         // DEBUG OUTPUT
-        #echo "\n[DEBUG] Status code: " . $response->getStatusCode() . "\n";
-        #echo "[DEBUG] Location: " . $response->headers->get('Location') . "\n";
-        #echo "[DEBUG] Content: " . mb_substr($response->getContent(), 0, 500) . "\n";
+        // echo "\n[DEBUG] Status code: " . $response->getStatusCode() . "\n";
+        // echo "[DEBUG] Location: " . $response->headers->get('Location') . "\n";
+        // echo "[DEBUG] Content: " . mb_substr($response->getContent(), 0, 500) . "\n";
 
         $result = $response->getStatusCode();
 
@@ -64,11 +69,11 @@ class UserControllerTest extends AbstractTestController
             $this->assertResponseRedirects($expectedRedirect);
         }
 
-        if ($roles && in_array('ROLE_ADMIN', $roles, true) && $expectedStatusCode === 200) {
+        if ($roles && in_array('ROLE_ADMIN', $roles, true) && 200 === $expectedStatusCode) {
             $h1 = $this->httpClient->getCrawler()->filter('h1')->text();
             $expected = $this->translator->trans('title.user_list');
-            #echo "\n[DEBUG] H1: " . $h1 . "\n";
-            #echo "[DEBUG] Expected H1: " . $expected . "\n";
+            // echo "\n[DEBUG] H1: " . $h1 . "\n";
+            // echo "[DEBUG] Expected H1: " . $expected . "\n";
             $this->assertSelectorTextContains('h1', $expected);
             // ...other admin-specific assertions can go here...
         }
@@ -87,9 +92,9 @@ class UserControllerTest extends AbstractTestController
 
         // DEBUG: nagłówki th
         $ths = $crawler->filter('th');
-//        foreach ($ths as $i => $th) {
-//            echo "\n[DEBUG] TH[$i]: " . trim($th->textContent) . "\n";
-//        }
+        //        foreach ($ths as $i => $th) {
+        //            echo "\n[DEBUG] TH[$i]: " . trim($th->textContent) . "\n";
+        //        }
 
 
         $expected = [
@@ -99,7 +104,7 @@ class UserControllerTest extends AbstractTestController
             $this->translator->trans('label.actions'),
         ];
         foreach ($expected as $i => $label) {
-//            echo "[DEBUG] Expected TH[$i]: $label\n";
+            //            echo "[DEBUG] Expected TH[$i]: $label\n";
             $this->assertEquals($label, trim($ths->eq($i)->text()));
         }
     }
@@ -118,24 +123,24 @@ class UserControllerTest extends AbstractTestController
         $crawler = $this->httpClient->getCrawler();
 
         $firstRow = $crawler->filter('table tbody tr')->first();
-        
+
         // DEBUG: wypisz zawartość każdej komórki
-//        foreach ($firstRow->filter('td') as $i => $cell) {
-//            echo "\n[DEBUG] Cell[$i]: " . trim($cell->textContent) . "\n";
-//        }
-        
+        //        foreach ($firstRow->filter('td') as $i => $cell) {
+        //            echo "\n[DEBUG] Cell[$i]: " . trim($cell->textContent) . "\n";
+        //        }
+
         $this->assertEquals((string) $user->getId(), trim($firstRow->filter('td')->eq(0)->text()));
         $this->assertEquals($user->getEmail(), trim($firstRow->filter('td')->eq(1)->text()));
         $this->assertStringContainsString('ROLE_ADMIN', trim($firstRow->filter('td')->eq(2)->text()));
-        
-        //dropdown menu
+
+        // dropdown menu
         $rows = $crawler->filter('table tbody tr');
         $this->assertGreaterThan(0, $rows->count());
 
         $firstRow = $rows->first();
         $this->assertDropdownMenu($firstRow, 1); // Only edit action for users
-        
-        //link/edit
+
+        // link/edit
         $editLink = $firstRow->filter('.dropdown-menu a[href*="/edit"]');
         $this->assertGreaterThan(0, $editLink->count(), 'Edit link not found in dropdown menu');
         $this->assertStringContainsString('/edit', $editLink->attr('href'));
@@ -149,7 +154,7 @@ class UserControllerTest extends AbstractTestController
         $user = $this->createUser([UserRole::ROLE_ADMIN->value, UserRole::ROLE_USER->value]);
         $this->httpClient->loginUser($user);
 
-        for ($i = 1; $i <= 25; $i++) {
+        for ($i = 1; $i <= 25; ++$i) {
             $this->createUserWithEmail([UserRole::ROLE_USER->value], "user{$i}@example.com");
         }
 
@@ -163,6 +168,10 @@ class UserControllerTest extends AbstractTestController
     /**
      * Test route for edit action.
      *
+     * @param array<string>|null $roles              Roles of the user (null for unauthenticated)
+     * @param int                $expectedStatusCode Expected HTTP status code
+     * @param string|null        $expectedRedirect   Expected redirect URL, if any
+     *
      * @dataProvider roleProvider
      */
     public function testEditRoute(?array $roles, int $expectedStatusCode, ?string $expectedRedirect): void
@@ -174,9 +183,9 @@ class UserControllerTest extends AbstractTestController
         }
 
         // Create a test user to edit
-        $testUser = $this->createUserWithEmail([UserRole::ROLE_USER->value], "user1@example.com");
+        $testUser = $this->createUserWithEmail([UserRole::ROLE_USER->value], 'user1@example.com');
 
-        $this->httpClient->request('GET', self::TEST_ROUTE . '/' . $testUser->getId() . '/edit');
+        $this->httpClient->request('GET', self::TEST_ROUTE.'/'.$testUser->getId().'/edit');
         $result = $this->httpClient->getResponse()->getStatusCode();
 
         $this->assertEquals($expectedStatusCode, $result);
@@ -193,9 +202,9 @@ class UserControllerTest extends AbstractTestController
         $user = $this->createUser([UserRole::ROLE_ADMIN->value, UserRole::ROLE_USER->value]);
         $this->httpClient->loginUser($user);
 
-        $testUser = $this->createUserWithEmail([UserRole::ROLE_USER->value], "user1@example.com");
+        $testUser = $this->createUserWithEmail([UserRole::ROLE_USER->value], 'user1@example.com');
 
-        $this->httpClient->request('GET', self::TEST_ROUTE . '/' . $testUser->getId() . '/edit');
+        $this->httpClient->request('GET', self::TEST_ROUTE.'/'.$testUser->getId().'/edit');
         $this->assertResponseIsSuccessful();
         $this->assertSelectorTextContains('h1', $this->translator->trans('title.user_edit', ['%id%' => $testUser->getId()]));
     }
@@ -208,9 +217,9 @@ class UserControllerTest extends AbstractTestController
         $user = $this->createUser([UserRole::ROLE_ADMIN->value, UserRole::ROLE_USER->value]);
         $this->httpClient->loginUser($user);
 
-        $testUser = $this->createUserWithEmail([UserRole::ROLE_USER->value], "user1@example.com");
+        $testUser = $this->createUserWithEmail([UserRole::ROLE_USER->value], 'user1@example.com');
 
-        $this->httpClient->request('GET', self::TEST_ROUTE . '/' . $testUser->getId() . '/edit');
+        $this->httpClient->request('GET', self::TEST_ROUTE.'/'.$testUser->getId().'/edit');
         $this->assertResponseIsSuccessful();
 
         $crawler = $this->httpClient->getCrawler();
@@ -229,9 +238,9 @@ class UserControllerTest extends AbstractTestController
         $user = $this->createUser([UserRole::ROLE_ADMIN->value, UserRole::ROLE_USER->value]);
         $this->httpClient->loginUser($user);
 
-        $testUser = $this->createUserWithEmail([UserRole::ROLE_USER->value], "user1@example.com");
+        $testUser = $this->createUserWithEmail([UserRole::ROLE_USER->value], 'user1@example.com');
 
-        $this->httpClient->request('GET', self::TEST_ROUTE . '/' . $testUser->getId() . '/edit');
+        $this->httpClient->request('GET', self::TEST_ROUTE.'/'.$testUser->getId().'/edit');
         $this->assertResponseIsSuccessful();
 
         $this->httpClient->submitForm(
@@ -258,9 +267,9 @@ class UserControllerTest extends AbstractTestController
         $user = $this->createUser([UserRole::ROLE_ADMIN->value, UserRole::ROLE_USER->value]);
         $this->httpClient->loginUser($user);
 
-        $testUser = $this->createUserWithEmail([UserRole::ROLE_USER->value], "user1@example.com");
+        $testUser = $this->createUserWithEmail([UserRole::ROLE_USER->value], 'user1@example.com');
 
-        $this->httpClient->request('GET', self::TEST_ROUTE . '/' . $testUser->getId() . '/edit');
+        $this->httpClient->request('GET', self::TEST_ROUTE.'/'.$testUser->getId().'/edit');
         $this->assertResponseIsSuccessful();
 
         $this->httpClient->submitForm(
@@ -287,9 +296,9 @@ class UserControllerTest extends AbstractTestController
         $user = $this->createUser([UserRole::ROLE_ADMIN->value, UserRole::ROLE_USER->value]);
         $this->httpClient->loginUser($user);
 
-        $testUser = $this->createUserWithEmail([UserRole::ROLE_USER->value], "user1@example.com");
+        $testUser = $this->createUserWithEmail([UserRole::ROLE_USER->value], 'user1@example.com');
 
-        $this->httpClient->request('GET', self::TEST_ROUTE . '/' . $testUser->getId() . '/edit');
+        $this->httpClient->request('GET', self::TEST_ROUTE.'/'.$testUser->getId().'/edit');
         $this->assertResponseIsSuccessful();
 
         $this->httpClient->submitForm(
@@ -314,14 +323,13 @@ class UserControllerTest extends AbstractTestController
         $user = $this->createUser([UserRole::ROLE_ADMIN->value, UserRole::ROLE_USER->value]);
         $this->httpClient->loginUser($user);
 
-        $testUser = $this->createUserWithEmail([UserRole::ROLE_USER->value], "user1@example.com");
+        $testUser = $this->createUserWithEmail([UserRole::ROLE_USER->value], 'user1@example.com');
 
-        $this->httpClient->request('GET', self::TEST_ROUTE . '/' . $testUser->getId() . '/edit');
+        $this->httpClient->request('GET', self::TEST_ROUTE.'/'.$testUser->getId().'/edit');
         $this->assertResponseIsSuccessful();
 
         $this->assertBackToList();
     }
-
 
     /**
      * Test edit action with non-existent user.
@@ -331,7 +339,7 @@ class UserControllerTest extends AbstractTestController
         $user = $this->createUser([UserRole::ROLE_ADMIN->value, UserRole::ROLE_USER->value]);
         $this->httpClient->loginUser($user);
 
-        $this->httpClient->request('GET', self::TEST_ROUTE . '/999999/edit');
+        $this->httpClient->request('GET', self::TEST_ROUTE.'/999999/edit');
         $this->assertResponseStatusCodeSame(Response::HTTP_NOT_FOUND);
     }
 
@@ -343,10 +351,10 @@ class UserControllerTest extends AbstractTestController
         $user = $this->createUser([UserRole::ROLE_ADMIN->value, UserRole::ROLE_USER->value]);
         $this->httpClient->loginUser($user);
 
-        
+
         $pages = [
             'index' => self::TEST_ROUTE,
-            'edit' => self::TEST_ROUTE . '/' . $user->getId() . '/edit'
+            'edit' => self::TEST_ROUTE.'/'.$user->getId().'/edit',
         ];
 
         foreach ($pages as $pageName => $url) {
@@ -355,5 +363,4 @@ class UserControllerTest extends AbstractTestController
             $this->assertNavbar();
         }
     }
-
-} 
+}

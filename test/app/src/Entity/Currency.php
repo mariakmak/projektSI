@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Currency entity.
  */
@@ -16,7 +17,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[ORM\Entity(repositoryClass: CurrencyRepository::class)]
 #[ORM\Table(name: 'currencies')]
 #[ORM\UniqueConstraint(name: 'unique_currency_name', columns: ['name'])]
-#[UniqueEntity(fields: ['name'], message: 'Currency with this name already exists')]
+#[UniqueEntity(fields: ['name'], message: 'currency.unique_name')]
 class Currency
 {
     /**

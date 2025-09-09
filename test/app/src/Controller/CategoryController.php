@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Category controller.
  */
@@ -16,7 +17,6 @@ use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Symfony\Bundle\SecurityBundle\Security;
 
 /**
  * Class CategoryController.
@@ -40,11 +40,10 @@ class CategoryController extends AbstractController
      * @param CategoryService     $categoryService category service instance
      * @param TranslatorInterface $translator      translator instance
      */
-    public function __construct(CategoryService $categoryService, TranslatorInterface $translator )
+    public function __construct(CategoryService $categoryService, TranslatorInterface $translator)
     {
         $this->categoryService = $categoryService;
         $this->translator = $translator;
-
     }
 
     /**
@@ -221,11 +220,4 @@ class CategoryController extends AbstractController
             ]
         );
     }
-
-
-
-
-
-
-
 }

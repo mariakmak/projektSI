@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Category repository.
  */
@@ -71,36 +72,36 @@ class CategoryRepository extends ServiceEntityRepository
 
         return $queryBuilder;
     }
-//
-//    /**
-//     * Add category.
-//     *
-//     * @param Category $entity Category entity
-//     * @param bool     $flush  Whether to flush the changes (default: false)
-//     */
-//    public function add(Category $entity, bool $flush = false): void
-//    {
-//        $this->getEntityManager()->persist($entity);
-//
-//        if ($flush) {
-//            $this->getEntityManager()->flush();
-//        }
-//    }
-//
-//    /**
-//     * Remove category.
-//     *
-//     * @param Category $entity Category entity
-//     * @param bool     $flush  Whether to flush the changes (default: false)
-//     */
-//    public function remove(Category $entity, bool $flush = false): void
-//    {
-//        $this->getEntityManager()->remove($entity);
-//
-//        if ($flush) {
-//            $this->getEntityManager()->flush();
-//        }
-//    }
+    //
+    //    /**
+    //     * Add category.
+    //     *
+    //     * @param Category $entity Category entity
+    //     * @param bool     $flush  Whether to flush the changes (default: false)
+    //     */
+    //    public function add(Category $entity, bool $flush = false): void
+    //    {
+    //        $this->getEntityManager()->persist($entity);
+    //
+    //        if ($flush) {
+    //            $this->getEntityManager()->flush();
+    //        }
+    //    }
+    //
+    //    /**
+    //     * Remove category.
+    //     *
+    //     * @param Category $entity Category entity
+    //     * @param bool     $flush  Whether to flush the changes (default: false)
+    //     */
+    //    public function remove(Category $entity, bool $flush = false): void
+    //    {
+    //        $this->getEntityManager()->remove($entity);
+    //
+    //        if ($flush) {
+    //            $this->getEntityManager()->flush();
+    //        }
+    //    }
 
     /**
      * Save entity.

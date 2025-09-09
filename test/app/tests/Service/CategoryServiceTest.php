@@ -12,14 +12,15 @@ use App\Service\CategoryService;
 use App\Service\CategoryServiceInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Knp\Component\Pager\Pagination;
 
-
+/**
+ * Unit tests for the CategoryService.
+ */
 class CategoryServiceTest extends KernelTestCase
 {
     /**
@@ -45,10 +46,6 @@ class CategoryServiceTest extends KernelTestCase
         $this->categoryService = $container->get(CategoryService::class);
     }
 
-
-
-
-
     /**
      * Test save.
      *
@@ -62,7 +59,7 @@ class CategoryServiceTest extends KernelTestCase
         $user->setPassword('test');
         $this->entityManager->persist($user);
         $this->entityManager->flush();
-        
+
         $category = new Category();
         $category->setName('Test Category');
         $category->setAuthor($user);
@@ -96,16 +93,16 @@ class CategoryServiceTest extends KernelTestCase
         $user->setPassword('test');
         $this->entityManager->persist($user);
         $this->entityManager->flush();
-        
+
         $category = new Category();
         $category->setName('To Delete');
         $category->setAuthor($user);
         $this->categoryService->save($category);
         $id = $category->getId();
-        
+
         // when
         $this->categoryService->delete($category);
-        
+
         // then
         $found = $this->entityManager->createQueryBuilder()
             ->select('category')
@@ -130,15 +127,15 @@ class CategoryServiceTest extends KernelTestCase
         $user->setPassword('test');
         $this->entityManager->persist($user);
         $this->entityManager->flush();
-        
+
         $category = new Category();
         $category->setName('Find Me');
         $category->setAuthor($user);
         $this->categoryService->save($category);
-        
+
         // when
         $found = $this->categoryService->findOneById($category->getId());
-        
+
         // then
         $this->assertInstanceOf(Category::class, $found);
         $this->assertEquals($category, $found);
@@ -157,18 +154,18 @@ class CategoryServiceTest extends KernelTestCase
         $user->setPassword('test');
         $this->entityManager->persist($user);
         $this->entityManager->flush();
-        
 
-        for ($i = 0; $i < 10; $i++) {
+
+        for ($i = 0; $i < 10; ++$i) {
             $category = new Category();
-            $category->setName('Cat ' . $i);
+            $category->setName('Cat '.$i);
             $category->setAuthor($user);
             $this->categoryService->save($category);
         }
-        
+
         // when
         $pagination = $this->categoryService->getPaginatedList(1, $user);
-        
+
         // then
         $this->assertInstanceOf(Pagination\PaginationInterface::class, $pagination);
         $this->assertGreaterThan(0, count($pagination));
@@ -187,18 +184,16 @@ class CategoryServiceTest extends KernelTestCase
         $user->setPassword('test');
         $this->entityManager->persist($user);
         $this->entityManager->flush();
-        
+
         $category = new Category();
         $category->setName('Deletable');
         $category->setAuthor($user);
         $this->categoryService->save($category);
-        
+
         // when
         $result = $this->categoryService->canBeDeleted($category);
-        
+
         // then
         $this->assertTrue($result);
     }
-
-
 }

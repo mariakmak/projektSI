@@ -16,11 +16,15 @@ use App\Entity\User;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\ORMException;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
+/**
+ * Class TransactionServiceTest.
+ *
+ * @covers \App\Service\TransactionService
+ */
 class TransactionServiceTest extends KernelTestCase
 {
     /**
@@ -57,6 +61,9 @@ class TransactionServiceTest extends KernelTestCase
         $this->entityManager = null;
     }
 
+    /**
+     * Test saving a transaction.
+     */
     public function testSave(): void
     {
         // given
@@ -65,12 +72,12 @@ class TransactionServiceTest extends KernelTestCase
         $user->setPassword('test');
         $this->entityManager->persist($user);
         $this->entityManager->flush();
-        
+
         $currency = new Currency();
         $currency->setName('USD');
         $this->entityManager->persist($currency);
         $this->entityManager->flush();
-        
+
         $wallet = new Wallet();
         $wallet->setName('Test Wallet');
         $wallet->setCurrency($currency);
@@ -80,7 +87,7 @@ class TransactionServiceTest extends KernelTestCase
         $wallet->setUpdatedAt(new \DateTimeImmutable('2024-06-01'));
         $this->entityManager->persist($wallet);
         $this->entityManager->flush();
-        
+
         $category = new Category();
         $category->setName('Test Category');
         $category->setAuthor($user);
@@ -88,7 +95,7 @@ class TransactionServiceTest extends KernelTestCase
         $category->setUpdatedAt(new \DateTimeImmutable('2024-06-01'));
         $this->entityManager->persist($category);
         $this->entityManager->flush();
-        
+
         $transaction = new Transaction();
         $transaction->setName('Test Transaction');
         $transaction->setSum(100);
@@ -97,7 +104,7 @@ class TransactionServiceTest extends KernelTestCase
         $transaction->setAuthor($user);
         $transaction->setWallet($wallet);
         $transaction->setCategory($category);
-        
+
         // when
         $this->transactionService->save($transaction);
 
@@ -114,6 +121,9 @@ class TransactionServiceTest extends KernelTestCase
         $this->assertEquals($transaction, $resultTransaction);
     }
 
+    /**
+     * Test deleting a transaction.
+     */
     public function testDelete(): void
     {
         // given
@@ -122,12 +132,12 @@ class TransactionServiceTest extends KernelTestCase
         $user->setPassword('test');
         $this->entityManager->persist($user);
         $this->entityManager->flush();
-        
+
         $currency = new Currency();
         $currency->setName('EUR');
         $this->entityManager->persist($currency);
         $this->entityManager->flush();
-        
+
         $wallet = new Wallet();
         $wallet->setName('Delete Wallet');
         $wallet->setCurrency($currency);
@@ -137,7 +147,7 @@ class TransactionServiceTest extends KernelTestCase
         $wallet->setUpdatedAt(new \DateTimeImmutable('2024-06-01'));
         $this->entityManager->persist($wallet);
         $this->entityManager->flush();
-        
+
         $category = new Category();
         $category->setName('Delete Category');
         $category->setAuthor($user);
@@ -145,7 +155,7 @@ class TransactionServiceTest extends KernelTestCase
         $category->setUpdatedAt(new \DateTimeImmutable('2024-06-01'));
         $this->entityManager->persist($category);
         $this->entityManager->flush();
-        
+
         $transaction = new Transaction();
         $transaction->setName('To Delete');
         $transaction->setSum(200);
@@ -154,13 +164,13 @@ class TransactionServiceTest extends KernelTestCase
         $transaction->setAuthor($user);
         $transaction->setWallet($wallet);
         $transaction->setCategory($category);
-        
+
         $this->transactionService->save($transaction);
         $id = $transaction->getId();
-        
+
         // when
         $this->transactionService->delete($transaction);
-        
+
         // then
         $found = $this->entityManager->createQueryBuilder()
             ->select('transaction')
@@ -172,6 +182,9 @@ class TransactionServiceTest extends KernelTestCase
         $this->assertNull($found);
     }
 
+    /**
+     * Test getting a paginated list of transactions.
+     */
     public function testGetPaginatedList(): void
     {
         // given
@@ -180,12 +193,12 @@ class TransactionServiceTest extends KernelTestCase
         $user->setPassword('test');
         $this->entityManager->persist($user);
         $this->entityManager->flush();
-        
+
         $currency = new Currency();
         $currency->setName('GBP');
         $this->entityManager->persist($currency);
         $this->entityManager->flush();
-        
+
         $wallet = new Wallet();
         $wallet->setName('Paginate Wallet');
         $wallet->setCurrency($currency);
@@ -195,7 +208,7 @@ class TransactionServiceTest extends KernelTestCase
         $wallet->setUpdatedAt(new \DateTimeImmutable('2024-06-01'));
         $this->entityManager->persist($wallet);
         $this->entityManager->flush();
-        
+
         $category = new Category();
         $category->setName('Paginate Category');
         $category->setAuthor($user);
@@ -204,32 +217,35 @@ class TransactionServiceTest extends KernelTestCase
         $this->entityManager->persist($category);
         $this->entityManager->flush();
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 10; ++$i) {
             $transaction = new Transaction();
-            $transaction->setName('Transaction ' . $i);
+            $transaction->setName('Transaction '.$i);
             $transaction->setSum(100 * ($i + 1));
-            $transaction->setValue($i % 2 === 0);
-            $transaction->setDescription('Description ' . $i);
+            $transaction->setValue(0 === $i % 2);
+            $transaction->setDescription('Description '.$i);
             $transaction->setAuthor($user);
             $transaction->setWallet($wallet);
             $transaction->setCategory($category);
             $this->transactionService->save($transaction);
         }
-        
+
         // when
         $result = $this->transactionService->getPaginatedList(1, $user);
-        
+
         // then
         $this->assertPaginatedListStructure($result);
-        
+
         // when
         $filters = ['category_id' => $category->getId()];
         $resultWithFilters = $this->transactionService->getPaginatedList(1, $user, $filters);
-        
+
         // then
         $this->assertPaginatedListStructure($resultWithFilters);
     }
 
+    /**
+     * Test getting transactions filtered by date.
+     */
     public function testGetByDate(): void
     {
         // given
@@ -238,12 +254,12 @@ class TransactionServiceTest extends KernelTestCase
         $user->setPassword('test');
         $this->entityManager->persist($user);
         $this->entityManager->flush();
-        
+
         $currency = new Currency();
         $currency->setName('PLN');
         $this->entityManager->persist($currency);
         $this->entityManager->flush();
-        
+
         $wallet = new Wallet();
         $wallet->setName('Date Wallet');
         $wallet->setCurrency($currency);
@@ -253,7 +269,7 @@ class TransactionServiceTest extends KernelTestCase
         $wallet->setUpdatedAt(new \DateTimeImmutable('2024-06-01'));
         $this->entityManager->persist($wallet);
         $this->entityManager->flush();
-        
+
         $category = new Category();
         $category->setName('Date Category');
         $category->setAuthor($user);
@@ -273,16 +289,19 @@ class TransactionServiceTest extends KernelTestCase
         $transaction->setCategory($category);
         $transaction->setCreatedAt(new \DateTimeImmutable('2024-01-15'));
         $this->transactionService->save($transaction);
-        
+
         // when
         $startDate = new \DateTimeImmutable('2024-01-01');
         $endDate = new \DateTimeImmutable('2024-01-31');
         $result = $this->transactionService->getByDate(1, $user, $startDate, $endDate);
-        
+
         // then
         $this->assertPaginatedListStructure($result);
     }
 
+    /**
+     * Test getting transactions by date outside the range.
+     */
     public function testGetByDateOutsideRange(): void
     {
         // given
@@ -291,12 +310,12 @@ class TransactionServiceTest extends KernelTestCase
         $user->setPassword('test');
         $this->entityManager->persist($user);
         $this->entityManager->flush();
-        
+
         $currency = new Currency();
         $currency->setName('CHF');
         $this->entityManager->persist($currency);
         $this->entityManager->flush();
-        
+
         $wallet = new Wallet();
         $wallet->setName('Outside Wallet');
         $wallet->setCurrency($currency);
@@ -306,7 +325,7 @@ class TransactionServiceTest extends KernelTestCase
         $wallet->setUpdatedAt(new \DateTimeImmutable('2024-06-01'));
         $this->entityManager->persist($wallet);
         $this->entityManager->flush();
-        
+
         $category = new Category();
         $category->setName('Outside Category');
         $category->setAuthor($user);
@@ -314,7 +333,7 @@ class TransactionServiceTest extends KernelTestCase
         $category->setUpdatedAt(new \DateTimeImmutable('2024-06-01'));
         $this->entityManager->persist($category);
         $this->entityManager->flush();
-        
+
 
         $transaction = new Transaction();
         $transaction->setName('Outside Range Transaction');
@@ -326,24 +345,20 @@ class TransactionServiceTest extends KernelTestCase
         $transaction->setCategory($category);
         $transaction->setCreatedAt(new \DateTimeImmutable('2024-03-15'));
         $this->transactionService->save($transaction);
-        
+
         $startDate = new \DateTimeImmutable('2024-01-01');
         $endDate = new \DateTimeImmutable('2024-01-31');
-        
+
         $result = $this->transactionService->getByDate(1, $user, $startDate, $endDate);
-        
+
         // then
         $this->assertPaginatedListStructure($result);
     }
 
-
-
-
-
-
-
     /**
      * Assert paginated list structure.
+     *
+     * @param array $result The paginated result to check
      */
     private function assertPaginatedListStructure(array $result): void
     {

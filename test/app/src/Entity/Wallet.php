@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Wallet entity.
  */
@@ -18,7 +19,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[ORM\Entity(repositoryClass: WalletRepository::class)]
 #[ORM\Table(name: 'wallets')]
 #[ORM\UniqueConstraint(name: 'unique_wallet_name_per_user', columns: ['name', 'author_id'])]
-#[UniqueEntity(fields: ['name', 'author'], message: 'Wallet with this name already exists for this user')]
+#[UniqueEntity(fields: ['name', 'author'], message: 'wallet.unique_name')]
 class Wallet
 {
     /**

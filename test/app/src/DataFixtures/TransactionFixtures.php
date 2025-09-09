@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Transaction fixtures.
  */
@@ -31,9 +32,9 @@ class TransactionFixtures extends AbstractBaseFixtures implements DependentFixtu
             /** @var Category $category */
             $category = $this->getRandomReference('categories');
             $transaction->setCategory($category);
-            $transaction->setName($this->faker->sentence);
+            $transaction->setName($this->faker->unique()->sentence);
 
-            $transaction->setDescription($this->faker->sentence);
+            $transaction->setDescription($this->faker->unique()->sentence);
             $transaction->setCreatedAt(
                 \DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-100 days', '-1 days')

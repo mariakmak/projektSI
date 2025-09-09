@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Base fixtures.
  */
@@ -47,6 +48,8 @@ abstract class AbstractBaseFixtures extends Fixture
     {
         $this->manager = $manager;
         $this->faker = Factory::create();
+        // Ensure a clean uniqueness pool for each fixtures load
+        $this->faker->unique(true);
         $this->loadData();
     }
 

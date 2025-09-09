@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Category service.
  */
@@ -39,13 +40,13 @@ class CategoryService implements CategoryServiceInterface
      */
     private Security $security;
 
-
     /**
      * Constructor.
      *
      * @param CategoryRepository    $categoryRepository    CategoryRepository
      * @param PaginatorInterface    $paginator             Paginator
      * @param TransactionRepository $transactionRepository TransactionRepository
+     * @param Security              $security              Security
      */
     public function __construct(CategoryRepository $categoryRepository, PaginatorInterface $paginator, TransactionRepository $transactionRepository, Security $security)
     {
@@ -64,7 +65,7 @@ class CategoryService implements CategoryServiceInterface
     {
         if (null === $category->getId()) {
             $category->setCreatedAt(new \DateTimeImmutable());
-            #$category->setAuthor($this->security->getUser());
+            // $category->setAuthor($this->security->getUser());
         }
         $category->setUpdatedAt(new \DateTimeImmutable());
 

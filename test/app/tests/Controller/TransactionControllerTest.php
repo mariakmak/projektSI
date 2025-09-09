@@ -1,20 +1,11 @@
 <?php
+
 /**
  * Transaction Controller test.
  */
 
 namespace App\Tests\Controller;
 
-use App\Entity\Transaction;
-use App\Entity\Wallet;
-use App\Entity\Category;
-use App\Entity\User;
-use App\Entity\Currency;
-use App\Repository\TransactionRepository;
-use App\Repository\WalletRepository;
-use App\Repository\CategoryRepository;
-use App\Repository\CurrencyRepository;
-use Symfony\Component\DomCrawler\Crawler;
 use PHPUnit\Framework\Assert;
 
 /**
@@ -31,16 +22,17 @@ class TransactionControllerTest extends AbstractTestController
 
     /**
      * @dataProvider roleProvider
+     *
+     * @param array|null  $roles              Roles of the user (null for unauthenticated)
+     * @param int         $expectedStatusCode Expected HTTP response status code
+     * @param string|null $expectedRedirect   Expected redirect URL, if any
      */
-    public function testIndexRoute(
-        ?array $roles,
-        int $expectedStatusCode,
-        ?string $expectedRedirect = null
-    ): void {
+    public function testIndexRoute(?array $roles, int $expectedStatusCode, ?string $expectedRedirect = null): void
+    {
         $user = null;
         $transaction = null;
 
-        if ($roles !== null) {
+        if (null !== $roles) {
             $user = $this->createUser($roles);
             $this->httpClient->loginUser($user);
             $transaction = $this->createTransactionForUser($user);
@@ -51,9 +43,10 @@ class TransactionControllerTest extends AbstractTestController
         $response = $this->httpClient->getResponse();
         $this->assertSame($expectedStatusCode, $response->getStatusCode());
 
-        if ($expectedRedirect !== null) {
+        if (null !== $expectedRedirect) {
             $this->assertTrue($response->isRedirect());
             $this->assertSame($expectedRedirect, $response->headers->get('Location'));
+
             return;
         }
 
@@ -66,50 +59,53 @@ class TransactionControllerTest extends AbstractTestController
             $this->assertDropdownMenu($row, 2);
         });
         $this->assertCreateLink($crawler, '/transaction/create');
-
     }
 
     /**
      * @dataProvider roleProvider
+     *
+     * @param array|null  $roles              Roles of the user (null for unauthenticated)
+     * @param int         $expectedStatusCode Expected HTTP response status code
+     * @param string|null $expectedRedirect   Expected redirect URL, if any
      */
     public function testShowTransaction(?array $roles, int $expectedStatusCode, ?string $expectedRedirect = null): void
     {
         $user = null;
         $transaction = null;
 
-        if ($roles !== null) {
+        if (null !== $roles) {
             $user = $this->createUser($roles);
             $this->httpClient->loginUser($user);
             $transaction = $this->createTransactionForUser($user);
         }
 
         $transactionId = $transaction ? $transaction->getId() : 999;
-        $crawler = $this->httpClient->request('GET', '/transaction/' . $transactionId);
+        $crawler = $this->httpClient->request('GET', '/transaction/'.$transactionId);
 
         $response = $this->httpClient->getResponse();
         $this->assertSame($expectedStatusCode, $response->getStatusCode());
 
-        if ($expectedRedirect !== null) {
+        if (null !== $expectedRedirect) {
             $this->assertTrue($response->isRedirect($expectedRedirect));
+
             return;
         }
 
-        if ($transaction !== null) {
-
+        if (null !== $transaction) {
             $this->assertNavbar();
 
 
             $this->assertSelectorExists('dl.dl-horizontal');
 
-            $this->assertSelectorTextContains('dl.dl-horizontal dd:nth-of-type(1)', (string)$transaction->getId());
+            $this->assertSelectorTextContains('dl.dl-horizontal dd:nth-of-type(1)', (string) $transaction->getId());
             $this->assertSelectorTextContains('dl.dl-horizontal dd:nth-of-type(2)', $transaction->getName());
             $this->assertSelectorTextContains('dl.dl-horizontal dd:nth-of-type(3)', $transaction->getCategory()->getName());
             $this->assertSelectorTextContains('dl.dl-horizontal dd:nth-of-type(4)', $transaction->getDescription());
             $this->assertSelectorTextContains('dl.dl-horizontal dd:nth-of-type(5)', $transaction->getCreatedAt()->format('Y/m/d'));
             $this->assertSelectorTextContains('dl.dl-horizontal dd:nth-of-type(6)', $transaction->getWallet()->getName());
-            $this->assertSelectorTextContains('dl.dl-horizontal dd:nth-of-type(7)', (string)$transaction->getSum());
+            $this->assertSelectorTextContains('dl.dl-horizontal dd:nth-of-type(7)', (string) $transaction->getSum());
             $this->assertSelectorTextContains('dl.dl-horizontal dd:nth-of-type(8)', $transaction->getWallet()->getCurrency()->getName());
-            $this->assertSelectorTextContains('dl.dl-horizontal dd:nth-of-type(9)', (string)$transaction->getValue());
+            $this->assertSelectorTextContains('dl.dl-horizontal dd:nth-of-type(9)', (string) $transaction->getValue());
 
             $this->assertBackToList($crawler);
         }
@@ -117,12 +113,16 @@ class TransactionControllerTest extends AbstractTestController
 
     /**
      * @dataProvider roleProvider
+     *
+     * @param array|null  $roles                    Roles of the user (null for unauthenticated)
+     * @param int         $expectedStatusCode       Expected HTTP response status code
+     * @param string|null $expectedRedirectLocation Expected redirect URL, if any
      */
     public function testCreateAction(?array $roles, int $expectedStatusCode, ?string $expectedRedirectLocation): void
     {
         $category = null;
         $wallet = null;
-        if ($roles !== null) {
+        if (null !== $roles) {
             $user = $this->createUser($roles);
             $this->httpClient->loginUser($user);
             $category = $this->createCategoryForUser($user);
@@ -147,10 +147,10 @@ class TransactionControllerTest extends AbstractTestController
                 'transaction[value]' => true,
                 'transaction[description]' => 'Test description',
             ];
-            if ($category !== null) {
+            if (null !== $category) {
                 $formData['transaction[category]'] = $category->getId();
             }
-            if ($wallet !== null) {
+            if (null !== $wallet) {
                 $formData['transaction[wallet]'] = $wallet->getId();
             }
 
@@ -167,10 +167,14 @@ class TransactionControllerTest extends AbstractTestController
 
     /**
      * @dataProvider roleProvider
+     *
+     * @param array|null  $roles                    Roles of the user (null for unauthenticated)
+     * @param int         $expectedStatusCode       Expected HTTP response status code
+     * @param string|null $expectedRedirectLocation Expected redirect URL, if any
      */
     public function testDeleteAction(?array $roles, int $expectedStatusCode, ?string $expectedRedirectLocation): void
     {
-        if ($roles !== null) {
+        if (null !== $roles) {
             $user = $this->createUser($roles);
             $this->httpClient->loginUser($user);
             $transaction = $this->createTransactionForUser($user);
@@ -179,7 +183,7 @@ class TransactionControllerTest extends AbstractTestController
             $transactionId = 1;
         }
 
-        $crawler = $this->httpClient->request('GET', '/transaction/' . $transactionId . '/delete');
+        $crawler = $this->httpClient->request('GET', '/transaction/'.$transactionId.'/delete');
 
         if ($expectedRedirectLocation) {
             $this->assertResponseRedirects($expectedRedirectLocation);
@@ -201,7 +205,4 @@ class TransactionControllerTest extends AbstractTestController
             $this->assertSelectorExists('.alert-success');
         }
     }
-
-
 }
-

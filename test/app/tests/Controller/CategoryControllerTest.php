@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Category Controller test.
  */
@@ -6,9 +7,6 @@
 namespace App\Tests\Controller;
 
 use App\Entity\Category;
-use App\Entity\User;
-use App\Repository\CategoryRepository;
-use Symfony\Component\DomCrawler\Crawler;
 use PHPUnit\Framework\Assert;
 
 /**
@@ -23,21 +21,20 @@ class CategoryControllerTest extends AbstractTestController
      */
     public const TEST_ROUTE = '/category';
 
-
-
     /**
      * @dataProvider roleProvider
+     *
+     * @param array|null  $roles              Roles of the user (null for unauthenticated)
+     * @param int         $expectedStatusCode Expected HTTP response status code
+     * @param string|null $expectedRedirect   Expected redirect URL, if any
      */
-    public function testIndexRoute(
-        ?array $roles,
-        int $expectedStatusCode,
-        ?string $expectedRedirect = null
-    ): void {
+    public function testIndexRoute(?array $roles, int $expectedStatusCode, ?string $expectedRedirect = null): void
+    {
 
         $user = null;
         $category = null;
 
-        if ($roles !== null) {
+        if (null !== $roles) {
             $user = $this->createUser($roles);
             $this->httpClient->loginUser($user);
             $category = $this->createCategoryForUser($user);
@@ -46,16 +43,17 @@ class CategoryControllerTest extends AbstractTestController
 
         $crawler = $this->httpClient->request('GET', self::TEST_ROUTE);
         $response = $this->httpClient->getResponse();
-        #echo $this->httpClient->getResponse()->getContent();
+        // echo $this->httpClient->getResponse()->getContent();
         $this->assertSame($expectedStatusCode, $response->getStatusCode());
 
-        if ($expectedRedirect !== null) {
+        if (null !== $expectedRedirect) {
             $this->assertTrue($response->isRedirect());
             $this->assertSame($expectedRedirect, $response->headers->get('Location'));
+
             return;
         }
 
-        //menu
+        // menu
         $this->assertNavbar();
 
         // struktura tabeli
@@ -67,7 +65,7 @@ class CategoryControllerTest extends AbstractTestController
             $this->assertDropdownMenu($row);
         });
 
-        #echo $this->httpClient->getResponse()->getContent();
+        // echo $this->httpClient->getResponse()->getContent();
         // link category.create
         $this->assertCreateLink($crawler, '/category/create');
         $link = $crawler->selectLink($this->translator->trans('action.create'))->link();
@@ -76,20 +74,19 @@ class CategoryControllerTest extends AbstractTestController
         $this->assertSelectorExists('form');
     }
 
-
-
-
-
-
     /**
      * @dataProvider roleProvider
+     *
+     * @param array|null  $roles              Roles of the user (null for unauthenticated)
+     * @param int         $expectedStatusCode Expected HTTP response status code
+     * @param string|null $expectedRedirect   Expected redirect URL, if any
      */
     public function testShowCategory(?array $roles, int $expectedStatusCode, ?string $expectedRedirect = null): void
     {
         $user = null;
         $category = null;
 
-        if ($roles !== null) {
+        if (null !== $roles) {
             $user = $this->createUser($roles);
             $this->httpClient->loginUser($user);
 
@@ -97,44 +94,42 @@ class CategoryControllerTest extends AbstractTestController
         }
 
         $categoryId = $category ? $category->getId() : 999;
-        $crawler = $this->httpClient->request('GET', '/category/' . $categoryId);
+        $crawler = $this->httpClient->request('GET', '/category/'.$categoryId);
 
         $response = $this->httpClient->getResponse();
         $this->assertSame($expectedStatusCode, $response->getStatusCode());
 
-        if ($expectedRedirect !== null) {
+        if (null !== $expectedRedirect) {
             $this->assertTrue($response->isRedirect($expectedRedirect));
+
             return;
         }
 
-        if ($category !== null) {
-
-            //menu
+        if (null !== $category) {
+            // menu
             $this->assertNavbar();
 
             $this->assertSelectorExists('dl.dl-horizontal');
 
-            $this->assertSelectorTextContains('dl.dl-horizontal dd:nth-of-type(1)', (string)$category->getId());
+            $this->assertSelectorTextContains('dl.dl-horizontal dd:nth-of-type(1)', (string) $category->getId());
             $this->assertSelectorTextContains('dl.dl-horizontal dd:nth-of-type(2)', $category->getCreatedAt()->format('Y/m/d'));
             $this->assertSelectorTextContains('dl.dl-horizontal dd:nth-of-type(3)', $category->getUpdatedAt()->format('Y/m/d'));
             $this->assertSelectorTextContains('dl.dl-horizontal dd:nth-of-type(4)', $category->getName());
 
             $this->assertBackToList($crawler);
-
         }
-
     }
-
-
-
-
 
     /**
      * @dataProvider roleProvider
+     *
+     * @param array|null  $roles                    Roles of the user (null for unauthenticated)
+     * @param int         $expectedStatusCode       Expected HTTP response status code
+     * @param string|null $expectedRedirectLocation Expected redirect URL, if any
      */
     public function testCreateAction(?array $roles, int $expectedStatusCode, ?string $expectedRedirectLocation): void
     {
-        if ($roles !== null) {
+        if (null !== $roles) {
             $user = $this->createUser($roles);
             $this->httpClient->loginUser($user);
         }
@@ -151,8 +146,8 @@ class CategoryControllerTest extends AbstractTestController
             $this->assertSelectorExists('form');
             $this->assertBackToList($crawler);
 
-            #$submitLabel = $this->translator->trans('action.save');
-            #echo "Submit label in test: " . $submitLabel;
+            // $submitLabel = $this->translator->trans('action.save');
+            // echo "Submit label in test: " . $submitLabel;
 
             $form = $crawler->filter('form')->form([
                 'category[name]' => 'Nowa kategoria testowa',
@@ -167,27 +162,26 @@ class CategoryControllerTest extends AbstractTestController
         }
     }
 
-
-
-
-
     /**
      * @dataProvider roleProvider
+     *
+     * @param array|null  $roles                    Roles of the user (null for unauthenticated)
+     * @param int         $expectedStatusCode       Expected HTTP response status code
+     * @param string|null $expectedRedirectLocation Expected redirect URL, if any
      */
     public function testEditAction(?array $roles, int $expectedStatusCode, ?string $expectedRedirectLocation): void
     {
-        if ($roles !== null) {
+        if (null !== $roles) {
             $user = $this->createUser($roles);
             $this->httpClient->loginUser($user);
 
             $category = $this->createCategoryForUser($user);
             $categoryId = $category->getId();
-        }else {
-
+        } else {
             $categoryId = 1;
         }
 
-        $crawler = $this->httpClient->request('GET', '/category/' . $categoryId . '/edit');
+        $crawler = $this->httpClient->request('GET', '/category/'.$categoryId.'/edit');
 
         if ($expectedRedirectLocation) {
             $this->assertResponseRedirects($expectedRedirectLocation);
@@ -200,8 +194,8 @@ class CategoryControllerTest extends AbstractTestController
             $this->assertBackToList($crawler);
 
 
-            #$submitLabel = $this->translator->trans('action.edit');
-            #echo "Submit label in test: " . $submitLabel;
+            // $submitLabel = $this->translator->trans('action.edit');
+            // echo "Submit label in test: " . $submitLabel;
 
             $form = $crawler->filter('form')->form([
                 'category[name]' => 'Nowa kategoria testowa',
@@ -216,16 +210,16 @@ class CategoryControllerTest extends AbstractTestController
         }
     }
 
-
-
-
-
     /**
      * @dataProvider roleProvider
+     *
+     * @param array|null  $roles                    Roles of the user (null for unauthenticated)
+     * @param int         $expectedStatusCode       Expected HTTP response status code
+     * @param string|null $expectedRedirectLocation Expected redirect URL, if any
      */
     public function testDeleteAction(?array $roles, int $expectedStatusCode, ?string $expectedRedirectLocation): void
     {
-        if ($roles !== null) {
+        if (null !== $roles) {
             $user = $this->createUser($roles);
             $this->httpClient->loginUser($user);
 
@@ -236,7 +230,7 @@ class CategoryControllerTest extends AbstractTestController
         }
 
 
-        $crawler = $this->httpClient->request('GET', '/category/' . $categoryId . '/delete');
+        $crawler = $this->httpClient->request('GET', '/category/'.$categoryId.'/delete');
 
         if ($expectedRedirectLocation) {
             $this->assertResponseRedirects($expectedRedirectLocation);
@@ -259,24 +253,4 @@ class CategoryControllerTest extends AbstractTestController
             $this->assertSelectorExists('.alert-success');
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
-
-

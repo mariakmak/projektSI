@@ -11,7 +11,6 @@ use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-
 /**
  * Class CategoryTest.
  */
@@ -129,7 +128,7 @@ class CategoryTest extends KernelTestCase
         $category1->setAuthor($user);
         $category1->setCreatedAt(new \DateTimeImmutable('2024-01-01'));
         $category1->setUpdatedAt(new \DateTimeImmutable('2024-01-01'));
-        
+
         $this->entityManager->persist($category1);
         $this->entityManager->flush();
 
@@ -142,7 +141,7 @@ class CategoryTest extends KernelTestCase
 
         // then
         $this->expectException(\Doctrine\DBAL\Exception\UniqueConstraintViolationException::class);
-        
+
         $this->entityManager->persist($category2);
         $this->entityManager->flush();
     }
@@ -198,8 +197,3 @@ class CategoryTest extends KernelTestCase
         $this->entityManager = null;
     }
 }
-
-
-
-
-

@@ -22,7 +22,7 @@ class CategoryFixtures extends AbstractBaseFixtures implements DependentFixtureI
     {
         $this->createMany(80, 'categories', function (int $i) {
             $category = new Category();
-            $category->setName($this->faker->sentence);
+            $category->setName($this->faker->unique()->sentence);
             $category->setCreatedAt(
                 \DateTimeImmutable::createFromMutable($this->faker->dateTimeBetween('-100 days', '-1 days'))
             );

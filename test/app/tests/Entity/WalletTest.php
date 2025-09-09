@@ -7,10 +7,8 @@
 namespace App\Tests\Entity;
 
 use App\Entity\Currency;
-use App\Entity\Transaction;
 use App\Entity\User;
 use App\Entity\Wallet;
-use App\Entity\Category;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -84,8 +82,6 @@ class WalletTest extends KernelTestCase
         $this->assertSame($expectedWallet->getSum(), $wallet->getSum());
     }
 
-
-
     /**
      * Test that unique constraint prevents duplicate wallet names for same user.
      */
@@ -110,7 +106,7 @@ class WalletTest extends KernelTestCase
         $wallet1->setCreatedAt(new \DateTimeImmutable('2024-01-01'));
         $wallet1->setUpdatedAt(new \DateTimeImmutable('2024-01-01'));
         $wallet1->setSum(0);
-        
+
         $this->entityManager->persist($wallet1);
         $this->entityManager->flush();
 
@@ -125,7 +121,7 @@ class WalletTest extends KernelTestCase
 
         // then
         $this->expectException(\Doctrine\DBAL\Exception\UniqueConstraintViolationException::class);
-        
+
         $this->entityManager->persist($wallet2);
         $this->entityManager->flush();
     }
@@ -189,8 +185,3 @@ class WalletTest extends KernelTestCase
         $this->entityManager = null;
     }
 }
-
-
-
-
-

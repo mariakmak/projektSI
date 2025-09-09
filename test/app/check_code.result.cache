@@ -1,26 +1,34 @@
+   1) src/Repository/TransactionRepository.php (types_spaces)
 
-Found 0 of 40 files that can be fixed in 1.789 seconds, 20.00 MB memory used
- ----------- ------------ ----------------------------------------------------------- ------------------------------------------ 
-  State       Domain       Id                                                          Message Preview (en)                      
- ----------- ------------ ----------------------------------------------------------- ------------------------------------------ 
-   missing    validators   Description cannot be longer than {{ limit }} characters.   Description cannot be longer than {{ ...  
- ----------- ------------ ----------------------------------------------------------- ------------------------------------------ 
+Found 1 of 40 files that can be fixed in 1.903 seconds, 20.00 MB memory used
+   1) tests/bootstrap.php (concat_space)
+   2) tests/Repository/TransactionRepositoryTest.php (no_superfluous_phpdoc_tags, phpdoc_trim)
 
- ----------- ------------ ----------------------------------------------------------- ------------------------------------------ ------------------------------------------ 
-  State       Domain       Id                                                          Message Preview (pl)                       Fallback Message Preview (en)             
- ----------- ------------ ----------------------------------------------------------- ------------------------------------------ ------------------------------------------ 
-   missing    validators   Description cannot be longer than {{ limit }} characters.   Description cannot be longer than {{ ...   Description cannot be longer than {{ ...  
- ----------- ------------ ----------------------------------------------------------- ------------------------------------------ ------------------------------------------ 
+Found 2 of 20 files that can be fixed in 1.939 seconds, 20.00 MB memory used
+ ----------- ------------ ------------------------- ------------------------- 
+  State       Domain       Id                        Message Preview (en)     
+ ----------- ------------ ------------------------- ------------------------- 
+   missing    validators   category.unique_name      category.unique_name     
+   missing    validators   currency.unique_name      currency.unique_name     
+   missing    validators   Transaction.unique_name   Transaction.unique_name  
+   missing    validators   wallet.unique_name        wallet.unique_name       
+ ----------- ------------ ------------------------- ------------------------- 
 
-[notice] Migrating up to DoctrineMigrations\Version20240628155736
-[notice] finished in 630.7ms, used 26M memory, 1 migrations executed, 12 sql queries
+ ----------- ------------ ------------------------- ------------------------- ------------------------------- 
+  State       Domain       Id                        Message Preview (pl)      Fallback Message Preview (en)  
+ ----------- ------------ ------------------------- ------------------------- ------------------------------- 
+   missing    validators   category.unique_name      category.unique_name      category.unique_name           
+   missing    validators   currency.unique_name      currency.unique_name      currency.unique_name           
+   missing    validators   Transaction.unique_name   Transaction.unique_name   Transaction.unique_name        
+   missing    validators   wallet.unique_name        wallet.unique_name        wallet.unique_name             
+ ----------- ------------ ------------------------- ------------------------- ------------------------------- 
 
- [OK] Successfully migrated to version: DoctrineMigrations\Version20240628155736                                        
+[notice] Migrating up to DoctrineMigrations\Version20250822181000
+[notice] finished in 758.5ms, used 28M memory, 2 migrations executed, 16 sql queries
+
+ [OK] Successfully migrated to version: DoctrineMigrations\Version20250822181000                                        
 
 
    > purging database
    > loading App\DataFixtures\UserFixtures
    > loading App\DataFixtures\CurrencyFixtures
-   > loading App\DataFixtures\CategoryFixtures
-   > loading App\DataFixtures\WalletFixtures
-   > loading App\DataFixtures\TransactionFixtures

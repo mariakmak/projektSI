@@ -6,7 +6,6 @@
 
 namespace App\Tests\Entity;
 
-use App\Entity\Enum\UserRole;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -61,10 +60,7 @@ class UserTest extends KernelTestCase
         $this->assertSame($expectedUser->getRoles(), $user->getRoles());
         $this->assertSame($expectedUser->getUserIdentifier(), $expectedUser->getEmail());
         $this->assertSame($user->getUserIdentifier(), $user->getEmail());
-
     }
-
-
 
     /**
      * Test User security methods.
@@ -93,8 +89,3 @@ class UserTest extends KernelTestCase
         $this->entityManager = null;
     }
 }
-
-
-
-
-

@@ -20,7 +20,7 @@ class CurrencyFixtures extends AbstractBaseFixtures
     {
         $this->createMany(20, 'currencies', function (int $i) {
             $currency = new Currency();
-            $currency->setName($this->faker->currencyCode);
+            $currency->setName($this->faker->unique()->currencyCode);
 
             return $currency;
         });

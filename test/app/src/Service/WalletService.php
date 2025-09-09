@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Wallet service.
  */

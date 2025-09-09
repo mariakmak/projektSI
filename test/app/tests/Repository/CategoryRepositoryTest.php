@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * This file is part of the [Your Project Name] package.
+ */
+
 namespace App\Tests\Repository;
 
 use App\Entity\Category;
@@ -8,11 +12,19 @@ use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
+/**
+ * Unit tests for the CategoryRepository.
+ */
 class CategoryRepositoryTest extends KernelTestCase
 {
     private ?EntityManagerInterface $em = null;
     private CategoryRepository $repo;
 
+    /**
+     * Set up the test environment.
+     *
+     * Boots the Symfony kernel and initializes the entity manager and repository.
+     */
     protected function setUp(): void
     {
         self::bootKernel();
@@ -21,6 +33,11 @@ class CategoryRepositoryTest extends KernelTestCase
         $this->repo = $container->get(CategoryRepository::class);
     }
 
+    /**
+     * Tear down the test environment.
+     *
+     * Closes the entity manager and cleans up references.
+     */
     protected function tearDown(): void
     {
         parent::tearDown();
@@ -28,34 +45,9 @@ class CategoryRepositoryTest extends KernelTestCase
         $this->em = null;
     }
 
-    private function createUser(string $email = 'author@example.com'): User
-    {
-        $user = new User();
-        $user->setEmail($email);
-        $user->setPassword('pwd');
-        $this->em->persist($user);
-        $this->em->flush();
-        return $user;
-    }
-
-    private function createCategory(User $author, string $name = null): Category
-    {
-        static $counter = 1;
-
-        $c = new Category();
-        $c->setAuthor($author);
-        $c->setCreatedAt(new \DateTimeImmutable('2024-01-01'));
-        $c->setUpdatedAt(new \DateTimeImmutable('2024-01-02'));
-
-        $c->setName($name ?? 'category_' . $counter);
-
-        $counter++;
-
-        $this->repo->save($c);
-        return $c;
-    }
-
-
+    /**
+     * Test adding, removing, saving, and deleting categories in the repository.
+     */
     public function testAddRemoveSaveDelete(): void
     {
         $author = $this->createUser('a1@example.com');
@@ -65,11 +57,11 @@ class CategoryRepositoryTest extends KernelTestCase
         $category->setCreatedAt(new \DateTimeImmutable('2024-01-01'));
         $category->setUpdatedAt(new \DateTimeImmutable('2024-01-01'));
 
-//        $this->repo->add($category, true);
-//        $this->assertNotNull($this->repo->findOneBy(['name' => 'C1']));
-//
-//        $this->repo->remove($category, true);
-//        $this->assertNull($this->repo->findOneBy(['name' => 'C1']));
+        //        $this->repo->add($category, true);
+        //        $this->assertNotNull($this->repo->findOneBy(['name' => 'C1']));
+        //
+        //        $this->repo->remove($category, true);
+        //        $this->assertNull($this->repo->findOneBy(['name' => 'C1']));
 
         $this->repo->save($category);
         $this->assertNotNull($this->repo->findOneBy(['name' => 'C1']));
@@ -78,6 +70,11 @@ class CategoryRepositoryTest extends KernelTestCase
         $this->assertNull($this->repo->findOneBy(['name' => 'C1']));
     }
 
+    /**
+     * Test repository queryByAuthor method.
+     *
+     * Ensures that only categories authored by a specific user are returned.
+     */
     public function testQueryByAuthor(): void
     {
         $author1 = $this->createUser('u1@example.com');
@@ -96,10 +93,11 @@ class CategoryRepositoryTest extends KernelTestCase
         }
     }
 
-
-
-
-
+    /**
+     * Test repository queryAll method.
+     *
+     * Ensures that all categories are returned in descending order of updatedAt.
+     */
     public function testQueryAll(): void
     {
         $author = $this->createUser('author@example.com');
@@ -124,14 +122,47 @@ class CategoryRepositoryTest extends KernelTestCase
         $this->assertSame('Cat1', $results[2]->getName()); // 2024-01-01
     }
 
+    /**
+     * Create and persist a user for testing.
+     *
+     * @param string $email Email address of the user (default: 'author@example.com')
+     *
+     * @return User The created User entity
+     */
+    private function createUser(string $email = 'author@example.com'): User
+    {
+        $user = new User();
+        $user->setEmail($email);
+        $user->setPassword('pwd');
+        $this->em->persist($user);
+        $this->em->flush();
 
+        return $user;
+    }
 
+    /**
+     * Create and persist a category for testing.
+     *
+     * @param User        $author Author of the category
+     * @param string|null $name   Optional name of the category
+     *
+     * @return Category The created Category entity
+     */
+    private function createCategory(User $author, ?string $name = null): Category
+    {
+        static $counter = 1;
 
+        $c = new Category();
+        $c->setAuthor($author);
+        $c->setCreatedAt(new \DateTimeImmutable('2024-01-01'));
+        $c->setUpdatedAt(new \DateTimeImmutable('2024-01-02'));
 
+        $c->setName($name ?? 'category_'.$counter);
 
+        ++$counter;
+
+        $this->repo->save($c);
+
+        return $c;
+    }
 }
-
-
-
-
-

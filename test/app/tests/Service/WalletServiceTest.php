@@ -2,7 +2,7 @@
 
 /**
  * Wallet service tests.
- * 
+ *
  * UWAGA: Metoda canBeDeleted w WalletService NIE sprawdza czy portfel może być usunięty!
  * Tylko usuwa wszystkie transakcje z portfela. Portfel pozostaje w bazie danych.
  * Nazwa metody jest myląca - w rzeczywistości robi clearTransactions().
@@ -19,11 +19,15 @@ use App\Entity\User;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\ORMException;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
+/**
+ * Class WalletServiceTest.
+ *
+ * @covers \App\Service\WalletService
+ */
 class WalletServiceTest extends KernelTestCase
 {
     /**
@@ -60,6 +64,9 @@ class WalletServiceTest extends KernelTestCase
         $this->entityManager = null;
     }
 
+    /**
+     * Test saving a wallet.
+     */
     public function testSave(): void
     {
         // given
@@ -68,12 +75,12 @@ class WalletServiceTest extends KernelTestCase
         $user->setPassword('test');
         $this->entityManager->persist($user);
         $this->entityManager->flush();
-        
+
         $currency = new Currency();
         $currency->setName('USD');
         $this->entityManager->persist($currency);
         $this->entityManager->flush();
-        
+
         $wallet = new Wallet();
         $wallet->setName('Test Wallet');
         $wallet->setCurrency($currency);
@@ -81,7 +88,7 @@ class WalletServiceTest extends KernelTestCase
         $wallet->setSum(1000);
         $wallet->setCreatedAt(new \DateTimeImmutable('2024-01-01'));
         $wallet->setUpdatedAt(new \DateTimeImmutable('2024-06-01'));
-        
+
         // when
         $this->walletService->save($wallet);
 
@@ -98,6 +105,9 @@ class WalletServiceTest extends KernelTestCase
         $this->assertEquals($wallet, $resultWallet);
     }
 
+    /**
+     * Test deleting a wallet.
+     */
     public function testDelete(): void
     {
         // given
@@ -106,12 +116,12 @@ class WalletServiceTest extends KernelTestCase
         $user->setPassword('test');
         $this->entityManager->persist($user);
         $this->entityManager->flush();
-        
+
         $currency = new Currency();
         $currency->setName('EUR');
         $this->entityManager->persist($currency);
         $this->entityManager->flush();
-        
+
         $wallet = new Wallet();
         $wallet->setName('To Delete');
         $wallet->setCurrency($currency);
@@ -119,13 +129,13 @@ class WalletServiceTest extends KernelTestCase
         $wallet->setSum(500);
         $wallet->setCreatedAt(new \DateTimeImmutable('2024-01-01'));
         $wallet->setUpdatedAt(new \DateTimeImmutable('2024-06-01'));
-        
+
         $this->walletService->save($wallet);
         $id = $wallet->getId();
-        
+
         // when
         $this->walletService->delete($wallet);
-        
+
         // then
         $found = $this->entityManager->createQueryBuilder()
             ->select('wallet')
@@ -137,6 +147,9 @@ class WalletServiceTest extends KernelTestCase
         $this->assertNull($found);
     }
 
+    /**
+     * Test getting a paginated list of wallets.
+     */
     public function testGetPaginatedList(): void
     {
         // given
@@ -145,16 +158,16 @@ class WalletServiceTest extends KernelTestCase
         $user->setPassword('test');
         $this->entityManager->persist($user);
         $this->entityManager->flush();
-        
+
         $currency = new Currency();
         $currency->setName('USD');
         $this->entityManager->persist($currency);
         $this->entityManager->flush();
-        
 
-        for ($i = 0; $i < 10; $i++) {
+
+        for ($i = 0; $i < 10; ++$i) {
             $wallet = new Wallet();
-            $wallet->setName('Wallet ' . $i);
+            $wallet->setName('Wallet '.$i);
             $wallet->setCurrency($currency);
             $wallet->setAuthor($user);
             $wallet->setSum(100 * ($i + 1));
@@ -162,15 +175,18 @@ class WalletServiceTest extends KernelTestCase
             $wallet->setUpdatedAt(new \DateTimeImmutable('2024-06-01'));
             $this->walletService->save($wallet);
         }
-        
+
         // when
         $pagination = $this->walletService->getPaginatedList(1, $user);
-        
+
         // then
         $this->assertInstanceOf(PaginationInterface::class, $pagination);
         $this->assertGreaterThan(0, count($pagination));
     }
 
+    /**
+     * Test that canBeDeleted.
+     */
     public function testCanBeDeleted(): void
     {
         // given
@@ -179,12 +195,12 @@ class WalletServiceTest extends KernelTestCase
         $user->setPassword('test');
         $this->entityManager->persist($user);
         $this->entityManager->flush();
-        
+
         $currency = new Currency();
         $currency->setName('JPY');
         $this->entityManager->persist($currency);
         $this->entityManager->flush();
-        
+
 
         $category = new \App\Entity\Category();
         $category->setName('Test Category');
@@ -193,7 +209,7 @@ class WalletServiceTest extends KernelTestCase
         $category->setUpdatedAt(new \DateTimeImmutable('2024-06-01'));
         $this->entityManager->persist($category);
         $this->entityManager->flush();
-        
+
         $wallet = new Wallet();
         $wallet->setName('Wallet with Transactions');
         $wallet->setCurrency($currency);
@@ -202,7 +218,7 @@ class WalletServiceTest extends KernelTestCase
         $wallet->setCreatedAt(new \DateTimeImmutable('2024-01-01'));
         $wallet->setUpdatedAt(new \DateTimeImmutable('2024-06-01'));
         $this->walletService->save($wallet);
-        
+
 
         $transaction = new Transaction();
         $transaction->setName('Test Transaction');
@@ -215,14 +231,14 @@ class WalletServiceTest extends KernelTestCase
         $transaction->setCreatedAt(new \DateTimeImmutable('2024-01-01'));
         $this->entityManager->persist($transaction);
         $this->entityManager->flush();
-        
+
 
         $transactionsBefore = $this->entityManager->getRepository(Transaction::class)->findBy(['wallet' => $wallet]);
         $this->assertCount(1, $transactionsBefore);
-        
+
         // when
         $this->walletService->canBeDeleted($wallet);
-        
+
         // then
         $foundWallet = $this->entityManager->getRepository(Wallet::class)->find($wallet->getId());
         $this->assertNotNull($foundWallet);
@@ -232,6 +248,9 @@ class WalletServiceTest extends KernelTestCase
         $this->assertCount(0, $transactionsAfter);
     }
 
+    /**
+     * Test canBeDeleted on an empty wallet (no transactions).
+     */
     public function testCanBeDeletedEmptyWallet(): void
     {
         // given
@@ -240,12 +259,12 @@ class WalletServiceTest extends KernelTestCase
         $user->setPassword('test');
         $this->entityManager->persist($user);
         $this->entityManager->flush();
-        
+
         $currency = new Currency();
         $currency->setName('GBP');
         $this->entityManager->persist($currency);
         $this->entityManager->flush();
-        
+
         $wallet = new Wallet();
         $wallet->setName('Empty Wallet');
         $wallet->setCurrency($currency);
@@ -254,20 +273,23 @@ class WalletServiceTest extends KernelTestCase
         $wallet->setCreatedAt(new \DateTimeImmutable('2024-01-01'));
         $wallet->setUpdatedAt(new \DateTimeImmutable('2024-06-01'));
         $this->walletService->save($wallet);
-        
+
         // when
         $this->walletService->canBeDeleted($wallet);
-        
+
         // then
         $foundWallet = $this->entityManager->getRepository(Wallet::class)->find($wallet->getId());
         $this->assertNotNull($foundWallet);
         $this->assertEquals('Empty Wallet', $foundWallet->getName());
-        
+
 
         $transactions = $this->entityManager->getRepository(Transaction::class)->findBy(['wallet' => $wallet]);
         $this->assertCount(0, $transactions);
     }
 
+    /**
+     * Test adding sum to wallet.
+     */
     public function testCountWalletSum(): void
     {
         // given
@@ -276,12 +298,12 @@ class WalletServiceTest extends KernelTestCase
         $user->setPassword('test');
         $this->entityManager->persist($user);
         $this->entityManager->flush();
-        
+
         $currency = new Currency();
         $currency->setName('PLN');
         $this->entityManager->persist($currency);
         $this->entityManager->flush();
-        
+
         $wallet = new Wallet();
         $wallet->setName('Test Wallet');
         $wallet->setCurrency($currency);
@@ -290,17 +312,20 @@ class WalletServiceTest extends KernelTestCase
         $wallet->setCreatedAt(new \DateTimeImmutable('2024-01-01'));
         $wallet->setUpdatedAt(new \DateTimeImmutable('2024-06-01'));
         $this->walletService->save($wallet);
-        
+
         // when
         $result = $this->walletService->countWalletSum($wallet, 500, true);
-        
+
         // then
         $this->assertTrue($result);
-        
+
 
         $this->assertEquals(1500, $wallet->getSum());
     }
 
+    /**
+     * Test subtracting sum from wallet.
+     */
     public function testCountWalletSumSubtract(): void
     {
         // given
@@ -309,12 +334,12 @@ class WalletServiceTest extends KernelTestCase
         $user->setPassword('test');
         $this->entityManager->persist($user);
         $this->entityManager->flush();
-        
+
         $currency = new Currency();
         $currency->setName('CHF');
         $this->entityManager->persist($currency);
         $this->entityManager->flush();
-        
+
         $wallet = new Wallet();
         $wallet->setName('Test Wallet');
         $wallet->setCurrency($currency);
@@ -323,14 +348,14 @@ class WalletServiceTest extends KernelTestCase
         $wallet->setCreatedAt(new \DateTimeImmutable('2024-01-01'));
         $wallet->setUpdatedAt(new \DateTimeImmutable('2024-06-01'));
         $this->walletService->save($wallet);
-        
+
         // when
         $result = $this->walletService->countWalletSum($wallet, 300, false);
-        
+
         // then
         $this->assertTrue($result);
-        
+
 
         $this->assertEquals(700, $wallet->getSum());
     }
-} 
+}

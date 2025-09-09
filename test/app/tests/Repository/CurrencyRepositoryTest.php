@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * This file is part of the [Your Project Name] package.
+ */
+
 namespace App\Tests\Repository;
 
 use App\Entity\Currency;
@@ -7,11 +11,17 @@ use App\Repository\CurrencyRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
+/**
+ * Unit tests for the CurrencyRepository.
+ */
 class CurrencyRepositoryTest extends KernelTestCase
 {
     private ?EntityManagerInterface $em = null;
     private CurrencyRepository $repo;
 
+    /**
+     * Set up the test environment.
+     */
     protected function setUp(): void
     {
         self::bootKernel();
@@ -20,6 +30,9 @@ class CurrencyRepositoryTest extends KernelTestCase
         $this->repo = $container->get(CurrencyRepository::class);
     }
 
+    /**
+     * Tear down the test environment.
+     */
     protected function tearDown(): void
     {
         parent::tearDown();
@@ -27,6 +40,9 @@ class CurrencyRepositoryTest extends KernelTestCase
         $this->em = null;
     }
 
+    /**
+     * Test adding and removing a currency.
+     */
     public function testAddAndRemove(): void
     {
         $currency = new Currency();
@@ -40,8 +56,3 @@ class CurrencyRepositoryTest extends KernelTestCase
         $this->assertNull($this->repo->findOneBy(['name' => 'PLN']));
     }
 }
-
-
-
-
-

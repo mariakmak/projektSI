@@ -275,6 +275,22 @@
                 <source>Day</source>
                 <target>Dzień</target>
             </trans-unit>
+            <trans-unit id="category.unique_name">
+                <source>category.unique_name</source>
+                <target>Kategoria o takiej nazwie już istnieje dla tego użytkownika</target>
+            </trans-unit>
+            <trans-unit id="currency.unique_name">
+                <source>currency.unique_name</source>
+                <target>Waluta o takiej nazwie już istnieje</target>
+            </trans-unit>
+            <trans-unit id="transaction.unique_name">
+                <source>transaction.unique_name</source>
+                <target>Transakcja o takiej nazwie już istnieje dla tego użytkownika</target>
+            </trans-unit>
+            <trans-unit id="wallet.unique_name">
+                <source>wallet.unique_name</source>
+                <target>Portfel o takiej nazwie już istnieje dla tego użytkownika</target>
+            </trans-unit>
 
     </body>
   </file>

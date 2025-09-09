@@ -12,11 +12,15 @@ use App\Service\UserServiceInterface;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\ORMException;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
+/**
+ * Class UserServiceTest.
+ *
+ * @covers \App\Service\UserService
+ */
 class UserServiceTest extends KernelTestCase
 {
     /**
@@ -54,7 +58,12 @@ class UserServiceTest extends KernelTestCase
     }
 
     /**
+     * Test saving a user with roles.
+     *
      * @dataProvider provideUserRoles
+     *
+     * @param string $email Email of the user to create
+     * @param array  $roles Roles to assign to the user
      */
     public function testSave(string $email, array $roles): void
     {
@@ -63,7 +72,7 @@ class UserServiceTest extends KernelTestCase
         $user->setEmail($email);
         $user->setPassword('test123');
         $user->setRoles($roles);
-        
+
         // when
         $this->userService->save($user);
 
@@ -80,6 +89,11 @@ class UserServiceTest extends KernelTestCase
         $this->assertEquals($roles, $resultUser->getRoles());
     }
 
+    /**
+     * Data provider for testSave.
+     *
+     * @return array<string, array<int, mixed>>
+     */
     public function provideUserRoles(): array
     {
         return [
@@ -88,12 +102,15 @@ class UserServiceTest extends KernelTestCase
         ];
     }
 
+    /**
+     * Test getting a paginated list of users.
+     */
     public function testGetPaginatedList(): void
     {
         // given
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 10; ++$i) {
             $user = new User();
-            $user->setEmail('user' . $i . '@example.com');
+            $user->setEmail('user'.$i.'@example.com');
             $user->setPassword('test123');
             $this->entityManager->persist($user);
         }
@@ -101,12 +118,9 @@ class UserServiceTest extends KernelTestCase
 
         // when
         $pagination = $this->userService->getPaginatedList(1);
-        
+
         // then
         $this->assertInstanceOf(PaginationInterface::class, $pagination);
         $this->assertGreaterThan(0, count($pagination));
     }
-
-
-
-} 
+}

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Transaction repository.
  */
@@ -74,35 +75,35 @@ class TransactionRepository extends ServiceEntityRepository
         parent::__construct($registry, Transaction::class);
     }
 
-//    /**
-//     * Add transaction entity.
-//     *
-//     * @param Transaction $entity Transaction entity to add
-//     * @param bool        $flush  Whether to flush EntityManager after persisting (default: false)
-//     */
-//    public function add(Transaction $entity, bool $flush = false): void
-//    {
-//        $this->getEntityManager()->persist($entity);
-//
-//        if ($flush) {
-//            $this->getEntityManager()->flush();
-//        }
-//    }
-//
-//    /**
-//     * Remove transaction entity.
-//     *
-//     * @param Transaction $entity Transaction entity to remove
-//     * @param bool        $flush  Whether to flush EntityManager after removing (default: false)
-//     */
-//    public function remove(Transaction $entity, bool $flush = false): void
-//    {
-//        $this->getEntityManager()->remove($entity);
-//
-//        if ($flush) {
-//            $this->getEntityManager()->flush();
-//        }
-//    }
+    //    /**
+    //     * Add transaction entity.
+    //     *
+    //     * @param Transaction $entity Transaction entity to add
+    //     * @param bool        $flush  Whether to flush EntityManager after persisting (default: false)
+    //     */
+    //    public function add(Transaction $entity, bool $flush = false): void
+    //    {
+    //        $this->getEntityManager()->persist($entity);
+    //
+    //        if ($flush) {
+    //            $this->getEntityManager()->flush();
+    //        }
+    //    }
+    //
+    //    /**
+    //     * Remove transaction entity.
+    //     *
+    //     * @param Transaction $entity Transaction entity to remove
+    //     * @param bool        $flush  Whether to flush EntityManager after removing (default: false)
+    //     */
+    //    public function remove(Transaction $entity, bool $flush = false): void
+    //    {
+    //        $this->getEntityManager()->remove($entity);
+    //
+    //        if ($flush) {
+    //            $this->getEntityManager()->flush();
+    //        }
+    //    }
 
     /**
      * Save entity.
@@ -181,7 +182,7 @@ class TransactionRepository extends ServiceEntityRepository
                 ->setParameter(':category', $category)
                 ->getQuery()
                 ->getSingleScalarResult();
-        } catch (NonUniqueResultException|NoResultException $e) {
+        } catch (NonUniqueResultException | NoResultException $e) {
             throw new \RuntimeException(sprintf('Error while querying by category: %s', $e->getMessage()));
         }
     }

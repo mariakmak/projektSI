@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Transaction controller.
  */
@@ -189,12 +190,12 @@ class TransactionController extends AbstractController
                 );
 
                 return $this->redirectToRoute('transaction_index');
-            } else {
-                $this->addFlash(
-                    'notice',
-                    $this->translator->trans('message.value')
-                );
             }
+
+            $this->addFlash(
+                'notice',
+                $this->translator->trans('message.value')
+            );
         }
 
         return $this->render(

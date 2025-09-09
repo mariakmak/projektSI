@@ -106,8 +106,6 @@ class TransactionTest extends KernelTestCase
         $this->assertSame($expectedTransaction->getAuthor(), $transaction->getAuthor());
     }
 
-
-
     /**
      * Test that unique constraint prevents duplicate transaction names for same user.
      */
@@ -151,7 +149,7 @@ class TransactionTest extends KernelTestCase
         $transaction1->setCategory($category);
         $transaction1->setWallet($wallet);
         $transaction1->setAuthor($user);
-        
+
         $this->entityManager->persist($transaction1);
         $this->entityManager->flush();
 
@@ -168,7 +166,7 @@ class TransactionTest extends KernelTestCase
 
         // then
         $this->expectException(\Doctrine\DBAL\Exception\UniqueConstraintViolationException::class);
-        
+
         $this->entityManager->persist($transaction2);
         $this->entityManager->flush();
     }
@@ -262,8 +260,3 @@ class TransactionTest extends KernelTestCase
         $this->entityManager = null;
     }
 }
-
-
-
-
-

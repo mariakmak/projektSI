@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * This file is part of the [Your Project Name] package.
+ */
+
 namespace App\Tests\Repository;
 
 use App\Entity\Category;
@@ -12,11 +16,17 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
+/**
+ * Unit tests for the TransactionRepository.
+ */
 class TransactionRepositoryTest extends KernelTestCase
 {
     private ?EntityManagerInterface $em = null;
     private TransactionRepository $repo;
 
+    /**
+     * Set up the test environment.
+     */
     protected function setUp(): void
     {
         self::bootKernel();
@@ -25,6 +35,9 @@ class TransactionRepositoryTest extends KernelTestCase
         $this->repo = $container->get(TransactionRepository::class);
     }
 
+    /**
+     * Tear down the test environment.
+     */
     protected function tearDown(): void
     {
         parent::tearDown();
@@ -32,84 +45,9 @@ class TransactionRepositoryTest extends KernelTestCase
         $this->em = null;
     }
 
-    private function createUser(): User
-    {
-        $u = new User();
-        $u->setEmail(uniqid('u').'@example.com');
-        $u->setPassword('pwd');
-        $this->em->persist($u);
-        $this->em->flush();
-        return $u;
-    }
-
-    private function createCurrency(string $name = 'USD'): Currency
-    {
-        $c = new Currency();
-        $c->setName($name);
-        $this->em->persist($c);
-        $this->em->flush();
-        return $c;
-    }
-
-    private function createCategory(User $author, string $name = null): Category
-    {
-        static $counter = 1;
-
-        $c = new Category();
-        $c->setName($name ?? 'category_' . $counter);
-
-        $c->setAuthor($author);
-        $c->setCreatedAt(new \DateTimeImmutable('2024-01-01'));
-        $c->setUpdatedAt(new \DateTimeImmutable('2024-01-02'));
-
-        $counter++;
-
-        $this->em->persist($c);
-        $this->em->flush();
-
-        return $c;
-    }
-
-    private function createWallet(User $author, Currency $currency, string $name = null): Wallet
-    {
-        static $counter = 1;
-
-        $w = new Wallet();
-        $w->setName($name ?? 'wallet_' . $counter);
-        $w->setCurrency($currency);
-        $w->setAuthor($author);
-        $w->setCreatedAt(new \DateTimeImmutable('2024-01-01'));
-        $w->setUpdatedAt(new \DateTimeImmutable('2024-01-02'));
-        $w->setSum(0);
-
-        $counter++;
-
-        $this->em->persist($w);
-        $this->em->flush();
-        return $w;
-    }
-
-    private function createTransaction(User $author, Wallet $wallet, Category $category, string $name = null, int $sum = 10, bool $value = true, string $date = '2024-02-01' ): Transaction
-    {
-
-        static $counter = 1;
-
-        $t = new Transaction();
-        $t->setName($name ?? 'transaction_' . $counter);
-        $t->setDescription('desc');
-        $t->setCreatedAt(new \DateTimeImmutable($date));
-        $t->setSum($sum);
-        $t->setValue($value);
-        $t->setAuthor($author);
-        $t->setWallet($wallet);
-        $t->setCategory($category);
-
-        $counter++;
-
-        $this->repo->save($t);
-        return $t;
-    }
-
+    /**
+     * Test adding, removing, saving, and deleting a transaction.
+     */
     public function testAddRemoveSaveDelete(): void
     {
         $author = $this->createUser();
@@ -126,11 +64,11 @@ class TransactionRepositoryTest extends KernelTestCase
         $t->setWallet($wallet);
         $t->setCategory($category);
 
-//        $this->repo->add($t, true);
-//        $this->assertNotNull($this->repo->findOneBy(['name' => 'TT']));
-//
-//        $this->repo->remove($t, true);
-//        $this->assertNull($this->repo->findOneBy(['name' => 'TT']));
+        //        $this->repo->add($t, true);
+        //        $this->assertNotNull($this->repo->findOneBy(['name' => 'TT']));
+        //
+        //        $this->repo->remove($t, true);
+        //        $this->assertNull($this->repo->findOneBy(['name' => 'TT']));
 
         $this->repo->save($t);
         $this->assertNotNull($this->repo->findOneBy(['name' => 'TT']));
@@ -139,6 +77,9 @@ class TransactionRepositoryTest extends KernelTestCase
         $this->assertNull($this->repo->findOneBy(['name' => 'TT']));
     }
 
+    /**
+     * Test querying transactions by author and wallet.
+     */
     public function testQueryByAuthorAndWallet(): void
     {
         $author1 = $this->createUser();
@@ -167,6 +108,9 @@ class TransactionRepositoryTest extends KernelTestCase
         }
     }
 
+    /**
+     * Test counting transactions by category.
+     */
     public function testQueryByCategoryCount(): void
     {
         $author = $this->createUser();
@@ -181,6 +125,9 @@ class TransactionRepositoryTest extends KernelTestCase
         $this->assertEquals(2, (int) $count);
     }
 
+    /**
+     * Test finding transactions within a specific date range.
+     */
     public function testFindByDate(): void
     {
         $author = $this->createUser();
@@ -202,6 +149,9 @@ class TransactionRepositoryTest extends KernelTestCase
         }
     }
 
+    /**
+     * Test calculating total amount for a collection of transactions.
+     */
     public function testCalculateTotalAmount(): void
     {
         $author = $this->createUser();
@@ -216,9 +166,128 @@ class TransactionRepositoryTest extends KernelTestCase
         $total = $this->repo->calculateTotalAmount($collection);
         $this->assertSame(60.0, $total);
     }
+
+    /**
+     * Create a new user for testing.
+     *
+     * @return User
+     */
+    private function createUser(): User
+    {
+        $u = new User();
+        $u->setEmail(uniqid('u').'@example.com');
+        $u->setPassword('pwd');
+        $this->em->persist($u);
+        $this->em->flush();
+
+        return $u;
+    }
+
+    /**
+     * Create a new currency for testing.
+     *
+     * @param string $name Name of the currency
+     *
+     * @return Currency
+     */
+    private function createCurrency(string $name = 'USD'): Currency
+    {
+        $c = new Currency();
+        $c->setName($name);
+        $this->em->persist($c);
+        $this->em->flush();
+
+        return $c;
+    }
+
+    /**
+     * Create a new category for testing.
+     *
+     * @param User        $author Author of the category
+     * @param string|null $name   Optional category name
+     *
+     * @return Category
+     */
+    private function createCategory(User $author, ?string $name = null): Category
+    {
+        static $counter = 1;
+
+        $c = new Category();
+        $c->setName($name ?? 'category_'.$counter);
+
+        $c->setAuthor($author);
+        $c->setCreatedAt(new \DateTimeImmutable('2024-01-01'));
+        $c->setUpdatedAt(new \DateTimeImmutable('2024-01-02'));
+
+        ++$counter;
+
+        $this->em->persist($c);
+        $this->em->flush();
+
+        return $c;
+    }
+
+    /**
+     * Create a new wallet for testing.
+     *
+     * @param User        $author   Owner of the wallet
+     * @param Currency    $currency Currency of the wallet
+     * @param string|null $name     Optional wallet name
+     *
+     * @return Wallet
+     */
+    private function createWallet(User $author, Currency $currency, ?string $name = null): Wallet
+    {
+        static $counter = 1;
+
+        $w = new Wallet();
+        $w->setName($name ?? 'wallet_'.$counter);
+        $w->setCurrency($currency);
+        $w->setAuthor($author);
+        $w->setCreatedAt(new \DateTimeImmutable('2024-01-01'));
+        $w->setUpdatedAt(new \DateTimeImmutable('2024-01-02'));
+        $w->setSum(0);
+
+        ++$counter;
+
+        $this->em->persist($w);
+        $this->em->flush();
+
+        return $w;
+    }
+
+    /**
+     * Create a new transaction for testing.
+     *
+     * @param User        $author   Author of the transaction
+     * @param Wallet      $wallet   Wallet used in the transaction
+     * @param Category    $category Category of the transaction
+     * @param string|null $name     Optional transaction name
+     * @param int         $sum      Amount
+     * @param bool        $value    True for income, false for expense
+     * @param string      $date     Transaction date in 'Y-m-d' format
+     *
+     * @return Transaction
+     */
+    private function createTransaction(User $author, Wallet $wallet, Category $category, ?string $name = null, int $sum = 10, bool $value = true, string $date = '2024-02-01'): Transaction
+    {
+
+        static $counter = 1;
+
+        $t = new Transaction();
+        $t->setName($name ?? 'transaction_'.$counter);
+        $t->setDescription('desc');
+        $t->setCreatedAt(new \DateTimeImmutable($date));
+        $t->setSum($sum);
+        $t->setValue($value);
+        $t->setAuthor($author);
+        $t->setWallet($wallet);
+        $t->setCategory($category);
+
+        ++$counter;
+
+        $this->repo->save($t);
+
+        return $t;
+    }
 }
-
-
-
-
-

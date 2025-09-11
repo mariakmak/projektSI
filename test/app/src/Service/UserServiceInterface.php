@@ -1,7 +1,7 @@
 <?php
 
 /**
- * User service interface.
+ * user service interface.
  */
 
 namespace App\Service;
@@ -26,7 +26,7 @@ interface UserServiceInterface
     /**
      * Save the entity.
      *
-     * @param User $user User entity
+     * @param User $user user entity
      *
      * @return void Void
      */

@@ -130,7 +130,7 @@ class TransactionRepository extends ServiceEntityRepository
     /**
      * Query transactions by author.
      *
-     * @param UserInterface         $user    User entity
+     * @param UserInterface         $user    user entity
      * @param array<string, object> $filters Filters array
      *
      * @return QueryBuilder Query builder
@@ -192,7 +192,7 @@ class TransactionRepository extends ServiceEntityRepository
      *
      * @param \DateTimeInterface $startDate Start date
      * @param \DateTimeInterface $endDate   End date
-     * @param User               $user      User entity
+     * @param User               $user      user entity
      *
      * @return array<Transaction> Array of Transaction objects
      */

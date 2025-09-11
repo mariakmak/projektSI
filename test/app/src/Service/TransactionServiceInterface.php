@@ -30,7 +30,7 @@ interface TransactionServiceInterface
      * Get paginated list by date.
      *
      * @param int                $page      Page number
-     * @param User               $user      User for whom transactions are fetched
+     * @param User               $user      user for whom transactions are fetched
      * @param \DateTimeInterface $startDate Start date
      * @param \DateTimeInterface $endDate   End date
      *

@@ -117,7 +117,7 @@ class WalletRepository extends ServiceEntityRepository
     /**
      * Query wallets by author.
      *
-     * @param User $user User entity
+     * @param User $user user entity
      *
      * @return QueryBuilder Query builder
      */

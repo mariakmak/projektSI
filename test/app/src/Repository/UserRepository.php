@@ -1,7 +1,7 @@
 <?php
 
 /**
- * User repository.
+ * user repository.
  */
 
 namespace App\Repository;
@@ -39,7 +39,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     /**
      * Add entity to the database.
      *
-     * @param User $entity User entity
+     * @param User $entity user entity
      * @param bool $flush  Whether to flush the changes (default: false)
      */
     public function add(User $entity, bool $flush = false): void
@@ -54,7 +54,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     /**
      * Remove entity from the database.
      *
-     * @param User $entity User entity
+     * @param User $entity user entity
      * @param bool $flush  Whether to flush the changes (default: false)
      */
     public function remove(User $entity, bool $flush = false): void
@@ -80,7 +80,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     /**
      * Save entity.
      *
-     * @param User $user User entity
+     * @param User $user user entity
      */
     public function save(User $user): void
     {
@@ -91,7 +91,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     /**
      * Upgrade the user's password.
      *
-     * @param PasswordAuthenticatedUserInterface $user              User object
+     * @param PasswordAuthenticatedUserInterface $user              user object
      * @param string                             $newHashedPassword New hashed password
      *
      * @throws UnsupportedUserException If the user object is not supported
@@ -120,7 +120,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
     //    /**
-    //     * @return User[] Returns an array of User objects
+    //     * @return user[] Returns an array of user objects
     //     */
     //    public function findByExampleField($value): array
     //    {
@@ -134,7 +134,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?User
+    //    public function findOneBySomeField($value): ?user
     //    {
     //        return $this->createQueryBuilder('u')
     //            ->andWhere('u.exampleField = :val')

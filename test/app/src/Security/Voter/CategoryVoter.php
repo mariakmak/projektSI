@@ -107,7 +107,7 @@ class CategoryVoter extends Voter
      * Checks if user can edit category.
      *
      * @param Category $category category entity
-     * @param User     $user     User
+     * @param User     $user     user
      *
      * @return bool Result
      */
@@ -120,7 +120,7 @@ class CategoryVoter extends Voter
      * Checks if user can view category.
      *
      * @param Category $category categories entity
-     * @param User     $user     User
+     * @param User     $user     user
      *
      * @return bool Result
      */
@@ -133,7 +133,7 @@ class CategoryVoter extends Voter
      * Checks if user can delete category.
      *
      * @param Category $category category entity
-     * @param User     $user     User
+     * @param User     $user     user
      *
      * @return bool Result
      */

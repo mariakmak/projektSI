@@ -1,7 +1,7 @@
 <?php
 
 /**
- * User service.
+ * user service.
  */
 
 namespace App\Service;
@@ -17,7 +17,7 @@ use Knp\Component\Pager\PaginatorInterface;
 class UserService implements UserServiceInterface
 {
     /**
-     * User repository.
+     * user repository.
      */
     private UserRepository $userRepository;
 
@@ -29,7 +29,7 @@ class UserService implements UserServiceInterface
     /**
      * Constructor.
      *
-     * @param UserRepository     $userRepository User repository
+     * @param UserRepository     $userRepository user repository
      * @param PaginatorInterface $paginator      Paginator
      */
     public function __construct(UserRepository $userRepository, PaginatorInterface $paginator)
@@ -57,7 +57,7 @@ class UserService implements UserServiceInterface
     /**
      * Save entity.
      *
-     * @param User $user User entity
+     * @param User $user user entity
      *
      * @return void Void
      */

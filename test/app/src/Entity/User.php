@@ -1,7 +1,7 @@
 <?php
 
 /**
- * User entity.
+ * user entity.
  */
 
 namespace App\Entity;
@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * Class User.
+ * Class user.
  */
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: 'users')]
@@ -88,7 +88,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * A visual identifier that represents this user.
      *
-     * @return string User identifier
+     * @return string user identifier
      *
      * @see UserInterface
      */
@@ -148,7 +148,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Setter for password.
      *
-     * @param string $password User password
+     * @param string $password user password
      */
     public function setPassword(string $password): void
     {

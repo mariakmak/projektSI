@@ -1,7 +1,7 @@
 <?php
 
 /**
- * User entity tests.
+ * user entity tests.
  */
 
 namespace App\Tests\Entity;
@@ -32,7 +32,7 @@ class UserTest extends KernelTestCase
     }
 
     /**
-     * Test User Entity.
+     * Test user Entity.
      */
     public function testUserEntity(): void
     {
@@ -63,7 +63,7 @@ class UserTest extends KernelTestCase
     }
 
     /**
-     * Test User security methods.
+     * Test user security methods.
      */
     public function testUserSecurityMethods(): void
     {

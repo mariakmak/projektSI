@@ -1,7 +1,7 @@
 <?php
 
 /**
- * User controller test.
+ * user controller test.
  */
 
 namespace App\Tests\Controller;

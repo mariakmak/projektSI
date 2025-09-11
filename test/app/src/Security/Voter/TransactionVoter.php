@@ -107,7 +107,7 @@ class TransactionVoter extends Voter
      * Checks if user can edit transaction.
      *
      * @param Transaction $transaction Transaction entity
-     * @param User        $user        User
+     * @param User        $user        user
      *
      * @return bool Result
      */
@@ -120,7 +120,7 @@ class TransactionVoter extends Voter
      * Checks if user can view transaction.
      *
      * @param Transaction $transaction transaction entity
-     * @param User        $user        User
+     * @param User        $user        user
      *
      * @return bool Result
      */
@@ -133,7 +133,7 @@ class TransactionVoter extends Voter
      * Checks if user can delete transaction.
      *
      * @param Transaction $transaction transaction entity
-     * @param User        $user        User
+     * @param User        $user        user
      *
      * @return bool Result
      */

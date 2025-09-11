@@ -136,9 +136,9 @@ abstract class AbstractTestController extends WebTestCase
     /**
      * Create user.
      *
-     * @param array $roles User roles
+     * @param array $roles user roles
      *
-     * @return User User entity
+     * @return User user entity
      *
      * @throws ContainerExceptionInterface|NotFoundExceptionInterface|ORMException|OptimisticLockException
      */
@@ -163,10 +163,10 @@ abstract class AbstractTestController extends WebTestCase
     /**
      * Create user with specific email. It allows to create many unique users.
      *
-     * @param array  $roles User roles
-     * @param string $email User email
+     * @param array  $roles user roles
+     * @param string $email user email
      *
-     * @return User User entity
+     * @return User user entity
      *
      * @throws ContainerExceptionInterface|NotFoundExceptionInterface|ORMException|OptimisticLockException
      */
@@ -227,7 +227,7 @@ abstract class AbstractTestController extends WebTestCase
     /**
      * Create wallet for user.
      *
-     * @param User $user User entity
+     * @param User $user user entity
      *
      * @return \App\Entity\Wallet Wallet entity
      */
@@ -259,7 +259,7 @@ abstract class AbstractTestController extends WebTestCase
     /**
      * Create category for user.
      *
-     * @param User $user User entity
+     * @param User $user user entity
      *
      * @return \App\Entity\Category Category entity
      */
@@ -280,7 +280,7 @@ abstract class AbstractTestController extends WebTestCase
     /**
      * Create transaction for user.
      *
-     * @param User $user User entity
+     * @param User $user user entity
      *
      * @return \App\Entity\Transaction Transaction entity
      */

@@ -81,7 +81,7 @@ class TransactionService implements TransactionServiceInterface
      * @return PaginationInterface<string, mixed> Paginated list
      */
 
-    //     public function getPaginatedList(int $page, User $author, array $filters = []): PaginationInterface
+    //     public function getPaginatedList(int $page, user $author, array $filters = []): PaginationInterface
     //     {
     //
     //
@@ -130,7 +130,7 @@ class TransactionService implements TransactionServiceInterface
      * Get transactions by date.
      *
      * @param int                $page      Page number
-     * @param User               $user      User
+     * @param User               $user      user
      * @param \DateTimeInterface $startDate Start date
      * @param \DateTimeInterface $endDate   End date
      *

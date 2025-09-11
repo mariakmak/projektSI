@@ -127,7 +127,7 @@ class CategoryRepositoryTest extends KernelTestCase
      *
      * @param string $email Email address of the user (default: 'author@example.com')
      *
-     * @return User The created User entity
+     * @return User The created user entity
      */
     private function createUser(string $email = 'author@example.com'): User
     {

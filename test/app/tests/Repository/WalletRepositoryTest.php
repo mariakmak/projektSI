@@ -114,7 +114,7 @@ class WalletRepositoryTest extends KernelTestCase
     }
 
     /**
-     * Create and persist a new User entity.
+     * Create and persist a new user entity.
      *
      * @return User the created user
      */

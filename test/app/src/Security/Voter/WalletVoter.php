@@ -107,7 +107,7 @@ class WalletVoter extends Voter
      * Checks if user can edit wallet.
      *
      * @param Wallet $wallet wallet entity
-     * @param User   $user   User
+     * @param User   $user   user
      *
      * @return bool Result
      */
@@ -120,7 +120,7 @@ class WalletVoter extends Voter
      * Checks if user can view wallet.
      *
      * @param Wallet $wallet wallet entity
-     * @param User   $user   User
+     * @param User   $user   user
      *
      * @return bool Result
      */
@@ -133,7 +133,7 @@ class WalletVoter extends Voter
      * Checks if user can delete wallet.
      *
      * @param Wallet $wallet wallet entity
-     * @param User   $user   User
+     * @param User   $user   user
      *
      * @return bool Result
      */

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * User controller.
+ * user controller.
  */
 
 namespace App\Controller;
@@ -23,7 +23,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class UserController extends AbstractController
 {
     /**
-     * User service.
+     * user service.
      */
     private UserServiceInterface $userService;
 
@@ -40,9 +40,9 @@ class UserController extends AbstractController
     /**
      * Constructor.
      *
-     * @param UserServiceInterface        $userService    User interface
+     * @param UserServiceInterface        $userService    user interface
      * @param TranslatorInterface         $translator     Translator interface
-     * @param UserPasswordHasherInterface $passwordHasher User password interface
+     * @param UserPasswordHasherInterface $passwordHasher user password interface
      */
     public function __construct(UserServiceInterface $userService, TranslatorInterface $translator, UserPasswordHasherInterface $passwordHasher)
     {
@@ -73,7 +73,7 @@ class UserController extends AbstractController
      * Edit action.
      *
      * @param Request $request HTTP request
-     * @param User    $user    User entity
+     * @param User    $user    user entity
      *
      * @return Response HTTP response
      */

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * User fixtures.
+ * user fixtures.
  */
 
 namespace App\DataFixtures;

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * User service tests.
+ * user service tests.
  */
 
 namespace App\Tests\Service;
@@ -29,7 +29,7 @@ class UserServiceTest extends KernelTestCase
     private ?EntityManagerInterface $entityManager = null;
 
     /**
-     * User service.
+     * user service.
      */
     private ?UserServiceInterface $userService = null;
 

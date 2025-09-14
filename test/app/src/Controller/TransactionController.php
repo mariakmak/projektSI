@@ -13,13 +13,11 @@ use App\Service\TransactionServiceInterface;
 use App\Service\WalletService;
 use Form\Type\FilterType;
 use JetBrains\PhpStorm\ArrayShape;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Class TransactionController.
@@ -43,24 +41,17 @@ class TransactionController extends AbstractController
     private WalletService $walletService;
 
     /**
-     * Entity manager.
-     */
-    private EntityManagerInterface $entityManager;
-
-    /**
      * Constructor.
      *
      * @param TransactionServiceInterface $transactionService Transaction service
      * @param WalletService               $walletService      Wallet service
      * @param TranslatorInterface         $translator         Translator
-     * @param EntityManagerInterface      $entityManager      Entity Manager
      */
-    public function __construct(TransactionServiceInterface $transactionService, WalletService $walletService, TranslatorInterface $translator, EntityManagerInterface $entityManager)
+    public function __construct(TransactionServiceInterface $transactionService, WalletService $walletService, TranslatorInterface $translator)
     {
         $this->transactionService = $transactionService;
         $this->walletService = $walletService;
         $this->translator = $translator;
-        $this->entityManager = $entityManager;
     }
 
     /**
@@ -171,17 +162,9 @@ class TransactionController extends AbstractController
 
         // dd($request, $form);
         if ($form->isSubmitted() && $form->isValid()) {
-            // dd($request);
-            $data = $form->getData(); // dane z formu
-            $select = $data->getwallet();
+            $success = $this->walletService->updateBalanceOnTransactionCreate($transaction);
 
-            $sum = $data->getSum(); // sum z form
-            $value = $data->isValue(); // value z form
-            // dd($sum, $value);
-            $a = $this->walletService->countWalletSum($select, $sum, $value);
-            // var_dump($select);
-
-            if (true === $a) {
+            if ($success) {
                 $this->transactionService->save($transaction);
 
                 $this->addFlash(
@@ -207,16 +190,22 @@ class TransactionController extends AbstractController
     /**
      * Delete action.
      *
-     * @param Request     $request     HTTP request
-     * @param Transaction $transaction Transaction entity
+     * @param Request $request HTTP request
+     * @param int     $id      Transaction ID
      *
      * @return Response HTTP response
      */
-    #[
-        \Symfony\Component\Routing\Attribute\Route('/{id}/delete', name: 'transaction_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
-    #[IsGranted('DELETE', subject: 'transaction')]
-    public function delete(Request $request, Transaction $transaction): Response
+    #[\Symfony\Component\Routing\Attribute\Route('/{id}/delete', name: 'transaction_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
+    public function delete(Request $request, int $id): Response
     {
+        $transaction = $this->transactionService->findOneById($id);
+
+        if (!$transaction) {
+            throw $this->createNotFoundException('Transaction not found');
+        }
+
+        $this->denyAccessUnlessGranted('DELETE', $transaction);
+
         $form = $this->createForm(FormType::class, $transaction, [
             'method' => 'DELETE',
             'action' => $this->generateUrl('transaction_delete', ['id' => $transaction->getId()]),
@@ -224,22 +213,7 @@ class TransactionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $wallet = $transaction->getWallet();
-            $value = $transaction->getValue();
-
-            if ($wallet && null !== $transaction->getSum() && true === $value) {
-                $newSum = $wallet->getSum() - $transaction->getSum();
-                $wallet->setSum($newSum);
-                $this->entityManager->persist($wallet);
-                $this->entityManager->flush();
-            }
-
-            if ($wallet && null !== $transaction->getSum() && false === $value) {
-                $newSum = $wallet->getSum() + $transaction->getSum();
-                $wallet->setSum($newSum);
-                $this->entityManager->persist($wallet);
-                $this->entityManager->flush();
-            }
+            $success = $this->walletService->updateBalanceOnTransactionDelete($transaction);
 
             $this->transactionService->delete($transaction);
             $this->addFlash(
@@ -262,7 +236,7 @@ class TransactionController extends AbstractController
     /**
      * Show action.
      *
-     * @param Transaction $transaction Transaction entity
+     * @param int $id Transaction ID
      *
      * @return Response HTTP response
      */
@@ -272,9 +246,16 @@ class TransactionController extends AbstractController
         requirements: ['id' => '[1-9]\d*'],
         methods: 'GET',
     )]
-    #[IsGranted('VIEW', subject: 'transaction')]
-    public function show(Transaction $transaction): Response
+    public function show(int $id): Response
     {
+        $transaction = $this->transactionService->findOneById($id);
+
+        if (!$transaction) {
+            throw $this->createNotFoundException('Transaction not found');
+        }
+
+        $this->denyAccessUnlessGranted('VIEW', $transaction);
+
         return $this->render(
             'transaction/show.html.twig',
             ['transaction' => $transaction]

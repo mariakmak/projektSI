@@ -128,6 +128,18 @@ class TransactionRepository extends ServiceEntityRepository
     }
 
     /**
+     * Find one by id.
+     *
+     * @param int $id Transaction id
+     *
+     * @return Transaction|null Transaction entity
+     */
+    public function findOneById(int $id): ?Transaction
+    {
+        return $this->find($id);
+    }
+
+    /**
      * Query transactions by author.
      *
      * @param UserInterface         $user    user entity
@@ -182,7 +194,7 @@ class TransactionRepository extends ServiceEntityRepository
                 ->setParameter(':category', $category)
                 ->getQuery()
                 ->getSingleScalarResult();
-        } catch (NonUniqueResultException | NoResultException $e) {
+        } catch (NonUniqueResultException|NoResultException $e) {
             throw new \RuntimeException(sprintf('Error while querying by category: %s', $e->getMessage()));
         }
     }

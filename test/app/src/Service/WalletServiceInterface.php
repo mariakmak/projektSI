@@ -6,6 +6,7 @@
 
 namespace App\Service;
 
+use App\Entity\Transaction;
 use App\Entity\User;
 use App\Entity\Wallet;
 use Knp\Component\Pager\Pagination\PaginationInterface;
@@ -44,16 +45,24 @@ interface WalletServiceInterface
      *
      * @param Wallet $wallet Wallet entity
      */
-    public function canBeDeleted(Wallet $wallet): void;
+    public function canBeDeleted(Wallet $wallet): bool;
 
     /**
-     * Count wallet balance.
+     * Update wallet balance when a transaction is created.
      *
-     * @param Wallet $select Wallet entity
-     * @param int    $sum    Sum to add or subtract
-     * @param bool   $value  Whether to add or subtract the sum
+     * @param Transaction $transaction Transaction entity to apply
      *
-     * @return bool True if the wallet balance was updated successfully, false otherwise
+     * @return bool True if balance was successfully updated, false otherwise
      */
-    public function countWalletSum(Wallet $select, int $sum, bool $value): bool;
+    public function updateBalanceOnTransactionCreate(Transaction $transaction): bool;
+
+    /**
+     * Update wallet balance when a transaction is deleted.
+     *
+     * If the transaction was income (`value = true`), its sum is subtracted.
+     * If it was expense (`value = false`), its sum is added back.
+     *
+     * @param Transaction $transaction Transaction entity to revert
+     */
+    public function updateBalanceOnTransactionDelete(Transaction $transaction): void;
 }

@@ -51,4 +51,13 @@ interface TransactionServiceInterface
      * @param Transaction $transaction Transaction entity
      */
     public function delete(Transaction $transaction): void;
+
+    /**
+     * Find one by id.
+     *
+     * @param int $id Transaction id
+     *
+     * @return Transaction|null Transaction entity
+     */
+    public function findOneById(int $id): ?Transaction;
 }

@@ -74,6 +74,18 @@ class TransactionService implements TransactionServiceInterface
     }
 
     /**
+     * Find one by id.
+     *
+     * @param int $id Transaction id
+     *
+     * @return Transaction|null Transaction entity
+     */
+    public function findOneById(int $id): ?Transaction
+    {
+        return $this->transactionRepository->findOneById($id);
+    }
+
+    /**
      * Get paginated list.
      *
      * @param int $page Page number

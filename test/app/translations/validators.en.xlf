@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="file.ext">
+    <body>
+<trans-unit id="category.unique_name">
+    <source>category.unique_name</source>
+    <target>This category name already exists for this user.</target>
+</trans-unit>
+<trans-unit id="wallet.unique_name">
+    <source>wallet.unique_name</source>
+    <target>This wallet name already exists for this user.</target>
+</trans-unit>
+<trans-unit id="transaction.unique_name">
+    <source>transaction.unique_name</source>
+    <target>This transaction name already exists.</target>
+</trans-unit>
+<trans-unit id="currency.unique_name">
+    <source>currency.unique_name</source>
+    <target>This currency name already exists.</target>
+</trans-unit>
+    </body>
+  </file>
+</xliff>

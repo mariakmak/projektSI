@@ -132,35 +132,6 @@ class WalletRepository extends ServiceEntityRepository
     }
 
     /**
-     * Count wallet balance and update it if possible.
-     *
-     * @param int    $sum       Amount to add or subtract
-     * @param bool   $value     Whether to add (true) or subtract (false)
-     * @param Wallet $wallet    Wallet entity
-     * @param int    $walletSum Current wallet balance
-     *
-     * @return bool Whether the operation was successful
-     */
-    public function countWalletBalance(int $sum, bool $value, Wallet $wallet, int $walletSum): bool
-    {
-        if (false !== $value) {
-            if ($walletSum + $sum >= 0) {
-                $wallet->setSum($walletSum + $sum);
-                $this->save($wallet);
-
-                return true;
-            }
-        } elseif ($walletSum - $sum >= 0) {
-            $wallet->setSum($walletSum - $sum);
-            $this->save($wallet);
-
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
      * Get or create new query builder.
      *
      * @param QueryBuilder|null $queryBuilder Query builder

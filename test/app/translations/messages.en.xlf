@@ -275,23 +275,10 @@
                 <source>Day</source>
                 <target>Day</target>
             </trans-unit>
-            <trans-unit id="category.unique_name">
-                <source>category.unique_name</source>
-                <target>Category with this name already exists for this user</target>
+            <trans-unit id="message.wallet_contains_transactions">
+                <source>message.wallet_contains_transactions</source>
+                <target>Can't be deleted. Wallet contains transactions.</target>
             </trans-unit>
-            <trans-unit id="currency.unique_name">
-                <source>currency.unique_name</source>
-                <target>Currency with this name already exists</target>
-            </trans-unit>
-            <trans-unit id="transaction.unique_name">
-                <source>transaction.unique_name</source>
-                <target>Transaction with this name already exists for this user</target>
-            </trans-unit>
-            <trans-unit id="wallet.unique_name">
-                <source>wallet.unique_name</source>
-                <target>Wallet with this name already exists for this user</target>
-            </trans-unit>
-
 
     </body>
   </file>

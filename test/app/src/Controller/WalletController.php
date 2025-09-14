@@ -203,6 +203,17 @@ class WalletController extends AbstractController
     #[IsGranted('DELETE', subject: 'wallet')]
     public function delete(Request $request, Wallet $wallet): Response
     {
+
+        if (!$this->walletService->canBeDeleted($wallet)) {
+            $this->addFlash(
+                'warning',
+                $this->translator->trans('message.wallet_contains_transactions')
+            );
+
+            return $this->redirectToRoute('wallet_index');
+        }
+
+
         $form = $this->createForm(FormType::class, $wallet, [
             'method' => 'DELETE',
             'action' => $this->generateUrl('wallet_delete', ['id' => $wallet->getId()]),
@@ -210,7 +221,6 @@ class WalletController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->walletService->canBeDeleted($wallet);
             $this->walletService->delete($wallet);
 
             $this->addFlash(

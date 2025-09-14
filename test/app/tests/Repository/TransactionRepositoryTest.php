@@ -170,7 +170,7 @@ class TransactionRepositoryTest extends KernelTestCase
     /**
      * Create a new user for testing.
      *
-     * @return User
+     * @return User The created user entity
      */
     private function createUser(): User
     {
@@ -188,7 +188,7 @@ class TransactionRepositoryTest extends KernelTestCase
      *
      * @param string $name Name of the currency
      *
-     * @return Currency
+     * @return Currency The created currency entity
      */
     private function createCurrency(string $name = 'USD'): Currency
     {
@@ -206,7 +206,7 @@ class TransactionRepositoryTest extends KernelTestCase
      * @param User        $author Author of the category
      * @param string|null $name   Optional category name
      *
-     * @return Category
+     * @return Category The created category entity
      */
     private function createCategory(User $author, ?string $name = null): Category
     {
@@ -232,9 +232,9 @@ class TransactionRepositoryTest extends KernelTestCase
      *
      * @param User        $author   Owner of the wallet
      * @param Currency    $currency Currency of the wallet
-     * @param string|null $name     Optional wallet name
+     * @param string|null $name     Wallet name
      *
-     * @return Wallet
+     * @return Wallet The created wallet entity
      */
     private function createWallet(User $author, Currency $currency, ?string $name = null): Wallet
     {
@@ -267,7 +267,7 @@ class TransactionRepositoryTest extends KernelTestCase
      * @param bool        $value    True for income, false for expense
      * @param string      $date     Transaction date in 'Y-m-d' format
      *
-     * @return Transaction
+     * @return Transaction The created transaction entity
      */
     private function createTransaction(User $author, Wallet $wallet, Category $category, ?string $name = null, int $sum = 10, bool $value = true, string $date = '2024-02-01'): Transaction
     {

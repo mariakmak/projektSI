@@ -93,27 +93,6 @@ class WalletRepositoryTest extends KernelTestCase
     }
 
     /**
-     * Test the wallet balance calculation method.
-     */
-    public function testCountWalletBalance(): void
-    {
-        $author = $this->createUser();
-        $currency = $this->createCurrency('USD');
-        $wallet = $this->createWallet($author, $currency, 'Balance');
-        $wallet->setSum(100);
-        $this->repo->save($wallet);
-
-        $this->assertTrue($this->repo->countWalletBalance(50, true, $wallet, 100));
-        $this->assertSame(150, $wallet->getSum());
-
-        $this->assertTrue($this->repo->countWalletBalance(30, false, $wallet, 150));
-        $this->assertSame(120, $wallet->getSum());
-
-        $this->assertFalse($this->repo->countWalletBalance(200, false, $wallet, 120));
-        $this->assertSame(120, $wallet->getSum());
-    }
-
-    /**
      * Create and persist a new user entity.
      *
      * @return User the created user

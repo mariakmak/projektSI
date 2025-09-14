@@ -17,7 +17,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[ORM\Entity(repositoryClass: TransactionRepository::class)]
 #[ORM\Table(name: 'transactions')]
 #[ORM\UniqueConstraint(name: 'unique_transaction_name_per_user', columns: ['name', 'author_id'])]
-#[UniqueEntity(fields: ['name', 'author'], message: 'Transaction.unique_name')]
+#[UniqueEntity(fields: ['name', 'author'], message: 'transaction.unique_name')]
 class Transaction
 {
     /**

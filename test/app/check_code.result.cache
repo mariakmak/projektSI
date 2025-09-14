@@ -1,30 +1,17 @@
-   1) src/Repository/TransactionRepository.php (types_spaces)
 
-Found 1 of 40 files that can be fixed in 1.903 seconds, 20.00 MB memory used
-   1) tests/bootstrap.php (concat_space)
-   2) tests/Repository/TransactionRepositoryTest.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+Found 0 of 40 files that can be fixed in 1.971 seconds, 20.00 MB memory used
 
-Found 2 of 20 files that can be fixed in 1.939 seconds, 20.00 MB memory used
- ----------- ------------ ------------------------- ------------------------- 
-  State       Domain       Id                        Message Preview (en)     
- ----------- ------------ ------------------------- ------------------------- 
-   missing    validators   category.unique_name      category.unique_name     
-   missing    validators   currency.unique_name      currency.unique_name     
-   missing    validators   Transaction.unique_name   Transaction.unique_name  
-   missing    validators   wallet.unique_name        wallet.unique_name       
- ----------- ------------ ------------------------- ------------------------- 
+Found 0 of 20 files that can be fixed in 1.550 seconds, 20.00 MB memory used
+ ------- -------- ---- ---------------------- 
+  State   Domain   Id   Message Preview (en)  
+ ------- -------- ---- ---------------------- 
 
- ----------- ------------ ------------------------- ------------------------- ------------------------------- 
-  State       Domain       Id                        Message Preview (pl)      Fallback Message Preview (en)  
- ----------- ------------ ------------------------- ------------------------- ------------------------------- 
-   missing    validators   category.unique_name      category.unique_name      category.unique_name           
-   missing    validators   currency.unique_name      currency.unique_name      currency.unique_name           
-   missing    validators   Transaction.unique_name   Transaction.unique_name   Transaction.unique_name        
-   missing    validators   wallet.unique_name        wallet.unique_name        wallet.unique_name             
- ----------- ------------ ------------------------- ------------------------- ------------------------------- 
+ ------- -------- ---- ---------------------- ------------------------------- 
+  State   Domain   Id   Message Preview (pl)   Fallback Message Preview (en)  
+ ------- -------- ---- ---------------------- ------------------------------- 
 
 [notice] Migrating up to DoctrineMigrations\Version20250822181000
-[notice] finished in 758.5ms, used 28M memory, 2 migrations executed, 16 sql queries
+[notice] finished in 824.1ms, used 28M memory, 2 migrations executed, 16 sql queries
 
  [OK] Successfully migrated to version: DoctrineMigrations\Version20250822181000                                        
 
@@ -32,3 +19,6 @@ Found 2 of 20 files that can be fixed in 1.939 seconds, 20.00 MB memory used
    > purging database
    > loading App\DataFixtures\UserFixtures
    > loading App\DataFixtures\CurrencyFixtures
+   > loading App\DataFixtures\CategoryFixtures
+   > loading App\DataFixtures\WalletFixtures
+   > loading App\DataFixtures\TransactionFixtures

@@ -24,7 +24,7 @@ use Knp\Component\Pager\Pagination;
 class CategoryServiceTest extends KernelTestCase
 {
     /**
-     * Category repository.
+     * Entity manager.
      */
     private ?EntityManagerInterface $entityManager;
 

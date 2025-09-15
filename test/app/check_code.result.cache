@@ -1,7 +1,18 @@
 
-Found 0 of 40 files that can be fixed in 1.971 seconds, 20.00 MB memory used
+Found 0 of 40 files that can be fixed in 2.883 seconds, 20.00 MB memory used
+   1) tests/Controller/AbstractTestController.php (class_attributes_separation, yoda_style)
 
-Found 0 of 20 files that can be fixed in 1.550 seconds, 20.00 MB memory used
+Found 1 of 20 files that can be fixed in 1.978 seconds, 20.00 MB memory used
+
+FILE: /home/wwwroot/app/tests/Controller/AbstractTestController.php
+----------------------------------------------------------------------------------------------------------------------------------------------------
+FOUND 1 ERROR AFFECTING 1 LINE
+----------------------------------------------------------------------------------------------------------------------------------------------------
+ 143 | ERROR | Use Yoda conditions when checking a variable against an expression to avoid an accidental assignment inside the condition statement.
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+Time: 4.46 secs; Memory: 12MB
+
  ------- -------- ---- ---------------------- 
   State   Domain   Id   Message Preview (en)  
  ------- -------- ---- ---------------------- 
@@ -11,7 +22,7 @@ Found 0 of 20 files that can be fixed in 1.550 seconds, 20.00 MB memory used
  ------- -------- ---- ---------------------- ------------------------------- 
 
 [notice] Migrating up to DoctrineMigrations\Version20250822181000
-[notice] finished in 824.1ms, used 28M memory, 2 migrations executed, 16 sql queries
+[notice] finished in 928.2ms, used 28M memory, 2 migrations executed, 16 sql queries
 
  [OK] Successfully migrated to version: DoctrineMigrations\Version20250822181000                                        
 

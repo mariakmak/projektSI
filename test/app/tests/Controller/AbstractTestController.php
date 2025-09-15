@@ -134,6 +134,27 @@ abstract class AbstractTestController extends WebTestCase
     }
 
     /**
+     * Clean up after each test to reduce memory usage.
+     */
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+
+        if (null !== static::$kernel && static::$kernel->getContainer()->has('doctrine')) {
+            $em = static::getContainer()->get('doctrine')->getManager();
+            $em->clear();
+        }
+
+        self::ensureKernelShutdown();
+
+        gc_collect_cycles();
+    }
+
+
+
+
+
+    /**
      * Create user.
      *
      * @param array $roles user roles
